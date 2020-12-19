@@ -9,7 +9,7 @@ public class Consegne {
 	private String IndirizzoP;
 	private String IndirizzoA;
 	private boolean Consegnato;
-	private CompConsegna ComposizioneConsegna;
+	private Carrello ComposizioneConsegna;
 	
 	public String getCodC() {
 		return CodC;
@@ -46,10 +46,10 @@ public class Consegne {
 		Consegnato = consegnato;
 	}
 	
-	public CompConsegna getComposizioneConsegna() {
+	public Carrello getComposizioneConsegna() {
 		return ComposizioneConsegna;
 	}
-	public void setComposizioneConsegna(CompConsegna composizioneConsegna) {
+	public void setComposizioneConsegna(Carrello composizioneConsegna) {
 		ComposizioneConsegna = composizioneConsegna;
 	}
 	

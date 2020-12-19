@@ -11,7 +11,7 @@ public class Utente {
 	private String Indirizzo;
 	private Date Data;
 	private String Password;
-	private ArrayList<Consegne> OrdiniEffettuate = new ArrayList<Consegne>();
+	private ArrayList<Consegne> OrdiniEffettuate;
 	
 	public String getEmail() {
 		return email;

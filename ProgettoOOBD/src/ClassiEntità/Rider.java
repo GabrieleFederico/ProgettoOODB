@@ -5,12 +5,11 @@ import java.util.LinkedList;
 
 public class Rider {
 
-	
 	private String CodR;
 	private String Nome;
 	private String Cognome;
-	private ArrayList<Ristorante> Ristoranti = new ArrayList<Ristorante>();
-	private LinkedList<Consegne> ConsegneDaFare = new LinkedList<Consegne>();
+	private ArrayList<Ristorante> Ristoranti;
+	private LinkedList<Consegne> ConsegneDaFare;
 	private enum Mezzo{
 		Automobile,
 		Bici,

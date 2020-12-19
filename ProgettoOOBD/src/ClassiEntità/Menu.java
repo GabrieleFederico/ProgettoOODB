@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Menu {
 	
 	private Ristorante Ristorante;
-	private ArrayList<Prodotto> Prodotti = new ArrayList<Prodotto>();
+	private ArrayList<Prodotto> Prodotti;
 	private float Prezzo;
 	
 	public Ristorante getRistorante() {
