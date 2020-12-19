@@ -26,5 +26,13 @@ public class Ristorante {
 		Indirizzo = indirizzo;
 	}
 	
+	public Menu getMenu() {
+		return Menu;
+	}
+	public void setMenu(Menu menu) {
+		Menu = menu;
+	}
+	
+	
 	
 }

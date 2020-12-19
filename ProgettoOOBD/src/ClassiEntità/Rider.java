@@ -9,13 +9,13 @@ public class Rider {
 	private String CodR;
 	private String Nome;
 	private String Cognome;
+	private ArrayList<Ristorante> Ristoranti = new ArrayList<Ristorante>();
+	private LinkedList<Consegne> ConsegneDaFare = new LinkedList<Consegne>();
 	private enum Mezzo{
 		Automobile,
 		Bici,
 		Moto
 	}
-	private ArrayList<Ristorante> Ristoranti = new ArrayList<Ristorante>();
-	private LinkedList<Consegne> ConsegneDaFare = new LinkedList<Consegne>();
 	
 	public String getCodR() {
 		return CodR;

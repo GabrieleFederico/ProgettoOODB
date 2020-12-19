@@ -22,7 +22,7 @@ public class Utente {
 	public String getNome() {
 		return Nome;
 	}
-	public void setMome(String nome) {
+	public void setNome(String nome) {
 		Nome = nome;
 	}
 	public String getCognome() {
@@ -49,6 +49,14 @@ public class Utente {
 	public void setPassword(String password) {
 		Password = password;
 	}
+	
+	public ArrayList<Consegne> getOrdiniEffettuate() {
+		return OrdiniEffettuate;
+	}
+	public void setOrdiniEffettuate(ArrayList<Consegne> ordiniEffettuate) {
+		OrdiniEffettuate = ordiniEffettuate;
+	}
+
 	
 	
 }
