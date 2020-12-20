@@ -1,4 +1,4 @@
-package ClassiEntità;
+package classiEntità;
 
 import java.sql.Time;
 
