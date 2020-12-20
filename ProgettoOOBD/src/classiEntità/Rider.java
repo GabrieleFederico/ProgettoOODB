@@ -8,13 +8,9 @@ public class Rider {
 	private String CodR;
 	private String Nome;
 	private String Cognome;
+	private String Mezzo;
 	private ArrayList<Ristorante> Ristoranti;
 	private LinkedList<Consegne> ConsegneDaFare;
-	private enum Mezzo{
-		Automobile,
-		Bici,
-		Moto
-	}
 	
 	public String getCodR() {
 		return CodR;
@@ -35,6 +31,13 @@ public class Rider {
 	}
 	public void setCognome(String cognome) {
 		Cognome = cognome;
+	}
+	
+	public String getMezzo() {
+		return Mezzo;
+	}
+	public void setMezzo(String mezzo) {
+		Mezzo = mezzo;
 	}
 	
 	public ArrayList<Ristorante> getRistoranti() {

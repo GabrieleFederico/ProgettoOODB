@@ -23,7 +23,7 @@ public class ConnessioneDB {
     		
     	}
     	catch(ClassNotFoundException e){
-    		System.out.println("Connessione al Database fallita: "+ e.getMessage());
+    		System.out.println("Creazione di una Connessione al database fallita: "+ e.getMessage());
     		
     	}
     }
