@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import classiEntità.Utente;
-import controllers.ControllerLogin;
+import dbConn.ConnessioneDB;
 import interfacce.JFrameLogin;
 import interfacce.JFrameRegistrati;
 import postgresDAOImpl.UtenteDAOPostgres;
@@ -15,35 +15,32 @@ public class ControllerLogin {
 
 	JFrameRegistrati fr;
 	JFrameLogin fl;
-	UtenteDAOPostgres u1;
-	private Connection connessione;
-	
-	public static void main(String[] args) {
-		ControllerLogin c = new ControllerLogin();
-	}		
-	
-		public ControllerLogin() {
-				
-				fl = new JFrameLogin(this);
-				fl.setVisible(true);
-		}
-		
-		public void LoginRegistratiButton() {
-			
-			fr = new JFrameRegistrati(this);
-			fl.setVisible(false);
-			fr.setVisible(true);
-		}
+	Connection connessione;
 
-		public void RegistraCredenziali(String email, String pwd, String nome, String cognome, String indirizzo) throws SQLException {
+
+	public ControllerLogin(Connection connessione) {
 			
-			u1 = new UtenteDAOPostgres(connessione);
+		this.connessione = connessione;
+		fl = new JFrameLogin(this);
+		fl.setVisible(true);
+	}
+		
+	public void LoginRegistratiButton() {
 			
-			Utente utente = new Utente (email, pwd, nome, cognome, indirizzo);
+		fr = new JFrameRegistrati(this);
+		fl.setVisible(false);
+		fr.setVisible(true);
+	}
+
+	public void RegistraCredenziali(String email, String pwd, String nome, String cognome, String indirizzo) throws SQLException {
 			
-			fl.setVisible(true);
-			fr.setVisible(false);
+		UtenteDAOPostgres u1 = new UtenteDAOPostgres(connessione);
+		Utente utente = new Utente (email, pwd, nome, cognome, indirizzo);
+		u1.inserisciUtente(utente);
 			
-		}
+		fl.setVisible(true);
+		fr.setVisible(false);
+			
+	}
 		
 }

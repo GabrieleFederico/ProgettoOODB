@@ -27,6 +27,7 @@ public class UtenteDAOPostgres implements UtenteDAO {
 		inserisciUtentePS.setString(3, utente.getIndirizzo());
 		inserisciUtentePS.setString(4, utente.getPassword());
 		inserisciUtentePS.setString(5, utente.getCognome());
+		inserisciUtentePS.executeUpdate();
 	}
     
 	

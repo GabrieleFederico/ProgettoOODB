@@ -12,14 +12,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 
 public class JFrameRegistrati extends JFrame {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -68,7 +67,11 @@ public class JFrameRegistrati extends JFrame {
 		ButtonConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-			controllore.RegistraCredenziali(TFNewEmail.getText(), TFNewPassword.getText(), TFNewNome.getText(), TFNewCognome.getText(), TFNewIndirizzo.getText());	
+				try {
+					controllore.RegistraCredenziali(TFNewEmail.getText(), TFNewPassword.getText(), TFNewNome.getText(), TFNewCognome.getText(), TFNewIndirizzo.getText());
+				} catch (SQLException e) {
+					System.out.println("Errore: "+e.getMessage());
+				}	
 			}
 		});
 		ButtonConferma.setBounds(304, 308, 109, 23);

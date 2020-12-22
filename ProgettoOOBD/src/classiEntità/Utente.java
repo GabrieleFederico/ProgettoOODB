@@ -9,7 +9,6 @@ public class Utente {
 	private String Nome;
 	private String Cognome;
 	private String Indirizzo;
-	private Date Data;
 	private String Password;
 	private ArrayList<Consegne> OrdiniEffettuate;
 	
@@ -49,7 +48,6 @@ public class Utente {
 		Indirizzo = indirizzo;
 	}
 
-	}
 	public String getPassword() {
 		return Password;
 	}

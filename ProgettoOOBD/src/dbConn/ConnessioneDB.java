@@ -8,11 +8,11 @@ public class ConnessioneDB {
 
 	private static ConnessioneDB istanza;
     private Connection connessione = null;
-    private final String USERNAME = "admin";
+    private final String USERNAME = "postgres";
     private final String PASSWORD = "2802dueMILA";
     private final String IP = "localhost";
     private final String PORT = "5432";
-    private String url = "jdbc:postgresql://"+IP+":"+PORT+"/ProgettoBD";
+    private String url = "jdbc:postgresql://"+IP+":"+PORT+"/postgres";
     
     private ConnessioneDB() throws SQLException{
     	
@@ -27,7 +27,7 @@ public class ConnessioneDB {
     		
     	}
     }
-   
+
     public Connection getConnessione() {
     	return connessione;
     }
