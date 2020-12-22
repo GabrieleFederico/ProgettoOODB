@@ -1,11 +1,13 @@
-package Interfacce;
+package interfacce;
 
-import Controllers.ControllerLogin;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controllers.ControllerLogin;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -87,10 +89,6 @@ public class JFrameRegistrati extends JFrame {
 		JLabel LabelNewIndirizzo = new JLabel("Indirizzo:");
 		LabelNewIndirizzo.setBounds(74, 215, 75, 14);
 		contentPane.add(LabelNewIndirizzo);
-		
-		JLabel lblNewLabel_3 = new JLabel("Data di nascita:");
-		lblNewLabel_3.setBounds(74, 246, 89, 14);
-		contentPane.add(lblNewLabel_3);
 		
 		TFNewNome = new JTextField();
 		TFNewNome.setBounds(198, 150, 166, 20);

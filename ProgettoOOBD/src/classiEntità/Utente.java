@@ -13,6 +13,17 @@ public class Utente {
 	private String Password;
 	private ArrayList<Consegne> OrdiniEffettuate;
 	
+	
+	public Utente(String email,  String password, String nome, String cognome, String indirizzo) {
+		super();
+		this.email = email;
+		Password = password;
+		Nome = nome;
+		Cognome = cognome;
+		Indirizzo = indirizzo;
+	}
+	
+	
 	public String getEmail() {
 		return email;
 	}
@@ -37,11 +48,7 @@ public class Utente {
 	public void setIndirizzo(String indirizzo) {
 		Indirizzo = indirizzo;
 	}
-	public Date getData() {
-		return Data;
-	}
-	public void setData(Date data) {
-		Data = data;
+
 	}
 	public String getPassword() {
 		return Password;
