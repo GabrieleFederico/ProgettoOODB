@@ -21,8 +21,11 @@ public class JFrameLogin extends JFrame {
 	private JTextField TFLogin;
 	private JTextField TFPassword;
 	
+	ControllerLogin controllore;
 	
-	public JFrameLogin() {
+	public JFrameLogin(ControllerLogin c) {
+		setTitle("Login");
+		controllore=c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 714, 516);
 		contentPane = new JPanel();
@@ -43,6 +46,9 @@ public class JFrameLogin extends JFrame {
 		JButton ButtonRegistrati = new JButton("Registrati");
 		ButtonRegistrati.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				c.LoginRegistratiButton();
+				
 				 
 			}
 		});
