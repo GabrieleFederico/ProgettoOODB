@@ -16,8 +16,7 @@ public class ControllorePrincipale {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
 		}
-		catch (SQLException exception)
-        {
+		catch (SQLException exception){
             System.out.println("SQLException: "+ exception.getMessage());
         }
 		

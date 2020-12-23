@@ -70,7 +70,7 @@ public class JFrameRegistrati extends JFrame {
 				try {
 					controllore.RegistraCredenziali(TFNewEmail.getText(), TFNewPassword.getText(), TFNewNome.getText(), TFNewCognome.getText(), TFNewIndirizzo.getText());
 				} catch (SQLException e) {
-					System.out.println("Errore: "+e.getMessage());
+					System.out.println(e.getMessage());
 				}	
 			}
 		});

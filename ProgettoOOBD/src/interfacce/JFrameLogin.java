@@ -10,15 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class JFrameLogin extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
 	
 	private JPanel contentPane;
 	private JTextField TFLogin;
@@ -49,9 +46,7 @@ public class JFrameLogin extends JFrame {
 		JButton ButtonRegistrati = new JButton("Registrati");
 		ButtonRegistrati.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 				c.LoginRegistratiButton();
-				
 				 
 			}
 		});
@@ -59,6 +54,19 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(ButtonRegistrati);
 		
 		JButton ButtonLogin = new JButton("Login");
+		ButtonLogin.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					if (c.ControllaCredenziali(TFLogin.getText(), TFPassword.getText()))
+						System.out.println("credenziali corrette");
+					else
+						System.out.println("credenziali sbagliate");
+				}
+				catch(SQLException e){
+					System.out.println(e.getMessage());
+				}
+			}
+		});
 		ButtonLogin.setBounds(276, 304, 89, 23);
 		contentPane.add(ButtonLogin);
 		

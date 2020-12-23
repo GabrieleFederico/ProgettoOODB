@@ -2,6 +2,7 @@ package postgresDAOImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,12 +12,13 @@ import interfacceDAO.UtenteDAO;
 public class UtenteDAOPostgres implements UtenteDAO {
 
 	private Connection connessione;
-	private PreparedStatement inserisciUtentePS, getAllUtentiPS;
+	private PreparedStatement inserisciUtentePS, getAllUtentiPS, esisteUtentePS;
 
 	
 	public UtenteDAOPostgres(Connection connessione) throws SQLException {
 		this.connessione = connessione;
 		inserisciUtentePS = connessione.prepareStatement("INSERT INTO Utente VALUES (?, ?, ?, ?, ?)");
+		esisteUtentePS = connessione.prepareStatement("SELECT * FROM Utente WHERE email = ? AND pwd = ?");
 	}
 
 
@@ -31,6 +33,19 @@ public class UtenteDAOPostgres implements UtenteDAO {
 	}
     
 	
+	@Override
+	public boolean esisteUtente(String email, String pwd) throws SQLException {
+		
+		esisteUtentePS.setString(1, email);
+		esisteUtentePS.setString(2, pwd);
+		ResultSet rs = esisteUtentePS.executeQuery();
+		if(rs.next())
+			return true;
+		else
+			return false;
+	}
+
+
 	@Override
 	public ArrayList<Utente> getAllUtenti() {
 		

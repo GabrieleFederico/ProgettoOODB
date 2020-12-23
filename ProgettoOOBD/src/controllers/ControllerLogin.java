@@ -33,14 +33,22 @@ public class ControllerLogin {
 	}
 
 	public void RegistraCredenziali(String email, String pwd, String nome, String cognome, String indirizzo) throws SQLException {
-			
+
 		UtenteDAOPostgres u1 = new UtenteDAOPostgres(connessione);
 		Utente utente = new Utente (email, pwd, nome, cognome, indirizzo);
 		u1.inserisciUtente(utente);
-			
+		
 		fl.setVisible(true);
 		fr.setVisible(false);
 			
+	}
+	public boolean ControllaCredenziali(String email, String pwd) throws SQLException {
+		
+		UtenteDAOPostgres u2 = new UtenteDAOPostgres(connessione);
+		if(u2.esisteUtente(email, pwd))
+			return true;
+		else
+			return false;
 	}
 		
 }
