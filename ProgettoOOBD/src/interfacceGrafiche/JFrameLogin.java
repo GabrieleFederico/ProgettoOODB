@@ -1,9 +1,10 @@
-package interfacce;
+package interfacceGrafiche;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controllers.ControllerLogin;
+import controllers.ControllorePrincipale;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -22,10 +23,14 @@ public class JFrameLogin extends JFrame {
 	private JTextField TFPassword;
 	
 	ControllerLogin controllore;
+	ControllorePrincipale controller;
+	Errore LoginSbagliato = new Errore();
 	
-	public JFrameLogin(ControllerLogin c) {
+	public JFrameLogin(ControllerLogin c, ControllorePrincipale c1) {
+		
 		setTitle("Login");
 		controllore=c;
+		controller = c1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 714, 516);
 		contentPane = new JPanel();
@@ -58,9 +63,9 @@ public class JFrameLogin extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					if (c.ControllaCredenziali(TFLogin.getText(), TFPassword.getText()))
-						System.out.println("credenziali corrette");
+						c.PassaAdHome(c1);
 					else
-						System.out.println("credenziali sbagliate");
+						LoginSbagliato.setVisible(true);
 				}
 				catch(SQLException e){
 					System.out.println(e.getMessage());

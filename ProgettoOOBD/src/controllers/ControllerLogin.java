@@ -5,23 +5,22 @@ import java.sql.SQLException;
 
 import classiEntità.Utente;
 import dbConn.ConnessioneDB;
-import interfacce.JFrameLogin;
-import interfacce.JFrameRegistrati;
+import interfacceGrafiche.JFrameLogin;
+import interfacceGrafiche.JFrameRegistrati;
 import postgresDAOImpl.UtenteDAOPostgres;
 
 
 public class ControllerLogin {
-
 
 	JFrameRegistrati fr;
 	JFrameLogin fl;
 	Connection connessione;
 
 
-	public ControllerLogin(Connection connessione) {
+	public ControllerLogin(Connection connessione, ControllorePrincipale controller) {
 			
 		this.connessione = connessione;
-		fl = new JFrameLogin(this);
+		fl = new JFrameLogin(this, controller);
 		fl.setVisible(true);
 	}
 		
@@ -49,6 +48,11 @@ public class ControllerLogin {
 			return true;
 		else
 			return false;
+	}
+	
+	public void PassaAdHome(ControllerLogin this, ControllorePrincipale c) {
+		c.PassaAdHome(this, this.connessione);
+		
 	}
 		
 }

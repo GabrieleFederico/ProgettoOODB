@@ -11,6 +11,7 @@ public class ControllorePrincipale {
 		
 		Connection connessione = null;
 		ConnessioneDB connessioneDB = null;
+		ControllorePrincipale principale = new ControllorePrincipale();
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -20,8 +21,16 @@ public class ControllorePrincipale {
             System.out.println("SQLException: "+ exception.getMessage());
         }
 		
-		ControllerLogin c = new ControllerLogin(connessione);
+		principale.Start(connessione);
 
 	}
-
+	
+	void Start(Connection connessione) {
+		ControllerLogin c = new ControllerLogin(connessione, this);
+	}
+	
+	void PassaAdHome(ControllerLogin c, Connection connessione) {
+		c.fl.dispose();
+		ControllerRicerca c1 = new ControllerRicerca(connessione);
+	}
 }

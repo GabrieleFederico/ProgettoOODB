@@ -14,13 +14,11 @@ public class UtenteDAOPostgres implements UtenteDAO {
 	private Connection connessione;
 	private PreparedStatement inserisciUtentePS, getAllUtentiPS, esisteUtentePS;
 
-	
 	public UtenteDAOPostgres(Connection connessione) throws SQLException {
 		this.connessione = connessione;
 		inserisciUtentePS = connessione.prepareStatement("INSERT INTO Utente VALUES (?, ?, ?, ?, ?)");
 		esisteUtentePS = connessione.prepareStatement("SELECT * FROM Utente WHERE email = ? AND pwd = ?");
 	}
-
 
 	@Override
 	public void inserisciUtente(Utente utente) throws SQLException {
@@ -31,7 +29,6 @@ public class UtenteDAOPostgres implements UtenteDAO {
 		inserisciUtentePS.setString(5, utente.getCognome());
 		inserisciUtentePS.executeUpdate();
 	}
-    
 	
 	@Override
 	public boolean esisteUtente(String email, String pwd) throws SQLException {
@@ -44,7 +41,6 @@ public class UtenteDAOPostgres implements UtenteDAO {
 		else
 			return false;
 	}
-
 
 	@Override
 	public ArrayList<Utente> getAllUtenti() {
