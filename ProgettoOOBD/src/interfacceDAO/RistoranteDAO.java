@@ -1,8 +1,10 @@
 package interfacceDAO;
 
-import classiEntità.Ristorante;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface RistoranteDAO {
 
-	public Ristorante getRistoranteByNome(String nome);
+	public ArrayList<String> getRistoranteByNomeOrProdotto(String ricerca) throws SQLException;
+	
 }

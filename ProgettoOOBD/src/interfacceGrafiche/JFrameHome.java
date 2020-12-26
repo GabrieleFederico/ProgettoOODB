@@ -13,11 +13,14 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 
 public class JFrameHome extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField inputTF;
 	ControllerRicerca controller;
 	
 	public JFrameHome(ControllerRicerca c) {
@@ -30,10 +33,10 @@ public class JFrameHome extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(71, 11, 264, 28);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		inputTF = new JTextField();
+		inputTF.setBounds(71, 11, 264, 28);
+		contentPane.add(inputTF);
+		inputTF.setColumns(10);
 		
 		JComboBox Mezzo = new JComboBox();
 		Mezzo.setModel(new DefaultComboBoxModel(new String[] {"Selezionare mezzo", "Automobile", "Moto", "Bicicletta"}));
@@ -46,7 +49,16 @@ public class JFrameHome extends JFrame {
 		FasciaPrezzo.setBounds(555, 11, 139, 28);
 		contentPane.add(FasciaPrezzo);
 		
-		JButton ricercaPredefinita1 = new JButton("ricercaPredefinita1");
+		JButton ricercaPredefinita1 = new JButton("Panini");
+		ricercaPredefinita1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					c.Ricerca("panino");
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		});
 		ricercaPredefinita1.setBounds(10, 197, 215, 163);
 		contentPane.add(ricercaPredefinita1);
 		

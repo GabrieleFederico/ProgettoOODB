@@ -5,7 +5,6 @@ import java.util.LinkedList;
 public class Ristorante {
 
 	private String Nome;
-	private String CodN;
 	private String Indirizzo;
 	private Menu Menu;
 	private LinkedList<Rider> RiderDelRistorante;
@@ -16,12 +15,7 @@ public class Ristorante {
 	public void setNome(String nome) {
 		Nome = nome;
 	}
-	public String getCodN() {
-		return CodN;
-	}
-	public void setCodN(String codN) {
-		CodN = codN;
-	}
+
 	public String getIndirizzo() {
 		return Indirizzo;
 	}
