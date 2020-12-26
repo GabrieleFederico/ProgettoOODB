@@ -64,8 +64,11 @@ public class JFrameLogin extends JFrame {
 				try {
 					if (c.ControllaCredenziali(TFLogin.getText(), TFPassword.getText()))
 						c.PassaAdHome(c1);
-					else
+					else {
 						LoginSbagliato.setVisible(true);
+						svuotaCampi();
+					}
+
 				}
 				catch(SQLException e){
 					System.out.println(e.getMessage());
@@ -103,6 +106,15 @@ public class JFrameLogin extends JFrame {
 		});
 		ButtonChiudi.setBounds(36, 418, 89, 23);
 		contentPane.add(ButtonChiudi);
-	}
+		
+			
+		}
+		
+		public void svuotaCampi() {
+			TFLogin.setText(null);
+			TFPassword.setText(null);
+		}
 
 }
+
+

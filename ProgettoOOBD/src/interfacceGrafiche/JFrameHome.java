@@ -47,15 +47,15 @@ public class JFrameHome extends JFrame {
 		contentPane.add(FasciaPrezzo);
 		
 		JButton ricercaPredefinita1 = new JButton("ricercaPredefinita1");
-		ricercaPredefinita1.setBounds(54, 197, 215, 163);
+		ricercaPredefinita1.setBounds(10, 197, 215, 163);
 		contentPane.add(ricercaPredefinita1);
 		
 		JButton ricercaPredefinita2 = new JButton("ricercaPredefinita2");
-		ricercaPredefinita2.setBounds(320, 197, 215, 163);
+		ricercaPredefinita2.setBounds(298, 197, 215, 163);
 		contentPane.add(ricercaPredefinita2);
 		
 		JButton ricercaPredefinita3 = new JButton("ricercaPredefinita3");
-		ricercaPredefinita3.setBounds(592, 197, 215, 163);
+		ricercaPredefinita3.setBounds(583, 197, 215, 163);
 		contentPane.add(ricercaPredefinita3);
 	}
 }

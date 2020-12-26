@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import classiEntità.Utente;
 import dbConn.ConnessioneDB;
+import interfacceGrafiche.Errore;
 import interfacceGrafiche.JFrameLogin;
 import interfacceGrafiche.JFrameRegistrati;
 import postgresDAOImpl.UtenteDAOPostgres;
@@ -31,6 +32,8 @@ public class ControllerLogin {
 		fr.setVisible(true);
 	}
 
+	
+	
 	public void RegistraCredenziali(String email, String pwd, String nome, String cognome, String indirizzo) throws SQLException {
 
 		UtenteDAOPostgres u1 = new UtenteDAOPostgres(connessione);
@@ -54,5 +57,4 @@ public class ControllerLogin {
 		c.PassaAdHome(this, this.connessione);
 		
 	}
-		
 }
