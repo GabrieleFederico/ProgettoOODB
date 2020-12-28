@@ -21,7 +21,6 @@ public class ControllerRicerca {
 		RistoranteDAOPostgres RP = new RistoranteDAOPostgres(connessione);
 		ArrayList<String> risultatoRicerca = new ArrayList<String>();
 		risultatoRicerca = RP.getRistoranteByNomeOrProdotto(nome);
-		//now is here the problem 
 		for(String s: risultatoRicerca) {
 			System.out.println(s + "\n");
 		}

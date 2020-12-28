@@ -16,7 +16,7 @@ public class RistoranteDAOPostgres implements RistoranteDAO {
 
 		public RistoranteDAOPostgres(Connection connessione) throws SQLException {
 			this.connessione = connessione;
-			getRistoranteByNomeOrProdottoPS = connessione.prepareStatement("SELECT DISTINCT ristoranti.nome FROM ristoranti NATURAL JOIN menu WHERE ristoranti.Nome LIKE ? or menu.nomep LIKE ?");
+			getRistoranteByNomeOrProdottoPS = connessione.prepareStatement("SELECT ristoranti.nome, ristoranti.indirizzo FROM ristoranti NATURAL JOIN menu  WHERE ristoranti.Nome LIKE ? OR menu.nomep LIKE ? GROUP BY ristoranti.nome,ristoranti.indirizzo");
 		}
 		
 		@Override

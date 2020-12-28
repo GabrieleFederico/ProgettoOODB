@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controllers.ControllerCarrello;
 import controllers.ControllerRicerca;
 
 import javax.swing.JTextField;
@@ -66,7 +67,7 @@ public class JFrameHome extends JFrame {
 		PizzaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					c.Ricerca("Pizza");
+					c.Ricerca("Pizz");
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}
@@ -97,7 +98,8 @@ public class JFrameHome extends JFrame {
 		contentPane.add(CercaButton);
 		
 		JButton IMieiOrdiniButton = new JButton("I miei ordini");
-		IMieiOrdiniButton.setBounds(10, 436, 89, 23);
+		IMieiOrdiniButton.setBounds(10, 436, 139, 23);
 		contentPane.add(IMieiOrdiniButton);
 	}
+
 }
