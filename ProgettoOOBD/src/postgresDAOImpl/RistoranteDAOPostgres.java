@@ -13,17 +13,20 @@ public class RistoranteDAOPostgres implements RistoranteDAO {
 		private Connection connessione;
 		private PreparedStatement getRistoranteByNomeOrProdottoPS;
 
+
 		public RistoranteDAOPostgres(Connection connessione) throws SQLException {
 			this.connessione = connessione;
-			getRistoranteByNomeOrProdottoPS = connessione.prepareStatement("SELECT ristoranti.nome FROM ristoranti NATURAL JOIN menu WHERE ristoranti.Nome LIKE ? or menu.nomep LIKE ?");
+			getRistoranteByNomeOrProdottoPS = connessione.prepareStatement("SELECT DISTINCT ristoranti.nome FROM ristoranti NATURAL JOIN menu WHERE ristoranti.Nome LIKE ? or menu.nomep LIKE ?");
 		}
 		
-		
+		@Override
 		public ArrayList<String> getRistoranteByNomeOrProdotto(String ricerca) throws SQLException {
-			getRistoranteByNomeOrProdottoPS.setString(1, ricerca);
-			getRistoranteByNomeOrProdottoPS.setString(2, ricerca);
+			getRistoranteByNomeOrProdottoPS.setString(1,  "%" + ricerca + "%");
+			getRistoranteByNomeOrProdottoPS.setString(2,  "%" + ricerca + "%");
+
 			
 			ResultSet rs = getRistoranteByNomeOrProdottoPS.executeQuery();
+
 			
 			ArrayList<String> risultatoRicerca = new ArrayList<String>();
 			
