@@ -13,14 +13,14 @@ import postgresDAOImpl.UtenteDAOPostgres;
 
 public class ControllerLogin {
 
-	JFrameRegistrati fr;
-	JFrameLogin fl;
-	Connection connessione;
+	private JFrameRegistrati fr;
+	private JFrameLogin fl;
+	private Connection connessione;
+	private ConnessioneDB connessioneDB;
 
 
-	public ControllerLogin(Connection connessione, ControllorePrincipale controller) {
+	public ControllerLogin(ControllorePrincipale controller) {
 			
-		this.connessione = connessione;
 		fl = new JFrameLogin(this, controller);
 		fl.setVisible(true);
 	}
@@ -33,10 +33,9 @@ public class ControllerLogin {
 	}
 
 	
-	
 	public void RegistraCredenziali(String email, String pwd, String nome, String cognome, String indirizzo) throws SQLException {
 
-		UtenteDAOPostgres u1 = new UtenteDAOPostgres(connessione);
+		UtenteDAOPostgres u1 = new UtenteDAOPostgres();
 		Utente utente = new Utente (email, pwd, nome, cognome, indirizzo);
 		u1.inserisciUtente(utente);
 		
@@ -44,17 +43,20 @@ public class ControllerLogin {
 		fr.setVisible(false);
 			
 	}
-	public boolean ControllaCredenziali(String email, String pwd) throws SQLException {
+	public boolean ControllaCredenziali(String email, String pwd) throws SQLException{
 		
-		UtenteDAOPostgres u2 = new UtenteDAOPostgres(connessione);
-		if(u2.esisteUtente(email, pwd))
+		UtenteDAOPostgres u2 = new UtenteDAOPostgres();
+		if(u2.esisteUtente(email, pwd)) 
 			return true;
-		else
+		
+		else 
 			return false;
+		
 	}
 	
 	public void PassaAdHome(ControllerLogin this, ControllorePrincipale c) {
-		c.PassaAdHome(this, this.connessione);
+		fl.dispose();
+		c.PassaAdHome(this);
 		
 	}
 }

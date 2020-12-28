@@ -41,7 +41,6 @@ public class JFrameCarrello extends JFrame {
 		JButton ButtonIndietro = new JButton("Indietro");
 		ButtonIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				c.HomeButton();
 			}
 		});
 		ButtonIndietro.setBounds(10, 413, 89, 23);

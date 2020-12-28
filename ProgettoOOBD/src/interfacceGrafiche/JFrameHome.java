@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import controllers.ControllerCarrello;
 import controllers.ControllerRicerca;
+import controllers.ControllorePrincipale;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -23,10 +24,12 @@ public class JFrameHome extends JFrame {
 	private JPanel contentPane;
 	private JTextField inputTF;
 	ControllerRicerca controller;
+	ControllorePrincipale controllore;
 	
-	public JFrameHome(ControllerRicerca c) {
+	public JFrameHome(ControllerRicerca c, ControllorePrincipale c1) {
 		setTitle("Home");
 		controller = c;
+		controllore = c1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 769, 511);
 		contentPane = new JPanel();
@@ -46,7 +49,6 @@ public class JFrameHome extends JFrame {
 		
 		JComboBox FasciaPrezzo = new JComboBox();
 		FasciaPrezzo.setModel(new DefaultComboBoxModel(new String[] {"Fascia di prezzo", "0-5", "5-10", "10-20"}));
-		FasciaPrezzo.setToolTipText("Scegliere fascia di prezzo\r\n0-5\r\n5-10\r\n10-20\r\n");
 		FasciaPrezzo.setBounds(494, 11, 139, 28);
 		contentPane.add(FasciaPrezzo);
 		
@@ -100,6 +102,14 @@ public class JFrameHome extends JFrame {
 		JButton IMieiOrdiniButton = new JButton("I miei ordini");
 		IMieiOrdiniButton.setBounds(10, 436, 139, 23);
 		contentPane.add(IMieiOrdiniButton);
+		
+		JButton carrelloButton = new JButton("Carrello");
+		carrelloButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controllore.apriCarrello(c);
+			}
+		});
+		carrelloButton.setBounds(654, 62, 89, 23);
+		contentPane.add(carrelloButton);
 	}
-
 }

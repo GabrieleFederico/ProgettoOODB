@@ -1,10 +1,10 @@
 package interfacceGrafiche;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controllers.ControllerLogin;
-import controllers.ControllerRicerca;
 import controllers.ControllorePrincipale;
 
 import javax.swing.JTextField;
@@ -25,7 +25,6 @@ public class JFrameLogin extends JFrame {
 	
 	ControllerLogin controllore;
 	ControllorePrincipale controller;
-	ControllerRicerca cr;
 	Errore LoginSbagliato = new Errore();
 	
 	public JFrameLogin(ControllerLogin c, ControllorePrincipale c1) {
@@ -108,10 +107,8 @@ public class JFrameLogin extends JFrame {
 		});
 		ButtonChiudi.setBounds(36, 418, 89, 23);
 		contentPane.add(ButtonChiudi);
-		
 			
 		}
-
 
 		public void svuotaCampi() {
 			TFLogin.setText(null);

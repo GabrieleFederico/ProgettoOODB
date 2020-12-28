@@ -9,16 +9,14 @@ import postgresDAOImpl.RistoranteDAOPostgres;
 public class ControllerRicerca {
 	
 	JFrameHome fr;
-	Connection connessione;
 	
-	public ControllerRicerca(Connection connessione) {
-		this.connessione = connessione;
-		fr = new JFrameHome(this);
+	public ControllerRicerca(ControllorePrincipale c) {
+		fr = new JFrameHome(this, c);
 		fr.setVisible(true);
 	}
 	
 	public void Ricerca (String nome) throws SQLException {
-		RistoranteDAOPostgres RP = new RistoranteDAOPostgres(connessione);
+		RistoranteDAOPostgres RP = new RistoranteDAOPostgres();
 		ArrayList<String> risultatoRicerca = new ArrayList<String>();
 		risultatoRicerca = RP.getRistoranteByNomeOrProdotto(nome);
 		for(String s: risultatoRicerca) {

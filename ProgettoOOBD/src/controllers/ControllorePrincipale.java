@@ -1,36 +1,27 @@
 package controllers;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
-import dbConn.ConnessioneDB;
-
 public class ControllorePrincipale {
 
 	public static void main(String[] args) {
+
+		ControllorePrincipale principale = new ControllorePrincipale();	
 		
-		Connection connessione = null;
-		ConnessioneDB connessioneDB = null;
-		ControllorePrincipale principale = new ControllorePrincipale();
-		
-		try {
-			connessioneDB = ConnessioneDB.getIstanza();
-			connessione = connessioneDB.getConnessione();
-		}
-		catch (SQLException exception){
-            System.out.println("SQLException: "+ exception.getMessage());
-        }
-		
-		principale.Start(connessione);
+		principale.Start();
 
 	}
 	
-	void Start(Connection connessione) {
-		ControllerLogin c = new ControllerLogin(connessione, this);
+	void Start() {
+		ControllerLogin c = new ControllerLogin(this);
 	}
 	
-	void PassaAdHome(ControllerLogin c, Connection connessione) {
-		c.fl.dispose();
-		ControllerRicerca c1 = new ControllerRicerca(connessione);
+	void PassaAdHome(ControllerLogin c) {
+		ControllerRicerca c1 = new ControllerRicerca(this);
 	}
+
+	public void apriCarrello(ControllerRicerca c) {
+		c.fr.setVisible(false);
+		ControllerCarrello carrello = new ControllerCarrello();
+		
+	}
+
 }
