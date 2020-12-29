@@ -27,6 +27,7 @@ public class RistoranteDAOPostgres implements RistoranteDAO {
 				getRistoranteByNomeOrProdottoPS.setString(1,  "%" + ricerca + "%");
 				getRistoranteByNomeOrProdottoPS.setString(2,  "%" + ricerca + "%");
 				ResultSet rs = getRistoranteByNomeOrProdottoPS.executeQuery();
+				connessione.close();
 				
 				while(rs.next())
 					risultatoRicerca.add(rs.getString("nome"));
