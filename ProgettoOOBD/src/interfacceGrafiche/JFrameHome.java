@@ -61,7 +61,16 @@ public class JFrameHome extends JFrame {
 		contentPane.add(LogOutButton);
 		
 		JButton CercaButton = new JButton("Cerca");
-		CercaButton.setBounds(654, 11, 89, 26);
+		CercaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String TFInput = inputTF.getText();
+				String RiderInput = Mezzo.getSelectedItem().toString();
+				String PrezzoInput = FasciaPrezzo.getSelectedItem().toString();
+				c.CercaButton(TFInput, RiderInput, PrezzoInput);
+																	//sei_qui
+			}
+		});
+		CercaButton.setBounds(654, 11, 89, 28);
 		contentPane.add(CercaButton);
 		
 		JButton IMieiOrdiniButton = new JButton("I miei ordini");
@@ -78,17 +87,8 @@ public class JFrameHome extends JFrame {
 				controllore.apriCarrello(c);
 			}
 		});
-		carrelloButton.setBounds(654, 62, 89, 23);
+		carrelloButton.setBounds(331, 436, 89, 23);
 		contentPane.add(carrelloButton);
-		
-		JButton buttonHome = new JButton("Home");
-		buttonHome.setEnabled(false);
-		buttonHome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		buttonHome.setBounds(10, 62, 101, 37);
-		contentPane.add(buttonHome);
 		
 		componentiNecessarie = contentPane.getComponentCount();
 		
@@ -101,7 +101,7 @@ public class JFrameHome extends JFrame {
 		contentPane.add(PizzaButton);
 		
 		JButton SushiButton = new JButton("Sushi");
-		SushiButton.setBounds(493, 192, 215, 163);
+		SushiButton.setBounds(494, 192, 215, 163);
 		contentPane.add(SushiButton);
 		SushiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

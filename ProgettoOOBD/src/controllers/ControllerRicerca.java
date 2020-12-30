@@ -3,10 +3,8 @@ package controllers;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import interfacceGrafiche.JFrameHome;
 import postgresDAOImpl.RistoranteDAOPostgres;
 
@@ -48,5 +46,10 @@ public class ControllerRicerca {
 			y += 30;
 			pannello.add(ciao);
 		}
+	}
+
+	public void CercaButton(String tfInput, String riderInput, String prezzoInput) {
+		//da_continuare
+		
 	}
 }
