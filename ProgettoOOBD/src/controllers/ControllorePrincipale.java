@@ -15,10 +15,10 @@ public class ControllorePrincipale {
 	}
 	
 	void PassaAdHome(ControllerLogin c) {
-		ControllerRicerca c1 = new ControllerRicerca(this);
+		ControllerRicercaRistoranti c1 = new ControllerRicercaRistoranti(this);
 	}
 
-	public void apriCarrello(ControllerRicerca c) {
+	public void apriCarrello(ControllerRicercaRistoranti c) {
 		c.fr.setVisible(false);
 		ControllerCarrello carrello = new ControllerCarrello();
 		

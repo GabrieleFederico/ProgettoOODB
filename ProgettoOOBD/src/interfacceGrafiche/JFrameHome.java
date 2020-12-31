@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controllers.ControllerCarrello;
-import controllers.ControllerRicerca;
+import controllers.ControllerRicercaRistoranti;
 import controllers.ControllorePrincipale;
 
 import javax.swing.JTextField;
@@ -17,6 +17,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -26,11 +28,11 @@ public class JFrameHome extends JFrame {
 	private JPanel contentPane;
 	private JTextField inputTF;
 	private int componentiNecessarie;
-	ControllerRicerca controller;
+	ControllerRicercaRistoranti controller;
 	ControllorePrincipale controllore;
 	
 	
-	public JFrameHome(ControllerRicerca c, ControllorePrincipale c1) {
+	public JFrameHome(ControllerRicercaRistoranti c, ControllorePrincipale c1) {
 		setTitle("Home");
 		controller = c;
 		controllore = c1;
@@ -64,10 +66,20 @@ public class JFrameHome extends JFrame {
 		CercaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String TFInput = inputTF.getText();
-				String RiderInput = Mezzo.getSelectedItem().toString();
-				String PrezzoInput = FasciaPrezzo.getSelectedItem().toString();
-				c.CercaButton(TFInput, RiderInput, PrezzoInput);
-																	//sei_qui
+				String RiderInput = null;
+				String PrezzoInput = null;
+				if(Mezzo.getSelectedIndex() != 0);
+					RiderInput = Mezzo.getSelectedItem().toString();
+					
+				if(FasciaPrezzo.getSelectedIndex() != 0);
+					PrezzoInput = FasciaPrezzo.getSelectedItem().toString();
+					
+				try {
+					c.Ricerca(TFInput, contentPane, componentiNecessarie, PrezzoInput, RiderInput);
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+				
 			}
 		});
 		CercaButton.setBounds(654, 11, 89, 28);
@@ -103,10 +115,15 @@ public class JFrameHome extends JFrame {
 		JButton SushiButton = new JButton("Sushi");
 		SushiButton.setBounds(494, 192, 215, 163);
 		contentPane.add(SushiButton);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(24, 112, 75, 37);
+		contentPane.add(lblNewLabel);
+		
 		SushiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					c.Ricerca("Sushi", contentPane, componentiNecessarie);
+					c.Ricerca("Sushi", contentPane, componentiNecessarie, null, null);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}
@@ -115,21 +132,33 @@ public class JFrameHome extends JFrame {
 		PizzaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					c.Ricerca("Pizz", contentPane, componentiNecessarie);
+					c.Ricerca("Pizz", contentPane, componentiNecessarie, null, null);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}
 			}
 		});
-		
+
 		PaniniButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					c.Ricerca("Panin", contentPane, componentiNecessarie);
+					c.Ricerca("Panin", contentPane, componentiNecessarie, null, null);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}
 			}
 		});
+
+//		Come dare un'azione ad una label
+		
+//		lblNewLabel.addMouseListener(new MouseAdapter() {
+//			public void mouseClicked(MouseEvent arg0) {
+//				try {
+//					c.Ricerca("Panin", contentPane, componentiNecessarie, null, null);
+//				} catch (SQLException e) {
+//					System.out.println(e.getMessage());
+//				}
+//			}
+//		});
 	}
 }

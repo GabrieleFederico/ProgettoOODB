@@ -44,46 +44,29 @@ public class RistoranteDAOPostgres implements RistoranteDAO {
 			
 			ArrayList<String> risultatoRicercaC = new ArrayList<String>();
 			
-			//implementare_classe_con_metodo_per_questo
-			int low;
-			int max;
+			int indiceSeparatore;
+			indiceSeparatore = prezzoInput.indexOf("-");
+			String prezzoMinimo = prezzoInput.substring(0, indiceSeparatore);
+			String prezzoMassimo = prezzoInput.substring(indiceSeparatore+1, prezzoInput.length());
 			
-			if (prezzoInput.equals("0-5")) {
-				low=0;
-				max=5;
-			}	
-			else if (prezzoInput.equals("5-10")) {
-				low=5;
-				max=10;
-			}
-			else if(prezzoInput.equals("10-20")){
-				low=10;
-				max=20;
-			}
-			else {
-				low=0;
-				max=100;
-			}
+			int min = Integer.parseInt(prezzoMinimo);
+			int max = Integer.parseInt(prezzoMassimo);
 			
-			if (riderInput.equals("Selezionare mezzo")){
-				//non_so_cosa_farci
-			}
 			
 			try {
 				connessioneDB = ConnessioneDB.getIstanza();
 				connessione = connessioneDB.getConnessione();
-				getRistoranteByRicercaComplessaPS = connessione.prepareStatement("SELECT ristoranti.nome, ristoranti.indirizzo FROM ristoranti NATURAL JOIN menu WHERE ristoranti.Nome LIKE ? OR menu.nomep LIKE ? AND  menu.prezzop BETWEEN ? AND ? GROUP BY ristoranti.nome,ristoranti.indirizzo");
+				getRistoranteByRicercaComplessaPS = connessione.prepareStatement("SELECT ristoranti.nome, ristoranti.indirizzo FROM ristoranti NATURAL JOIN menu WHERE (ristoranti.Nome LIKE ? OR menu.nomep LIKE ?) AND  (menu.prezzop BETWEEN ? AND ?) GROUP BY ristoranti.nome, ristoranti.indirizzo");
 				getRistoranteByRicercaComplessaPS.setString(1,  "%" + tfInput + "%");
 				getRistoranteByRicercaComplessaPS.setString(2,  "%" + tfInput + "%");
-				getRistoranteByRicercaComplessaPS.setInt(3,  low);
+				getRistoranteByRicercaComplessaPS.setInt(3,  min);
 				getRistoranteByRicercaComplessaPS.setInt(4,  max);
-				System.out.println(getRistoranteByRicercaComplessaPS);
 				ResultSet res = getRistoranteByRicercaComplessaPS.executeQuery();
 				connessione.close();
 				
 				while(res.next())
 					risultatoRicercaC.add(res.getString("nome"));
-		}
+			}
 			catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}
