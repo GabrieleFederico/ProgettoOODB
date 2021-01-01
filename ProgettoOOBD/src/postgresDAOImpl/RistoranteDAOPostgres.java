@@ -49,6 +49,7 @@ public class RistoranteDAOPostgres implements RistoranteDAO {
 			String prezzoMinimo = prezzoInput.substring(0, indiceSeparatore);
 			String prezzoMassimo = prezzoInput.substring(indiceSeparatore+1, prezzoInput.length());
 			
+			
 			int min = Integer.parseInt(prezzoMinimo);
 			int max = Integer.parseInt(prezzoMassimo);
 			

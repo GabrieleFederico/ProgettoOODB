@@ -33,7 +33,7 @@ public class ControllerRicercaRistoranti {
 		int max = pannello.getComponentCount();
 		
 		for(i = max-1; i > componentiNecessarie-1; i--)
-			pannello.remove(i);
+			pannello.getComponent(i).setVisible(false);
 			
 		pannello.updateUI();
 		
@@ -53,5 +53,26 @@ public class ControllerRicercaRistoranti {
 		
 		
 	}
+
+	public void TornaHome( JPanel pannello, int componentiNecessarie) {
+		
+		int i;
+		int max = pannello.getComponentCount();
+		
+		for(i = max-1; i > componentiNecessarie-1; i--)
+			pannello.getComponent(i).setVisible(true);
+		
+		int j = max-1;
+		
+		while(pannello.getComponent(j) instanceof JLabel) {
+			pannello.remove(j);
+			j--;
+		}
+		
+		pannello.updateUI();
+	}
+
+}	
 	
-}
+	
+

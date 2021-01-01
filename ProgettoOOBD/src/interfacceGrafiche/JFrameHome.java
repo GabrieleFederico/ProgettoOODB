@@ -44,19 +44,14 @@ public class JFrameHome extends JFrame {
 		contentPane.setLayout(null);
 		
 		inputTF = new JTextField();
-		inputTF.setBounds(10, 11, 311, 28);
+		inputTF.setBounds(111, 11, 311, 28);
 		contentPane.add(inputTF);
 		inputTF.setColumns(10);
 		
 		JComboBox Mezzo = new JComboBox();
 		Mezzo.setModel(new DefaultComboBoxModel(new String[] {"Selezionare mezzo", "Automobile", "Moto", "Bicicletta"}));
-		Mezzo.setBounds(331, 11, 144, 28);
+		Mezzo.setBounds(432, 11, 144, 28);
 		contentPane.add(Mezzo);
-		
-		JComboBox FasciaPrezzo = new JComboBox();
-		FasciaPrezzo.setModel(new DefaultComboBoxModel(new String[] {"Fascia di prezzo", "0-5", "5-10", "10-20"}));
-		FasciaPrezzo.setBounds(494, 11, 139, 28);
-		contentPane.add(FasciaPrezzo);
 		
 		JButton LogOutButton = new JButton("Log Out");
 		LogOutButton.setBounds(654, 433, 89, 28);
@@ -71,9 +66,9 @@ public class JFrameHome extends JFrame {
 				if(Mezzo.getSelectedIndex() != 0);
 					RiderInput = Mezzo.getSelectedItem().toString();
 					
-				if(FasciaPrezzo.getSelectedIndex() != 0);
-					PrezzoInput = FasciaPrezzo.getSelectedItem().toString();
-					
+//				if(FasciaPrezzo.getSelectedIndex() != 0);
+//					PrezzoInput = FasciaPrezzo.getSelectedItem().toString();
+//					
 				try {
 					c.Ricerca(TFInput, contentPane, componentiNecessarie, PrezzoInput, RiderInput);
 				} catch (SQLException e) {
@@ -82,7 +77,7 @@ public class JFrameHome extends JFrame {
 				
 			}
 		});
-		CercaButton.setBounds(654, 11, 89, 28);
+		CercaButton.setBounds(10, 11, 89, 28);
 		contentPane.add(CercaButton);
 		
 		JButton IMieiOrdiniButton = new JButton("I miei ordini");
@@ -90,7 +85,7 @@ public class JFrameHome extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		IMieiOrdiniButton.setBounds(10, 433, 139, 26);
+		IMieiOrdiniButton.setBounds(625, 12, 118, 27);
 		contentPane.add(IMieiOrdiniButton);
 		
 		JButton carrelloButton = new JButton("Carrello");
@@ -99,31 +94,40 @@ public class JFrameHome extends JFrame {
 				controllore.apriCarrello(c);
 			}
 		});
-		carrelloButton.setBounds(331, 436, 89, 23);
+		carrelloButton.setBounds(333, 434, 89, 26);
 		contentPane.add(carrelloButton);
+		
+		JButton HomeButton = new JButton("Home");
+		HomeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+					c.TornaHome(contentPane, componentiNecessarie);	
+																					//sei_qui
+			}
+		});
+		HomeButton.setEnabled(false);
+		HomeButton.setBounds(10, 436, 89, 25);
+		contentPane.add(HomeButton);
 		
 		componentiNecessarie = contentPane.getComponentCount();
 		
 		JButton PaniniButton = new JButton("Panini");
-		PaniniButton.setBounds(10, 192, 215, 163);
+		PaniniButton.setBounds(10, 160, 215, 163);
 		contentPane.add(PaniniButton);
 		
 		JButton PizzaButton = new JButton("Pizza");
-		PizzaButton.setBounds(251, 192, 215, 163);
+		PizzaButton.setBounds(270, 160, 215, 163);
 		contentPane.add(PizzaButton);
 		
 		JButton SushiButton = new JButton("Sushi");
-		SushiButton.setBounds(494, 192, 215, 163);
+		SushiButton.setBounds(528, 160, 215, 163);
 		contentPane.add(SushiButton);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(24, 112, 75, 37);
-		contentPane.add(lblNewLabel);
 		
 		SushiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					c.Ricerca("Sushi", contentPane, componentiNecessarie, null, null);
+					HomeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}
@@ -133,6 +137,7 @@ public class JFrameHome extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					c.Ricerca("Pizz", contentPane, componentiNecessarie, null, null);
+					HomeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}
@@ -143,7 +148,8 @@ public class JFrameHome extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					c.Ricerca("Panin", contentPane, componentiNecessarie, null, null);
-				} catch (SQLException e) {
+					HomeButton.setEnabled(true);
+					} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}
 			}
