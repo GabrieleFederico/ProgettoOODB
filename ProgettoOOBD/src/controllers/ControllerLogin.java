@@ -1,10 +1,8 @@
 package controllers;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import classiEntità.Utente;
-import dbConn.ConnessioneDB;
 import interfacceGrafiche.Errore;
 import interfacceGrafiche.JFrameLogin;
 import interfacceGrafiche.JFrameRegistrati;
@@ -15,9 +13,6 @@ public class ControllerLogin {
 
 	private JFrameRegistrati fr;
 	private JFrameLogin fl;
-	private Connection connessione;
-	private ConnessioneDB connessioneDB;
-
 
 	public ControllerLogin(ControllorePrincipale controller) {
 			
@@ -48,7 +43,6 @@ public class ControllerLogin {
 		UtenteDAOPostgres u2 = new UtenteDAOPostgres();
 		if(u2.esisteUtente(email, pwd)) 
 			return true;
-		
 		else 
 			return false;
 		
