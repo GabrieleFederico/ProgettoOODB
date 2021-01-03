@@ -34,7 +34,7 @@ public class JFrameRistorante extends JFrame {
 	ControllorePrincipale controllore;
 	
 	
-	public JFrameRistorante(ControllerRicercaProdotto c, String nomeRistorante) {
+	public JFrameRistorante(ControllerRicercaProdotto c, String nomeRistorante) throws SQLException {
 		setTitle(nomeRistorante);
 		controller = c;
 		setBounds(100, 100, 769, 511);
@@ -49,7 +49,7 @@ public class JFrameRistorante extends JFrame {
 		inputTF.setColumns(10);
 		
 		JComboBox FasciaPrezzo = new JComboBox();
-		FasciaPrezzo.setBounds(372, 11, 171, 28);
+		FasciaPrezzo.setBounds(362, 11, 191, 28);
 		FasciaPrezzo.setModel(new DefaultComboBoxModel(new String[] {"Selezionare fascia di prezzo", "0-5", "5-10", "10-20"}));
 		contentPane.add(FasciaPrezzo);
 		
@@ -74,6 +74,8 @@ public class JFrameRistorante extends JFrame {
 		contentPane.add(CercaButton);
 		
 		componentiNecessarie = contentPane.getComponentCount();
+
+		c.getMenu(nomeRistorante, contentPane, componentiNecessarie);
 
 //		Come dare un'azione ad una label
 		
