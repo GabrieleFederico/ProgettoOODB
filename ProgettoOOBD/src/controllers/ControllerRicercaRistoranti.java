@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import classiEntità.Ristorante;
 import interfacceGrafiche.GestioneUI;
 import interfacceGrafiche.JFrameHome;
 import postgresDAOImpl.RistoranteDAOPostgres;
@@ -25,15 +26,16 @@ public class ControllerRicercaRistoranti {
 	public void Ricerca (String ricerca, JPanel pannello, int componentiNecessarie, String mezzo) throws SQLException {
 		
 		RistoranteDAOPostgres rp = new RistoranteDAOPostgres();
-		ArrayList<String> risultatoRicerca = new ArrayList<String>();
+		ArrayList<Ristorante> risultatoRicerca = new ArrayList<Ristorante>();
 		
 		if(mezzo == null)
 			risultatoRicerca = rp.getRistoranteByNomeOrProdotto(ricerca);
 		else
 			risultatoRicerca = rp.getRistoranteByRicercaComplessa(ricerca, mezzo);
-
+			
+		
 		gestore = new GestioneUI();
-		gestore.aggiornaInterfaccia(pannello, componentiNecessarie, risultatoRicerca);
+		gestore.aggiornaInterfacciaRistoranti(pannello, componentiNecessarie, risultatoRicerca);
 		
 	}
 

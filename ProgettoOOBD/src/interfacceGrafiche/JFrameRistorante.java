@@ -7,8 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import classiEntità.Ristorante;
 import controllers.ControllerCarrello;
-import controllers.ControllerRicercaProdotto;
+import controllers.ControllerRicercaMenu;
 import controllers.ControllorePrincipale;
 
 import javax.swing.JTextField;
@@ -30,12 +31,12 @@ public class JFrameRistorante extends JFrame {
 	private JPanel contentPane;
 	private JTextField inputTF;
 	private int componentiNecessarie;
-	ControllerRicercaProdotto controller;
+	ControllerRicercaMenu controller;
 	ControllorePrincipale controllore;
 	
 	
-	public JFrameRistorante(ControllerRicercaProdotto c, String nomeRistorante) throws SQLException {
-		setTitle(nomeRistorante);
+	public JFrameRistorante(ControllerRicercaMenu c, Ristorante r) throws SQLException {
+		setTitle(r.getNome());
 		controller = c;
 		setBounds(100, 100, 769, 511);
 		contentPane = new JPanel();
@@ -48,9 +49,9 @@ public class JFrameRistorante extends JFrame {
 		contentPane.add(inputTF);
 		inputTF.setColumns(10);
 		
-		JComboBox FasciaPrezzo = new JComboBox();
+		JComboBox<String> FasciaPrezzo = new JComboBox<String>();
 		FasciaPrezzo.setBounds(362, 11, 191, 28);
-		FasciaPrezzo.setModel(new DefaultComboBoxModel(new String[] {"Selezionare fascia di prezzo", "0-5", "5-10", "10-20"}));
+		FasciaPrezzo.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare fascia di prezzo", "0-5", "5-10", "10-20"}));
 		contentPane.add(FasciaPrezzo);
 		
 		JButton CercaButton = new JButton("Cerca");
@@ -75,7 +76,7 @@ public class JFrameRistorante extends JFrame {
 		
 		componentiNecessarie = contentPane.getComponentCount();
 
-		c.getMenu(nomeRistorante, contentPane, componentiNecessarie);
+		c.getMenu(r, contentPane, componentiNecessarie);
 
 //		Come dare un'azione ad una label
 		

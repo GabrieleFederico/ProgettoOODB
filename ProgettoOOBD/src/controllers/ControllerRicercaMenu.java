@@ -5,22 +5,24 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import classiEntità.Menu;
+import classiEntità.Ristorante;
 import interfacceGrafiche.GestioneUI;
 import interfacceGrafiche.JFrameRistorante;
 import postgresDAOImpl.MenùDAOPostgres;
 import postgresDAOImpl.RistoranteDAOPostgres;
 
-public class ControllerRicercaProdotto {
+public class ControllerRicercaMenu {
 	
 	JFrameRistorante fr;
 	GestioneUI gestore;
 	
-	public ControllerRicercaProdotto(String nomeRistorante) {
+	public ControllerRicercaMenu(Ristorante r) {
 		
 		try {
-			fr = new JFrameRistorante(this, nomeRistorante);
+			fr = new JFrameRistorante(this, r);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		fr.setVisible(true);
 	}
@@ -43,12 +45,12 @@ public class ControllerRicercaProdotto {
 	public void getMenu(String nomeRistorante, JPanel pannello, int componentiNecessarie) throws SQLException {
 		
 		MenùDAOPostgres mp = new MenùDAOPostgres();
-		ArrayList<String> menùRistorante = new ArrayList<String>();
-		
+		Menu menùRistorante = new Menu();
+				
 		menùRistorante = mp.getMenùByRistorante(nomeRistorante);
 			
 		gestore = new GestioneUI();
-		gestore.aggiornaInterfaccia(pannello, componentiNecessarie, menùRistorante);
+		gestore.aggiornaInterfaccia(pannello, componentiNecessarie, menùRistorante.getProdotti());
 		
 	}
 

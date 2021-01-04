@@ -48,9 +48,8 @@ public class JFrameHome extends JFrame {
 		contentPane.add(inputTF);
 		inputTF.setColumns(10);
 
-		JComboBox Mezzo = new JComboBox();
-		Mezzo.setModel(
-				new DefaultComboBoxModel(new String[] { "Selezionare mezzo", "Automobile", "Moto", "Bicicletta" }));
+		JComboBox<String> Mezzo = new JComboBox<String>();
+		Mezzo.setModel(new DefaultComboBoxModel<String>(new String[] { "Selezionare mezzo", "Automobile", "Moto", "Bici" }));
 		Mezzo.setBounds(351, 11, 144, 28);
 		contentPane.add(Mezzo);
 
@@ -66,7 +65,7 @@ public class JFrameHome extends JFrame {
 				if (Mezzo.getSelectedIndex() != 0)
 					RiderInput = Mezzo.getSelectedItem().toString();
 				try {
-					c.Ricerca(TFInput, contentPane, componentiNecessarie, null);
+					c.Ricerca(TFInput, contentPane, componentiNecessarie, RiderInput);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}

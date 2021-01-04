@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import classiEntità.Ristorante;
 import dbConn.ConnessioneDB;
 import interfacceDAO.RistoranteDAO;
 
@@ -18,31 +19,44 @@ public class RistoranteDAOPostgres implements RistoranteDAO {
 		private PreparedStatement getRistoranteByRicercaComplessaPS;
 
 		@Override
-		public ArrayList<String> getRistoranteByNomeOrProdotto(String ricerca) {
+		public ArrayList<Ristorante> getRistoranteByNomeOrProdotto(String ricerca) {
 			
-			ArrayList<String> risultatoRicerca = new ArrayList<String>();
+			String risultatoRicerca;
+			Ristorante temp;
+			ArrayList<Ristorante> risultato = new ArrayList<Ristorante>();
+			
 			try {
 				connessioneDB = ConnessioneDB.getIstanza();
 				connessione = connessioneDB.getConnessione();
-				getRistoranteByNomeOrProdottoPS = connessione.prepareStatement("SELECT ristoranti.nome, ristoranti.indirizzo FROM ristoranti NATURAL JOIN menu  WHERE ristoranti.Nome LIKE ? OR menu.nomep LIKE ? GROUP BY ristoranti.nome,ristoranti.indirizzo");
+				getRistoranteByNomeOrProdottoPS = connessione.prepareStatement("SELECT ristoranti.nome, ristoranti.indirizzo FROM ristoranti NATURAL JOIN menu  WHERE ristoranti.Nome LIKE ? OR menu.nomep LIKE ? GROUP BY ristoranti.nome, ristoranti.indirizzo");
 				getRistoranteByNomeOrProdottoPS.setString(1,  "%" + ricerca + "%");
 				getRistoranteByNomeOrProdottoPS.setString(2,  "%" + ricerca + "%");
 				ResultSet rs = getRistoranteByNomeOrProdottoPS.executeQuery();
 				connessione.close();
 				
-				while(rs.next())
-					risultatoRicerca.add(rs.getString("nome"));
+				while(rs.next()) {
+					temp = new Ristorante();
+					risultatoRicerca = rs.getString("nome");
+					temp.setNome(risultatoRicerca);
+					risultatoRicerca = rs.getString("indirizzo");
+					temp.setIndirizzo(risultatoRicerca);
+					risultato.add(temp);
+				}
+				
+				
 			} 
 			catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}
-			return risultatoRicerca;
+			return risultato;
 		}
 		
 		
-		public ArrayList<String> getRistoranteByRicercaComplessa(String tfInput, String riderInput){
+		public ArrayList<Ristorante> getRistoranteByRicercaComplessa(String tfInput, String riderInput){
 			
-			ArrayList<String> risultatoRicercaC = new ArrayList<String>();
+			String risultatoRicercaC;
+			Ristorante temp;
+			ArrayList<Ristorante> risultato = new ArrayList<Ristorante>();
 			
 //			int indiceSeparatore;
 //			indiceSeparatore = prezzoInput.indexOf("-");
@@ -59,7 +73,7 @@ public class RistoranteDAOPostgres implements RistoranteDAO {
 				connessione = connessioneDB.getConnessione();
 				
 				if(riderInput != null) {
-					getRistoranteByRicercaComplessaPS = connessione.prepareStatement("SELECT ristoranti.nome FROM (ristoranti NATURAL JOIN menu) JOIN (alserviziodi NATURAL JOIN rider) ON ristoranti.codn = alserviziodi.codn WHERE ((ristoranti.nome LIKE ? OR menu.nomep LIKE ?) AND (rider.mezzo LIKE ?)) GROUP BY ristoranti.nome, ristoranti.indirizzo");
+					getRistoranteByRicercaComplessaPS = connessione.prepareStatement("SELECT ristoranti.nome, ristoranti.indirizzo FROM (ristoranti NATURAL JOIN menu) JOIN (alserviziodi NATURAL JOIN rider) ON ristoranti.codn = alserviziodi.codn WHERE ((ristoranti.nome LIKE ? OR menu.nomep LIKE ?) AND (rider.mezzo LIKE ?)) GROUP BY ristoranti.nome, ristoranti.indirizzo");
 					getRistoranteByRicercaComplessaPS.setString(1,  "%" + tfInput + "%");
 					getRistoranteByRicercaComplessaPS.setString(2,  "%" + tfInput + "%");
 					getRistoranteByRicercaComplessaPS.setString(3,  riderInput);
@@ -70,12 +84,20 @@ public class RistoranteDAOPostgres implements RistoranteDAO {
 				ResultSet res = getRistoranteByRicercaComplessaPS.executeQuery();
 				connessione.close();
 				
-				while(res.next())
-					risultatoRicercaC.add(res.getString("nome"));
+
+				while(res.next()) {
+					temp = new Ristorante();
+					risultatoRicercaC = res.getString("nome");
+					temp.setNome(risultatoRicercaC);
+					risultatoRicercaC = res.getString("indirizzo");
+					temp.setIndirizzo(risultatoRicercaC);
+					risultato.add(temp);
+				}
+				
 			}
 			catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}
-			return risultatoRicercaC;
+			return risultato;
 }
 }

@@ -11,16 +11,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 
-import controllers.ControllerRicercaProdotto;
+import classiEntità.Ristorante;
+import controllers.ControllerRicercaMenu;
 
 public class GestioneUI {
 
 	private JLabel labelRisultato;
-	private ControllerRicercaProdotto a;
+	private ControllerRicercaMenu a;
 	private JSpinner contatore;
 	private JButton bottone;
 
-	public void aggiornaInterfaccia(JPanel pannello, int componentiNecessarie, ArrayList<String> risultatoRicerca) {
+	public void aggiornaInterfacciaRistoranti(JPanel pannello, int componentiNecessarie, ArrayList<Ristorante> risultatoRicerca) {
 
 		int i;
 		int max = pannello.getComponentCount();
@@ -30,31 +31,38 @@ public class GestioneUI {
 
 		pannello.updateUI();
 
-		int x = 100;
-		int y = 130;
-		int larg = 184;
-		int lung = 26;
-		for (String s : risultatoRicerca) {
-			labelRisultato = new JLabel(s);
-			labelRisultato.setBounds(x, y, larg, lung);
+		int xNome = 100;
+		int yNome = 130;
+		int xIndirizzo = 120;
+		int yIndirizzo = 145;
+		int larg = 185;
+		int lung = 20;
+		for (Ristorante r : risultatoRicerca) {
+			labelRisultato = new JLabel(r.getNome());
+			labelRisultato.setBounds(xNome, yNome, larg, lung);
 			pannello.add(labelRisultato);
 			if (componentiNecessarie > 3) {
 				labelRisultato.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent arg0) {
-						a = new ControllerRicercaProdotto(s);
+						Object source = arg0.getSource();
+						a = new ControllerRicercaMenu(r);
 					}
 				});
 				labelRisultato.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
 			else { 
 				contatore = new JSpinner();
-				contatore.setBounds(x+250, y, 40, 20);
+				contatore.setBounds(xNome+250, yNome, 40, 20);
 				pannello.add(contatore);
 				bottone = new JButton("Aggiungi al carrello");
-				bottone.setBounds(x+350, y, 200, 20);
+				bottone.setBounds(xNome+350, yNome, 200, 20);
 				pannello.add(bottone);
 			}
-			y += 30;
+			yNome += 50;
+			labelRisultato = new JLabel(r.getIndirizzo());
+			labelRisultato.setBounds(xIndirizzo, yIndirizzo, larg, lung);
+			pannello.add(labelRisultato);
+			yIndirizzo += 50;
 		}
 	}
 
