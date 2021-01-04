@@ -1,18 +1,18 @@
 package interfacceGrafiche;
 
 import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-
 import classiEntità.Prodotto;
 import classiEntità.Ristorante;
+import controllers.ControllerCarrello;
 import controllers.ControllerRicercaMenu;
 
 public class GestioneUI {
@@ -21,6 +21,7 @@ public class GestioneUI {
 	private ControllerRicercaMenu a;
 	private JSpinner contatore;
 	private JButton bottone;
+	private ControllerCarrello cc;
 
 	public void aggiornaInterfacciaRistoranti(JPanel pannello, int componentiNecessarie,
 			ArrayList<Ristorante> risultatoRicerca) {
@@ -81,6 +82,7 @@ public class GestioneUI {
 
 		int i;
 		int max = pannello.getComponentCount();
+		cc = new ControllerCarrello();
 
 		for (i = max - 1; i > componentiNecessarie - 1; i--)
 			pannello.remove(i);
@@ -91,6 +93,8 @@ public class GestioneUI {
 		int y = 130;
 		int larg = 185;
 		int lung = 20;
+		int index = 0;
+		ArrayList<JSpinner> spinners = new ArrayList<JSpinner>();
 
 		for (Prodotto p : risultatoRicerca) {
 			labelRisultato = new JLabel(p.getNomeP());
@@ -100,11 +104,25 @@ public class GestioneUI {
 			contatore = new JSpinner();
 			contatore.setBounds(x + 250, y, 40, 20);
 			pannello.add(contatore);
+			spinners.add(contatore);
 			bottone = new JButton("Aggiungi al carrello");
 			bottone.setBounds(x + 350, y, 200, 20);
 			pannello.add(bottone);
 			y += 50;
-
+			final int riga = index;
+			index++;
+	
+			bottone.addActionListener(new ActionListener() {
+				public void  actionPerformed(ActionEvent arg0) {
+					String nomep =  risultatoRicerca.get(riga).getNomeP();
+					int quantità = (int) spinners.get(riga).getValue();
+					String email = "asd@gmail.com";
+					cc.aggiungiAlCarrello(nomep, quantità, email);
+				}
+		
+			});
 		}
-	}
+		
+	
+}
 }
