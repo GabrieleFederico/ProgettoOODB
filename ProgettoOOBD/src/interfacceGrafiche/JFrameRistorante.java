@@ -61,7 +61,7 @@ public class JFrameRistorante extends JFrame {
 				String TFInput = inputTF.getText();
 				String PrezzoInput = null;
 				
-				if(FasciaPrezzo.getSelectedIndex() != 0);
+				if(FasciaPrezzo.getSelectedIndex() != 0)
 					PrezzoInput = FasciaPrezzo.getSelectedItem().toString();
 					
 				try {

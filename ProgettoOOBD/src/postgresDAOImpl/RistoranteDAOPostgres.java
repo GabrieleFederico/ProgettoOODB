@@ -56,17 +56,7 @@ public class RistoranteDAOPostgres implements RistoranteDAO {
 			
 			String risultatoRicercaC;
 			Ristorante temp;
-			ArrayList<Ristorante> risultato = new ArrayList<Ristorante>();
-			
-//			int indiceSeparatore;
-//			indiceSeparatore = prezzoInput.indexOf("-");
-//			String prezzoMinimo = prezzoInput.substring(0, indiceSeparatore);
-//			String prezzoMassimo = prezzoInput.substring(indiceSeparatore+1, prezzoInput.length());
-//			
-//			
-//			int min = Integer.parseInt(prezzoMinimo);
-//			int max = Integer.parseInt(prezzoMassimo);
-			
+			ArrayList<Ristorante> risultato = new ArrayList<Ristorante>();			
 			
 			try {
 				connessioneDB = ConnessioneDB.getIstanza();

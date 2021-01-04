@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import classiEntità.Menu;
+import classiEntità.Prodotto;
 import classiEntità.Ristorante;
 import interfacceGrafiche.GestioneUI;
 import interfacceGrafiche.JFrameRistorante;
@@ -16,8 +17,12 @@ public class ControllerRicercaMenu {
 	
 	JFrameRistorante fr;
 	GestioneUI gestore;
+	Ristorante r;
 	
-	public ControllerRicercaMenu(Ristorante r) {
+	public ControllerRicercaMenu(Ristorante rist) {
+		
+		r = rist;
+		gestore = new GestioneUI();
 		
 		try {
 			fr = new JFrameRistorante(this, r);
@@ -30,27 +35,25 @@ public class ControllerRicercaMenu {
 	public void RicercaProdotto (String ricerca, JPanel pannello, int componentiNecessarie, String fasciaPrezzo) throws SQLException {
 		
 		MenùDAOPostgres mp = new  MenùDAOPostgres();
-		ArrayList<String> risultatoRicerca = new ArrayList<String>();
+		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();
 		
 		if(fasciaPrezzo == null)
-			risultatoRicerca = mp.getProdottoByNomeProdottoAndRistorante(ricerca);
+			risultatoRicerca = mp.getProdottoByNomeProdottoAndRistorante(ricerca, r);
 		else
-			risultatoRicerca = mp.getProdottoByRicercaComplessa(ricerca, fasciaPrezzo);
+			risultatoRicerca = mp.getProdottoByRicercaComplessa(ricerca, r, fasciaPrezzo);
 
-		gestore = new GestioneUI();
-		gestore.aggiornaInterfaccia(pannello, componentiNecessarie, risultatoRicerca);
+		gestore.aggiornaInterfacciaProdotti(pannello, componentiNecessarie, risultatoRicerca);
 		
 	}
 
-	public void getMenu(String nomeRistorante, JPanel pannello, int componentiNecessarie) throws SQLException {
+	public void getMenu(Ristorante rist, JPanel pannello, int componentiNecessarie) throws SQLException {
 		
 		MenùDAOPostgres mp = new MenùDAOPostgres();
 		Menu menùRistorante = new Menu();
 				
-		menùRistorante = mp.getMenùByRistorante(nomeRistorante);
-			
-		gestore = new GestioneUI();
-		gestore.aggiornaInterfaccia(pannello, componentiNecessarie, menùRistorante.getProdotti());
+		menùRistorante = mp.getMenùByRistorante(rist);
+		
+		gestore.aggiornaInterfacciaProdotti(pannello, componentiNecessarie, menùRistorante.getProdotti());
 		
 	}
 
