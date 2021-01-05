@@ -1,26 +1,37 @@
 package controllers;
 
+import classiEntità.Ristorante;
+
 public class ControllorePrincipale {
 
+	String Email;
+	ControllerCarrello ccarrello;
+	
 	public static void main(String[] args) {
 
 		ControllorePrincipale principale = new ControllorePrincipale();	
 		
-		principale.Start();
+		principale.start();
 
 	}
 	
-	void Start() {
+	public void start() {
 		ControllerLogin c = new ControllerLogin(this);
 	}
 	
-	void PassaAdHome(ControllerLogin c) {
+	public void passaAdHome(ControllerLogin c, String email) {
+		ccarrello = new ControllerCarrello(email);
 		ControllerRicercaRistoranti c1 = new ControllerRicercaRistoranti(this);
+		Email = email;
+	}
+	
+	public void passaAInterfacciaRistorante(Ristorante r) {
+		ControllerRicercaMenu crm = new ControllerRicercaMenu(r, ccarrello);
 	}
 
 	public void apriCarrello(ControllerRicercaRistoranti c) {
 		c.fr.setVisible(false);
-		ControllerCarrello carrello = new ControllerCarrello();
+		ControllerCarrello carrello = new ControllerCarrello(Email);
 		
 	}
 

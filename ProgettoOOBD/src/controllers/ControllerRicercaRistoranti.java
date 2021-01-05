@@ -8,18 +8,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import classiEntità.Ristorante;
-import interfacceGrafiche.GestioneUI;
 import interfacceGrafiche.JFrameHome;
 import postgresDAOImpl.RistoranteDAOPostgres;
 
 public class ControllerRicercaRistoranti {
 	
 	JFrameHome fr;
-	GestioneUI gestore;
+	ControllorePrincipale C;
 	
 	public ControllerRicercaRistoranti(ControllorePrincipale c) {
-		
-		fr = new JFrameHome(this, c);
+		C = c;
+		fr = new JFrameHome(this, C);
 		fr.setVisible(true);
 	}
 	
@@ -32,18 +31,10 @@ public class ControllerRicercaRistoranti {
 			risultatoRicerca = rp.getRistoranteByNomeOrProdotto(ricerca);
 		else
 			risultatoRicerca = rp.getRistoranteByRicercaComplessa(ricerca, mezzo);
+		
+		fr.aggiornaInterfacciaRistoranti(pannello, componentiNecessarie, risultatoRicerca, C);
 			
-		
-		gestore = new GestioneUI();
-		gestore.aggiornaInterfacciaRistoranti(pannello, componentiNecessarie, risultatoRicerca);
-		
 	}
-
-	public void TornaHome(JPanel pannello, int componentiNecessarie) {
-		
-		gestore.TornaHome(pannello, componentiNecessarie);
-	}
-
 
 }	
 	

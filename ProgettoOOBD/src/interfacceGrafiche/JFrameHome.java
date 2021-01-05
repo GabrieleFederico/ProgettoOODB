@@ -5,9 +5,12 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
 
+import classiEntità.Ristorante;
 import controllers.ControllerCarrello;
+import controllers.ControllerRicercaMenu;
 import controllers.ControllerRicercaRistoranti;
 import controllers.ControllorePrincipale;
 
@@ -20,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Cursor;
@@ -95,7 +99,7 @@ public class JFrameHome extends JFrame {
 		JButton HomeButton = new JButton("Home");
 		HomeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				c.TornaHome(contentPane, componentiNecessarie);
+				TornaHome(contentPane, componentiNecessarie);
 				HomeButton.setEnabled(false);
 			}
 		});
@@ -149,5 +153,60 @@ public class JFrameHome extends JFrame {
 				}
 			}
 		});
+	}
+	
+	public void aggiornaInterfacciaRistoranti(JPanel pannello, int componentiNecessarie, ArrayList<Ristorante> risultatoRicerca, ControllorePrincipale c1) {
+
+		JLabel labelRisultato;
+		
+		int i;
+		int max = pannello.getComponentCount();
+
+		for (i = max - 1; i > componentiNecessarie - 1; i--)
+			pannello.getComponent(i).setVisible(false);
+
+		pannello.updateUI();
+
+		int xNome = 100;
+		int yNome = 130;
+		int xIndirizzo = 120;
+		int yIndirizzo = 145;
+		int larg = 185;
+		int lung = 20;
+		for (Ristorante r : risultatoRicerca) {
+			labelRisultato = new JLabel(r.getNome());
+			labelRisultato.setBounds(xNome, yNome, larg, lung);
+			pannello.add(labelRisultato);
+			labelRisultato.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent arg0) {
+					c1.passaAInterfacciaRistorante(r);
+				}
+			});
+			labelRisultato.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+			yNome += 50;
+			labelRisultato = new JLabel(r.getIndirizzo());
+			labelRisultato.setBounds(xIndirizzo, yIndirizzo, larg, lung);
+			pannello.add(labelRisultato);
+			yIndirizzo += 50;
+		}
+	}
+	
+	public void TornaHome(JPanel pannello, int componentiNecessarie) {
+
+		int i;
+		int max = pannello.getComponentCount();
+
+		for (i = max - 1; i > componentiNecessarie - 1; i--)
+			pannello.getComponent(i).setVisible(true);
+
+		int j = max - 1;
+
+		while (pannello.getComponent(j) instanceof JLabel) {
+			pannello.remove(j);
+			j--;
+		}
+
+		pannello.updateUI();
 	}
 }

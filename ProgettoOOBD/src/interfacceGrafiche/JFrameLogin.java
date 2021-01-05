@@ -14,6 +14,8 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class JFrameLogin extends JFrame {
 
@@ -28,7 +30,7 @@ public class JFrameLogin extends JFrame {
 	Errore LoginSbagliato = new Errore();
 	
 	public JFrameLogin(ControllerLogin c, ControllorePrincipale c1) {
-		
+
 		setTitle("Login");
 		controllore=c;
 		controller = c1;
@@ -45,6 +47,14 @@ public class JFrameLogin extends JFrame {
 		TFLogin.setColumns(10);
 		
 		TFPassword = new JTextField();
+		TFPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e1) {
+				if(e1.getKeyCode() == KeyEvent.VK_ENTER) {
+					login(c1, c, TFLogin.getText());
+				}
+			}
+		});
 		TFPassword.setBounds(276, 219, 149, 20);
 		contentPane.add(TFPassword);
 		TFPassword.setColumns(10);
@@ -60,20 +70,10 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(ButtonRegistrati);
 		
 		JButton ButtonLogin = new JButton("Login");
+		
 		ButtonLogin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					if (c.ControllaCredenziali(TFLogin.getText(), TFPassword.getText()))
-						c.PassaAdHome(c1);
-					else {
-						LoginSbagliato.setVisible(true);
-						svuotaCampi();
-					}
-
-				}
-				catch(SQLException e){
-					System.out.println(e.getMessage());
-				}
+				login(c1, c, TFLogin.getText());
 			}
 		});
 		ButtonLogin.setBounds(276, 304, 89, 23);
@@ -109,7 +109,22 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(ButtonChiudi);
 			
 		}
+	
+		public void login(ControllorePrincipale c1, ControllerLogin c, String email) {
+			try {
+				if (c.ControllaCredenziali(TFLogin.getText(), TFPassword.getText()))
+					c.PassaAdHome(c1, email);
+				else {
+					LoginSbagliato.setVisible(true);
+					svuotaCampi();
+				}
 
+			}
+			catch(SQLException e){
+				System.out.println(e.getMessage());
+			}
+		}
+		
 		public void svuotaCampi() {
 			TFLogin.setText(null);
 			TFPassword.setText(null);

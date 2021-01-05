@@ -23,16 +23,17 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getCarrelloByUtentePS = connessione.prepareStatement("INSERT INTO Carrello VALUES (?, ?, ?)");
-			getCarrelloByUtentePS.setString(1, nomep);
-			getCarrelloByUtentePS.setInt(2, quantità);
-			getCarrelloByUtentePS.setString(3, email);
+			getCarrelloByUtentePS = connessione.prepareStatement("INSERT INTO Carrello VALUES (?, ?, ?, ?)");
+			getCarrelloByUtentePS.setString(1, "codice");
+			getCarrelloByUtentePS.setString(2, nomep);
+			getCarrelloByUtentePS.setInt(3, quantità);
+			getCarrelloByUtentePS.setString(4, email);
 			getCarrelloByUtentePS.executeUpdate();
 			connessione.close();
 
-		} catch (SQLException e) {
-		System.out.println(e.getMessage());
-
+		} 
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 

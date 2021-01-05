@@ -18,7 +18,7 @@ public class MenùDAOPostgres implements MenùDAO{
 	private ConnessioneDB connessioneDB;
 	private PreparedStatement getMenùByRistorantePS, getProdottiByNomeAndRistorantePS, getProdottiByRicercaCPS;
 
-	public Menu getMenùByRistorante(Ristorante r) throws SQLException {
+	public Menu getMenùByRistorante(Ristorante r) {
 
 		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();
 		Menu risultato = new Menu();

@@ -5,8 +5,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
 
+import classiEntità.Prodotto;
 import classiEntità.Ristorante;
 import controllers.ControllerCarrello;
 import controllers.ControllerRicercaMenu;
@@ -21,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -32,10 +35,8 @@ public class JFrameRistorante extends JFrame {
 	private JTextField inputTF;
 	private int componentiNecessarie;
 	ControllerRicercaMenu controller;
-	ControllorePrincipale controllore;
 	
-	
-	public JFrameRistorante(ControllerRicercaMenu c, Ristorante r) throws SQLException {
+	public JFrameRistorante(ControllerRicercaMenu c, Ristorante r) {
 		setTitle(r.getNome());
 		controller = c;
 		setBounds(100, 100, 769, 511);
@@ -76,18 +77,57 @@ public class JFrameRistorante extends JFrame {
 		
 		componentiNecessarie = contentPane.getComponentCount();
 
-		c.getMenu(r, contentPane, componentiNecessarie);
-
-//		Come dare un'azione ad una label
+		c.getMenu(r, contentPane, componentiNecessarie, this);
 		
-//		lblNewLabel.addMouseListener(new MouseAdapter() {
-//			public void mouseClicked(MouseEvent arg0) {
-//				try {
-//					c.Ricerca("Panin", contentPane, componentiNecessarie, null, null);
-//				} catch (SQLException e) {
-//					System.out.println(e.getMessage());
-//				}
-//			}
-//		});
+	}
+	
+	public void aggiornaInterfacciaProdotti(JPanel pannello, int componentiNecessarie, ArrayList<Prodotto> risultatoRicerca, ControllerCarrello cc) {
+
+		JLabel labelRisultato;
+		JSpinner contatore;
+		JButton bottone;
+		
+		int i;
+		int max = pannello.getComponentCount();
+
+		for (i = max - 1; i > componentiNecessarie - 1; i--)
+			pannello.remove(i);
+
+		pannello.updateUI();
+
+		int x = 100;
+		int y = 130;
+		int larg = 185;
+		int lung = 20;
+		int index = 0;
+		ArrayList<JSpinner> spinners = new ArrayList<JSpinner>();
+
+		for (Prodotto p : risultatoRicerca) {
+			labelRisultato = new JLabel(p.getNomeP());
+			labelRisultato.setBounds(x, y, larg, lung);
+			pannello.add(labelRisultato);
+
+			contatore = new JSpinner();
+			contatore.setBounds(x + 250, y, 40, 20);
+			pannello.add(contatore);
+			spinners.add(contatore);
+			bottone = new JButton("Aggiungi al carrello");
+			bottone.setBounds(x + 350, y, 200, 20);
+			pannello.add(bottone);
+			y += 50;
+			final int riga = index;
+			index++;
+	
+			bottone.addActionListener(new ActionListener() {
+				public void  actionPerformed(ActionEvent arg0) {
+					String nomep =  risultatoRicerca.get(riga).getNomeP();
+					int quantità = (int) spinners.get(riga).getValue();
+					cc.aggiungiAlCarrello(nomep, quantità);
+				}
+		
+			});
+		}
+		
+	
 	}
 }

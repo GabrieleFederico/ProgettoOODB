@@ -26,8 +26,7 @@ public class ControllerLogin {
 		fr.setVisible(true);
 	}
 
-	public void RegistraCredenziali(String email, String pwd, String nome, String cognome, String indirizzo)
-			throws SQLException {
+	public void RegistraCredenziali(String email, String pwd, String nome, String cognome, String indirizzo) throws SQLException {
 
 		UtenteDAOPostgres u1 = new UtenteDAOPostgres();
 		Utente utente = new Utente(email, pwd, nome, cognome, indirizzo);
@@ -41,16 +40,17 @@ public class ControllerLogin {
 	public boolean ControllaCredenziali(String email, String pwd) throws SQLException {
 
 		UtenteDAOPostgres u2 = new UtenteDAOPostgres();
-		if (u2.esisteUtente(email, pwd))
+		if (u2.esisteUtente(email, pwd)) {
 			return true;
+		}
 		else
 			return false;
 
 	}
 
-	public void PassaAdHome(ControllerLogin this, ControllorePrincipale c) {
+	public void PassaAdHome(ControllerLogin this, ControllorePrincipale c, String email) {
 		fl.dispose();
-		c.PassaAdHome(this);
+		c.passaAdHome(this, email);
 
 	}
 }
