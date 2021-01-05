@@ -37,20 +37,19 @@ public class ControllerLogin {
 
 	}
 
-	public boolean ControllaCredenziali(String email, String pwd) throws SQLException {
+	public Utente ControllaCredenziali(String email, String pwd) throws SQLException {
 
 		UtenteDAOPostgres u2 = new UtenteDAOPostgres();
-		if (u2.esisteUtente(email, pwd)) {
-			return true;
-		}
-		else
-			return false;
+		Utente utente = new Utente(email, pwd, null, null, null);
+		utente = u2.getUtenteByCredenziali(email, pwd);
+		
+		return utente;
 
 	}
 
-	public void PassaAdHome(ControllerLogin this, ControllorePrincipale c, String email) {
+	public void PassaAdHome(ControllerLogin this, ControllorePrincipale c, Utente utente) {
 		fl.dispose();
-		c.passaAdHome(this, email);
+		c.passaAdHome(this, utente);
 
 	}
 }

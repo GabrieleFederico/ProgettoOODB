@@ -18,7 +18,8 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 	private ConnessioneDB connessioneDB;
 	private PreparedStatement getCarrelloByUtentePS;
 	
-	public void aggiungiProdottoAlCarrello(String nomep, int quantità, String email) {
+	@Override
+	public void aggiungiProdottoAlCarrello(String nomep, int quantità, Utente utente) {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -27,7 +28,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			getCarrelloByUtentePS.setString(1, "codice");
 			getCarrelloByUtentePS.setString(2, nomep);
 			getCarrelloByUtentePS.setInt(3, quantità);
-			getCarrelloByUtentePS.setString(4, email);
+			getCarrelloByUtentePS.setString(4, utente.getEmail());
 			getCarrelloByUtentePS.executeUpdate();
 			connessione.close();
 
@@ -39,7 +40,23 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 
 	@Override
 	public Carrello getCarrelloByUtente(Utente utente) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Carrello risultato = new Carrello(utente);
+		
+		try {
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			getCarrelloByUtentePS = connessione.prepareStatement("SELECT nomep, quantitaprodotto FROM carrello WHERE proprietario LIKE ?");
+			getCarrelloByUtentePS.setString(1, utente.getEmail());
+			getCarrelloByUtentePS.executeQuery();
+			connessione.close();
+
+		} 
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return risultato;
 	}
+
+
 }

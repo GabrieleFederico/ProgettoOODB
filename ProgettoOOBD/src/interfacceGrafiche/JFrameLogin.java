@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import classiEntità.Utente;
 import controllers.ControllerLogin;
 import controllers.ControllorePrincipale;
 
@@ -112,8 +113,9 @@ public class JFrameLogin extends JFrame {
 	
 		public void login(ControllorePrincipale c1, ControllerLogin c, String email) {
 			try {
-				if (c.ControllaCredenziali(TFLogin.getText(), TFPassword.getText()))
-					c.PassaAdHome(c1, email);
+				Utente u = c.ControllaCredenziali(TFLogin.getText(), TFPassword.getText());
+				if (u != null)
+					c.PassaAdHome(c1, u);
 				else {
 					LoginSbagliato.setVisible(true);
 					svuotaCampi();

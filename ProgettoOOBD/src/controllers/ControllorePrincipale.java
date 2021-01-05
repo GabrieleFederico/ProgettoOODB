@@ -1,6 +1,7 @@
 package controllers;
 
 import classiEntità.Ristorante;
+import classiEntità.Utente;
 
 public class ControllorePrincipale {
 
@@ -19,10 +20,9 @@ public class ControllorePrincipale {
 		ControllerLogin c = new ControllerLogin(this);
 	}
 	
-	public void passaAdHome(ControllerLogin c, String email) {
-		ccarrello = new ControllerCarrello(email);
+	public void passaAdHome(ControllerLogin c, Utente utente) {
+		ccarrello = new ControllerCarrello(utente);
 		ControllerRicercaRistoranti c1 = new ControllerRicercaRistoranti(this);
-		Email = email;
 	}
 	
 	public void passaAInterfacciaRistorante(Ristorante r) {
@@ -30,9 +30,9 @@ public class ControllorePrincipale {
 	}
 
 	public void apriCarrello(ControllerRicercaRistoranti c) {
-		c.fr.setVisible(false);
-		ControllerCarrello carrello = new ControllerCarrello(Email);
 		
+		ccarrello.fc.setVisible(true);
+	
 	}
 
 }

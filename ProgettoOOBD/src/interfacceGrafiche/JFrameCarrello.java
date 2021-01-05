@@ -1,28 +1,34 @@
 package interfacceGrafiche;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import classiEntità.Ristorante;
 import controllers.ControllerCarrello;
 
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class JFrameCarrello extends JFrame {
 
 	private JPanel contentPane;
-	ControllerCarrello controller;
+	private ControllerCarrello controller;
+	private int componentiNecessarie;
 
 	public JFrameCarrello(ControllerCarrello c) {
 		controller = c;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 716, 486);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -45,5 +51,20 @@ public class JFrameCarrello extends JFrame {
 		});
 		ButtonIndietro.setBounds(10, 413, 89, 23);
 		contentPane.add(ButtonIndietro);
+		
+		componentiNecessarie = contentPane.getComponentCount();
+		
+	}
+	
+	public JPanel getPannello() {
+		return contentPane;
+	}
+	
+	public int getComponentiNecessarie() {
+		return componentiNecessarie;
+	}
+	
+	public void aggiornaInterfacciaCarrello(JPanel pannello, String nomep, int quantità) {
+		
 	}
 }

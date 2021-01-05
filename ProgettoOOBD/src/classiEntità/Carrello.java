@@ -6,6 +6,10 @@ public class Carrello {
 
 	private ArrayList<Prodotto> Prodotti;
 	private Utente Proprietario;
+	
+	public Carrello(Utente proprietario) {
+		this.Proprietario = proprietario;
+	}
 
 	public ArrayList<Prodotto> getProdotti() {
 		return Prodotti;

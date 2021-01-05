@@ -36,9 +36,9 @@ public class UtenteDAOPostgres implements UtenteDAO {
 	}
 	
 	@Override
-	public boolean esisteUtente(String email, String pwd) {
+	public Utente getUtenteByCredenziali(String email, String pwd) {
 		
-		boolean esiste = false;
+		Utente risultato = new Utente(email, pwd, null, null, null);
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -48,17 +48,17 @@ public class UtenteDAOPostgres implements UtenteDAO {
 			esisteUtentePS.setString(2, pwd);
 			ResultSet rs = esisteUtentePS.executeQuery();
 			connessione.close();
-			if(rs.next())
-				esiste = true;
-			else
-				esiste = false;
+			
+			risultato.setNome(rs.getString("nome"));
+			risultato.setCognome(rs.getString("cognome"));
+			risultato.setIndirizzo(rs.getString("indirizzo"));
 		}
 		
 		catch(SQLException e){
 			System.out.println(e.getMessage());
 		}
 		
-		return esiste;
+		return risultato;
 	}
 
 	@Override

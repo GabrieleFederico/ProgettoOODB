@@ -10,11 +10,10 @@ public class Utente {
 	private String Cognome;
 	private String Indirizzo;
 	private String Password;
-	private ArrayList<Consegne> OrdiniEffettuate;
+	private ArrayList<Consegne> OrdiniEffettuati;
 	
 	
 	public Utente(String email,  String password, String nome, String cognome, String indirizzo) {
-		super();
 		this.email = email;
 		Password = password;
 		Nome = nome;
@@ -55,11 +54,11 @@ public class Utente {
 		Password = password;
 	}
 	
-	public ArrayList<Consegne> getOrdiniEffettuate() {
-		return OrdiniEffettuate;
+	public ArrayList<Consegne> getOrdiniEffettuati() {
+		return OrdiniEffettuati;
 	}
-	public void setOrdiniEffettuate(ArrayList<Consegne> ordiniEffettuate) {
-		OrdiniEffettuate = ordiniEffettuate;
+	public void setOrdiniEffettuate(ArrayList<Consegne> ordiniEffettuati) {
+		OrdiniEffettuati = ordiniEffettuati;
 	}
 
 	
