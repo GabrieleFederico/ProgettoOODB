@@ -49,9 +49,11 @@ public class UtenteDAOPostgres implements UtenteDAO {
 			ResultSet rs = esisteUtentePS.executeQuery();
 			connessione.close();
 			
-			risultato.setNome(rs.getString("nome"));
-			risultato.setCognome(rs.getString("cognome"));
-			risultato.setIndirizzo(rs.getString("indirizzo"));
+			if(rs.next()) {
+				risultato.setNome(rs.getString("nome"));
+				risultato.setCognome(rs.getString("cognome"));
+				risultato.setIndirizzo(rs.getString("indirizzo"));
+			}
 		}
 		
 		catch(SQLException e){

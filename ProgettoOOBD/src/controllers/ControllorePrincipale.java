@@ -2,6 +2,7 @@ package controllers;
 
 import classiEntità.Ristorante;
 import classiEntità.Utente;
+import interfacceGrafiche.JFrameCarrello;
 
 public class ControllorePrincipale {
 
@@ -30,9 +31,8 @@ public class ControllorePrincipale {
 	}
 
 	public void apriCarrello(ControllerRicercaRistoranti c) {
-		
-		ccarrello.fc.setVisible(true);
-	
+		ccarrello.fc = new JFrameCarrello(ccarrello);
+		ccarrello.fc.aggiornaInterfacciaCarrello();
 	}
 
 }

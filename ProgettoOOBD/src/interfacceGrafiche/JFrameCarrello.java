@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import classiEntità.Carrello;
+import classiEntità.Prodotto;
 import classiEntità.Ristorante;
 import controllers.ControllerCarrello;
 
@@ -26,6 +28,7 @@ public class JFrameCarrello extends JFrame {
 	private JPanel contentPane;
 	private ControllerCarrello controller;
 	private int componentiNecessarie;
+	private Carrello carrello;
 
 	public JFrameCarrello(ControllerCarrello c) {
 		controller = c;
@@ -54,6 +57,9 @@ public class JFrameCarrello extends JFrame {
 		
 		componentiNecessarie = contentPane.getComponentCount();
 		
+		carrello = controller.ottieniCarrello();
+		setVisible(true);
+		
 	}
 	
 	public JPanel getPannello() {
@@ -64,7 +70,26 @@ public class JFrameCarrello extends JFrame {
 		return componentiNecessarie;
 	}
 	
-	public void aggiornaInterfacciaCarrello(JPanel pannello, String nomep, int quantità) {
+	public void aggiornaInterfacciaCarrello() {
 		
+		JLabel label;
+		JButton bottone;
+		
+		int xLabel = 100;
+		int xBottone = 300;
+		int y = 130;
+		int larg = 185;
+		int lung = 20;
+		
+		for(Prodotto p : carrello.getProdotti()) {
+			label = new JLabel(p.getNomeP());
+			label.setBounds(xLabel, y, larg, lung);
+			contentPane.add(label);
+
+			bottone = new JButton("Rimuovi");
+			bottone.setBounds(xBottone, y, larg, lung);
+			contentPane.add(bottone);
+			y += 50;
+		}
 	}
 }

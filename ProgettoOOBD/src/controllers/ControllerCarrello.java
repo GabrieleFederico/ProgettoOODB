@@ -1,5 +1,6 @@
 package controllers;
 
+import classiEntità.Carrello;
 import classiEntità.Utente;
 import interfacceGrafiche.JFrameCarrello;
 import interfacceGrafiche.JFrameHome;
@@ -14,13 +15,20 @@ public class ControllerCarrello {
 	
 	public ControllerCarrello(Utente utente) {
 		this.utente = utente;
-		fc = new JFrameCarrello(this);
 	}
 
 	public void aggiungiAlCarrello(String nomep, int quantità) {
 		
 		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
 		cp.aggiungiProdottoAlCarrello(nomep, quantità, utente);
+	}
+	
+	public Carrello ottieniCarrello() {
+		
+		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
+		Carrello temp = cp.getCarrelloByUtente(utente);
+		
+		return temp;
 	}
 		
 }
