@@ -66,5 +66,10 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		return risultato;
 	}
 
+	public void rimuoviProdottoDalCarrello() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

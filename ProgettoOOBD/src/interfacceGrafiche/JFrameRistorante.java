@@ -28,6 +28,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import java.awt.Cursor;
+import javax.swing.SpinnerNumberModel;
 
 public class JFrameRistorante extends JFrame {
 
@@ -109,6 +110,7 @@ public class JFrameRistorante extends JFrame {
 
 			contatore = new JSpinner();
 			contatore.setBounds(x + 250, y, 40, 20);
+			contatore.setModel(new SpinnerNumberModel(0, 0, null, 1));
 			pannello.add(contatore);
 			spinners.add(contatore);
 			bottone = new JButton("Aggiungi al carrello");

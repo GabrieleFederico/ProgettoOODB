@@ -38,6 +38,8 @@ public class ControllerRicercaMenu {
 		else
 			risultatoRicerca = mp.getProdottoByRicercaComplessa(ricerca, r, fasciaPrezzo);
 		
+		fr.aggiornaInterfacciaProdotti(pannello, componentiNecessarie, risultatoRicerca, CCarrello);
+		
 		return risultatoRicerca;
 
 	}
