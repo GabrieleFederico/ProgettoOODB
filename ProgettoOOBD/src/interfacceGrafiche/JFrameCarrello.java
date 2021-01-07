@@ -83,29 +83,31 @@ public class JFrameCarrello extends JFrame {
 		int y = 130;
 		int larg = 185;
 		int lung = 20;
-		int i = 0;
-		
 		
 		for(Prodotto p : carrello.getProdotti()) {
 			
 			prodottoNelCarrello = new JLabel(p.getNomeP());
 			prodottoNelCarrello.setBounds(xLabel, y, larg, lung);
 			contentPane.add(prodottoNelCarrello);
-			final int indice = i;
 
 			bottone = new JButton("Rimuovi");
 			bottone.setBounds(xBottone, y, larg, lung);
 			bottone.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					controller.rimuoviDalCarrello(carrello, bottoni.indexOf(contentPane.getComponent(indice)));
-					
+					JButton source = (JButton) arg0.getSource();
+					controller.rimuoviDalCarrello(carrello, bottoni.indexOf(source));
+					contentPane.remove(bottoni.indexOf(source)+componentiNecessarie);
+					contentPane.remove(source);
+					carrello.getProdotti().remove(bottoni.indexOf(source));
+					contentPane.updateUI();
+					labels.remove(bottoni.indexOf(source));
+					bottoni.remove(source);
 				}
 			});
 			contentPane.add(bottone);
 			y += 50;
 			labels.add(prodottoNelCarrello);
 			bottoni.add(bottone);
-			i++;
 		}
 
 	}

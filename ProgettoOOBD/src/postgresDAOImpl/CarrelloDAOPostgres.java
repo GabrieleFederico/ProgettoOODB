@@ -16,7 +16,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 	
 	private Connection connessione;
 	private ConnessioneDB connessioneDB;
-	private PreparedStatement aggiungiProdottoAlCarrelloPS, getCarrelloByUtentePS;
+	private PreparedStatement aggiungiProdottoAlCarrelloPS, getCarrelloByUtentePS, rimuoviProdottoDalCarrelloPS;
 	
 	@Override
 	public void aggiungiProdottoAlCarrello(String nomep, int quantità, Utente utente) {
@@ -66,8 +66,21 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		return risultato;
 	}
 
-	public void rimuoviProdottoDalCarrello() {
-		// TODO Auto-generated method stub
+	public void rimuoviProdottoDalCarrello(Carrello carrello, int indice) {
+		
+		try {
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			rimuoviProdottoDalCarrelloPS = connessione.prepareStatement("DELETE FROM carrello WHERE proprietario = ? AND nomep = ?");
+			rimuoviProdottoDalCarrelloPS.setString(1, carrello.getProprietario().getEmail());
+			rimuoviProdottoDalCarrelloPS.setString(2, carrello.getProdotti().get(indice).getNomeP());
+			rimuoviProdottoDalCarrelloPS.executeUpdate();
+			connessione.close();
+
+		} 
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 
