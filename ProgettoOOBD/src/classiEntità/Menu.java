@@ -6,7 +6,7 @@ public class Menu {
 	
 	private Ristorante Ristorante;
 	private ArrayList<Prodotto> Prodotti;
-	private float Prezzo;
+	private ArrayList<Double> Prezzi;
 	
 	public Ristorante getRistorante() {
 		return Ristorante;
@@ -22,11 +22,11 @@ public class Menu {
 		Prodotti = prodotti;
 	}
 	
-	public float getPrezzo() {
-		return Prezzo;
+	public ArrayList<Double> getPrezzi() {
+		return Prezzi;
 	}
-	public void setPrezzo(float prezzo) {
-		Prezzo = prezzo;
+	public void setPrezzi(ArrayList<Double> prezzi) {
+		Prezzi = prezzi;
 	}
 	
 	

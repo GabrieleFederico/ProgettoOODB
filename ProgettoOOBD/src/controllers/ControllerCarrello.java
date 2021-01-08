@@ -36,5 +36,10 @@ public class ControllerCarrello {
 		cp.rimuoviProdottoDalCarrello(carrello, indice);
 
 	}
+	
+	//TODO
+	public void rimuoviParzialmenteDalCarrello() {
+		
+	}
 		
 }

@@ -7,6 +7,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 
 import classiEntit‡.Carrello;
@@ -22,6 +24,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class JFrameCarrello extends JFrame {
 
@@ -74,12 +78,15 @@ public class JFrameCarrello extends JFrame {
 		
 		JLabel prodottoNelCarrello;
 		JButton bottone;
+		JSpinner contatore;
 		ArrayList<JLabel> labels = new ArrayList<JLabel>();
 		ArrayList<JButton> bottoni = new ArrayList<JButton>();
+		ArrayList<JSpinner> contatori = new ArrayList<JSpinner>();
 
 		
 		int xLabel = 100;
 		int xBottone = 300;
+		int xSpinner = 250;
 		int y = 130;
 		int larg = 185;
 		int lung = 20;
@@ -91,7 +98,8 @@ public class JFrameCarrello extends JFrame {
 			contentPane.add(prodottoNelCarrello);
 
 			bottone = new JButton("Rimuovi");
-			bottone.setBounds(xBottone, y, larg, lung);
+			bottone.setBounds(xBottone, y, 150, lung);
+
 			bottone.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					JButton source = (JButton) arg0.getSource();
@@ -105,6 +113,19 @@ public class JFrameCarrello extends JFrame {
 				}
 			});
 			contentPane.add(bottone);
+
+			contatore = new JSpinner();
+			contatore.setBounds(xSpinner, y, 35, 20);
+			contatore.setModel(new SpinnerNumberModel(carrello.getQuantit‡Prodotti().get(carrello.getProdotti().indexOf(p)), 0, null, 1));
+			contatore.addChangeListener(new ChangeListener() {
+				public void stateChanged(ChangeEvent e) {
+					//TODO
+					controller.rimuoviParzialmenteDalCarrello();
+				}
+			});
+			
+			contentPane.add(contatore);
+			
 			y += 50;
 			labels.add(prodottoNelCarrello);
 			bottoni.add(bottone);

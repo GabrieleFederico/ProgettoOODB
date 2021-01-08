@@ -28,7 +28,8 @@ public class ControllerRicercaMenu {
 		fr.setVisible(true);
 	}
 	
-	public ArrayList<Prodotto> RicercaProdotto (String ricerca, JPanel pannello, int componentiNecessarie, String fasciaPrezzo) throws SQLException {
+	//Fare in modo che funzioni come prima ma con menu al posto di arraylist prodotti
+	public Menu RicercaProdotto (String ricerca, JPanel pannello, int componentiNecessarie, String fasciaPrezzo) throws SQLException {
 		
 		MenùDAOPostgres mp = new  MenùDAOPostgres();
 		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();
@@ -51,7 +52,7 @@ public class ControllerRicercaMenu {
 
 		menùRistorante = mp.getMenùByRistorante(rist);
 
-		fr.aggiornaInterfacciaProdotti(pannello, componentiNecessarie, menùRistorante.getProdotti(), CCarrello);
+		fr.aggiornaInterfacciaProdotti(pannello, componentiNecessarie, menùRistorante, CCarrello);
 		
 	}
 

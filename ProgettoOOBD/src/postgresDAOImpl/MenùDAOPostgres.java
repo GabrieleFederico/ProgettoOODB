@@ -21,14 +21,16 @@ public class MenùDAOPostgres implements MenùDAO{
 	public Menu getMenùByRistorante(Ristorante r) {
 
 		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();
+		ArrayList<Double> risultatoPrezzi = new ArrayList<Double>();
 		Menu risultato = new Menu();
 		Prodotto temp;
+		Double temp2;
 		risultato.setRistorante(r);
 
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getMenùByRistorantePS = connessione.prepareStatement("SELECT menu.nomep FROM menu NATURAL JOIN ristoranti WHERE ristoranti.nome LIKE ? AND ristoranti.indirizzo LIKE ?");
+			getMenùByRistorantePS = connessione.prepareStatement("SELECT menu.nomep, menu.prezzo FROM menu NATURAL JOIN ristoranti WHERE ristoranti.nome LIKE ? AND ristoranti.indirizzo LIKE ?");
 			getMenùByRistorantePS.setString(1, r.getNome());
 			getMenùByRistorantePS.setString(2, r.getIndirizzo());
 			ResultSet rs = getMenùByRistorantePS.executeQuery();
@@ -37,6 +39,7 @@ public class MenùDAOPostgres implements MenùDAO{
 			while (rs.next()) {
 				temp = new Prodotto();
 				temp.setNomeP(rs.getString("nomep"));
+				risultatoPrezzi.add(rs.getDouble("prezzo"));
 				risultatoRicerca.add(temp);
 			}
 		} catch (SQLException e) {
@@ -45,10 +48,12 @@ public class MenùDAOPostgres implements MenùDAO{
 		}
 		
 		risultato.setProdotti(risultatoRicerca);
+		risultato.setPrezzi(risultatoPrezzi);
 
 		return risultato;
 	}
 
+	//Fare in modo che restituisca un menù con anche i prezzi
 	public ArrayList<Prodotto> getProdottoByNomeProdottoAndRistorante(String ricerca, Ristorante r) {
 		
 		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();
@@ -59,7 +64,7 @@ public class MenùDAOPostgres implements MenùDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getProdottiByNomeAndRistorantePS = connessione.prepareStatement("SELECT menu.nomep FROM menu NATURAL JOIN ristoranti WHERE ((ristoranti.nome LIKE ? AND ristoranti.indirizzo LIKE ?) AND (menu.nomep LIKE ?))");
+			getProdottiByNomeAndRistorantePS = connessione.prepareStatement("SELECT menu.nomep, menu.prezzo FROM menu NATURAL JOIN ristoranti WHERE ((ristoranti.nome LIKE ? AND ristoranti.indirizzo LIKE ?) AND (menu.nomep LIKE ?))");
 			getProdottiByNomeAndRistorantePS.setString(1, r.getNome());
 			getProdottiByNomeAndRistorantePS.setString(2, r.getIndirizzo());
 			getProdottiByNomeAndRistorantePS.setString(3, "%"+ricerca+"%");
@@ -80,7 +85,8 @@ public class MenùDAOPostgres implements MenùDAO{
 
 		return risultatoRicerca;
 	}
-
+	
+	//Stessa cosa della funzione sopra
 	public ArrayList<Prodotto> getProdottoByRicercaComplessa(String ricerca, Ristorante r, String fasciaPrezzo) {
 		
 		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();

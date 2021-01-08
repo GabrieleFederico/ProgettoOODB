@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
 
+import classiEntità.Menu;
 import classiEntità.Prodotto;
 import classiEntità.Ristorante;
 import controllers.ControllerCarrello;
@@ -82,7 +83,8 @@ public class JFrameRistorante extends JFrame {
 		
 	}
 	
-	public void aggiornaInterfacciaProdotti(JPanel pannello, int componentiNecessarie, ArrayList<Prodotto> risultatoRicerca, ControllerCarrello cc) {
+	//Fare in modo che funzioni ora che prende un menu in input e non un arraylist di prodotti
+	public void aggiornaInterfacciaProdotti(JPanel pannello, int componentiNecessarie, Menu risultatoRicerca, ControllerCarrello cc) {
 
 		JLabel labelRisultato;
 		JSpinner contatore;
@@ -110,7 +112,7 @@ public class JFrameRistorante extends JFrame {
 
 			contatore = new JSpinner();
 			contatore.setBounds(x + 250, y, 40, 20);
-			contatore.setModel(new SpinnerNumberModel(0, 0, null, 1));
+			contatore.setModel(new SpinnerNumberModel(1, 1, null, 1));
 			pannello.add(contatore);
 			spinners.add(contatore);
 			bottone = new JButton("Aggiungi al carrello");
