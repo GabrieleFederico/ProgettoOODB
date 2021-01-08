@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.JScrollPane;
 
 public class JFrameCarrello extends JFrame {
 
@@ -43,21 +44,21 @@ public class JFrameCarrello extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel LabelCarrello = new JLabel("Carrello");
-		LabelCarrello.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		LabelCarrello.setBounds(320, 11, 140, 14);
+		LabelCarrello.setBounds(298, 11, 55, 20);
 		contentPane.add(LabelCarrello);
+		LabelCarrello.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JButton ButtonPaga = new JButton("Paga");
-		ButtonPaga.setBounds(601, 413, 89, 23);
+		ButtonPaga.setBounds(587, 389, 57, 23);
 		contentPane.add(ButtonPaga);
 		
 		JButton ButtonIndietro = new JButton("Indietro");
+		ButtonIndietro.setBounds(39, 389, 71, 23);
+		contentPane.add(ButtonIndietro);
 		ButtonIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		ButtonIndietro.setBounds(10, 413, 89, 23);
-		contentPane.add(ButtonIndietro);
 		
 		componentiNecessarie = contentPane.getComponentCount();
 		
@@ -87,7 +88,7 @@ public class JFrameCarrello extends JFrame {
 		int xLabel = 100;
 		int xBottone = 300;
 		int xSpinner = 250;
-		int y = 130;
+		int y = 100;
 		int larg = 185;
 		int lung = 20;
 		
@@ -109,9 +110,11 @@ public class JFrameCarrello extends JFrame {
 					contentPane.remove(source);
 					carrello.getProdotti().remove(bottoni.indexOf(source));
 					contentPane.updateUI();
+					
 					labels.remove(bottoni.indexOf(source));
 					contatori.remove(bottoni.indexOf(source));
 					spostamentoVersoAlto(labels, contatori, bottoni, bottoni.indexOf(source));
+					
 					bottoni.remove(source);
 				}
 			});
@@ -138,9 +141,20 @@ public class JFrameCarrello extends JFrame {
 	}
 
 	public void spostamentoVersoAlto(ArrayList<JLabel> labels, ArrayList<JSpinner> contatori, ArrayList<JButton> bottoni, int indice){
-		for(int i = indice; indice<labels.size(); indice++) {
-			System.out.println(labels.size());
-			labels.get(i).setBounds(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+		
+		int i;
+		
+		for(i = indice; i < labels.size(); i++) {
+			labels.get(i).setBounds(labels.get(i).getX(), labels.get(i).getY()-50, labels.get(i).getWidth(), labels.get(i).getHeight());
 		}
+		
+		for(i = indice; i < contatori.size(); i++) {
+			contatori.get(i).setBounds(contatori.get(i).getX(), contatori.get(i).getY()-50, contatori.get(i).getWidth(), contatori.get(i).getHeight());
+		}
+		
+		for(i = indice+1; i < bottoni.size(); i++) {
+			bottoni.get(i).setBounds(bottoni.get(i).getX(), bottoni.get(i).getY()-50, bottoni.get(i).getWidth(), bottoni.get(i).getHeight());
+		}
+		
 	}
 }
