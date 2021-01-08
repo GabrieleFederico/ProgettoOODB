@@ -28,6 +28,7 @@ public class ControllorePrincipale {
 	
 	public void passaAInterfacciaRistorante(Ristorante r) {
 		ControllerRicercaMenu crm = new ControllerRicercaMenu(r, ccarrello);
+
 	}
 
 	public void apriCarrello(ControllerRicercaRistoranti c) {

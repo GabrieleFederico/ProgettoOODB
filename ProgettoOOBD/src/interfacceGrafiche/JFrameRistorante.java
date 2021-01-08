@@ -1,34 +1,23 @@
 package interfacceGrafiche;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
-
 import classiEntità.Menu;
 import classiEntità.Prodotto;
 import classiEntità.Ristorante;
 import controllers.ControllerCarrello;
 import controllers.ControllerRicercaMenu;
-import controllers.ControllorePrincipale;
-
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import javax.swing.JTextPane;
-import java.awt.Cursor;
 import javax.swing.SpinnerNumberModel;
 
 public class JFrameRistorante extends JFrame {
@@ -78,12 +67,11 @@ public class JFrameRistorante extends JFrame {
 		contentPane.add(CercaButton);
 		
 		componentiNecessarie = contentPane.getComponentCount();
-
 		c.getMenu(r, contentPane, componentiNecessarie, this);
 		
 	}
 	
-	//Fare in modo che funzioni ora che prende un menu in input e non un arraylist di prodotti
+
 	public void aggiornaInterfacciaProdotti(JPanel pannello, int componentiNecessarie, Menu risultatoRicerca, ControllerCarrello cc) {
 
 		JLabel labelRisultato;
@@ -105,7 +93,7 @@ public class JFrameRistorante extends JFrame {
 		int index = 0;
 		ArrayList<JSpinner> spinners = new ArrayList<JSpinner>();
 
-		for (Prodotto p : risultatoRicerca) {
+		for (Prodotto p : risultatoRicerca.getProdotti()) {
 			labelRisultato = new JLabel(p.getNomeP());
 			labelRisultato.setBounds(x, y, larg, lung);
 			pannello.add(labelRisultato);
@@ -124,7 +112,7 @@ public class JFrameRistorante extends JFrame {
 	
 			bottone.addActionListener(new ActionListener() {
 				public void  actionPerformed(ActionEvent arg0) {
-					String nomep =  risultatoRicerca.get(riga).getNomeP();
+					String nomep = risultatoRicerca.getProdotti().get(riga).getNomeP();
 					int quantità = (int) spinners.get(riga).getValue();
 					cc.aggiungiAlCarrello(nomep, quantità);
 				}

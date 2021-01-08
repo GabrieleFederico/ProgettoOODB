@@ -104,11 +104,14 @@ public class JFrameCarrello extends JFrame {
 				public void actionPerformed(ActionEvent arg0) {
 					JButton source = (JButton) arg0.getSource();
 					controller.rimuoviDalCarrello(carrello, bottoni.indexOf(source));
-					contentPane.remove(bottoni.indexOf(source)+componentiNecessarie);
+					contentPane.remove(labels.get(bottoni.indexOf(source)));
+					contentPane.remove(contatori.get(bottoni.indexOf(source)));
 					contentPane.remove(source);
 					carrello.getProdotti().remove(bottoni.indexOf(source));
 					contentPane.updateUI();
 					labels.remove(bottoni.indexOf(source));
+					contatori.remove(bottoni.indexOf(source));
+					spostamentoVersoAlto(labels, contatori, bottoni, bottoni.indexOf(source));
 					bottoni.remove(source);
 				}
 			});
@@ -129,7 +132,15 @@ public class JFrameCarrello extends JFrame {
 			y += 50;
 			labels.add(prodottoNelCarrello);
 			bottoni.add(bottone);
+			contatori.add(contatore);
 		}
 
+	}
+
+	public void spostamentoVersoAlto(ArrayList<JLabel> labels, ArrayList<JSpinner> contatori, ArrayList<JButton> bottoni, int indice){
+		for(int i = indice; indice<labels.size(); indice++) {
+			System.out.println(labels.size());
+			labels.get(i).setBounds(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+		}
 	}
 }

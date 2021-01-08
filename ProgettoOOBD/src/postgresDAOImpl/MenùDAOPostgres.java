@@ -18,80 +18,97 @@ public class MenùDAOPostgres implements MenùDAO{
 	private ConnessioneDB connessioneDB;
 	private PreparedStatement getMenùByRistorantePS, getProdottiByNomeAndRistorantePS, getProdottiByRicercaCPS;
 
+	
 	public Menu getMenùByRistorante(Ristorante r) {
 
 		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();
 		ArrayList<Double> risultatoPrezzi = new ArrayList<Double>();
 		Menu risultato = new Menu();
 		Prodotto temp;
-		Double temp2;
+		Double prezzoTemp;
 		risultato.setRistorante(r);
 
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getMenùByRistorantePS = connessione.prepareStatement("SELECT menu.nomep, menu.prezzo FROM menu NATURAL JOIN ristoranti WHERE ristoranti.nome LIKE ? AND ristoranti.indirizzo LIKE ?");
+			getMenùByRistorantePS = connessione.prepareStatement("SELECT menu.nomep, menu.prezzop FROM menu NATURAL JOIN ristoranti WHERE ristoranti.nome LIKE ? AND ristoranti.indirizzo LIKE ?");
 			getMenùByRistorantePS.setString(1, r.getNome());
 			getMenùByRistorantePS.setString(2, r.getIndirizzo());
 			ResultSet rs = getMenùByRistorantePS.executeQuery();
 			connessione.close();
 
 			while (rs.next()) {
+			
 				temp = new Prodotto();
 				temp.setNomeP(rs.getString("nomep"));
-				risultatoPrezzi.add(rs.getDouble("prezzo"));
 				risultatoRicerca.add(temp);
+			
+				prezzoTemp = rs.getDouble("prezzop");
+				risultatoPrezzi.add(prezzoTemp);
+			
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 
 		}
+	
+			risultato.setPrezzi(risultatoPrezzi);
+			risultato.setProdotti(risultatoRicerca);
 		
-		risultato.setProdotti(risultatoRicerca);
-		risultato.setPrezzi(risultatoPrezzi);
-
 		return risultato;
 	}
 
-	//Fare in modo che restituisca un menù con anche i prezzi
-	public ArrayList<Prodotto> getProdottoByNomeProdottoAndRistorante(String ricerca, Ristorante r) {
+
+	public Menu getMenuByNomeProdottoAndRistorante(String ricerca, Ristorante r) {
 		
 		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();
+		ArrayList<Double> risultatoPrezzi = new ArrayList<Double>();
 		Menu risultato = new Menu();
 		Prodotto temp;
+		Double prezzoTemp;
 		risultato.setRistorante(r);
 
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getProdottiByNomeAndRistorantePS = connessione.prepareStatement("SELECT menu.nomep, menu.prezzo FROM menu NATURAL JOIN ristoranti WHERE ((ristoranti.nome LIKE ? AND ristoranti.indirizzo LIKE ?) AND (menu.nomep LIKE ?))");
+			getProdottiByNomeAndRistorantePS = connessione.prepareStatement("SELECT menu.nomep, menu.prezzop FROM menu NATURAL JOIN ristoranti WHERE ((ristoranti.nome LIKE ? AND ristoranti.indirizzo LIKE ?) AND (menu.nomep LIKE ?))");
 			getProdottiByNomeAndRistorantePS.setString(1, r.getNome());
 			getProdottiByNomeAndRistorantePS.setString(2, r.getIndirizzo());
 			getProdottiByNomeAndRistorantePS.setString(3, "%"+ricerca+"%");
 			ResultSet rs = getProdottiByNomeAndRistorantePS.executeQuery();
 			connessione.close();
 
+			
 			while (rs.next()) {
+				
 				temp = new Prodotto();
 				temp.setNomeP(rs.getString("nomep"));
 				risultatoRicerca.add(temp);
+			
+				prezzoTemp = rs.getDouble("prezzop");
+				risultatoPrezzi.add(prezzoTemp);
+			
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 
 		}
+	
+			risultato.setPrezzi(risultatoPrezzi);
+			risultato.setProdotti(risultatoRicerca);
 		
-		risultato.setProdotti(risultatoRicerca);
-
-		return risultatoRicerca;
+		return risultato;
+		
 	}
 	
-	//Stessa cosa della funzione sopra
-	public ArrayList<Prodotto> getProdottoByRicercaComplessa(String ricerca, Ristorante r, String fasciaPrezzo) {
+
+	public Menu getProdottoByRicercaComplessa(String ricerca, Ristorante r, String fasciaPrezzo) {
 		
 		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();
+		ArrayList<Double> risultatoPrezzi = new ArrayList<Double>();
 		Menu risultato = new Menu();
 		Prodotto temp;
+		Double prezzoTemp;
 		risultato.setRistorante(r);
 		
 		int indiceSeparatore;
@@ -106,7 +123,7 @@ public class MenùDAOPostgres implements MenùDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getProdottiByRicercaCPS = connessione.prepareStatement("SELECT menu.nomep FROM menu NATURAL JOIN ristoranti WHERE ((ristoranti.nome LIKE ? AND ristoranti.indirizzo LIKE ?) AND (menu.nomep LIKE ?) AND (menu.prezzop BETWEEN ? AND ?))");
+			getProdottiByRicercaCPS = connessione.prepareStatement("SELECT menu.nomep, menu.prezzop FROM menu NATURAL JOIN ristoranti WHERE ((ristoranti.nome LIKE ? AND ristoranti.indirizzo LIKE ?) AND (menu.nomep LIKE ?) AND (menu.prezzop BETWEEN ? AND ?))");
 			getProdottiByRicercaCPS.setString(1, r.getNome());
 			getProdottiByRicercaCPS.setString(2, r.getIndirizzo());
 			getProdottiByRicercaCPS.setString(3, "%"+ricerca+"%");
@@ -117,17 +134,23 @@ public class MenùDAOPostgres implements MenùDAO{
 			connessione.close();
 
 			while (rs.next()) {
+				
 				temp = new Prodotto();
 				temp.setNomeP(rs.getString("nomep"));
 				risultatoRicerca.add(temp);
+			
+				prezzoTemp = rs.getDouble("prezzop");
+				risultatoPrezzi.add(prezzoTemp);
+			
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 
 		}
+	
+			risultato.setPrezzi(risultatoPrezzi);
+			risultato.setProdotti(risultatoRicerca);
 		
-		risultato.setProdotti(risultatoRicerca);
-
-		return risultatoRicerca;
+		return risultato;
 	}
 }

@@ -9,9 +9,9 @@ import classiEntità.Ristorante;
 
 public interface MenùDAO {
 	
-	public Menu getMenùByRistorante(Ristorante ristorante) throws SQLException;
-	public ArrayList<Prodotto> getProdottoByNomeProdottoAndRistorante(String ricerca, Ristorante r);
-	public ArrayList<Prodotto> getProdottoByRicercaComplessa(String ricerca, Ristorante r, String fasciaPrezzo);
+	public Menu getMenùByRistorante(Ristorante r);
+	public Menu getMenuByNomeProdottoAndRistorante(String ricerca, Ristorante r);
+	public Menu getProdottoByRicercaComplessa(String ricerca, Ristorante r, String fasciaPrezzo);
 
 
 }

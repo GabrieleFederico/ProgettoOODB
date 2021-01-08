@@ -28,14 +28,14 @@ public class ControllerRicercaMenu {
 		fr.setVisible(true);
 	}
 	
-	//Fare in modo che funzioni come prima ma con menu al posto di arraylist prodotti
+
 	public Menu RicercaProdotto (String ricerca, JPanel pannello, int componentiNecessarie, String fasciaPrezzo) throws SQLException {
 		
 		MenùDAOPostgres mp = new  MenùDAOPostgres();
-		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();
+		Menu risultatoRicerca = new Menu();
 		
 		if(fasciaPrezzo == null)
-			risultatoRicerca = mp.getProdottoByNomeProdottoAndRistorante(ricerca, r);
+			risultatoRicerca = mp.getMenuByNomeProdottoAndRistorante(ricerca, r);
 		else
 			risultatoRicerca = mp.getProdottoByRicercaComplessa(ricerca, r, fasciaPrezzo);
 		
