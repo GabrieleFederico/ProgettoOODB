@@ -4,18 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
-
 import classiEntità.Carrello;
 import classiEntità.Prodotto;
 import classiEntità.Ristorante;
 import controllers.ControllerCarrello;
-
+import controllers.ControllerRicercaMenu;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -34,6 +32,7 @@ public class JFrameCarrello extends JFrame {
 	private ControllerCarrello controller;
 	private int componentiNecessarie;
 	private Carrello carrello;
+	private ControllerRicercaMenu controllerMenu;
 
 	public JFrameCarrello(ControllerCarrello c) {
 		controller = c;
@@ -49,12 +48,18 @@ public class JFrameCarrello extends JFrame {
 		LabelCarrello.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JButton ButtonPaga = new JButton("Paga");
-		ButtonPaga.setBounds(587, 389, 57, 23);
+		ButtonPaga.setBounds(587, 389, 80, 23);
 		contentPane.add(ButtonPaga);
 		
 		JButton ButtonIndietro = new JButton("Indietro");
-		ButtonIndietro.setBounds(39, 389, 71, 23);
+		ButtonIndietro.setBounds(21, 389, 89, 23);
 		contentPane.add(ButtonIndietro);
+		
+		JLabel LabelTotale = new JLabel("Totale:");
+		LabelTotale.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		LabelTotale.setBounds(553, 364, 80, 14);
+		contentPane.add(LabelTotale);
+		
 		ButtonIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -83,14 +88,17 @@ public class JFrameCarrello extends JFrame {
 		ArrayList<JLabel> labels = new ArrayList<JLabel>();
 		ArrayList<JButton> bottoni = new ArrayList<JButton>();
 		ArrayList<JSpinner> contatori = new ArrayList<JSpinner>();
+		ArrayList<Double> prezziArticoli = new ArrayList<Double>();
 
 		
 		int xLabel = 100;
-		int xBottone = 300;
-		int xSpinner = 250;
+		int xLabelPrezzo = 280;
+		int xBottone = 400;
+		int xSpinner = 350;
 		int y = 100;
 		int larg = 185;
 		int lung = 20;
+		int index = 0;
 		
 		for(Prodotto p : carrello.getProdotti()) {
 			
@@ -100,7 +108,13 @@ public class JFrameCarrello extends JFrame {
 
 			bottone = new JButton("Rimuovi");
 			bottone.setBounds(xBottone, y, 150, lung);
-
+			
+			prezziArticoli = controller.getPrezzi(carrello);
+			JLabel prezzo = new JLabel(prezziArticoli.get(index).toString() + "€");
+			prezzo.setBounds(xLabelPrezzo, y, larg, lung);
+			contentPane.add(prezzo);
+			index++;
+			
 			bottone.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					JButton source = (JButton) arg0.getSource();
@@ -137,6 +151,11 @@ public class JFrameCarrello extends JFrame {
 			bottoni.add(bottone);
 			contatori.add(contatore);
 		}
+		
+		Double totale = getTotale(contatori, prezziArticoli);
+		JLabel totaleDaPagare = new JLabel(totale.toString());
+		totaleDaPagare.setBounds(600, 364, 80, 14);
+		contentPane.add(totaleDaPagare);
 
 	}
 
@@ -156,5 +175,15 @@ public class JFrameCarrello extends JFrame {
 			bottoni.get(i).setBounds(bottoni.get(i).getX(), bottoni.get(i).getY()-50, bottoni.get(i).getWidth(), bottoni.get(i).getHeight());
 		}
 		
+	}
+	
+	public Double getTotale(ArrayList<JSpinner> contatori, ArrayList<Double> prezziArticoli) {
+		double risultato = 0;
+		int i;
+		
+		for (i=0; i < contatori.size(); i++) {
+			risultato = risultato + (prezziArticoli.get(i) * (int) contatori.get(i).getValue());
+		}
+		return risultato;
 	}
 }

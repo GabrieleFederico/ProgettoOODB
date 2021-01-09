@@ -6,6 +6,7 @@ public class Carrello {
 
 	private ArrayList<Prodotto> Prodotti;
 	private ArrayList<Integer> Quantit‡Prodotti;
+	private ArrayList<Double> Prezzi;
 	private Utente Proprietario;
 	
 	public Carrello(Utente proprietario) {
@@ -37,5 +38,15 @@ public class Carrello {
 	public void setProprietario(Utente proprietario) {
 		Proprietario = proprietario;
 	}
+
+	public ArrayList<Double> getPrezzi() {
+		return Prezzi;
+	}
+
+	public void setPrezzi(ArrayList<Double> prezzi) {
+		Prezzi = prezzi;
+	}
+	
+	
 	
 }

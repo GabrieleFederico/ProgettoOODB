@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import classiEntità.Carrello;
 import classiEntità.Utente;
 import interfacceGrafiche.JFrameCarrello;
@@ -17,10 +19,10 @@ public class ControllerCarrello {
 		this.utente = utente;
 	}
 
-	public void aggiungiAlCarrello(String nomep, int quantità) {
+	public void aggiungiAlCarrello(String nomep, int quantità, double prezzo) {
 		
 		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
-		cp.aggiungiProdottoAlCarrello(nomep, quantità, utente);
+		cp.aggiungiProdottoAlCarrello(nomep, quantità, utente, prezzo);
 	}
 	
 	public Carrello ottieniCarrello() {
@@ -40,6 +42,12 @@ public class ControllerCarrello {
 	//TODO
 	public void rimuoviParzialmenteDalCarrello() {
 		
+	}
+
+	public ArrayList<Double> getPrezzi(Carrello carrello) {
+		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
+		ArrayList<Double> prezzi = cp.getArrayListPrezzi(carrello);		
+		return prezzi;
 	}
 		
 }

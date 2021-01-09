@@ -16,19 +16,20 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 	
 	private Connection connessione;
 	private ConnessioneDB connessioneDB;
-	private PreparedStatement aggiungiProdottoAlCarrelloPS, getCarrelloByUtentePS, rimuoviProdottoDalCarrelloPS;
+	private PreparedStatement aggiungiProdottoAlCarrelloPS, getCarrelloByUtentePS, rimuoviProdottoDalCarrelloPS, getArrayListPrezziPS;
 	
 	@Override
-	public void aggiungiProdottoAlCarrello(String nomep, int quantità, Utente utente) {
+	public void aggiungiProdottoAlCarrello(String nomep, int quantità, Utente utente, double prezzo) {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			aggiungiProdottoAlCarrelloPS = connessione.prepareStatement("INSERT INTO Carrello VALUES (?, ?, ?, ?)");
+			aggiungiProdottoAlCarrelloPS = connessione.prepareStatement("INSERT INTO Carrello VALUES (?, ?, ?, ?, ?)");
 			aggiungiProdottoAlCarrelloPS.setString(1, "codice");
 			aggiungiProdottoAlCarrelloPS.setString(2, nomep);
 			aggiungiProdottoAlCarrelloPS.setInt(3, quantità);
 			aggiungiProdottoAlCarrelloPS.setString(4, utente.getEmail());
+			aggiungiProdottoAlCarrelloPS.setDouble(5, prezzo);
 			aggiungiProdottoAlCarrelloPS.executeUpdate();
 			connessione.close();
 			
@@ -85,5 +86,32 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		
 	}
 
-
+	public ArrayList<Double> getArrayListPrezzi(Carrello carrello) {
+		
+		ArrayList<Double> risultatoPrezzi = new ArrayList<Double>();
+		Double temp;
+		
+		try {
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			getArrayListPrezziPS = connessione.prepareStatement("select prezzo from carrello where proprietario = ?");
+			getArrayListPrezziPS.setString(1, carrello.getProprietario().getEmail());
+			ResultSet rs = getArrayListPrezziPS.executeQuery();
+			connessione.close();
+			
+			while(rs.next()) {
+				temp = rs.getDouble("prezzo");
+				risultatoPrezzi.add(temp);
+				
+			}
+				
+		}
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return risultatoPrezzi;
+	}
+	
 }
+

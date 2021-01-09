@@ -106,18 +106,24 @@ public class JFrameRistorante extends JFrame {
 			bottone = new JButton("Aggiungi al carrello");
 			bottone.setBounds(x + 350, y, 200, 20);
 			pannello.add(bottone);
-			y += 50;
 			final int riga = index;
-			index++;
 	
+			ArrayList<Double> prezziArticoli = risultatoRicerca.getPrezzi();
+			JLabel prezzo = new JLabel(prezziArticoli.get(index).toString() + "€");
+			prezzo.setBounds(x + 200, y, larg, lung);
+			pannello.add(prezzo);
+			y += 50;
+			index++;
+			
 			bottone.addActionListener(new ActionListener() {
 				public void  actionPerformed(ActionEvent arg0) {
 					String nomep = risultatoRicerca.getProdotti().get(riga).getNomeP();
 					int quantità = (int) spinners.get(riga).getValue();
-					cc.aggiungiAlCarrello(nomep, quantità);
+					double prezzi = prezziArticoli.get(riga).doubleValue();
+					cc.aggiungiAlCarrello(nomep, quantità, prezzi);
 				}
-		
 			});
+			
 		}
 		
 	
