@@ -91,7 +91,6 @@ public class JFrameCarrello extends JFrame {
 		ArrayList<JSpinner> contatori = new ArrayList<JSpinner>();
 		ArrayList<Double> prezziArticoli = new ArrayList<Double>();
 		ArrayList<Integer> quantitàProdotti = new ArrayList<Integer>();
-//		ArrayLisy<Double> 
 
 		int y = 100;
 		int lung = 20;
@@ -133,7 +132,6 @@ public class JFrameCarrello extends JFrame {
 					contentPane.remove(contatori.get(bottoni.indexOf(source)));
 					contentPane.remove(source);
 					carrello.getProdotti().remove(bottoni.indexOf(source));
-					contentPane.updateUI();
 					
 					prezziJLabel.remove(bottoni.indexOf(source));
 					labels.remove(bottoni.indexOf(source));
@@ -141,6 +139,10 @@ public class JFrameCarrello extends JFrame {
 					spostamentoVersoAlto(labels, contatori, bottoni, bottoni.indexOf(source), prezziJLabel);
 					
 					bottoni.remove(source);
+					String nuovoPrezzoTotale = String.valueOf(getPrezzoTotale(prezziJLabel));
+					totaleDaPagare.setText(nuovoPrezzoTotale);
+					
+					contentPane.updateUI();
 				}
 			});
 			contentPane.add(bottone);
@@ -156,8 +158,8 @@ public class JFrameCarrello extends JFrame {
 					int nuovoValore = (int) contatori.get(i).getValue();
 					controller.ModificaQuantitàCarrello(nuovoValore, carrello, nomeProdotto);
 					prezziJLabel.get(i).setText((prezzoArticoloSingolo * nuovoValore + "€"));
-					String bla = String.valueOf(getPrezzoTotale(prezziJLabel));
-					totaleDaPagare.setText(bla);
+					String nuovoPrezzoTotale = String.valueOf(getPrezzoTotale(prezziJLabel));
+					totaleDaPagare.setText(nuovoPrezzoTotale);
 					contentPane.updateUI();
 				}
 			});

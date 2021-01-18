@@ -1,8 +1,10 @@
 package controllers;
 
+import classiEntità.Rider;
 import classiEntità.Ristorante;
 import classiEntità.Utente;
 import interfacceGrafiche.JFrameCarrello;
+import interfacceGrafiche.JFrameHomeRider;
 
 public class ControllorePrincipale {
 
@@ -21,9 +23,15 @@ public class ControllorePrincipale {
 		ControllerLogin c = new ControllerLogin(this);
 	}
 	
-	public void passaAdHome(ControllerLogin c, Utente utente) {
+	public void passaAdHomeUtente(ControllerLogin c, Utente utente) {
 		ccarrello = new ControllerCarrello(utente);
 		ControllerRicercaRistoranti c1 = new ControllerRicercaRistoranti(this);
+	}
+	
+	public void passaAdHomeRider(ControllerLogin c, Rider rider) {
+		
+		JFrameHomeRider homerider = new JFrameHomeRider();
+		homerider.setVisible(true);
 	}
 	
 	public void passaAInterfacciaRistorante(Ristorante r) {

@@ -2,10 +2,12 @@ package controllers;
 
 import java.sql.SQLException;
 
+import classiEntità.Rider;
 import classiEntità.Utente;
 import interfacceGrafiche.Errore;
 import interfacceGrafiche.JFrameLogin;
 import interfacceGrafiche.JFrameRegistrati;
+import postgresDAOImpl.RiderDAOPostgres;
 import postgresDAOImpl.UtenteDAOPostgres;
 
 public class ControllerLogin {
@@ -47,9 +49,26 @@ public class ControllerLogin {
 
 	}
 
-	public void PassaAdHome(ControllerLogin this, ControllorePrincipale c, Utente utente) {
+	public void PassaAdHomeUtente(ControllerLogin this, ControllorePrincipale c, Utente utente) {
 		fl.dispose();
-		c.passaAdHome(this, utente);
+		c.passaAdHomeUtente(this, utente);
 
+	}
+	
+	public void PassaAdHomeRider(ControllerLogin this, ControllorePrincipale c, Rider rider) {
+		fl.dispose();
+		c.passaAdHomeRider(this, rider);
+
+	}
+	
+	public Rider getRider(String email, String password) {
+		
+		Rider rider = null;
+		RiderDAOPostgres rd = new RiderDAOPostgres();
+		
+		rider = rd.getRiderByEmail(email, password);
+		
+		
+		return rider;
 	}
 }

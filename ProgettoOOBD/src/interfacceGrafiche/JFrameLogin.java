@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import classiEntità.Rider;
 import classiEntità.Utente;
 import controllers.ControllerLogin;
 import controllers.ControllorePrincipale;
@@ -52,7 +53,7 @@ public class JFrameLogin extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e1) {
 				if(e1.getKeyCode() == KeyEvent.VK_ENTER) {
-					login(c1, c, TFLogin.getText());
+					login(c1, c);
 				}
 			}
 		});
@@ -74,9 +75,10 @@ public class JFrameLogin extends JFrame {
 		
 		ButtonLogin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				login(c1, c, TFLogin.getText());
+				login(c1, c);
 			}
 		});
+		
 		ButtonLogin.setBounds(276, 304, 89, 23);
 		contentPane.add(ButtonLogin);
 		
@@ -111,19 +113,26 @@ public class JFrameLogin extends JFrame {
 			
 		}
 	
-		public void login(ControllorePrincipale c1, ControllerLogin c, String email) {
-			try {
-				Utente u = c.ControllaCredenziali(TFLogin.getText(), TFPassword.getText());
-				if (u != null)
-					c.PassaAdHome(c1, u);
-				else {
-					LoginSbagliato.setVisible(true);
-					svuotaCampi();
-				}
-
+		public void login(ControllorePrincipale c1, ControllerLogin c) {
+			
+			Rider r = c.getRider(TFLogin.getText(), TFPassword.getText());
+			if(r != null) {
+				c.PassaAdHomeRider(c1, r);
 			}
-			catch(SQLException e){
-				System.out.println(e.getMessage());
+			else {
+				try {
+					Utente u = c.ControllaCredenziali(TFLogin.getText(), TFPassword.getText());
+					if (u != null)
+						c.PassaAdHomeUtente(c1, u);
+					else {
+						LoginSbagliato.setVisible(true);
+						svuotaCampi();
+					}
+	
+				}
+				catch(SQLException e){
+					System.out.println(e.getMessage());
+				}
 			}
 		}
 		
