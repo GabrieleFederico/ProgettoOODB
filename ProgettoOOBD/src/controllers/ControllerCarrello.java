@@ -7,12 +7,12 @@ import javax.swing.JLabel;
 import classiEntità.Carrello;
 import classiEntità.Utente;
 import interfacceGrafiche.JFrameCarrello;
-import interfacceGrafiche.JFrameHome;
+import interfacceGrafiche.JFrameHomeUtente;
 import postgresDAOImpl.CarrelloDAOPostgres;
 
 public class ControllerCarrello {
 	
-	JFrameHome fh;
+	JFrameHomeUtente fh;
 	JFrameCarrello fc;
 	Utente utente;
 

@@ -8,17 +8,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import classiEntità.Ristorante;
-import interfacceGrafiche.JFrameHome;
+import interfacceGrafiche.JFrameHomeUtente;
 import postgresDAOImpl.RistoranteDAOPostgres;
 
 public class ControllerRicercaRistoranti {
 	
-	JFrameHome fr;
+	JFrameHomeUtente fr;
 	ControllorePrincipale C;
 	
 	public ControllerRicercaRistoranti(ControllorePrincipale c) {
 		C = c;
-		fr = new JFrameHome(this, C);
+		fr = new JFrameHomeUtente(this, C);
 		fr.setVisible(true);
 	}
 	

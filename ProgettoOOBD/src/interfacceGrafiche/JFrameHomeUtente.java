@@ -28,7 +28,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Cursor;
 
-public class JFrameHome extends JFrame {
+public class JFrameHomeUtente extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField inputTF;
@@ -36,7 +36,7 @@ public class JFrameHome extends JFrame {
 	ControllerRicercaRistoranti controller;
 	ControllorePrincipale controllore;
 
-	public JFrameHome(ControllerRicercaRistoranti c, ControllorePrincipale c1) {
+	public JFrameHomeUtente(ControllerRicercaRistoranti c, ControllorePrincipale c1) {
 		setTitle("Home");
 		controller = c;
 		controllore = c1;
