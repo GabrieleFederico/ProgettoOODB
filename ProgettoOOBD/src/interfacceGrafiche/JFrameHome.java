@@ -60,6 +60,17 @@ public class JFrameHome extends JFrame {
 		JButton LogOutButton = new JButton("Log Out");
 		LogOutButton.setBounds(10, 433, 89, 28);
 		contentPane.add(LogOutButton);
+		
+		JButton HomeButton = new JButton("Home");
+		HomeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TornaHome(contentPane, componentiNecessarie);
+				HomeButton.setEnabled(false);
+			}
+		});
+		HomeButton.setEnabled(false);
+		HomeButton.setBounds(324, 435, 89, 25);
+		contentPane.add(HomeButton);
 
 		JButton CercaButton = new JButton("Cerca");
 		CercaButton.addActionListener(new ActionListener() {
@@ -70,6 +81,7 @@ public class JFrameHome extends JFrame {
 					RiderInput = Mezzo.getSelectedItem().toString();
 				try {
 					c.Ricerca(TFInput, contentPane, componentiNecessarie, RiderInput);
+					HomeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}
@@ -95,17 +107,6 @@ public class JFrameHome extends JFrame {
 		});
 		carrelloButton.setBounds(625, 434, 118, 26);
 		contentPane.add(carrelloButton);
-
-		JButton HomeButton = new JButton("Home");
-		HomeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				TornaHome(contentPane, componentiNecessarie);
-				HomeButton.setEnabled(false);
-			}
-		});
-		HomeButton.setEnabled(false);
-		HomeButton.setBounds(324, 435, 89, 25);
-		contentPane.add(HomeButton);
 
 		componentiNecessarie = contentPane.getComponentCount();
 

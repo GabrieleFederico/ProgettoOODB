@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.swing.JLabel;
+
 import classiEntit‡.Carrello;
 import classiEntit‡.Prodotto;
 import classiEntit‡.Utente;
@@ -16,7 +19,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 	
 	private Connection connessione;
 	private ConnessioneDB connessioneDB;
-	private PreparedStatement aggiungiProdottoAlCarrelloPS, getCarrelloByUtentePS, rimuoviProdottoDalCarrelloPS, getArrayListPrezziPS;
+	private PreparedStatement aggiungiProdottoAlCarrelloPS, getCarrelloByUtentePS, rimuoviProdottoDalCarrelloPS, getArrayListPrezziPS, cambiaQuantit‡CarrelloPS;
 	
 	@Override
 	public void aggiungiProdottoAlCarrello(String nomep, int quantit‡, Utente utente, double prezzo) {
@@ -89,12 +92,12 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 	public ArrayList<Double> getArrayListPrezzi(Carrello carrello) {
 		
 		ArrayList<Double> risultatoPrezzi = new ArrayList<Double>();
-		Double temp;
+		double temp;
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getArrayListPrezziPS = connessione.prepareStatement("select prezzo from carrello where proprietario = ?");
+			getArrayListPrezziPS = connessione.prepareStatement("SELECT prezzo FROM carrello WHERE proprietario = ?");
 			getArrayListPrezziPS.setString(1, carrello.getProprietario().getEmail());
 			ResultSet rs = getArrayListPrezziPS.executeQuery();
 			connessione.close();
@@ -111,6 +114,24 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		}
 		
 		return risultatoPrezzi;
+	}
+
+	public void cambiaQuantit‡Carrello(int nuovoValore, Carrello carrello, String nomeProdotto) {
+
+		try {
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			cambiaQuantit‡CarrelloPS = connessione.prepareStatement("UPDATE CARRELLO SET quantitaprodotto = ? WHERE proprietario = ? AND nomep = ?");
+			cambiaQuantit‡CarrelloPS.setInt(1, nuovoValore);
+			cambiaQuantit‡CarrelloPS.setString(2, carrello.getProprietario().getEmail());
+			cambiaQuantit‡CarrelloPS.setString(3, nomeProdotto);
+			cambiaQuantit‡CarrelloPS.executeUpdate();
+			connessione.close();	
+		}
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 }

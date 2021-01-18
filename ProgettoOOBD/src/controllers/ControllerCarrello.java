@@ -2,6 +2,8 @@ package controllers;
 
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 import classiEntit‡.Carrello;
 import classiEntit‡.Utente;
 import interfacceGrafiche.JFrameCarrello;
@@ -39,8 +41,10 @@ public class ControllerCarrello {
 
 	}
 	
-	//TODO
-	public void rimuoviParzialmenteDalCarrello() {
+	
+	public void ModificaQuantit‡Carrello(int nuovoValore, Carrello carrello,  String nomeProdotto) {
+		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
+		cp.cambiaQuantit‡Carrello(nuovoValore, carrello, nomeProdotto);		
 		
 	}
 

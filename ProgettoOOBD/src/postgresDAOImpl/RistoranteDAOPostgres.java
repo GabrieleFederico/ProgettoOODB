@@ -15,8 +15,7 @@ public class RistoranteDAOPostgres implements RistoranteDAO {
 
 		private Connection connessione;
 		private ConnessioneDB connessioneDB;
-		private PreparedStatement getRistoranteByNomeOrProdottoPS;
-		private PreparedStatement getRistoranteByRicercaComplessaPS;
+		private PreparedStatement getRistoranteByNomeOrProdottoPS, getRistoranteByRicercaComplessaPS;
 
 		@Override
 		public ArrayList<Ristorante> getRistoranteByNomeOrProdotto(String ricerca) {
