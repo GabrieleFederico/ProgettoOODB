@@ -38,6 +38,8 @@ public class RiderDAOPostgres implements RiderDAO{
 				risultato.setNome(rs.getString("nome"));
 				risultato.setMezzo(rs.getString("mezzo"));
 			}
+			else 
+				risultato = null;
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
