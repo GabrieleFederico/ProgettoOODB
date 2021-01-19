@@ -39,7 +39,6 @@ public class UtenteDAOPostgres implements UtenteDAO {
 	public Utente getUtenteByCredenziali(String email, String pwd) {
 		
 		Utente risultato = new Utente(email, pwd, null, null, null);
-		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();

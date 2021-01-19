@@ -19,6 +19,7 @@ import controllers.ControllorePrincipale;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.JComboBox;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -29,12 +30,17 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Cursor;
+import javax.swing.JTextArea;
+import java.awt.List;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class JFrameHomeUtente extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField inputTF;
 	private int componentiNecessarie;
+	private JScrollPane scrollPane;
 	ControllerRicercaRistoranti controller;
 	ControllorePrincipale controllore;
 
@@ -82,7 +88,7 @@ public class JFrameHomeUtente extends JFrame {
 				if (Mezzo.getSelectedIndex() != 0)
 					RiderInput = Mezzo.getSelectedItem().toString();
 				try {
-					c.Ricerca(TFInput, contentPane, componentiNecessarie, RiderInput);
+					c.ricerca(TFInput, contentPane, componentiNecessarie, RiderInput);
 					HomeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
@@ -112,7 +118,7 @@ public class JFrameHomeUtente extends JFrame {
 		contentPane.add(carrelloButton);
 
 		componentiNecessarie = contentPane.getComponentCount();
-
+		
 		JButton PaniniButton = new JButton("Panini");
 		PaniniButton.setBounds(10, 160, 215, 163);
 		contentPane.add(PaniniButton);
@@ -128,7 +134,7 @@ public class JFrameHomeUtente extends JFrame {
 		SushiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					c.Ricerca("Sushi", contentPane, componentiNecessarie, null);
+					c.ricerca("Sushi", contentPane, componentiNecessarie, null);
 					HomeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
@@ -139,7 +145,7 @@ public class JFrameHomeUtente extends JFrame {
 		PizzaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					c.Ricerca("Pizz", contentPane, componentiNecessarie, null);
+					c.ricerca("Pizz", contentPane, componentiNecessarie, null);
 					HomeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
@@ -150,7 +156,7 @@ public class JFrameHomeUtente extends JFrame {
 		PaniniButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					c.Ricerca("Panin", contentPane, componentiNecessarie, null);
+					c.ricerca("Panin", contentPane, componentiNecessarie, null);
 					HomeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
@@ -165,22 +171,27 @@ public class JFrameHomeUtente extends JFrame {
 		
 		int i;
 		int max = pannello.getComponentCount();
-
+		
 		for (i = max - 1; i > componentiNecessarie - 1; i--)
 			pannello.getComponent(i).setVisible(false);
 
 		pannello.updateUI();
-
-		int xNome = 100;
-		int yNome = 130;
-		int xIndirizzo = 120;
-		int yIndirizzo = 145;
-		int larg = 185;
-		int lung = 20;
+		
+		JPanel pannelloScrollPane = new JPanel();
+		pannelloScrollPane.setLayout(new BoxLayout(pannelloScrollPane, BoxLayout.Y_AXIS));
+		
+		scrollPane = new JScrollPane(pannelloScrollPane);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setBounds(10, 68, 733, 354);
+		contentPane.add(scrollPane);
+		
 		for (Ristorante r : risultatoRicerca) {
+			
 			labelRisultato = new JLabel(r.getNome());
-			labelRisultato.setBounds(xNome, yNome, larg, lung);
-			pannello.add(labelRisultato);
+			labelRisultato.setBorder(new EmptyBorder(0, 312, 0, 0));
+			pannelloScrollPane.add(labelRisultato);
+			
 			labelRisultato.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent arg0) {
 					c1.passaAInterfacciaRistorante(r);
@@ -188,12 +199,11 @@ public class JFrameHomeUtente extends JFrame {
 			});
 			labelRisultato.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-			yNome += 50;
 			labelRisultato = new JLabel(r.getIndirizzo());
-			labelRisultato.setBounds(xIndirizzo, yIndirizzo, larg, lung);
-			pannello.add(labelRisultato);
-			yIndirizzo += 50;
+			labelRisultato.setBorder(new EmptyBorder(0, 312, 30, 0));
+			pannelloScrollPane.add(labelRisultato);	
 		}
+		pannelloScrollPane.updateUI();
 	}
 	
 	public void TornaHome(JPanel pannello, int componentiNecessarie) {
@@ -210,7 +220,8 @@ public class JFrameHomeUtente extends JFrame {
 			pannello.remove(j);
 			j--;
 		}
-
+		scrollPane.removeAll();
 		pannello.updateUI();
+		scrollPane.setVisible(false);
 	}
 }

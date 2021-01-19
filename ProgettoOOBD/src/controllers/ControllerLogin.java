@@ -46,7 +46,6 @@ public class ControllerLogin {
 		utente = u2.getUtenteByCredenziali(email, pwd);
 		
 		return utente;
-
 	}
 
 	public void PassaAdHomeUtente(ControllerLogin this, ControllorePrincipale c, Utente utente) {

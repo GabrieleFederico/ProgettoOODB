@@ -23,7 +23,7 @@ public class ControllerRicercaRistoranti {
 		fr.setVisible(true);
 	}
 	
-	public void Ricerca (String ricerca, JPanel pannello, int componentiNecessarie, String mezzo) throws SQLException {
+	public void ricerca (String ricerca, JPanel pannello, int componentiNecessarie, String mezzo) throws SQLException {
 		
 		RistoranteDAOPostgres rp = new RistoranteDAOPostgres();
 		ArrayList<Ristorante> risultatoRicerca = new ArrayList<Ristorante>();
