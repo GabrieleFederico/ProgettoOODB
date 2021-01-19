@@ -25,13 +25,15 @@ public class ControllorePrincipale {
 	
 	public void passaAdHomeUtente(ControllerLogin c, Utente utente) {
 		ccarrello = new ControllerCarrello(utente);
-		ControllerRicercaRistoranti c1 = new ControllerRicercaRistoranti(this);
+		c = null;
+		ControllerRicercaRistoranti c1 = new ControllerRicercaRistoranti(this, utente);
 	}
 	
 	public void passaAdHomeRider(ControllerLogin c, Rider rider) {
 		
-		JFrameHomeRider homerider = new JFrameHomeRider();
-		homerider.setVisible(true);
+		c = null;
+		ControllerRider cr = new ControllerRider(rider);
+		
 	}
 	
 	public void passaAInterfacciaRistorante(Ristorante r) {

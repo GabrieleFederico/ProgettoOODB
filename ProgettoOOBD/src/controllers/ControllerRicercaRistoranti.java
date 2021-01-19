@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import classiEntità.Ristorante;
+import classiEntità.Utente;
 import interfacceGrafiche.JFrameHomeUtente;
 import postgresDAOImpl.RistoranteDAOPostgres;
 
@@ -16,9 +17,9 @@ public class ControllerRicercaRistoranti {
 	JFrameHomeUtente fr;
 	ControllorePrincipale C;
 	
-	public ControllerRicercaRistoranti(ControllorePrincipale c) {
+	public ControllerRicercaRistoranti(ControllorePrincipale c, Utente u) {
 		C = c;
-		fr = new JFrameHomeUtente(this, C);
+		fr = new JFrameHomeUtente(this, C, u);
 		fr.setVisible(true);
 	}
 	

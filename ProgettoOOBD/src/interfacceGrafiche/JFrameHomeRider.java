@@ -32,5 +32,6 @@ public class JFrameHomeRider extends JFrame {
 		JButton ButtonLogout = new JButton("Logout");
 		ButtonLogout.setBounds(10, 407, 89, 23);
 		contentPane.add(ButtonLogout);
+	
 	}
 }

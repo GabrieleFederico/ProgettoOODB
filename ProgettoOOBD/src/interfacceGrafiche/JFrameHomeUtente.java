@@ -9,7 +9,9 @@ import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
 
 import classiEntità.Ristorante;
+import classiEntità.Utente;
 import controllers.ControllerCarrello;
+import controllers.ControllerOrdini;
 import controllers.ControllerRicercaMenu;
 import controllers.ControllerRicercaRistoranti;
 import controllers.ControllorePrincipale;
@@ -36,7 +38,7 @@ public class JFrameHomeUtente extends JFrame {
 	ControllerRicercaRistoranti controller;
 	ControllorePrincipale controllore;
 
-	public JFrameHomeUtente(ControllerRicercaRistoranti c, ControllorePrincipale c1) {
+	public JFrameHomeUtente(ControllerRicercaRistoranti c, ControllorePrincipale c1, Utente utente) {
 		setTitle("Home");
 		controller = c;
 		controllore = c1;
@@ -94,6 +96,7 @@ public class JFrameHomeUtente extends JFrame {
 		JButton IMieiOrdiniButton = new JButton("I miei ordini");
 		IMieiOrdiniButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ControllerOrdini co = new ControllerOrdini(utente);
 			}
 		});
 		IMieiOrdiniButton.setBounds(625, 12, 118, 27);
