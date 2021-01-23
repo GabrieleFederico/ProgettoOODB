@@ -102,7 +102,7 @@ public class JFrameHomeUtente extends JFrame {
 		JButton IMieiOrdiniButton = new JButton("I miei ordini");
 		IMieiOrdiniButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ControllerOrdini co = new ControllerOrdini(utente);
+				controllore.apriOrdini(utente);
 			}
 		});
 		IMieiOrdiniButton.setBounds(625, 12, 118, 27);

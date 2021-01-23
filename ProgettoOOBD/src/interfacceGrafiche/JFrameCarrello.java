@@ -128,7 +128,6 @@ public class JFrameCarrello extends JFrame {
 
 			bottone = new JButton("Rimuovi");
 			bottone.setBounds(xBottone, y, 150, lung);
-			pannelloScrollPane.add(bottone);
 			
 			prezzo = new JLabel(prezziArticoli.get(index) * quantitàProdotti.get(index) + "€");
 			prezzo.setBounds(xLabelPrezzo, y, larg, lung);

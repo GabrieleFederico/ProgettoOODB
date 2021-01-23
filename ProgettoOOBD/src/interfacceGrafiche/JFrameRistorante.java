@@ -26,10 +26,12 @@ public class JFrameRistorante extends JFrame {
 	private JTextField inputTF;
 	private int componentiNecessarie;
 	ControllerRicercaMenu controller;
+	Ristorante rist;
 	
 	public JFrameRistorante(ControllerRicercaMenu c, Ristorante r) {
 		setTitle(r.getNome());
 		controller = c;
+		rist = r;
 		setBounds(100, 100, 769, 511);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -120,7 +122,7 @@ public class JFrameRistorante extends JFrame {
 					String nomep = risultatoRicerca.getProdotti().get(riga).getNomeP();
 					int quantità = (int) spinners.get(riga).getValue();
 					double prezzi = prezziArticoli.get(riga).doubleValue();
-					cc.aggiungiAlCarrello(nomep, quantità, prezzi);
+					cc.aggiungiAlCarrello(nomep, quantità, prezzi, rist);
 				}
 			});
 			

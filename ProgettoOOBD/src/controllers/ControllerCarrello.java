@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 import classiEntità.Carrello;
+import classiEntità.Ristorante;
 import classiEntità.Utente;
 import interfacceGrafiche.JFrameCarrello;
 import interfacceGrafiche.JFrameHomeUtente;
@@ -21,10 +22,10 @@ public class ControllerCarrello {
 		this.utente = utente;
 	}
 
-	public void aggiungiAlCarrello(String nomep, int quantità, double prezzo) {
+	public void aggiungiAlCarrello(String nomep, int quantità, double prezzo, Ristorante ristorante) {
 		
 		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
-		cp.aggiungiProdottoAlCarrello(nomep, quantità, utente, prezzo);
+		cp.aggiungiProdottoAlCarrello(nomep, quantità, utente, prezzo, ristorante);
 	}
 	
 	public Carrello ottieniCarrello() {

@@ -23,6 +23,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 	public ArrayList<Consegne> getConsegneByUtente(Utente utente) {
 		
 		ArrayList<Consegne> risultato = new ArrayList<Consegne>();
+		Consegne temp; 
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -33,14 +34,19 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			connessione.close();
 			
 			while(rs.next()) {
-				
+				temp = new Consegne();
+				temp.setCodC(rs.getString("codc"));
+				temp.setOrario(rs.getTime("dataconsegna"));
+				temp.setIndirizzoP(rs.getString("indirizzop"));
+				temp.setIndirizzoA(rs.getString("indirizzoa"));
+				risultato.add(temp);
 			}
 		} 
 		catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		
-		return null;
+		return risultato;
 	}
 	
 	

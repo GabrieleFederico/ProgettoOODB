@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 
 import classiEntit‡.Carrello;
 import classiEntit‡.Prodotto;
+import classiEntit‡.Ristorante;
 import classiEntit‡.Utente;
 import dbConn.ConnessioneDB;
 import interfacceDAO.CarrelloDAO;
@@ -22,16 +23,17 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 	private PreparedStatement aggiungiProdottoAlCarrelloPS, getCarrelloByUtentePS, rimuoviProdottoDalCarrelloPS, getArrayListPrezziPS, cambiaQuantit‡CarrelloPS;
 	
 	@Override
-	public void aggiungiProdottoAlCarrello(String nomep, int quantit‡, Utente utente, double prezzo) {
+	public void aggiungiProdottoAlCarrello(String nomep, int quantit‡, Utente utente, double prezzo, Ristorante ristorante) {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			aggiungiProdottoAlCarrelloPS = connessione.prepareStatement("INSERT INTO Carrello VALUES ( ?, ?, ?, ?)");
+			aggiungiProdottoAlCarrelloPS = connessione.prepareStatement("INSERT INTO Carrello VALUES (?, ?, ?, ?, ?)");
 			aggiungiProdottoAlCarrelloPS.setString(1, nomep);
 			aggiungiProdottoAlCarrelloPS.setInt(2, quantit‡);
 			aggiungiProdottoAlCarrelloPS.setString(3, utente.getEmail());
 			aggiungiProdottoAlCarrelloPS.setDouble(4, prezzo);
+			aggiungiProdottoAlCarrelloPS.setString(5, ristorante.getNome());
 			aggiungiProdottoAlCarrelloPS.executeUpdate();
 			connessione.close();
 		} 

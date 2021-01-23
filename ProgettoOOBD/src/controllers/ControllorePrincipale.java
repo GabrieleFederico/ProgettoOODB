@@ -40,6 +40,12 @@ public class ControllorePrincipale {
 		ControllerRicercaMenu crm = new ControllerRicercaMenu(r, ccarrello);
 
 	}
+	
+	public void apriOrdini(Utente u) {
+
+		ControllerOrdini co = new ControllerOrdini(u);
+		
+	}
 
 	public void apriCarrello(ControllerRicercaRistoranti c) {
 		ccarrello.fc = new JFrameCarrello(ccarrello);

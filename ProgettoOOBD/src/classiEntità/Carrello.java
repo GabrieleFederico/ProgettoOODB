@@ -8,6 +8,7 @@ public class Carrello {
 	private ArrayList<Integer> Quantit‡Prodotti;
 	private ArrayList<Double> Prezzi;
 	private Utente Proprietario;
+	private Ristorante provenienzaProdotti;
 	
 	public Carrello(Utente proprietario) {
 		this.Proprietario = proprietario;
@@ -46,6 +47,16 @@ public class Carrello {
 	public void setPrezzi(ArrayList<Double> prezzi) {
 		Prezzi = prezzi;
 	}
+
+	public Ristorante getProvenienzaProdotti() {
+		return provenienzaProdotti;
+	}
+
+	public void setProvenienzaProdotti(Ristorante provenienzaProdotti) {
+		this.provenienzaProdotti = provenienzaProdotti;
+	}
+	
+	
 	
 	
 	
