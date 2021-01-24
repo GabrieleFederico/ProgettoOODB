@@ -5,22 +5,24 @@ import java.util.Date;
 
 public class Utente {
 	
-	private String email; 
+	private String email;
+	private String Password;
 	private String Nome;
 	private String Cognome;
 	private String Indirizzo;
-	private String Password;
 	private ArrayList<Consegne> OrdiniEffettuati;
 	
 	
 	public Utente(String email,  String password, String nome, String cognome, String indirizzo) {
 		this.email = email;
-		Password = password;
 		Nome = nome;
 		Cognome = cognome;
 		Indirizzo = indirizzo;
+		Password = password;
 	}
 	
+	public Utente() {
+	}
 	
 	public String getEmail() {
 		return email;

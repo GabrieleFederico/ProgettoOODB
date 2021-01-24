@@ -49,11 +49,12 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		
 		Carrello risultato = new Carrello(utente);
 		Prodotto temp;
+		Ristorante temp2;
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getCarrelloByUtentePS = connessione.prepareStatement("SELECT nomep, quantitaprodotto FROM carrello WHERE proprietario LIKE ?");
+			getCarrelloByUtentePS = connessione.prepareStatement("SELECT nomep, quantitaprodotto, provenienzaprodotto FROM carrello WHERE proprietario = ? ORDER BY carrello.provenienzaprodotto ASC");
 			getCarrelloByUtentePS.setString(1, utente.getEmail());
 			ResultSet rs = getCarrelloByUtentePS.executeQuery();
 			connessione.close();
@@ -63,6 +64,10 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 				temp.setNomeP(rs.getString("nomep"));
 				risultato.getProdotti().add(temp);
 				risultato.getQuantit‡Prodotti().add(rs.getInt("quantitaprodotto"));
+				temp2 = new Ristorante();
+				temp2.setNome(rs.getString("provenienzaprodotto"));
+				risultato.getProvenienzaProdotti().add(temp2);
+				
 			}
 
 		} 

@@ -24,7 +24,7 @@ public class JFrameLogin extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
-	private JTextField TFLogin;
+	private JTextField TFEmail;
 	private JTextField TFPassword;
 	
 	ControllerLogin controllore;
@@ -43,10 +43,10 @@ public class JFrameLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		TFLogin = new JTextField();
-		TFLogin.setBounds(276, 140, 149, 20);
-		contentPane.add(TFLogin);
-		TFLogin.setColumns(10);
+		TFEmail = new JTextField();
+		TFEmail.setBounds(276, 140, 149, 20);
+		contentPane.add(TFEmail);
+		TFEmail.setColumns(10);
 		
 		TFPassword = new JTextField();
 		TFPassword.addKeyListener(new KeyAdapter() {
@@ -115,29 +115,25 @@ public class JFrameLogin extends JFrame {
 	
 		public void login(ControllorePrincipale c1, ControllerLogin c) {
 			
-			Rider r = c.getRider(TFLogin.getText(), TFPassword.getText());
-			if(r != null) {
-				c.PassaAdHomeRider(c1, r);
-			}
-			else {
 				try {
-					Utente u = c.ControllaCredenziali(TFLogin.getText(), TFPassword.getText());
-					if (u != null)
+					Rider r = c.getRider(TFEmail.getText(), TFPassword.getText());
+					Utente u = c.ControllaCredenziali(TFEmail.getText(), TFPassword.getText());
+					if(r != null) {
+						c.PassaAdHomeRider(c1, r);
+					} else if (u != null) {
 						c.PassaAdHomeUtente(c1, u);
-					else {
+					} else {
 						LoginSbagliato.setVisible(true);
 						svuotaCampi();
 					}
-	
 				}
 				catch(SQLException e){
 					System.out.println(e.getMessage());
 				}
 			}
-		}
 		
 		public void svuotaCampi() {
-			TFLogin.setText(null);
+			TFEmail.setText(null);
 			TFPassword.setText(null);
 		}
 

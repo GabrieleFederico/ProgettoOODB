@@ -39,7 +39,6 @@ public class ControllerCarrello {
 	public void rimuoviDalCarrello(Carrello carrello, int indice) {
 		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
 		cp.rimuoviProdottoDalCarrello(carrello, indice);
-
 	}
 	
 	

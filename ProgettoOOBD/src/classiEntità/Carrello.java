@@ -8,16 +8,18 @@ public class Carrello {
 	private ArrayList<Integer> Quantit‡Prodotti;
 	private ArrayList<Double> Prezzi;
 	private Utente Proprietario;
-	private Ristorante provenienzaProdotti;
+	private ArrayList<Ristorante> provenienzaProdotti;
 	
 	public Carrello(Utente proprietario) {
 		this.Proprietario = proprietario;
 		Prodotti = new ArrayList<Prodotto>();
 		Quantit‡Prodotti = new ArrayList<Integer>();
+		provenienzaProdotti = new ArrayList<Ristorante>();
 	}
 	public Carrello() {
 		Prodotti = new ArrayList<Prodotto>();
 		Quantit‡Prodotti = new ArrayList<Integer>();
+		provenienzaProdotti = new ArrayList<Ristorante>();
 	}
 
 	public ArrayList<Prodotto> getProdotti() {
@@ -52,11 +54,11 @@ public class Carrello {
 		Prezzi = prezzi;
 	}
 
-	public Ristorante getProvenienzaProdotti() {
+	public ArrayList<Ristorante> getProvenienzaProdotti() {
 		return provenienzaProdotti;
 	}
 
-	public void setProvenienzaProdotti(Ristorante provenienzaProdotti) {
+	public void setProvenienzaProdotti(ArrayList<Ristorante> provenienzaProdotti) {
 		this.provenienzaProdotti = provenienzaProdotti;
 	}
 	

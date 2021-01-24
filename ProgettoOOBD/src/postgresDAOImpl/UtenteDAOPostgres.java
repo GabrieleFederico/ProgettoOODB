@@ -22,11 +22,11 @@ public class UtenteDAOPostgres implements UtenteDAO {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
 			inserisciUtentePS = connessione.prepareStatement("INSERT INTO Utente VALUES (?, ?, ?, ?, ?)");
-			inserisciUtentePS.setString(1, utente.getNome());
-			inserisciUtentePS.setString(2, utente.getEmail());
-			inserisciUtentePS.setString(3, utente.getPassword());
-			inserisciUtentePS.setString(4, utente.getIndirizzo());
-			inserisciUtentePS.setString(5, utente.getCognome());
+			inserisciUtentePS.setString(1, utente.getEmail());
+			inserisciUtentePS.setString(2, utente.getPassword());
+			inserisciUtentePS.setString(3, utente.getNome());
+			inserisciUtentePS.setString(4, utente.getCognome());
+			inserisciUtentePS.setString(5, utente.getIndirizzo());
 			inserisciUtentePS.executeUpdate();
 			connessione.close();
 		}
@@ -38,7 +38,8 @@ public class UtenteDAOPostgres implements UtenteDAO {
 	@Override
 	public Utente getUtenteByCredenziali(String email, String pwd) {
 		
-		Utente risultato = new Utente(email, pwd, null, null, null);
+		Utente risultato = new Utente();
+		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
@@ -49,14 +50,20 @@ public class UtenteDAOPostgres implements UtenteDAO {
 			connessione.close();
 			
 			if(rs.next()) {
+				risultato.setEmail(email);
+				risultato.setPassword(pwd);
 				risultato.setNome(rs.getString("nome"));
 				risultato.setCognome(rs.getString("cognome"));
 				risultato.setIndirizzo(rs.getString("indirizzo"));
+			}
+			else {
+				risultato = null;
 			}
 		}
 		
 		catch(SQLException e){
 			System.out.println(e.getMessage());
+			
 		}
 		
 		return risultato;

@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
@@ -87,7 +88,7 @@ public class JFrameCarrello extends JFrame {
 	
 	public void aggiornaInterfacciaCarrello() {
 		
-		JLabel prodottoNelCarrello, prezzo;
+		JLabel prodottoNelCarrello, prezzo, provenienza;
 		JButton bottone;
 		JSpinner contatore;
 		ArrayList<JLabel> labels = new ArrayList<JLabel>();
@@ -96,8 +97,10 @@ public class JFrameCarrello extends JFrame {
 		ArrayList<JSpinner> contatori = new ArrayList<JSpinner>();
 		ArrayList<Double> prezziArticoli = new ArrayList<Double>();
 		ArrayList<Integer> quantitàProdotti = new ArrayList<Integer>();
+		ArrayList<Ristorante> listaRistoranti = new ArrayList<Ristorante>();
+		ArrayList<JLabel> labelsNomiRistoranti = new ArrayList<JLabel>();
 
-		int y = 25;
+		int y = 10;
 		int lung = 20;
 		int index = 0;
 		int larg = 185;
@@ -106,11 +109,13 @@ public class JFrameCarrello extends JFrame {
 		int xBottone = 400;
 		int xSpinner = 350;
 		int xLabelPrezzo = 260;	
+		String nomeRistorante = new String();
 		JLabel totaleDaPagare = new JLabel();
 		String stringaRisultato = new String();
 		
 		prezziArticoli = controller.getPrezzi(carrello);
 		quantitàProdotti = controller.ottieniCarrello().getQuantitàProdotti();
+		listaRistoranti = controller.ottieniCarrello().getProvenienzaProdotti();
 		
 		JPanel pannelloScrollPane = new JPanel();
 		pannelloScrollPane.setLayout(null);
@@ -121,6 +126,16 @@ public class JFrameCarrello extends JFrame {
 		contentPane.add(scrollPane);
 		
 		for(Prodotto p : carrello.getProdotti()) {
+ 
+			provenienza = new JLabel(listaRistoranti.get(index).getNome());
+			
+			if (!Objects.equals(nomeRistorante, provenienza.getText())){
+				provenienza.setBounds(xLabel-60, y, larg, lung);
+				pannelloScrollPane.add(provenienza);
+				nomeRistorante = provenienza.getText();
+				y += 40;
+				labelsNomiRistoranti.add(provenienza);
+			}
 			
 			prodottoNelCarrello = new JLabel(p.getNomeP());
 			prodottoNelCarrello.setBounds(xLabel, y, larg, lung);
@@ -137,12 +152,40 @@ public class JFrameCarrello extends JFrame {
 			bottone.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					JButton source = (JButton) arg0.getSource();
+
 					controller.rimuoviDalCarrello(carrello, bottoni.indexOf(source));
 					pannelloScrollPane.remove(prezziJLabel.get(bottoni.indexOf(source)));
 					pannelloScrollPane.remove(labels.get(bottoni.indexOf(source)));
 					pannelloScrollPane.remove(contatori.get(bottoni.indexOf(source)));
 					pannelloScrollPane.remove(source);
 					carrello.getProdotti().remove(bottoni.indexOf(source));
+					
+					Ristorante temp = carrello.getProvenienzaProdotti().get(bottoni.indexOf(source));
+					if (!temp.getNome().equals(carrello.getProvenienzaProdotti().get(bottoni.indexOf(source)+1).getNome()) && 
+							!temp.getNome().equals(carrello.getProvenienzaProdotti().get(bottoni.indexOf(source)-1).getNome())) {
+						for (JLabel l : labelsNomiRistoranti) {
+							if (temp.getNome().equals(l.getText())) {
+								labelsNomiRistoranti.remove(l);
+								pannelloScrollPane.remove(labelsNomiRistoranti.get(labelsNomiRistoranti.indexOf(l)));
+								break;
+							}
+						} 
+					}
+					carrello.getProvenienzaProdotti().remove(bottoni.indexOf(source));
+					
+					
+
+//					pannelloScrollPane.remove(labelsNomiRistoranti.get(labelsNomiRistoranti.indexOf(l)));
+					
+//					if(!carrello.getProvenienzaProdotti().) {
+//						int j = 0;
+//						while (!labelsNomiRistoranti.get(j).getText().equals(temp.getNome())) {
+//								j++;
+//						}
+//						pannelloScrollPane.remove(labelsNomiRistoranti.get(j));
+//						labelsNomiRistoranti.remove(j);
+//					}
+					
 					
 					prezziJLabel.remove(bottoni.indexOf(source));
 					labels.remove(bottoni.indexOf(source));
@@ -154,6 +197,7 @@ public class JFrameCarrello extends JFrame {
 					totaleDaPagare.setText(nuovoPrezzoTotale);
 					
 					contentPane.updateUI();
+					pannelloScrollPane.updateUI();
 				}
 			});
 			pannelloScrollPane.add(bottone);
@@ -177,7 +221,7 @@ public class JFrameCarrello extends JFrame {
 			
 			pannelloScrollPane.add(contatore);
 			
-			y += 50;
+			y += 40;
 			labels.add(prodottoNelCarrello);
 			bottoni.add(bottone);
 			contatori.add(contatore);			
@@ -197,19 +241,19 @@ public class JFrameCarrello extends JFrame {
 		int i;
 		
 		for(i = indice; i < labels.size(); i++) {
-			labels.get(i).setBounds(labels.get(i).getX(), labels.get(i).getY()-50, labels.get(i).getWidth(), labels.get(i).getHeight());
+			labels.get(i).setBounds(labels.get(i).getX(), labels.get(i).getY()-40, labels.get(i).getWidth(), labels.get(i).getHeight());
 		}
 		
 		for(i = indice; i < contatori.size(); i++) {
-			contatori.get(i).setBounds(contatori.get(i).getX(), contatori.get(i).getY()-50, contatori.get(i).getWidth(), contatori.get(i).getHeight());
+			contatori.get(i).setBounds(contatori.get(i).getX(), contatori.get(i).getY()-40, contatori.get(i).getWidth(), contatori.get(i).getHeight());
 		}
 		
 		for(i = indice+1; i < bottoni.size(); i++) {
-			bottoni.get(i).setBounds(bottoni.get(i).getX(), bottoni.get(i).getY()-50, bottoni.get(i).getWidth(), bottoni.get(i).getHeight());
+			bottoni.get(i).setBounds(bottoni.get(i).getX(), bottoni.get(i).getY()-40, bottoni.get(i).getWidth(), bottoni.get(i).getHeight());
 		}
 		
 		for(i = indice; i < prezziJLabel.size(); i++) {
-			prezziJLabel.get(i).setBounds(prezziJLabel.get(i).getX(), prezziJLabel.get(i).getY()-50, prezziJLabel.get(i).getWidth(), prezziJLabel.get(i).getHeight());
+			prezziJLabel.get(i).setBounds(prezziJLabel.get(i).getX(), prezziJLabel.get(i).getY()-40, prezziJLabel.get(i).getWidth(), prezziJLabel.get(i).getHeight());
 		}
 		
 	}

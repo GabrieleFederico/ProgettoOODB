@@ -40,9 +40,9 @@ public class ControllerLogin {
 	}
 
 	public Utente ControllaCredenziali(String email, String pwd) throws SQLException {
-
+		
 		UtenteDAOPostgres u2 = new UtenteDAOPostgres();
-		Utente utente = new Utente(email, pwd, null, null, null);
+		Utente utente = new Utente();
 		utente = u2.getUtenteByCredenziali(email, pwd);
 		
 		return utente;
@@ -62,11 +62,8 @@ public class ControllerLogin {
 	
 	public Rider getRider(String email, String password) {
 		
-		Rider rider = null;
 		RiderDAOPostgres rd = new RiderDAOPostgres();
-		
-		rider = rd.getRiderByEmail(email, password);
-		
+		Rider rider = rd.getRiderByEmail(email, password);
 		
 		return rider;
 	}
