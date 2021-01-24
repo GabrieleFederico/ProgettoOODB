@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 import classiEntit‡.Carrello;
+import classiEntit‡.Consegne;
 import classiEntit‡.Prodotto;
 import classiEntit‡.Ristorante;
 import classiEntit‡.Utente;
@@ -21,6 +22,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 	private Connection connessione;
 	private ConnessioneDB connessioneDB;
 	private PreparedStatement aggiungiProdottoAlCarrelloPS, getCarrelloByUtentePS, rimuoviProdottoDalCarrelloPS, getArrayListPrezziPS, cambiaQuantit‡CarrelloPS;
+	private PreparedStatement getCarrelloByOrdinePS;
 	
 	@Override
 	public void aggiungiProdottoAlCarrello(String nomep, int quantit‡, Utente utente, double prezzo, Ristorante ristorante) {
@@ -131,6 +133,34 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			System.out.println(e.getMessage());
 		}
 		
+	}
+	
+	public Carrello getCarrelloByOrdine(Consegne ordine){
+		
+		Prodotto temp;
+		Carrello risultato = new Carrello();
+		
+		try {
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			getCarrelloByOrdinePS = connessione.prepareStatement("SELECT * FROM archiviocarrello WHERE codc = ?");
+			getCarrelloByOrdinePS.setString(1, ordine.getCodC());
+			ResultSet rs = getCarrelloByOrdinePS.executeQuery();
+			connessione.close();
+			
+			while(rs.next()){
+				temp = new Prodotto();
+				temp.setNomeP(rs.getString("NomeP"));
+				risultato.getProdotti().add(temp);
+				risultato.getPrezzi().add(rs.getDouble("prezzo"));
+			}
+				
+		}
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return risultato;
 	}
 	
 }

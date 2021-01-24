@@ -1,10 +1,13 @@
 package interfacceGrafiche;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -29,6 +32,7 @@ public class JFrameOrdiniUtente extends JFrame {
 	private JScrollPane scrollPane;
 	private JLabel ordine;
 	private JButton dettagliOrdine;
+	private ArrayList<JButton> bottoni;
 	private ArrayList<Consegne> ordini;
 	
 	public JFrameOrdiniUtente(ControllerOrdini co) {
@@ -46,9 +50,7 @@ public class JFrameOrdiniUtente extends JFrame {
 		int index = 0;
 		int larg = 185;
 		int xLabel = 100;
-		double totale = 0;
 		int xBottone = 400;
-		int xLabelPrezzo = 260;	
 		
 		JPanel pannelloScrollPane = new JPanel();
 		pannelloScrollPane.setLayout(null);
@@ -62,6 +64,7 @@ public class JFrameOrdiniUtente extends JFrame {
 			
 			ordine = new JLabel(o.getCodC());
 			ordine.setBounds(xLabel, y, larg, lung);
+			
 			pannelloScrollPane.add(ordine);
 
 			dettagliOrdine = new JButton("Dettagli Ordine");
@@ -69,12 +72,15 @@ public class JFrameOrdiniUtente extends JFrame {
 			
 			dettagliOrdine.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-
+					JButton source = (JButton) arg0.getSource();
+					co.apriDettagli(ordini.get(bottoni.indexOf(source)));
 				}
 			});
 			pannelloScrollPane.add(dettagliOrdine);
 
 			y += 50;
+			
+			bottoni.add(dettagliOrdine);
 
 		}
 		

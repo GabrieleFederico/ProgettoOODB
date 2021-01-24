@@ -2,9 +2,12 @@ package controllers;
 
 import java.util.ArrayList;
 
+import classiEntità.Carrello;
 import classiEntità.Consegne;
 import classiEntità.Utente;
+import interfacceGrafiche.JFrameDettagliOrdine;
 import interfacceGrafiche.JFrameOrdiniUtente;
+import postgresDAOImpl.CarrelloDAOPostgres;
 import postgresDAOImpl.ConsegneDAOPostgres;
 
 public class ControllerOrdini {
@@ -24,5 +27,19 @@ public class ControllerOrdini {
 		ris = cd.getConsegneByUtente(u);
 		
 		return ris;
+	}
+	
+	public void apriDettagli(Consegne ordine) {
+		
+		JFrameDettagliOrdine dettagli = new JFrameDettagliOrdine(getDettagliOrdine(ordine));
+	}
+	
+	public Carrello getDettagliOrdine(Consegne ordine) {
+		
+		Carrello risultato;
+		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
+		risultato = cp.getCarrelloByOrdine(ordine);
+		
+		return risultato;
 	}
 }

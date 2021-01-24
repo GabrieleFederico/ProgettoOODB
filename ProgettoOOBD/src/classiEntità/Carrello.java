@@ -15,6 +15,10 @@ public class Carrello {
 		Prodotti = new ArrayList<Prodotto>();
 		Quantit‡Prodotti = new ArrayList<Integer>();
 	}
+	public Carrello() {
+		Prodotti = new ArrayList<Prodotto>();
+		Quantit‡Prodotti = new ArrayList<Integer>();
+	}
 
 	public ArrayList<Prodotto> getProdotti() {
 		return Prodotti;
