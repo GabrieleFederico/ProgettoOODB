@@ -29,6 +29,11 @@ public class ControllerOrdini {
 		return ris;
 	}
 	
+	public ArrayList<Consegne> getOrdiniByRider(){
+		
+		return null;
+	}
+	
 	public void apriDettagli(Consegne ordine) {
 		
 		JFrameDettagliOrdine dettagli = new JFrameDettagliOrdine(getDettagliOrdine(ordine));

@@ -6,6 +6,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import javax.swing.JButton;
 
 public class JFrameHomeRider extends JFrame {
@@ -27,6 +31,12 @@ public class JFrameHomeRider extends JFrame {
 		
 		JButton ButtonIMieiOrdini = new JButton("I miei ordini");
 		ButtonIMieiOrdini.setBounds(584, 407, 100, 23);
+		
+		ButtonIMieiOrdini.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//apri una nuova finestra con gli ordini effettuati dal rider
+			}
+		});
 		contentPane.add(ButtonIMieiOrdini);
 		
 		JButton ButtonLogout = new JButton("Logout");
