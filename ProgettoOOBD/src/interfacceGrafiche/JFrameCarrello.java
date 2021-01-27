@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Objects;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
@@ -119,9 +120,9 @@ public class JFrameCarrello extends JFrame {
 		
 		JPanel pannelloScrollPane = new JPanel();
 		pannelloScrollPane.setLayout(null);
-		pannelloScrollPane.setPreferredSize(new Dimension(733, carrello.getProdotti().size()*50));
+		pannelloScrollPane.setPreferredSize(new Dimension(733, carrello.getProdotti().size()*75));
 		
-		scrollPane = new JScrollPane(pannelloScrollPane, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane = new JScrollPane(pannelloScrollPane, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 68, 733, 354);
 		contentPane.add(scrollPane);
 		
@@ -153,7 +154,7 @@ public class JFrameCarrello extends JFrame {
 				public void actionPerformed(ActionEvent arg0) {
 					JButton source = (JButton) arg0.getSource();
 
-					controller.rimuoviDalCarrello(carrello, bottoni.indexOf(source));
+					boolean a = controller.rimuoviDalCarrello(carrello, bottoni.indexOf(source));
 					pannelloScrollPane.remove(prezziJLabel.get(bottoni.indexOf(source)));
 					pannelloScrollPane.remove(labels.get(bottoni.indexOf(source)));
 					pannelloScrollPane.remove(contatori.get(bottoni.indexOf(source)));
@@ -161,31 +162,17 @@ public class JFrameCarrello extends JFrame {
 					carrello.getProdotti().remove(bottoni.indexOf(source));
 					
 					Ristorante temp = carrello.getProvenienzaProdotti().get(bottoni.indexOf(source));
-					if (!temp.getNome().equals(carrello.getProvenienzaProdotti().get(bottoni.indexOf(source)+1).getNome()) && 
-							!temp.getNome().equals(carrello.getProvenienzaProdotti().get(bottoni.indexOf(source)-1).getNome())) {
-						for (JLabel l : labelsNomiRistoranti) {
-							if (temp.getNome().equals(l.getText())) {
-								labelsNomiRistoranti.remove(l);
-								pannelloScrollPane.remove(labelsNomiRistoranti.get(labelsNomiRistoranti.indexOf(l)));
-								break;
-							}
-						} 
-					}
 					carrello.getProvenienzaProdotti().remove(bottoni.indexOf(source));
 					
-					
-
-//					pannelloScrollPane.remove(labelsNomiRistoranti.get(labelsNomiRistoranti.indexOf(l)));
-					
-//					if(!carrello.getProvenienzaProdotti().) {
-//						int j = 0;
-//						while (!labelsNomiRistoranti.get(j).getText().equals(temp.getNome())) {
-//								j++;
-//						}
-//						pannelloScrollPane.remove(labelsNomiRistoranti.get(j));
-//						labelsNomiRistoranti.remove(j);
-//					}
-					
+					if(!a) {
+						for(JLabel l : labelsNomiRistoranti) {
+							if(l.getText().equals(temp.getNome())) {
+								pannelloScrollPane.remove(labelsNomiRistoranti.get(labelsNomiRistoranti.indexOf(l)));
+								labelsNomiRistoranti.remove(l);
+								break;
+							}
+						}
+					}
 					
 					prezziJLabel.remove(bottoni.indexOf(source));
 					labels.remove(bottoni.indexOf(source));
@@ -209,10 +196,11 @@ public class JFrameCarrello extends JFrame {
 			contatore.setModel(new SpinnerNumberModel(carrello.getQuantitàProdotti().get(carrello.getProdotti().indexOf(p)), 1, null, 1));
 			contatore.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
+					JSpinner source = (JSpinner) e.getSource();
 					String nomeProdotto = p.getNomeP();
-					int nuovoValore = (int) contatori.get(i).getValue();
+					int nuovoValore = (int) contatori.get(contatori.indexOf(source)).getValue();
 					controller.ModificaQuantitàCarrello(nuovoValore, carrello, nomeProdotto);
-					prezziJLabel.get(i).setText((prezzoArticoloSingolo * nuovoValore + "€"));
+					prezziJLabel.get(contatori.indexOf(source)).setText((prezzoArticoloSingolo * nuovoValore + "€"));
 					String nuovoPrezzoTotale = String.valueOf(getPrezzoTotale(prezziJLabel));
 					totaleDaPagare.setText(nuovoPrezzoTotale);
 					pannelloScrollPane.updateUI();

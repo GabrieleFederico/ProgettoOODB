@@ -10,4 +10,5 @@ public interface CarrelloDAO {
 	public Carrello getCarrelloByUtente(Utente utente);
 	public void aggiungiProdottoAlCarrello(String nomep, int quantità, Utente utente, double prezzo, Ristorante ristorante);
 	public Carrello getCarrelloByOrdine(Consegne ordine);
+	public boolean esisteRistoranteNelCarrello(Ristorante rist);
 }

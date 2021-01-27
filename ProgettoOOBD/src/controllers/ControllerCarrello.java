@@ -36,9 +36,12 @@ public class ControllerCarrello {
 		return temp;
 	}
 	
-	public void rimuoviDalCarrello(Carrello carrello, int indice) {
+	public boolean rimuoviDalCarrello(Carrello carrello, int indice) {
+		
 		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
-		cp.rimuoviProdottoDalCarrello(carrello, indice);
+		Ristorante temp = cp.rimuoviProdottoDalCarrello(carrello, indice);
+		
+		return cp.esisteRistoranteNelCarrello(temp);
 	}
 	
 	

@@ -22,7 +22,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 	private Connection connessione;
 	private ConnessioneDB connessioneDB;
 	private PreparedStatement aggiungiProdottoAlCarrelloPS, getCarrelloByUtentePS, rimuoviProdottoDalCarrelloPS, getArrayListPrezziPS, cambiaQuantit‡CarrelloPS;
-	private PreparedStatement getCarrelloByOrdinePS;
+	private PreparedStatement getCarrelloByOrdinePS, esisteRistorantePS;
 	
 	@Override
 	public void aggiungiProdottoAlCarrello(String nomep, int quantit‡, Utente utente, double prezzo, Ristorante ristorante) {
@@ -77,14 +77,16 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		return risultato;
 	}
 
-	public void rimuoviProdottoDalCarrello(Carrello carrello, int indice) {
+	public Ristorante rimuoviProdottoDalCarrello(Carrello carrello, int indice) {
 		
+		Ristorante ris = carrello.getProvenienzaProdotti().get(indice);
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			rimuoviProdottoDalCarrelloPS = connessione.prepareStatement("DELETE FROM carrello WHERE proprietario = ? AND nomep = ?");
+			rimuoviProdottoDalCarrelloPS = connessione.prepareStatement("DELETE FROM carrello WHERE proprietario = ? AND nomep = ? AND provenienzaprodotto = ?");
 			rimuoviProdottoDalCarrelloPS.setString(1, carrello.getProprietario().getEmail());
 			rimuoviProdottoDalCarrelloPS.setString(2, carrello.getProdotti().get(indice).getNomeP());
+			rimuoviProdottoDalCarrelloPS.setString(3, carrello.getProvenienzaProdotti().get(indice).getNome());
 			rimuoviProdottoDalCarrelloPS.executeUpdate();
 			connessione.close();
 
@@ -93,6 +95,28 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			System.out.println(e.getMessage());
 		}
 		
+		return ris;
+		
+	}
+	
+	public boolean esisteRistoranteNelCarrello(Ristorante rist) {
+		
+		try {
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			esisteRistorantePS = connessione.prepareStatement("SELECT * FROM carrello WHERE provenienzaprodotto = ?");
+			esisteRistorantePS.setString(1, rist.getNome());
+			ResultSet rs = esisteRistorantePS.executeQuery();
+			connessione.close();
+			
+			if(rs.next()) 
+				return true;
+		} 
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return false;
 	}
 
 	public ArrayList<Double> getArrayListPrezzi(Carrello carrello) {
