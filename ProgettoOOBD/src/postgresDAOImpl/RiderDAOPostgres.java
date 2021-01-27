@@ -23,7 +23,6 @@ public class RiderDAOPostgres implements RiderDAO{
 	public Rider getRiderByEmail(String email, String password) {
 		
 		Rider risultato = new Rider();
-		risultato = null;
 
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -38,6 +37,7 @@ public class RiderDAOPostgres implements RiderDAO{
 				risultato.setCognome(rs.getString("cognome"));
 				risultato.setNome(rs.getString("nome"));
 				risultato.setMezzo(rs.getString("mezzo"));
+				return risultato;
 			}
 			
 		} catch (SQLException e) {
@@ -45,7 +45,7 @@ public class RiderDAOPostgres implements RiderDAO{
 
 		}
 		
-		return risultato;
+		return null;
 	}
 	
 	@Override
