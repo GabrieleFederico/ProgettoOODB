@@ -37,6 +37,7 @@ public class JFrameCarrello extends JFrame {
 	private JPanel contentPane;
 	private ControllerCarrello controller;
 	private int componentiNecessarie;
+	private double totale = 0;
 	private Carrello carrello;
 	private JScrollPane scrollPane;
 	private ControllerRicercaMenu controllerMenu;
@@ -59,7 +60,7 @@ public class JFrameCarrello extends JFrame {
 		JButton ButtonCassa = new JButton("Vai alla cassa");
 		ButtonCassa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cassa = new JDialogCassa();
+				cassa = new JDialogCassa(totale);
 				cassa.setVisible(true);
 			}
 		});
@@ -113,7 +114,6 @@ public class JFrameCarrello extends JFrame {
 		int index = 0;
 		int larg = 185;
 		int xLabel = 100;
-		double totale = 0;
 		int xBottone = 400;
 		int xSpinner = 350;
 		int xLabelPrezzo = 260;	
@@ -192,6 +192,7 @@ public class JFrameCarrello extends JFrame {
 					
 					contentPane.updateUI();
 					pannelloScrollPane.updateUI();
+					totale = getPrezzoTotale(prezziJLabel);
 				}
 			});
 			pannelloScrollPane.add(bottone);
@@ -211,6 +212,7 @@ public class JFrameCarrello extends JFrame {
 					String nuovoPrezzoTotale = String.valueOf(getPrezzoTotale(prezziJLabel));
 					totaleDaPagare.setText(nuovoPrezzoTotale);
 					pannelloScrollPane.updateUI();
+					totale = getPrezzoTotale(prezziJLabel);
 				}
 			});
 			

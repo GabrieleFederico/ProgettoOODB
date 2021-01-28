@@ -26,7 +26,8 @@ public class JDialogCassa extends JDialog {
 	private ControllerCarrello cc;
 	private ConclusioneOrdine co;
 
-	public JDialogCassa() {
+	public JDialogCassa(double totale) {
+		
 		setTitle("Pagamento");
 		setResizable(false);
 		setAlwaysOnTop(true);
@@ -51,7 +52,7 @@ public class JDialogCassa extends JDialog {
 		JButton ButtonAnnulla = new JButton("Annulla");
 		ButtonAnnulla.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				 dispose();
 			 }
 		});
 		ButtonAnnulla.setBounds(10, 139, 89, 23);
@@ -72,9 +73,6 @@ public class JDialogCassa extends JDialog {
 		LabelTotale.setBounds(10, 88, 143, 14);
 		contentPanel.add(LabelTotale);
 		
-		//ottenere_totale_da_carrello
-//		double totale = carrello.getPrezzoTotale(prezziJLabel);
-		double totale = 10;
 		String stringaRisultato = String.valueOf(totale);
 		JLabel JLabelprezzoTotale = new JLabel(stringaRisultato);
 		JLabelprezzoTotale.setBounds(160, 88, 60, 14);
