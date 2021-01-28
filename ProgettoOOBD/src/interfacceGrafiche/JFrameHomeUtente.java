@@ -189,7 +189,7 @@ public class JFrameHomeUtente extends JFrame {
 		for (Ristorante r : risultatoRicerca) {
 			
 			labelRisultato = new JLabel(r.getNome());
-			labelRisultato.setBorder(new EmptyBorder(0, 312, 0, 0));
+			labelRisultato.setBorder(new EmptyBorder(0, 60, 0, 0));
 			pannelloScrollPane.add(labelRisultato);
 			
 			labelRisultato.addMouseListener(new MouseAdapter() {
@@ -200,7 +200,7 @@ public class JFrameHomeUtente extends JFrame {
 			labelRisultato.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 			labelRisultato = new JLabel(r.getIndirizzo());
-			labelRisultato.setBorder(new EmptyBorder(0, 312, 30, 0));
+			labelRisultato.setBorder(new EmptyBorder(0, 70, 30, 0));
 			pannelloScrollPane.add(labelRisultato);	
 		}
 		pannelloScrollPane.updateUI();

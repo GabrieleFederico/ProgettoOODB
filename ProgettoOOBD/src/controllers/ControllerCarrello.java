@@ -9,6 +9,7 @@ import classiEntità.Ristorante;
 import classiEntità.Utente;
 import interfacceGrafiche.JFrameCarrello;
 import interfacceGrafiche.JFrameHomeUtente;
+import interfacceGrafiche.JDialogCassa;
 import postgresDAOImpl.CarrelloDAOPostgres;
 
 public class ControllerCarrello {
@@ -55,6 +56,10 @@ public class ControllerCarrello {
 		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
 		ArrayList<Double> prezzi = cp.getArrayListPrezzi(carrello);		
 		return prezzi;
+	}
+
+	public void ArchiviaOrdine() {
+		
 	}
 		
 }

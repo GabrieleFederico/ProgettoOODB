@@ -40,6 +40,8 @@ public class JFrameCarrello extends JFrame {
 	private Carrello carrello;
 	private JScrollPane scrollPane;
 	private ControllerRicercaMenu controllerMenu;
+	private JDialogCassa cassa;
+	ArrayList<Ristorante> listaRistoranti = new ArrayList<Ristorante>();
 
 	public JFrameCarrello(ControllerCarrello c) {
 		controller = c;
@@ -54,9 +56,15 @@ public class JFrameCarrello extends JFrame {
 		contentPane.add(LabelCarrello);
 		LabelCarrello.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JButton ButtonPaga = new JButton("Paga");
-		ButtonPaga.setBounds(623, 446, 80, 23);
-		contentPane.add(ButtonPaga);
+		JButton ButtonCassa = new JButton("Vai alla cassa");
+		ButtonCassa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cassa = new JDialogCassa();
+				cassa.setVisible(true);
+			}
+		});
+		ButtonCassa.setBounds(594, 446, 136, 23);
+		contentPane.add(ButtonCassa);
 		
 		JButton ButtonIndietro = new JButton("Indietro");
 		ButtonIndietro.setBounds(24, 446, 89, 23);
@@ -92,13 +100,12 @@ public class JFrameCarrello extends JFrame {
 		JLabel prodottoNelCarrello, prezzo, provenienza;
 		JButton bottone;
 		JSpinner contatore;
-		ArrayList<JLabel> labels = new ArrayList<JLabel>();
+		ArrayList<JLabel> nomiArticoliJLabel = new ArrayList<JLabel>();
 		ArrayList<JButton> bottoni = new ArrayList<JButton>();
 		ArrayList<JLabel> prezziJLabel = new ArrayList<JLabel>();
 		ArrayList<JSpinner> contatori = new ArrayList<JSpinner>();
 		ArrayList<Double> prezziArticoli = new ArrayList<Double>();
 		ArrayList<Integer> quantitàProdotti = new ArrayList<Integer>();
-		ArrayList<Ristorante> listaRistoranti = new ArrayList<Ristorante>();
 		ArrayList<JLabel> labelsNomiRistoranti = new ArrayList<JLabel>();
 
 		int y = 10;
@@ -154,9 +161,9 @@ public class JFrameCarrello extends JFrame {
 				public void actionPerformed(ActionEvent arg0) {
 					JButton source = (JButton) arg0.getSource();
 
-					boolean a = controller.rimuoviDalCarrello(carrello, bottoni.indexOf(source));
+					boolean prodottiInRistorante = controller.rimuoviDalCarrello(carrello, bottoni.indexOf(source));
 					pannelloScrollPane.remove(prezziJLabel.get(bottoni.indexOf(source)));
-					pannelloScrollPane.remove(labels.get(bottoni.indexOf(source)));
+					pannelloScrollPane.remove(nomiArticoliJLabel.get(bottoni.indexOf(source)));
 					pannelloScrollPane.remove(contatori.get(bottoni.indexOf(source)));
 					pannelloScrollPane.remove(source);
 					carrello.getProdotti().remove(bottoni.indexOf(source));
@@ -164,7 +171,7 @@ public class JFrameCarrello extends JFrame {
 					Ristorante temp = carrello.getProvenienzaProdotti().get(bottoni.indexOf(source));
 					carrello.getProvenienzaProdotti().remove(bottoni.indexOf(source));
 					
-					if(!a) {
+					if(!prodottiInRistorante) {
 						for(JLabel l : labelsNomiRistoranti) {
 							if(l.getText().equals(temp.getNome())) {
 								pannelloScrollPane.remove(labelsNomiRistoranti.get(labelsNomiRistoranti.indexOf(l)));
@@ -175,9 +182,9 @@ public class JFrameCarrello extends JFrame {
 					}
 					
 					prezziJLabel.remove(bottoni.indexOf(source));
-					labels.remove(bottoni.indexOf(source));
+					nomiArticoliJLabel.remove(bottoni.indexOf(source));
 					contatori.remove(bottoni.indexOf(source));
-					spostamentoVersoAlto(labels, contatori, bottoni, bottoni.indexOf(source), prezziJLabel);
+					spostamentoVersoAlto(nomiArticoliJLabel, contatori, bottoni, bottoni.indexOf(source), prezziJLabel, labelsNomiRistoranti, prodottiInRistorante);
 					
 					bottoni.remove(source);
 					String nuovoPrezzoTotale = String.valueOf(getPrezzoTotale(prezziJLabel));
@@ -210,7 +217,7 @@ public class JFrameCarrello extends JFrame {
 			pannelloScrollPane.add(contatore);
 			
 			y += 40;
-			labels.add(prodottoNelCarrello);
+			nomiArticoliJLabel.add(prodottoNelCarrello);
 			bottoni.add(bottone);
 			contatori.add(contatore);			
 			index++;
@@ -224,26 +231,39 @@ public class JFrameCarrello extends JFrame {
 	}
 	
 	
-	public void spostamentoVersoAlto(ArrayList<JLabel> labels, ArrayList<JSpinner> contatori, ArrayList<JButton> bottoni, int indice, ArrayList<JLabel> prezziJLabel){
+	public void spostamentoVersoAlto(ArrayList<JLabel> labels, ArrayList<JSpinner> contatori, ArrayList<JButton> bottoni, int indice, ArrayList<JLabel> prezziJLabel,
+			ArrayList<JLabel> labelsNomiRistoranti, boolean prodottiInRistorante){
 		
 		int i;
+		int value;
+		
+		if(prodottiInRistorante) 
+			value = 40;
+		else
+			value = 80;
 		
 		for(i = indice; i < labels.size(); i++) {
-			labels.get(i).setBounds(labels.get(i).getX(), labels.get(i).getY()-40, labels.get(i).getWidth(), labels.get(i).getHeight());
+			labels.get(i).setBounds(labels.get(i).getX(), labels.get(i).getY()-value, labels.get(i).getWidth(), labels.get(i).getHeight());
 		}
 		
 		for(i = indice; i < contatori.size(); i++) {
-			contatori.get(i).setBounds(contatori.get(i).getX(), contatori.get(i).getY()-40, contatori.get(i).getWidth(), contatori.get(i).getHeight());
+			contatori.get(i).setBounds(contatori.get(i).getX(), contatori.get(i).getY()-value, contatori.get(i).getWidth(), contatori.get(i).getHeight());
 		}
 		
 		for(i = indice+1; i < bottoni.size(); i++) {
-			bottoni.get(i).setBounds(bottoni.get(i).getX(), bottoni.get(i).getY()-40, bottoni.get(i).getWidth(), bottoni.get(i).getHeight());
+			bottoni.get(i).setBounds(bottoni.get(i).getX(), bottoni.get(i).getY()-value, bottoni.get(i).getWidth(), bottoni.get(i).getHeight());
 		}
 		
 		for(i = indice; i < prezziJLabel.size(); i++) {
-			prezziJLabel.get(i).setBounds(prezziJLabel.get(i).getX(), prezziJLabel.get(i).getY()-40, prezziJLabel.get(i).getWidth(), prezziJLabel.get(i).getHeight());
+			prezziJLabel.get(i).setBounds(prezziJLabel.get(i).getX(), prezziJLabel.get(i).getY()-value, prezziJLabel.get(i).getWidth(), prezziJLabel.get(i).getHeight());
 		}
 		
+		JLabel temp = new JLabel(listaRistoranti.get(indice).getNome());
+		int k = labelsNomiRistoranti.indexOf(temp);
+		
+		for(i = k+1; i < labelsNomiRistoranti.size(); i++) {
+			labelsNomiRistoranti.get(i).setBounds(labelsNomiRistoranti.get(i).getX(), labelsNomiRistoranti.get(i).getY()-value, labelsNomiRistoranti.get(i).getWidth(), labelsNomiRistoranti.get(i).getHeight());
+		}
 	}
 	
 	public double getPrezzoTotale (ArrayList<JLabel> prezziJLabel) {
