@@ -17,7 +17,7 @@ public class RiderDAOPostgres implements RiderDAO{
 
 	private Connection connessione;
 	private ConnessioneDB connessioneDB;
-	private PreparedStatement getRiderByEmail;
+	private PreparedStatement getRiderByEmailPS, inserisciRiderPS;
 
 	
 	public Rider getRiderByEmail(String email, String password) {
@@ -27,10 +27,10 @@ public class RiderDAOPostgres implements RiderDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getRiderByEmail = connessione.prepareStatement("SELECT * FROM rider WHERE emailrider = ? AND pwd = ?");
-			getRiderByEmail.setString(1, email);
-			getRiderByEmail.setString(2, password);
-			ResultSet rs = getRiderByEmail.executeQuery();
+			getRiderByEmailPS = connessione.prepareStatement("SELECT * FROM rider WHERE emailrider = ? AND pwd = ?");
+			getRiderByEmailPS.setString(1, email);
+			getRiderByEmailPS.setString(2, password);
+			ResultSet rs = getRiderByEmailPS.executeQuery();
 			connessione.close();
 			
 			if(rs.next()) {
@@ -47,6 +47,27 @@ public class RiderDAOPostgres implements RiderDAO{
 		
 		return null;
 	}
+	
+	public void inserisciRider(String nome, String cognome, String email, String mezzo, String password) {
+		try {
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			inserisciRiderPS = connessione.prepareStatement("INSERT INTO RIDER VALUES (default, ?, ?, ?, ?, ?);");
+			inserisciRiderPS.setString(1, nome);
+			inserisciRiderPS.setString(2, cognome);
+			inserisciRiderPS.setString(3, email);
+			inserisciRiderPS.setString(4, mezzo);
+			inserisciRiderPS.setString(5, password);
+			inserisciRiderPS.executeUpdate();
+			connessione.close();
+				
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+
+		}
+	}
+	
+	
 	
 	@Override
 	public ArrayList<Rider> getAllRider() {

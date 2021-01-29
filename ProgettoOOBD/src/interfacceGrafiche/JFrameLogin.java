@@ -64,21 +64,18 @@ public class JFrameLogin extends JFrame {
 		JButton ButtonRegistrati = new JButton("Registrati");
 		ButtonRegistrati.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				c.LoginRegistratiButton();
-				 
+				c.LoginRegistratiButton();	 
 			}
 		});
 		ButtonRegistrati.setBounds(523, 389, 139, 23);
 		contentPane.add(ButtonRegistrati);
 		
 		JButton ButtonLogin = new JButton("Login");
-		
 		ButtonLogin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				login(c1, c);
 			}
 		});
-		
 		ButtonLogin.setBounds(276, 304, 89, 23);
 		contentPane.add(ButtonLogin);
 		
@@ -112,6 +109,11 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(ButtonChiudi);
 		
 		JButton ButtonRegistraRider = new JButton("Registrati da Rider");
+		ButtonRegistraRider.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				c.LoginRegistratiRiderButton();	
+			}
+		});
 		ButtonRegistraRider.setBounds(523, 432, 139, 23);
 		contentPane.add(ButtonRegistraRider);
 			

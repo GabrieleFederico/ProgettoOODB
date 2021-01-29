@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 
-public class JFrameRegistrati extends JFrame {
+public class JFrameRegistratiUtente extends JFrame {
 
 
 	private static final long serialVersionUID = 1L;
@@ -27,7 +27,7 @@ public class JFrameRegistrati extends JFrame {
 	private JTextField TFNewCognome;
 	private JTextField TFNewIndirizzo;
 	
-	public JFrameRegistrati(ControllerLogin c) {
+	public JFrameRegistratiUtente(ControllerLogin c) {
 		controllore = c;
 		setTitle("Registrati");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,7 +64,7 @@ public class JFrameRegistrati extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
-					controllore.RegistraCredenziali(TFNewEmail.getText(), TFNewPassword.getText(), TFNewNome.getText(), TFNewCognome.getText(), TFNewIndirizzo.getText());
+					controllore.RegistraCredenzialiUtente(TFNewEmail.getText(), TFNewPassword.getText(), TFNewNome.getText(), TFNewCognome.getText(), TFNewIndirizzo.getText());
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}	

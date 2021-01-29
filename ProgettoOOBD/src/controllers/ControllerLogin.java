@@ -6,14 +6,16 @@ import classiEntità.Rider;
 import classiEntità.Utente;
 import interfacceGrafiche.Errore;
 import interfacceGrafiche.JFrameLogin;
-import interfacceGrafiche.JFrameRegistrati;
+import interfacceGrafiche.JFrameRegistratiRider;
+import interfacceGrafiche.JFrameRegistratiUtente;
 import postgresDAOImpl.RiderDAOPostgres;
 import postgresDAOImpl.UtenteDAOPostgres;
 
 public class ControllerLogin {
 
-	private JFrameRegistrati fr;
+	private JFrameRegistratiUtente fr;
 	private JFrameLogin fl;
+	private JFrameRegistratiRider frr;
 
 	public ControllerLogin(ControllorePrincipale controller) {
 
@@ -23,12 +25,12 @@ public class ControllerLogin {
 
 	public void LoginRegistratiButton() {
 
-		fr = new JFrameRegistrati(this);
+		fr = new JFrameRegistratiUtente(this);
 		fl.setVisible(false);
 		fr.setVisible(true);
 	}
 
-	public void RegistraCredenziali(String email, String pwd, String nome, String cognome, String indirizzo) throws SQLException {
+	public void RegistraCredenzialiUtente(String email, String pwd, String nome, String cognome, String indirizzo) throws SQLException {
 
 		UtenteDAOPostgres u1 = new UtenteDAOPostgres();
 		Utente utente = new Utente(email, pwd, nome, cognome, indirizzo);
@@ -66,5 +68,20 @@ public class ControllerLogin {
 		Rider rider = rd.getRiderByEmail(email, password);
 		
 		return rider;
+	}
+	
+	public void RegistraCredenzialiRider(String nome, String cognome, String email, String mezzo, String password) {
+		
+		RiderDAOPostgres r1 = new RiderDAOPostgres();
+		r1.inserisciRider(nome, cognome, email, mezzo, password);
+		fl.setVisible(true);
+		frr.setVisible(false);		
+	}
+
+	public void LoginRegistratiRiderButton() {
+		frr = new JFrameRegistratiRider(this);
+		fl.setVisible(false);
+		frr.setVisible(true);
+		
 	}
 }

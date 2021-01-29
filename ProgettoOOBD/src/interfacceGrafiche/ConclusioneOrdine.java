@@ -27,17 +27,16 @@ public class ConclusioneOrdine extends JDialog {
 		LabelConferma.setBounds(96, 60, 300, 14);
 		getContentPane().add(LabelConferma);
 		
-		JButton okButton = new JButton("ok");
-		okButton.addActionListener(new ActionListener() {
+		JButton ButtonOk = new JButton("ok");
+		ButtonOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				c.getfc().dispose();
 				
-				//torna_home
 			}
 		});
-		okButton.setBounds(168, 117, 72, 23);
-		getContentPane().add(okButton);
+		ButtonOk.setBounds(168, 117, 72, 23);
+		getContentPane().add(ButtonOk);
 
 	}
 
