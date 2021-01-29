@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.Window;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -60,6 +61,10 @@ public class ControllerCarrello {
 
 	public void ArchiviaOrdine() {
 		
+	}
+
+	public Window getfc() {
+		return fc;
 	}
 		
 }

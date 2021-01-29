@@ -19,7 +19,6 @@ import controllers.ControllerCarrello;
 import controllers.ControllerRicercaMenu;
 import javax.swing.JLabel;
 import java.awt.Font;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -63,7 +62,7 @@ public class JFrameCarrello extends JFrame {
 		JButton ButtonCassa = new JButton("Vai alla cassa");
 		ButtonCassa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cassa = new JDialogCassa(totale);
+				cassa = new JDialogCassa(totale, c);
 				cassa.setVisible(true);
 			}
 		});

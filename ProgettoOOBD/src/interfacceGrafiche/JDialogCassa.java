@@ -26,7 +26,7 @@ public class JDialogCassa extends JDialog {
 	private ControllerCarrello cc;
 	private ConclusioneOrdine co;
 
-	public JDialogCassa(double totale) {
+	public JDialogCassa(double totale, ControllerCarrello c) {
 		
 		setTitle("Pagamento");
 		setResizable(false);
@@ -40,10 +40,10 @@ public class JDialogCassa extends JDialog {
 		JButton ButtonPaga = new JButton("Paga");
 		ButtonPaga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cc.ArchiviaOrdine();
-				co = new ConclusioneOrdine();
+//				cc.ArchiviaOrdine();
+				co = new ConclusioneOrdine(c);
 				co.setVisible(true);
-				setVisible(false);
+				dispose();
 			}
 		});
 		ButtonPaga.setBounds(335, 139, 89, 23);
@@ -59,14 +59,14 @@ public class JDialogCassa extends JDialog {
 		contentPanel.add(ButtonAnnulla);
 		
 		JLabel LabelOrario = new JLabel("Inserire l'orario in cui desidera ricevere l'ordine:");
-		LabelOrario.setBounds(10, 42, 257, 14);
+		LabelOrario.setBounds(10, 42, 291, 14);
 		contentPanel.add(LabelOrario);
 		
 		
 		JComboBox<String> comboBoxOrario = new JComboBox<String>();
 		comboBoxOrario.setMaximumRowCount(4);
 		comboBoxOrario.setModel(new DefaultComboBoxModel<String>(new String[] {"19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00"}));
-		comboBoxOrario.setBounds(261, 38, 89, 22);
+		comboBoxOrario.setBounds(299, 38, 89, 22);
 		contentPanel.add(comboBoxOrario);
 		
 		JLabel LabelTotale = new JLabel("Il totale del suo ordine è:");

@@ -68,7 +68,7 @@ public class JFrameLogin extends JFrame {
 				 
 			}
 		});
-		ButtonRegistrati.setBounds(558, 418, 89, 23);
+		ButtonRegistrati.setBounds(523, 389, 139, 23);
 		contentPane.add(ButtonRegistrati);
 		
 		JButton ButtonLogin = new JButton("Login");
@@ -99,7 +99,7 @@ public class JFrameLogin extends JFrame {
 		
 		JLabel LabelRegistrati = new JLabel("Non sei ancora iscritto?");
 		LabelRegistrati.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		LabelRegistrati.setBounds(523, 393, 165, 14);
+		LabelRegistrati.setBounds(523, 352, 165, 14);
 		contentPane.add(LabelRegistrati);
 		
 		JButton ButtonChiudi = new JButton("Chiudi");
@@ -108,8 +108,12 @@ public class JFrameLogin extends JFrame {
 				System.exit(NORMAL);
 			}
 		});
-		ButtonChiudi.setBounds(36, 418, 89, 23);
+		ButtonChiudi.setBounds(34, 432, 89, 23);
 		contentPane.add(ButtonChiudi);
+		
+		JButton ButtonRegistraRider = new JButton("Registrati da Rider");
+		ButtonRegistraRider.setBounds(523, 432, 139, 23);
+		contentPane.add(ButtonRegistraRider);
 			
 		}
 	
@@ -136,7 +140,6 @@ public class JFrameLogin extends JFrame {
 			TFEmail.setText(null);
 			TFPassword.setText(null);
 		}
-
 }
 
 
