@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import classiEntità.Carrello;
 import classiEntità.Consegne;
+import classiEntità.ConsegneSenzaRider;
 import classiEntità.Prodotto;
 import classiEntità.Rider;
 import classiEntità.Utente;
@@ -18,7 +19,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 
 	private Connection connessione;
 	private ConnessioneDB connessioneDB;
-	private PreparedStatement getConsegneByUtentePS, getConsegneByRiderPS, creaConsegnaPS;
+	private PreparedStatement getConsegneByUtentePS, getConsegneByRiderPS, creaConsegnaPS, getConsegneByMezzoPS;
 	
 	@Override
 	public ArrayList<Consegne> getConsegneByUtente(Utente utente) {
@@ -94,7 +95,44 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			System.out.println(e.getMessage());
 		}
 	}
+
+	public ArrayList<ConsegneSenzaRider> getConsegneByMezzo(String mezzo) {
+
+		ArrayList<ConsegneSenzaRider> risultato = new ArrayList<ConsegneSenzaRider>();
+		ConsegneSenzaRider temp;
+		
+		try {
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			getConsegneByMezzoPS = connessione.prepareStatement("SELECT  CS.CodC, CS.Orario, CS.IndirizzoP, CS.IndirizzoA, U.Nome, U.Cognome, U.emailUtente,"
+																+ "CS.Mezzo FROM CONSEGNESENZARIDER AS CS NATURAL JOIN UTENTE AS U WHERE Mezzo = ?");
+			getConsegneByMezzoPS.setString(1, mezzo);
+			ResultSet rs = getConsegneByMezzoPS.executeQuery();
+			connessione.close();
+			
+			while(rs.next()) {
+				temp = new ConsegneSenzaRider();
+				temp.setCodC(rs.getString("CodC"));
+				temp.setOrario(rs.getTime("Orario"));
+				temp.setIndirizzoP(rs.getString("IndirizzoP"));
+				temp.setIndirizzoA(rs.getString("IndirizzoA"));
+				temp.setNomeUtente(rs.getString("Nome"));
+				temp.setCognomeUtente(rs.getString("cognome"));
+				temp.setEmailUtente(rs.getString("EmailUtente"));
+				temp.setMezzo(rs.getString("Mezzo"));
+				risultato.add(temp);
+			}
+		} 
+		
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return risultato;
+	}
+		
+}
 	
 	
 
-}
+

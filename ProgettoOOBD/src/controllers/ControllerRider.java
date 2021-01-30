@@ -2,6 +2,7 @@ package controllers;
 
 import classiEntità.Rider;
 import interfacceGrafiche.JFrameHomeRider;
+import postgresDAOImpl.RiderDAOPostgres;
 
 public class ControllerRider {
 	
@@ -13,6 +14,5 @@ public class ControllerRider {
 		homeRider.setVisible(true);
 		this.rider = rider;
 	}
-	
 
 }

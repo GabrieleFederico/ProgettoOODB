@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import classiEntità.Carrello;
 import controllers.ControllerCarrello;
-import controllers.ControllerOrdini;
+import controllers.ControllerConsegne;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -28,7 +28,7 @@ public class JDialogCassa extends JDialog {
 	private ControllerCarrello cc;
 	private ConclusioneOrdine co;
 
-	public JDialogCassa(double totale, ControllerCarrello c, Carrello carrello, ControllerOrdini cor) {
+	public JDialogCassa(double totale, ControllerCarrello c, Carrello carrello, ControllerConsegne cor) {
 		
 		setTitle("Pagamento");
 		setResizable(false);

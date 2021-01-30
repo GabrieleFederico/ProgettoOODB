@@ -24,7 +24,7 @@ import javax.swing.event.ChangeListener;
 import classiEntità.Consegne;
 import classiEntità.Prodotto;
 import classiEntità.Utente;
-import controllers.ControllerOrdini;
+import controllers.ControllerConsegne;
 
 public class JFrameOrdiniUtente extends JFrame {
 
@@ -35,7 +35,7 @@ public class JFrameOrdiniUtente extends JFrame {
 	private ArrayList<JButton> bottoni;
 	private ArrayList<Consegne> ordini;
 	
-	public JFrameOrdiniUtente(ControllerOrdini co, Utente u) {
+	public JFrameOrdiniUtente(ControllerConsegne co, Utente u) {
 
 		setBounds(100, 100, 649, 455);
 		contentPane = new JPanel();

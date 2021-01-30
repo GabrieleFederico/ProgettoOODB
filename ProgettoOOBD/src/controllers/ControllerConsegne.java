@@ -4,16 +4,25 @@ import java.util.ArrayList;
 
 import classiEntità.Carrello;
 import classiEntità.Consegne;
+import classiEntità.ConsegneSenzaRider;
+import classiEntità.Rider;
 import classiEntità.Utente;
 import interfacceGrafiche.JFrameDettagliOrdine;
 import interfacceGrafiche.JFrameOrdiniUtente;
 import postgresDAOImpl.CarrelloDAOPostgres;
 import postgresDAOImpl.ConsegneDAOPostgres;
+import postgresDAOImpl.RiderDAOPostgres;
 
-public class ControllerOrdini {
+public class ControllerConsegne {
 	
-	public ControllerOrdini() {
+	private Rider rider;
 
+	public ControllerConsegne() {
+
+	}
+	
+	public ControllerConsegne(Rider rider) {
+		this.rider = rider;
 	}
 	
 	public ArrayList<Consegne> getOrdiniByUtente(Utente u){
@@ -53,5 +62,15 @@ public class ControllerOrdini {
 		
 		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
 		cp.creaConsegna();
+	}
+
+	public ArrayList<ConsegneSenzaRider> getConsegneDisponibili() {
+		
+		ArrayList<ConsegneSenzaRider> risultato;
+		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
+		risultato = cp.getConsegneByMezzo(rider.getMezzo());
+		
+		return risultato;
+		
 	}
 }

@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 
 import classiEntità.Carrello;
 import controllers.ControllerCarrello;
-import controllers.ControllerOrdini;
+import controllers.ControllerConsegne;
 
 import java.awt.Font;
 import javax.swing.JButton;
@@ -16,7 +16,7 @@ public class ConclusioneOrdine extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	
-	public ConclusioneOrdine(ControllerCarrello c, Carrello carrello, ControllerOrdini cor) {
+	public ConclusioneOrdine(ControllerCarrello c, Carrello carrello, ControllerConsegne cor) {
 		setBounds(100, 100, 450, 190);
 		getContentPane().setLayout(null);
 		
