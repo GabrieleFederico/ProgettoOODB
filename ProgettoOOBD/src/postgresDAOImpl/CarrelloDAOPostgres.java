@@ -1,9 +1,11 @@
 package postgresDAOImpl;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -23,6 +25,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 	private ConnessioneDB connessioneDB;
 	private PreparedStatement aggiungiProdottoAlCarrelloPS, getCarrelloByUtentePS, rimuoviProdottoDalCarrelloPS, getArrayListPrezziPS, cambiaQuantit‡CarrelloPS;
 	private PreparedStatement getCarrelloByOrdinePS, esisteRistorantePS;
+	private CallableStatement archiviaCarrelloPS;
 	
 	@Override
 	public void aggiungiProdottoAlCarrello(String nomep, int quantit‡, Utente utente, double prezzo, Ristorante ristorante) {
@@ -190,6 +193,23 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		}
 		
 		return risultato;
+	}
+	
+	public void archiviaCarrello(Carrello carrello) {
+		
+		try {
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			archiviaCarrelloPS = connessione.prepareCall("call ArchiviaCarrello(?)");
+			archiviaCarrelloPS.setString(1, carrello.getProprietario().getEmail());
+			archiviaCarrelloPS.execute();
+			connessione.close();
+			
+				
+		}
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 }

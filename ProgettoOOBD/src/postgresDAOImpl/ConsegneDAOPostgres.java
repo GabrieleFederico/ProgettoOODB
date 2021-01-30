@@ -18,7 +18,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 
 	private Connection connessione;
 	private ConnessioneDB connessioneDB;
-	private PreparedStatement getConsegneByUtentePS, getConsegneByRiderPS;
+	private PreparedStatement getConsegneByUtentePS, getConsegneByRiderPS, creaConsegnaPS;
 	
 	@Override
 	public ArrayList<Consegne> getConsegneByUtente(Utente utente) {
@@ -78,6 +78,21 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		}
 		
 		return risultato;
+	}
+	
+	public void creaConsegna() {
+		
+		try {
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			creaConsegnaPS = connessione.prepareStatement("");
+			connessione.close();
+			
+	
+		} 
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	

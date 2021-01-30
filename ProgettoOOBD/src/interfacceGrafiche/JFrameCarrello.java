@@ -16,6 +16,7 @@ import classiEntità.Carrello;
 import classiEntità.Prodotto;
 import classiEntità.Ristorante;
 import controllers.ControllerCarrello;
+import controllers.ControllerOrdini;
 import controllers.ControllerRicercaMenu;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -46,7 +47,7 @@ public class JFrameCarrello extends JFrame {
 	private JLabel ristoranteRimosso;
 	ArrayList<Ristorante> listaRistoranti = new ArrayList<Ristorante>();
 
-	public JFrameCarrello(ControllerCarrello c) {
+	public JFrameCarrello(ControllerCarrello c, ControllerOrdini co) {
 		controller = c;
 		setBounds(100, 100, 813, 550);
 		contentPane = new JPanel();
@@ -62,7 +63,7 @@ public class JFrameCarrello extends JFrame {
 		JButton ButtonCassa = new JButton("Vai alla cassa");
 		ButtonCassa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cassa = new JDialogCassa(totale, c);
+				cassa = new JDialogCassa(totale, c, carrello, co);
 				cassa.setVisible(true);
 			}
 		});

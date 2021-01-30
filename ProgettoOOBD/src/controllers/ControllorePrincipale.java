@@ -10,6 +10,7 @@ public class ControllorePrincipale {
 
 	String Email;
 	ControllerCarrello ccarrello;
+	ControllerOrdini co = new ControllerOrdini();;
 	
 	public static void main(String[] args) {
 
@@ -43,12 +44,12 @@ public class ControllorePrincipale {
 	
 	public void apriOrdini(Utente u) {
 
-		ControllerOrdini co = new ControllerOrdini(u);
+		co.apriOrdini(u);
 		
 	}
 
 	public void apriCarrello(ControllerRicercaRistoranti c) {
-		ccarrello.fc = new JFrameCarrello(ccarrello);
+		ccarrello.fc = new JFrameCarrello(ccarrello, co);
 		ccarrello.fc.aggiornaInterfacciaCarrello();
 	}
 

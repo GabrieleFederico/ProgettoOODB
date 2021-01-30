@@ -11,16 +11,12 @@ import postgresDAOImpl.CarrelloDAOPostgres;
 import postgresDAOImpl.ConsegneDAOPostgres;
 
 public class ControllerOrdini {
-
-	Utente u;
 	
-	public ControllerOrdini(Utente utente) {
-		u = utente;
-		JFrameOrdiniUtente ordini = new JFrameOrdiniUtente(this);
-		ordini.setVisible(true);
+	public ControllerOrdini() {
+
 	}
 	
-	public ArrayList<Consegne> getOrdiniByUtente(){
+	public ArrayList<Consegne> getOrdiniByUtente(Utente u){
 		
 		ArrayList<Consegne> ris = new ArrayList<Consegne>();
 		ConsegneDAOPostgres cd = new ConsegneDAOPostgres();
@@ -46,5 +42,16 @@ public class ControllerOrdini {
 		risultato = cp.getCarrelloByOrdine(ordine);
 		
 		return risultato;
+	}
+	
+	public void apriOrdini(Utente u) {
+		JFrameOrdiniUtente ordini = new JFrameOrdiniUtente(this, u);
+		ordini.setVisible(true);
+	}
+	
+	public void creaOrdine(Carrello carrello) {
+		
+		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
+		cp.creaConsegna();
 	}
 }

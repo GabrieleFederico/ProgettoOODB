@@ -35,7 +35,7 @@ public class JFrameOrdiniUtente extends JFrame {
 	private ArrayList<JButton> bottoni;
 	private ArrayList<Consegne> ordini;
 	
-	public JFrameOrdiniUtente(ControllerOrdini co) {
+	public JFrameOrdiniUtente(ControllerOrdini co, Utente u) {
 
 		setBounds(100, 100, 649, 455);
 		contentPane = new JPanel();
@@ -43,7 +43,7 @@ public class JFrameOrdiniUtente extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		ordini = co.getOrdiniByUtente();
+		ordini = co.getOrdiniByUtente(u);
 		
 		int y = 25;
 		int lung = 20;
