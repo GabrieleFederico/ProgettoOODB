@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import classiEntità.Carrello;
+import classiEntità.Ristorante;
 import controllers.ControllerCarrello;
 import controllers.ControllerConsegne;
 
@@ -28,7 +29,7 @@ public class JDialogCassa extends JDialog {
 	private ControllerCarrello cc;
 	private ConclusioneOrdine co;
 
-	public JDialogCassa(double totale, ControllerCarrello c, Carrello carrello, ControllerConsegne cor) {
+	public JDialogCassa(double totale, ControllerCarrello c, Carrello carrello, ControllerConsegne cor, ArrayList<Ristorante> listaRistoranti) {
 		
 		setTitle("Pagamento");
 		setResizable(false);
@@ -43,7 +44,9 @@ public class JDialogCassa extends JDialog {
 		ButtonPaga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 //				cc.ArchiviaOrdine();
-				co = new ConclusioneOrdine(c, carrello, cor);
+				c.ArchiviaCarrello(carrello);
+				cor.creaOrdine(carrello, listaRistoranti);
+				co = new ConclusioneOrdine(c);
 				co.setVisible(true);
 				dispose();
 			}
