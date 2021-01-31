@@ -1,5 +1,6 @@
 package controllers;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 import classiEntità.Carrello;
@@ -53,7 +54,7 @@ public class ControllerConsegne {
 		ordini.setVisible(true);
 	}
 	
-	public void creaOrdine(Carrello carrello, ArrayList<Ristorante> listaRistoranti) {
+	public void creaOrdine(Carrello carrello, ArrayList<Ristorante> listaRistoranti, String mezzo, String orario) {
 			
 		Ristorante temp = new Ristorante();
 		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
@@ -61,10 +62,10 @@ public class ControllerConsegne {
 			
 		for(Ristorante r : listaRistoranti) {
 			if(!temp.getIndirizzo().equals(r.getIndirizzo())) {
-				cp.creaConsegna(temp.getIndirizzo(), carrello.getProprietario());
+				cp.creaConsegna(temp.getIndirizzo(), carrello.getProprietario(), mezzo, orario);
 			}
 			else if(r.getIndirizzo().equals(listaRistoranti.get(listaRistoranti.size()-1).getIndirizzo())) {
-				cp.creaConsegna(r.getIndirizzo(), carrello.getProprietario());
+				cp.creaConsegna(r.getIndirizzo(), carrello.getProprietario(), mezzo, orario);
 			}
 			temp = r;
 		}

@@ -20,38 +20,54 @@ import java.awt.List;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-public class JDialogCassa extends JDialog {
+public class JFrameCassa extends JFrame {
 
 	private JPanel contentPanel = new JPanel();
 	private ControllerCarrello cc;
 	private ConclusioneOrdine co;
 
-	public JDialogCassa(double totale, ControllerCarrello c, Carrello carrello, ControllerConsegne cor, ArrayList<Ristorante> listaRistoranti) {
+	public JFrameCassa(double totale, ControllerCarrello c, Carrello carrello, ControllerConsegne cor, ArrayList<Ristorante> listaRistoranti) {
 		
 		setTitle("Pagamento");
-		setResizable(false);
-		setAlwaysOnTop(true);
-		setBounds(150, 150, 450, 213);
+		setBounds(150, 150, 510, 273);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+
+		JComboBox<String> comboBoxMezzo = new JComboBox<String>();
+		comboBoxMezzo.setModel(new DefaultComboBoxModel<String>(new String[] { "Nessuna preferenza", "Automobile", "Moto", "Bici" }));
+		comboBoxMezzo.setBounds(95, 93, 125, 22);
+		contentPanel.add(comboBoxMezzo);
+		
+		JComboBox<String> comboBoxOrario = new JComboBox<String>();
+		comboBoxOrario.setMaximumRowCount(4);
+		comboBoxOrario.setModel(new DefaultComboBoxModel<String>(new String[] {"19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00"}));
+		comboBoxOrario.setBounds(299, 38, 89, 22);
+		contentPanel.add(comboBoxOrario);
 		
 		JButton ButtonPaga = new JButton("Paga");
 		ButtonPaga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				cc.ArchiviaOrdine();
+				String mezzo;
+				String orario = (String)comboBoxOrario.getSelectedItem();
+				if(comboBoxMezzo.getSelectedIndex() == 0)
+					mezzo = null;
+				else
+					mezzo = (String)comboBoxMezzo.getSelectedItem();
+				
 				c.ArchiviaCarrello(carrello);
-				cor.creaOrdine(carrello, listaRistoranti);
+				cor.creaOrdine(carrello, listaRistoranti, mezzo, orario);
 				co = new ConclusioneOrdine(c);
 				co.setVisible(true);
 				dispose();
 			}
 		});
-		ButtonPaga.setBounds(335, 139, 89, 23);
+		ButtonPaga.setBounds(395, 200, 89, 23);
 		contentPanel.add(ButtonPaga);
 		
 		JButton ButtonAnnulla = new JButton("Annulla");
@@ -60,28 +76,26 @@ public class JDialogCassa extends JDialog {
 				 dispose();
 			 }
 		});
-		ButtonAnnulla.setBounds(10, 139, 89, 23);
+		ButtonAnnulla.setBounds(10, 200, 89, 23);
 		contentPanel.add(ButtonAnnulla);
 		
 		JLabel LabelOrario = new JLabel("Inserire l'orario in cui desidera ricevere l'ordine:");
 		LabelOrario.setBounds(10, 42, 291, 14);
 		contentPanel.add(LabelOrario);
 		
-		
-		JComboBox<String> comboBoxOrario = new JComboBox<String>();
-		comboBoxOrario.setMaximumRowCount(4);
-		comboBoxOrario.setModel(new DefaultComboBoxModel<String>(new String[] {"19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00"}));
-		comboBoxOrario.setBounds(299, 38, 89, 22);
-		contentPanel.add(comboBoxOrario);
-		
 		JLabel LabelTotale = new JLabel("Il totale del suo ordine è:");
-		LabelTotale.setBounds(10, 88, 143, 14);
+		LabelTotale.setBounds(10, 157, 143, 14);
 		contentPanel.add(LabelTotale);
 		
 		String stringaRisultato = String.valueOf(totale);
 		JLabel JLabelprezzoTotale = new JLabel(stringaRisultato);
-		JLabelprezzoTotale.setBounds(160, 88, 60, 14);
+		JLabelprezzoTotale.setBounds(160, 157, 60, 14);
 		contentPanel.add(JLabelprezzoTotale);
+		
+		JLabel labelMezzo = new JLabel("Mezzo");
+		labelMezzo.setBounds(10, 97, 46, 14);
+		contentPanel.add(labelMezzo);
+		
 			
 	}
 }

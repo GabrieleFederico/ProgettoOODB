@@ -43,7 +43,7 @@ public class JFrameCarrello extends JFrame {
 	private Carrello carrello;
 	private JScrollPane scrollPane;
 	private ControllerRicercaMenu controllerMenu;
-	private JDialogCassa cassa;
+	private JFrameCassa cassa;
 	ArrayList<Ristorante> listaRistoranti = new ArrayList<Ristorante>();
 
 	public JFrameCarrello(ControllerCarrello c, ControllerConsegne co) {
@@ -62,7 +62,7 @@ public class JFrameCarrello extends JFrame {
 		JButton ButtonCassa = new JButton("Vai alla cassa");
 		ButtonCassa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cassa = new JDialogCassa(totale, c, carrello, co, listaRistoranti);
+				cassa = new JFrameCassa(totale, c, carrello, co, listaRistoranti);
 				cassa.setVisible(true);
 			}
 		});

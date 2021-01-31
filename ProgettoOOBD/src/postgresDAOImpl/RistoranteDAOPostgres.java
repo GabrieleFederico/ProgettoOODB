@@ -27,7 +27,7 @@ public class RistoranteDAOPostgres implements RistoranteDAO {
 			try {
 				connessioneDB = ConnessioneDB.getIstanza();
 				connessione = connessioneDB.getConnessione();
-				getRistoranteByNomeOrProdottoPS = connessione.prepareStatement("SELECT ristoranti.nome, ristoranti.indirizzo FROM ristoranti NATURAL JOIN menu WHERE ristoranti.nome LIKE ? OR menu.nomep LIKE ? GROUP BY ristoranti.nome, ristoranti.indirizzo");
+				getRistoranteByNomeOrProdottoPS = connessione.prepareStatement("SELECT ristoranti.nome, ristoranti.indirizzo FROM ristoranti NATURAL JOIN menu WHERE ristoranti.nome LIKE ? OR menu.prodotto LIKE ? GROUP BY ristoranti.nome, ristoranti.indirizzo");
 				getRistoranteByNomeOrProdottoPS.setString(1,  "%" + ricerca + "%");
 				getRistoranteByNomeOrProdottoPS.setString(2,  "%" + ricerca + "%");
 				ResultSet rs = getRistoranteByNomeOrProdottoPS.executeQuery();

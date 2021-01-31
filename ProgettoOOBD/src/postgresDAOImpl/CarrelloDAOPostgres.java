@@ -37,8 +37,8 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			aggiungiProdottoAlCarrelloPS.setString(1, nomep);
 			aggiungiProdottoAlCarrelloPS.setInt(2, quantit‡);
 			aggiungiProdottoAlCarrelloPS.setString(3, utente.getEmail());
-			aggiungiProdottoAlCarrelloPS.setDouble(4, prezzo);
-			aggiungiProdottoAlCarrelloPS.setString(5, ristorante.getNome() + "," + ristorante.getIndirizzo());
+			aggiungiProdottoAlCarrelloPS.setString(4, ristorante.getNome() + "," + ristorante.getIndirizzo());
+			aggiungiProdottoAlCarrelloPS.setDouble(5, prezzo);
 			aggiungiProdottoAlCarrelloPS.executeUpdate();
 			connessione.close();
 		} 
@@ -59,7 +59,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getCarrelloByUtentePS = connessione.prepareStatement("SELECT nomep, quantitaprodotto, provenienzaprodotto FROM carrello WHERE proprietario = ? ORDER BY carrello.provenienzaprodotto ASC");
+			getCarrelloByUtentePS = connessione.prepareStatement("SELECT prodotto, quantitaprodotto, provenienzaprodotto FROM carrello WHERE proprietario = ? ORDER BY carrello.provenienzaprodotto ASC");
 			getCarrelloByUtentePS.setString(1, utente.getEmail());
 			ResultSet rs = getCarrelloByUtentePS.executeQuery();
 			connessione.close();
@@ -67,7 +67,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			while(rs.next()) {
 				tmp = new String();
 				temp = new Prodotto();
-				temp.setNomeP(rs.getString("nomep"));
+				temp.setNomeP(rs.getString("prodotto"));
 				risultato.getProdotti().add(temp);
 				risultato.getQuantit‡Prodotti().add(rs.getInt("quantitaprodotto"));
 				temp2 = new Ristorante();
@@ -92,7 +92,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			rimuoviProdottoDalCarrelloPS = connessione.prepareStatement("DELETE FROM carrello WHERE proprietario = ? AND nomep = ? AND provenienzaprodotto = ?");
+			rimuoviProdottoDalCarrelloPS = connessione.prepareStatement("DELETE FROM carrello WHERE proprietario = ? AND prodotto = ? AND provenienzaprodotto = ?");
 			rimuoviProdottoDalCarrelloPS.setString(1, carrello.getProprietario().getEmail());
 			rimuoviProdottoDalCarrelloPS.setString(2, carrello.getProdotti().get(indice).getNomeP());
 			rimuoviProdottoDalCarrelloPS.setString(3, carrello.getProvenienzaProdotti().get(indice).getNome());
@@ -160,7 +160,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			cambiaQuantit‡CarrelloPS = connessione.prepareStatement("UPDATE CARRELLO SET quantitaprodotto = ? WHERE proprietario = ? AND nomep = ?");
+			cambiaQuantit‡CarrelloPS = connessione.prepareStatement("UPDATE CARRELLO SET quantitaprodotto = ? WHERE proprietario = ? AND prodotto = ?");
 			cambiaQuantit‡CarrelloPS.setInt(1, nuovoValore);
 			cambiaQuantit‡CarrelloPS.setString(2, carrello.getProprietario().getEmail());
 			cambiaQuantit‡CarrelloPS.setString(3, nomeProdotto);
@@ -188,7 +188,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			
 			while(rs.next()){
 				temp = new Prodotto();
-				temp.setNomeP(rs.getString("NomeP"));
+				temp.setNomeP(rs.getString("prodotto"));
 				risultato.getProdotti().add(temp);
 				risultato.getPrezzi().add(rs.getDouble("prezzo"));
 			}

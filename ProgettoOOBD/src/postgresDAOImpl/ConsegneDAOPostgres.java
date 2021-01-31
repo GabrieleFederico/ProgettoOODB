@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 
 import classiEntità.Carrello;
@@ -79,15 +80,17 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		return risultato;
 	}
 	
-	public void creaConsegna(String indirizzoP, Utente utente) {
+	public void creaConsegna(String indirizzoP, Utente utente, String mezzo, String orario) {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			creaConsegnaPS = connessione.prepareStatement("INSERT INTO CONSEGNE VALUES (default, CURRENT_TIMESTAMP, ?, ?, ?, 'false', null)");
-			creaConsegnaPS.setString(1, indirizzoP);
-			creaConsegnaPS.setString(2, utente.getIndirizzo());
-			creaConsegnaPS.setString(3, utente.getEmail());
+			creaConsegnaPS = connessione.prepareStatement("INSERT INTO CONSEGNE VALUES (default, ?, ?, ?, ?, 'false', null, ?)");
+			creaConsegnaPS.setString(1, orario);
+			creaConsegnaPS.setString(2, indirizzoP);
+			creaConsegnaPS.setString(3, utente.getIndirizzo());
+			creaConsegnaPS.setString(4, utente.getEmail());
+			creaConsegnaPS.setString(5, mezzo);
 			creaConsegnaPS.executeUpdate();
 			connessione.close();
 			

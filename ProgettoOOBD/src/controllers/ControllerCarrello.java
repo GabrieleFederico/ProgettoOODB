@@ -10,7 +10,7 @@ import classiEntità.Ristorante;
 import classiEntità.Utente;
 import interfacceGrafiche.JFrameCarrello;
 import interfacceGrafiche.JFrameHomeUtente;
-import interfacceGrafiche.JDialogCassa;
+import interfacceGrafiche.JFrameCassa;
 import postgresDAOImpl.CarrelloDAOPostgres;
 
 public class ControllerCarrello {
