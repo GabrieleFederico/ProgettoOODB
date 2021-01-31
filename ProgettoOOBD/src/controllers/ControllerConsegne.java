@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import classiEntità.Carrello;
 import classiEntità.Consegne;
 import classiEntità.Rider;
+import classiEntità.Ristorante;
 import classiEntità.Utente;
 import interfacceGrafiche.JFrameDettagliOrdine;
 import interfacceGrafiche.JFrameOrdiniUtente;
@@ -52,10 +53,21 @@ public class ControllerConsegne {
 		ordini.setVisible(true);
 	}
 	
-	public void creaOrdine(Carrello carrello) {
-		
+	public void creaOrdine(Carrello carrello, ArrayList<Ristorante> listaRistoranti) {
+			
+		Ristorante temp = new Ristorante();
 		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
-		cp.creaConsegna();
+		temp = listaRistoranti.get(0);
+			
+		for(Ristorante r : listaRistoranti) {
+			if(!temp.getIndirizzo().equals(r.getIndirizzo())) {
+				cp.creaConsegna(temp.getIndirizzo(), carrello.getProprietario());
+			}
+			else if(r.getIndirizzo().equals(listaRistoranti.get(listaRistoranti.size()-1).getIndirizzo())) {
+				cp.creaConsegna(r.getIndirizzo(), carrello.getProprietario());
+			}
+			temp = r;
+		}
 	}
 
 	public ArrayList<Consegne> getConsegneDisponibili() {

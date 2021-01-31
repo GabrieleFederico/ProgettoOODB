@@ -16,7 +16,7 @@ public class ConclusioneOrdine extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	
-	public ConclusioneOrdine(ControllerCarrello c, Carrello carrello, ControllerConsegne cor) {
+	public ConclusioneOrdine(ControllerCarrello c) {
 		setBounds(100, 100, 450, 190);
 		getContentPane().setLayout(null);
 		
@@ -33,8 +33,6 @@ public class ConclusioneOrdine extends JDialog {
 		ButtonOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
-				c.ArchiviaCarrello(carrello);
-				cor.creaOrdine(carrello);
 				c.getfc().dispose();
 				
 			}

@@ -47,7 +47,6 @@ public class JFrameOrdiniUtente extends JFrame {
 		
 		int y = 25;
 		int lung = 20;
-		int index = 0;
 		int larg = 185;
 		int xLabel = 100;
 		int xBottone = 400;
