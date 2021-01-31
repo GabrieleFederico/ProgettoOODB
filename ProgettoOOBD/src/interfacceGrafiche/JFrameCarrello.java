@@ -63,7 +63,7 @@ public class JFrameCarrello extends JFrame {
 		JButton ButtonCassa = new JButton("Vai alla cassa");
 		ButtonCassa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cassa = new JDialogCassa(totale, c, carrello, co);
+				cassa = new JDialogCassa(totale, c, carrello, co, listaRistoranti);
 				cassa.setVisible(true);
 			}
 		});

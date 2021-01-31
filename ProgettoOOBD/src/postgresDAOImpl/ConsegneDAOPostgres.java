@@ -80,15 +80,18 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		return risultato;
 	}
 	
-	public void creaConsegna() {
+	public void creaConsegna(String indirizzoP, Utente utente) {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			creaConsegnaPS = connessione.prepareStatement("");
+			creaConsegnaPS = connessione.prepareStatement("INSERT INTO CONSEGNE VALUES (default, CURRENT_TIMESTAMP, ?, ?, ?, 'false', null)");
+			creaConsegnaPS.setString(1, indirizzoP);
+			creaConsegnaPS.setString(2, utente.getIndirizzo());
+			creaConsegnaPS.setString(3, utente.getEmail());
+			creaConsegnaPS.executeUpdate();
 			connessione.close();
 			
-	
 		} 
 		catch (SQLException e) {
 			System.out.println(e.getMessage());

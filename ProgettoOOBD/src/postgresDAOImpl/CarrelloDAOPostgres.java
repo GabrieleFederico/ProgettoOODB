@@ -38,7 +38,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			aggiungiProdottoAlCarrelloPS.setInt(2, quantit‡);
 			aggiungiProdottoAlCarrelloPS.setString(3, utente.getEmail());
 			aggiungiProdottoAlCarrelloPS.setDouble(4, prezzo);
-			aggiungiProdottoAlCarrelloPS.setString(5, ristorante.getNome());
+			aggiungiProdottoAlCarrelloPS.setString(5, ristorante.getNome() + "," + ristorante.getIndirizzo());
 			aggiungiProdottoAlCarrelloPS.executeUpdate();
 			connessione.close();
 		} 
@@ -53,6 +53,8 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		Carrello risultato = new Carrello(utente);
 		Prodotto temp;
 		Ristorante temp2;
+		String tmp;
+		int i;
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -63,12 +65,16 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			connessione.close();
 			
 			while(rs.next()) {
+				tmp = new String();
 				temp = new Prodotto();
 				temp.setNomeP(rs.getString("nomep"));
 				risultato.getProdotti().add(temp);
 				risultato.getQuantit‡Prodotti().add(rs.getInt("quantitaprodotto"));
 				temp2 = new Ristorante();
-				temp2.setNome(rs.getString("provenienzaprodotto"));
+				tmp = rs.getString("provenienzaprodotto");
+				i = tmp.indexOf(",");
+				temp2.setNome(tmp.substring(0, i));
+				temp2.setIndirizzo(tmp.substring(i+1));
 				risultato.getProvenienzaProdotti().add(temp2);
 				
 			}
