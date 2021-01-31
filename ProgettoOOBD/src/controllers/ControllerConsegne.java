@@ -1,22 +1,28 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ListIterator;
 
 import classiEntità.Carrello;
 import classiEntità.Consegne;
-import classiEntità.Ristorante;
+import classiEntità.ConsegneSenzaRider;
+import classiEntità.Rider;
 import classiEntità.Utente;
 import interfacceGrafiche.JFrameDettagliOrdine;
 import interfacceGrafiche.JFrameOrdiniUtente;
 import postgresDAOImpl.CarrelloDAOPostgres;
 import postgresDAOImpl.ConsegneDAOPostgres;
+import postgresDAOImpl.RiderDAOPostgres;
 
-public class ControllerOrdini {
+public class ControllerConsegne {
 	
-	public ControllerOrdini() {
+	private Rider rider;
 
+	public ControllerConsegne() {
+
+	}
+	
+	public ControllerConsegne(Rider rider) {
+		this.rider = rider;
 	}
 	
 	public ArrayList<Consegne> getOrdiniByUtente(Utente u){
@@ -52,20 +58,19 @@ public class ControllerOrdini {
 		ordini.setVisible(true);
 	}
 	
-	public void creaOrdine(Carrello carrello, ArrayList<Ristorante> listaRistoranti) {
+	public void creaOrdine(Carrello carrello) {
 		
-		Ristorante temp = new Ristorante();
 		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
-		temp = listaRistoranti.get(0);
+		cp.creaConsegna();
+	}
+
+	public ArrayList<ConsegneSenzaRider> getConsegneDisponibili() {
 		
-		for(Ristorante r : listaRistoranti) {
-			if(!temp.getIndirizzo().equals(r.getIndirizzo())) {
-				cp.creaConsegna(temp.getIndirizzo(), carrello.getProprietario());
-			}
-			else if(r.getIndirizzo().equals(listaRistoranti.get(listaRistoranti.size()-1).getIndirizzo())) {
-				cp.creaConsegna(r.getIndirizzo(), carrello.getProprietario());
-			}
-			temp = r;
-		}
+		ArrayList<ConsegneSenzaRider> risultato;
+		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
+		risultato = cp.getConsegneByMezzo(rider.getMezzo());
+		
+		return risultato;
+		
 	}
 }

@@ -66,19 +66,5 @@ public class RiderDAOPostgres implements RiderDAO{
 
 		}
 	}
-	
-	
-	
-	@Override
-	public ArrayList<Rider> getAllRider() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Rider> getRiderByMezzo(String mezzo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import classiEntità.Ristorante;
 import classiEntità.Utente;
 import controllers.ControllerCarrello;
-import controllers.ControllerOrdini;
+import controllers.ControllerConsegne;
 import controllers.ControllerRicercaMenu;
 import controllers.ControllerRicercaRistoranti;
 import controllers.ControllorePrincipale;

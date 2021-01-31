@@ -16,7 +16,7 @@ import classiEntità.Carrello;
 import classiEntità.Prodotto;
 import classiEntità.Ristorante;
 import controllers.ControllerCarrello;
-import controllers.ControllerOrdini;
+import controllers.ControllerConsegne;
 import controllers.ControllerRicercaMenu;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -44,10 +44,9 @@ public class JFrameCarrello extends JFrame {
 	private JScrollPane scrollPane;
 	private ControllerRicercaMenu controllerMenu;
 	private JDialogCassa cassa;
-	private JLabel ristoranteRimosso;
 	ArrayList<Ristorante> listaRistoranti = new ArrayList<Ristorante>();
 
-	public JFrameCarrello(ControllerCarrello c, ControllerOrdini co) {
+	public JFrameCarrello(ControllerCarrello c, ControllerConsegne co) {
 		controller = c;
 		setBounds(100, 100, 813, 550);
 		contentPane = new JPanel();
@@ -164,7 +163,6 @@ public class JFrameCarrello extends JFrame {
 				public void actionPerformed(ActionEvent arg0) {
 					JButton source = (JButton) arg0.getSource();
 					
-					ristoranteRimosso = new JLabel (listaRistoranti.get( bottoni.indexOf(source)).getNome());
 					boolean prodottiInRistorante = controller.rimuoviDalCarrello(carrello, bottoni.indexOf(source));
 					pannelloScrollPane.remove(prezziJLabel.get(bottoni.indexOf(source)));
 					pannelloScrollPane.remove(nomiArticoliJLabel.get(bottoni.indexOf(source)));
