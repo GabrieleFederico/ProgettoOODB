@@ -10,7 +10,7 @@ public class ControllorePrincipale {
 
 	String Email;
 	ControllerCarrello ccarrello;
-	ControllerConsegne co = new ControllerConsegne();;
+	ControllerConsegne co = new ControllerConsegne();
 	
 	public static void main(String[] args) {
 

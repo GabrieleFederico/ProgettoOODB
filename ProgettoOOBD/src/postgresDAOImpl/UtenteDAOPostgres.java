@@ -14,14 +14,14 @@ public class UtenteDAOPostgres implements UtenteDAO {
 
 	private ConnessioneDB connessioneDB;
 	private Connection connessione;
-	private PreparedStatement inserisciUtentePS, getAllUtentiPS, esisteUtentePS;
+	private PreparedStatement inserisciUtentePS, esisteUtentePS;
 
 	@Override
 	public void inserisciUtente(Utente utente) {
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			inserisciUtentePS = connessione.prepareStatement("INSERT INTO Utente VALUES (?, ?, ?, ?, ?)");
+			inserisciUtentePS = connessione.prepareStatement("INSERT INTO utente VALUES (?, ?, ?, ?, ?)");
 			inserisciUtentePS.setString(1, utente.getEmail());
 			inserisciUtentePS.setString(2, utente.getPassword());
 			inserisciUtentePS.setString(3, utente.getNome());
@@ -43,7 +43,7 @@ public class UtenteDAOPostgres implements UtenteDAO {
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			esisteUtentePS = connessione.prepareStatement("SELECT * FROM Utente WHERE email = ? AND pwd = ?");
+			esisteUtentePS = connessione.prepareStatement("SELECT * FROM Utente WHERE emailUtente = ? AND pwd = ?");
 			esisteUtentePS.setString(1, email);
 			esisteUtentePS.setString(2, pwd);
 			ResultSet rs = esisteUtentePS.executeQuery();

@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 import classiEntità.Carrello;
 import classiEntità.Consegne;
-import classiEntità.ConsegneSenzaRider;
-import classiEntità.Prodotto;
 import classiEntità.Rider;
 import classiEntità.Utente;
 import dbConn.ConnessioneDB;
@@ -96,31 +94,36 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		}
 	}
 
-	public ArrayList<ConsegneSenzaRider> getConsegneByMezzo(String mezzo) {
+	public ArrayList<Consegne> getConsegneByMezzo(String mezzo) {
 
-		ArrayList<ConsegneSenzaRider> risultato = new ArrayList<ConsegneSenzaRider>();
-		ConsegneSenzaRider temp;
+		ArrayList<Consegne> risultato = new ArrayList<Consegne>();
+		Consegne temp;
+		Carrello carrello = new Carrello();
+		Utente utente = new Utente();
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getConsegneByMezzoPS = connessione.prepareStatement("SELECT  CS.CodC, CS.Orario, CS.IndirizzoP, CS.IndirizzoA, U.Nome, U.Cognome, U.emailUtente,"
-																+ "CS.Mezzo FROM CONSEGNESENZARIDER AS CS NATURAL JOIN UTENTE AS U WHERE Mezzo = ?");
+			getConsegneByMezzoPS = connessione.prepareStatement("SELECT  CONSEGNE.CodC, CONSEGNE.Orario, CONSEGNE.IndirizzoP, CONSEGNE.IndirizzoA, CONSEGNE.emailutente," 
+																+ "UTENTE.Nome, UTENTE.Cognome FROM CONSEGNE NATURAL JOIN UTENTE "
+																+ "WHERE CONSEGNE.CodR IS NULL AND (CONSEGNE.mezzorichiesto = ? OR CONSEGNE.mezzorichiesto IS NULL)");
 			getConsegneByMezzoPS.setString(1, mezzo);
 			ResultSet rs = getConsegneByMezzoPS.executeQuery();
 			connessione.close();
 			
 			while(rs.next()) {
-				temp = new ConsegneSenzaRider();
+				temp = new Consegne();
 				temp.setCodC(rs.getString("CodC"));
 				temp.setOrario(rs.getTime("Orario"));
 				temp.setIndirizzoP(rs.getString("IndirizzoP"));
 				temp.setIndirizzoA(rs.getString("IndirizzoA"));
-				temp.setNomeUtente(rs.getString("Nome"));
-				temp.setCognomeUtente(rs.getString("cognome"));
-				temp.setEmailUtente(rs.getString("EmailUtente"));
-				temp.setMezzo(rs.getString("Mezzo"));
+				utente.setNome(rs.getString("nome"));
+				utente.setCognome(rs.getString("cognome"));
+				utente.setEmail(rs.getString("EmailUtente"));
+				carrello.setProprietario(utente);
+				temp.setComposizioneConsegna(carrello);
 				risultato.add(temp);
+			
 			}
 		} 
 		

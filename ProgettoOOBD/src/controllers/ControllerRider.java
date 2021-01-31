@@ -6,11 +6,12 @@ import postgresDAOImpl.RiderDAOPostgres;
 
 public class ControllerRider {
 	
-	Rider rider;
+	private Rider rider;
+	private ControllerConsegne controller;
 	
 	public ControllerRider(Rider rider) {
 		
-		JFrameHomeRider homeRider = new JFrameHomeRider();
+		JFrameHomeRider homeRider = new JFrameHomeRider(controller);
 		homeRider.setVisible(true);
 		this.rider = rider;
 	}

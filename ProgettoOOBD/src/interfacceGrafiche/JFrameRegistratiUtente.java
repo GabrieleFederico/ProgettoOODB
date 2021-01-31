@@ -21,8 +21,7 @@ public class JFrameRegistratiUtente extends JFrame {
 	private JPanel contentPane;
 	private JTextField TFNewEmail;
 	private JTextField TFNewPassword;
-
-	ControllerLogin controllore;
+	private ControllerLogin controllore;
 	private JTextField TFNewNome;
 	private JTextField TFNewCognome;
 	private JTextField TFNewIndirizzo;

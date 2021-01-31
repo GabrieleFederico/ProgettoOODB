@@ -35,7 +35,7 @@ public class ControllerLogin {
 		UtenteDAOPostgres u1 = new UtenteDAOPostgres();
 		Utente utente = new Utente(email, pwd, nome, cognome, indirizzo);
 		u1.inserisciUtente(utente);
-
+		
 		fl.setVisible(true);
 		fr.setVisible(false);
 
