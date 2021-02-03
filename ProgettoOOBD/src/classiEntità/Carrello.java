@@ -62,8 +62,4 @@ public class Carrello {
 		this.provenienzaProdotti = provenienzaProdotti;
 	}
 	
-	
-	
-	
-	
 }

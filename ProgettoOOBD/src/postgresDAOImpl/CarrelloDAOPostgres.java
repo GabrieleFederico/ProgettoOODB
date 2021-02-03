@@ -33,7 +33,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			aggiungiProdottoAlCarrelloPS = connessione.prepareStatement("INSERT INTO Carrello VALUES (?, ?, ?, ?, ?)");
+			aggiungiProdottoAlCarrelloPS = connessione.prepareStatement("INSERT INTO Carrello VALUES (?, ?, ?, ?, ?, default)");
 			aggiungiProdottoAlCarrelloPS.setString(1, nomep);
 			aggiungiProdottoAlCarrelloPS.setInt(2, quantità);
 			aggiungiProdottoAlCarrelloPS.setString(3, utente.getEmail());
@@ -95,7 +95,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			rimuoviProdottoDalCarrelloPS = connessione.prepareStatement("DELETE FROM carrello WHERE proprietario = ? AND prodotto = ? AND provenienzaprodotto = ?");
 			rimuoviProdottoDalCarrelloPS.setString(1, carrello.getProprietario().getEmail());
 			rimuoviProdottoDalCarrelloPS.setString(2, carrello.getProdotti().get(indice).getNomeP());
-			rimuoviProdottoDalCarrelloPS.setString(3, carrello.getProvenienzaProdotti().get(indice).getNome());
+			rimuoviProdottoDalCarrelloPS.setString(3, carrello.getProvenienzaProdotti().get(indice).getNome() + "," + carrello.getProvenienzaProdotti().get(indice).getIndirizzo());
 			rimuoviProdottoDalCarrelloPS.executeUpdate();
 			connessione.close();
 
@@ -114,7 +114,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
 			esisteRistorantePS = connessione.prepareStatement("SELECT * FROM carrello WHERE provenienzaprodotto = ?");
-			esisteRistorantePS.setString(1, rist.getNome());
+			esisteRistorantePS.setString(1, rist.getNome() + "," + rist.getIndirizzo());
 			ResultSet rs = esisteRistorantePS.executeQuery();
 			connessione.close();
 			

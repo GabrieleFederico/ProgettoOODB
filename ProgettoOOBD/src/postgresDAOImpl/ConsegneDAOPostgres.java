@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import classiEntità.Carrello;
@@ -18,7 +20,8 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 
 	private Connection connessione;
 	private ConnessioneDB connessioneDB;
-	private PreparedStatement getConsegneByUtentePS, getConsegneByRiderPS, creaConsegnaPS, getConsegneByMezzoPS;
+	private PreparedStatement getConsegneByUtentePS, getConsegneByRiderPS, creaConsegnaPS, getConsegneByMezzoPS, getCodCOrdinePS;
+	private PreparedStatement assegnaConsegnaRiderPS, ordineConsegnatoPS;
 	
 	@Override
 	public ArrayList<Consegne> getConsegneByUtente(Utente utente) {
@@ -80,17 +83,18 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		return risultato;
 	}
 	
-	public void creaConsegna(String indirizzoP, Utente utente, String mezzo, String orario) {
+	public void creaConsegna(String indirizzoP, Utente utente, String mezzo, String orario, String CodC) {
 		
-		try {
+		try {			
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			creaConsegnaPS = connessione.prepareStatement("INSERT INTO CONSEGNE VALUES (default, ?, ?, ?, ?, 'false', null, ?)");
-			creaConsegnaPS.setString(1, orario);
-			creaConsegnaPS.setString(2, indirizzoP);
-			creaConsegnaPS.setString(3, utente.getIndirizzo());
-			creaConsegnaPS.setString(4, utente.getEmail());
-			creaConsegnaPS.setString(5, mezzo);
+			creaConsegnaPS = connessione.prepareStatement("INSERT INTO CONSEGNE VALUES (?, ?, ?, ?, ?, 'false', null, ?)");
+			creaConsegnaPS.setString(1, CodC);
+			creaConsegnaPS.setTime(2, Time.valueOf(orario + ":00"));
+			creaConsegnaPS.setString(3, indirizzoP);
+			creaConsegnaPS.setString(4, utente.getIndirizzo());
+			creaConsegnaPS.setString(5, utente.getEmail());
+			creaConsegnaPS.setString(6, mezzo);
 			creaConsegnaPS.executeUpdate();
 			connessione.close();
 			
@@ -138,6 +142,60 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		}
 		
 		return risultato;
+	}
+
+	public String getCodCOrdine(String proprietario, String provenienzaProdotto) {
+		
+		String codice = null;
+		
+		try {			
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			getCodCOrdinePS = connessione.prepareStatement("select distinct CodC from carrello where proprietario = ? AND provenienzaProdotto = ?");
+			getCodCOrdinePS.setString(1, proprietario);
+			getCodCOrdinePS.setString(2, provenienzaProdotto);
+			ResultSet rs = getCodCOrdinePS.executeQuery();
+			
+			while(rs.next()) {
+				codice = rs.getString("CodC");
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return codice;
+		
+	}
+
+	public void assegnaConsegnaRider(String CodR, String CodC) {
+
+		try {			
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			assegnaConsegnaRiderPS =  connessione.prepareStatement("UPDATE consegne SET CodR = ? WHERE CodC = ?");
+			assegnaConsegnaRiderPS.setString(1, CodR);
+			assegnaConsegnaRiderPS.setString(2, CodC);
+			assegnaConsegnaRiderPS.executeUpdate();
+		
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void ordineConsegnato(String CodC) {
+
+		try {			
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			ordineConsegnatoPS =  connessione.prepareStatement("UPDATE consegne SET consegnato = TRUE WHERE CodC = ?");
+			ordineConsegnatoPS.setString(1, CodC);
+			ordineConsegnatoPS.executeUpdate();
+		
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 		
 }

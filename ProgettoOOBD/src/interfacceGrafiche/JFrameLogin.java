@@ -29,7 +29,7 @@ public class JFrameLogin extends JFrame {
 	
 	ControllerLogin controllore;
 	ControllorePrincipale controller;
-	Errore LoginSbagliato = new Errore();
+	JDialogErroreLogin LoginSbagliato = new JDialogErroreLogin();
 	
 	public JFrameLogin(ControllerLogin c, ControllorePrincipale c1) {
 

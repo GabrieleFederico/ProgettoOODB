@@ -12,11 +12,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ConclusioneOrdine extends JDialog {
+public class JDialogConclusioneOrdine extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	
-	public ConclusioneOrdine(ControllerCarrello c) {
+	public JDialogConclusioneOrdine(ControllerCarrello c) {
 		setBounds(100, 100, 450, 190);
 		getContentPane().setLayout(null);
 		

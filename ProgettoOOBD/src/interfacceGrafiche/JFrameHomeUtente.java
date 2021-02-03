@@ -56,14 +56,9 @@ public class JFrameHomeUtente extends JFrame {
 		contentPane.setLayout(null);
 
 		inputTF = new JTextField();
-		inputTF.setBounds(23, 11, 311, 28);
+		inputTF.setBounds(23, 11, 332, 28);
 		contentPane.add(inputTF);
 		inputTF.setColumns(10);
-
-		JComboBox<String> Mezzo = new JComboBox<String>();
-		Mezzo.setModel(new DefaultComboBoxModel<String>(new String[] { "Selezionare mezzo", "Automobile", "Moto", "Bici" }));
-		Mezzo.setBounds(351, 11, 144, 28);
-		contentPane.add(Mezzo);
 
 		JButton LogOutButton = new JButton("Log Out");
 		LogOutButton.setBounds(10, 433, 89, 28);
@@ -84,19 +79,15 @@ public class JFrameHomeUtente extends JFrame {
 		CercaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String TFInput = inputTF.getText();
-				String RiderInput = null;
-				if (Mezzo.getSelectedIndex() != 0)
-					RiderInput = Mezzo.getSelectedItem().toString();
-				try {
-					c.ricerca(TFInput, contentPane, componentiNecessarie, RiderInput);
+					try {
+						c.ricerca(TFInput, contentPane, componentiNecessarie);
+					} catch (SQLException e) {
+						System.out.println(e.getMessage());
+					}
 					HomeButton.setEnabled(true);
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				}
-
 			}
 		});
-		CercaButton.setBounds(515, 11, 89, 28);
+		CercaButton.setBounds(365, 11, 120, 28);
 		contentPane.add(CercaButton);
 
 		JButton IMieiOrdiniButton = new JButton("I miei ordini");
@@ -134,7 +125,7 @@ public class JFrameHomeUtente extends JFrame {
 		SushiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					c.ricerca("Sushi", contentPane, componentiNecessarie, null);
+					c.ricerca("Sushi", contentPane, componentiNecessarie);
 					HomeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
@@ -145,7 +136,7 @@ public class JFrameHomeUtente extends JFrame {
 		PizzaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					c.ricerca("Pizz", contentPane, componentiNecessarie, null);
+					c.ricerca("Pizz", contentPane, componentiNecessarie);
 					HomeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
@@ -156,7 +147,7 @@ public class JFrameHomeUtente extends JFrame {
 		PaniniButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					c.ricerca("Panin", contentPane, componentiNecessarie, null);
+					c.ricerca("Panin", contentPane, componentiNecessarie);
 					HomeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());

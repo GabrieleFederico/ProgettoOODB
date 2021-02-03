@@ -14,11 +14,11 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Errore extends JDialog {
+public class JDialogErroreLogin extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
-	public Errore() {
+	public JDialogErroreLogin() {
 		setAlwaysOnTop(true);
 		setTitle("Errore");
 		setBounds(100, 100, 450, 191);
@@ -40,7 +40,7 @@ public class Errore extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						Errore.this.setVisible(false);
+						JDialogErroreLogin.this.setVisible(false);
 						dispose();
 						
 					}

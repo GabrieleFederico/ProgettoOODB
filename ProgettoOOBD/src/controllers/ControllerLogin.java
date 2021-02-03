@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import classiEntità.Rider;
 import classiEntità.Utente;
-import interfacceGrafiche.Errore;
+import interfacceGrafiche.JDialogErroreLogin;
 import interfacceGrafiche.JFrameLogin;
 import interfacceGrafiche.JFrameRegistratiRider;
 import interfacceGrafiche.JFrameRegistratiUtente;

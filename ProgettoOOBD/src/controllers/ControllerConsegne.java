@@ -1,7 +1,11 @@
 package controllers;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Objects;
+
+import javax.swing.JLabel;
 
 import classiEntità.Carrello;
 import classiEntità.Consegne;
@@ -16,9 +20,15 @@ import postgresDAOImpl.ConsegneDAOPostgres;
 public class ControllerConsegne {
 	
 	private String mezzo;
+	private String CodR;
 
 	public void CConsegne(Rider rider) {
 		this.mezzo = rider.getMezzo();
+	}
+	
+	public String getCodR(Rider rider) {
+		this.CodR = rider.getCodR();
+		return CodR;
 	}
 	
 	public ArrayList<Consegne> getOrdiniByUtente(Utente u){
@@ -56,19 +66,19 @@ public class ControllerConsegne {
 	
 	public void creaOrdine(Carrello carrello, ArrayList<Ristorante> listaRistoranti, String mezzo, String orario) {
 			
-		Ristorante temp = new Ristorante();
 		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
-		temp = listaRistoranti.get(0);
-			
+		String provenienza = null;
+		String codiceCarrello;
+		
 		for(Ristorante r : listaRistoranti) {
-			if(!temp.getIndirizzo().equals(r.getIndirizzo())) {
-				cp.creaConsegna(temp.getIndirizzo(), carrello.getProprietario(), mezzo, orario);
+			if (!Objects.equals(r.getIndirizzo(), provenienza)){
+				codiceCarrello = cp.getCodCOrdine(carrello.getProprietario().getEmail(), r.getNome() + "," + r.getIndirizzo());
+				cp.creaConsegna(r.getIndirizzo(), carrello.getProprietario(), mezzo, orario, codiceCarrello);
+				provenienza = r.getIndirizzo();
 			}
-			else if(r.getIndirizzo().equals(listaRistoranti.get(listaRistoranti.size()-1).getIndirizzo())) {
-				cp.creaConsegna(r.getIndirizzo(), carrello.getProprietario(), mezzo, orario);
-			}
-			temp = r;
+			
 		}
+		
 	}
 
 	public ArrayList<Consegne> getConsegneDisponibili() {
@@ -77,6 +87,18 @@ public class ControllerConsegne {
 		ArrayList<Consegne> risultato = cp.getConsegneByMezzo(mezzo);
 		
 		return risultato;
+		
+	}
+
+	public void nuovoOrdineRider(String CodR, String CodC) {
+		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
+		cp.assegnaConsegnaRider(CodR, CodC);
+		
+	}
+
+	public void ordineConsegnato(String CodC) {
+		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
+		cp.ordineConsegnato(CodC);
 		
 	}
 }

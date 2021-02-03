@@ -21,14 +21,14 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class JFrameCassa extends JFrame {
 
 	private JPanel contentPanel = new JPanel();
-	private ControllerCarrello cc;
-	private ConclusioneOrdine co;
+	private JDialogConclusioneOrdine co;
 
 	public JFrameCassa(double totale, ControllerCarrello c, Carrello carrello, ControllerConsegne cor, ArrayList<Ristorante> listaRistoranti) {
 		
@@ -54,15 +54,16 @@ public class JFrameCassa extends JFrame {
 		ButtonPaga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String mezzo;
-				String orario = (String)comboBoxOrario.getSelectedItem();
+				String orario = comboBoxOrario.getSelectedItem().toString();
+				
 				if(comboBoxMezzo.getSelectedIndex() == 0)
 					mezzo = null;
 				else
 					mezzo = (String)comboBoxMezzo.getSelectedItem();
 				
-				c.ArchiviaCarrello(carrello);
 				cor.creaOrdine(carrello, listaRistoranti, mezzo, orario);
-				co = new ConclusioneOrdine(c);
+				c.ArchiviaCarrello(carrello);
+				co = new JDialogConclusioneOrdine(c);
 				co.setVisible(true);
 				dispose();
 			}
