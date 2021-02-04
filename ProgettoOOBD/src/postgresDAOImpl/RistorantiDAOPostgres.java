@@ -11,7 +11,7 @@ import dbConn.ConnessioneDB;
 import interfacceDAO.RistorantiDAO;
 
 
-public class RistoranteDAOPostgres implements RistorantiDAO {
+public class RistorantiDAOPostgres implements RistorantiDAO {
 
 		private Connection connessione;
 		private ConnessioneDB connessioneDB;

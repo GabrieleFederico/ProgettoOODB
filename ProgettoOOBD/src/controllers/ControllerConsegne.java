@@ -12,7 +12,7 @@ import interfacceGrafiche.JFrameDettagliOrdine;
 import interfacceGrafiche.JFrameOrdiniUtente;
 import postgresDAOImpl.CarrelloDAOPostgres;
 import postgresDAOImpl.ConsegneDAOPostgres;
-import postgresDAOImpl.RiderDAOPostgres;
+import postgresDAOImpl.RidersDAOPostgres;
 
 public class ControllerConsegne {
 	

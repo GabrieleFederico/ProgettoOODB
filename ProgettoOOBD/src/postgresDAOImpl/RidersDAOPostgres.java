@@ -15,7 +15,7 @@ import classiEntità.Utenti;
 import dbConn.ConnessioneDB;
 import interfacceDAO.RidersDAO;
 
-public class RiderDAOPostgres implements RidersDAO{
+public class RidersDAOPostgres implements RidersDAO{
 	
 
 	private Connection connessione;

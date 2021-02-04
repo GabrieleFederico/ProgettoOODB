@@ -8,8 +8,8 @@ import interfacceGrafiche.JDialogErroreLogin;
 import interfacceGrafiche.JFrameLogin;
 import interfacceGrafiche.JFrameRegistratiRider;
 import interfacceGrafiche.JFrameRegistratiUtente;
-import postgresDAOImpl.RiderDAOPostgres;
-import postgresDAOImpl.UtenteDAOPostgres;
+import postgresDAOImpl.RidersDAOPostgres;
+import postgresDAOImpl.UtentiDAOPostgres;
 
 public class ControllerLogin {
 
@@ -34,7 +34,7 @@ public class ControllerLogin {
 
 	public void registraCredenzialiUtente(String email, String pwd, String nome, String cognome, String indirizzo) throws SQLException {
 
-		UtenteDAOPostgres u1 = new UtenteDAOPostgres();
+		UtentiDAOPostgres u1 = new UtentiDAOPostgres();
 		Utenti utente = new Utenti(email, pwd, nome, cognome, indirizzo);
 		u1.inserisciUtente(utente);
 		
@@ -45,7 +45,7 @@ public class ControllerLogin {
 
 	public Utenti controllaCredenziali(String email, String pwd) throws SQLException {
 		
-		UtenteDAOPostgres u2 = new UtenteDAOPostgres();
+		UtentiDAOPostgres u2 = new UtentiDAOPostgres();
 		Utenti utente = new Utenti();
 		utente = u2.getUtenteByCredenziali(email, pwd);
 		
@@ -66,7 +66,7 @@ public class ControllerLogin {
 	
 	public Riders getRider(String email, String password) {
 		
-		RiderDAOPostgres rd = new RiderDAOPostgres();
+		RidersDAOPostgres rd = new RidersDAOPostgres();
 		Riders rider = rd.getRiderByEmail(email, password);
 		
 		return rider;
@@ -74,7 +74,7 @@ public class ControllerLogin {
 	
 	public void registraCredenzialiRider(String nome, String cognome, String email, String mezzo, String password) {
 		
-		RiderDAOPostgres r1 = new RiderDAOPostgres();
+		RidersDAOPostgres r1 = new RidersDAOPostgres();
 		r1.inserisciRider(nome, cognome, email, mezzo, password);
 		fl.setVisible(true);
 		frr.setVisible(false);		

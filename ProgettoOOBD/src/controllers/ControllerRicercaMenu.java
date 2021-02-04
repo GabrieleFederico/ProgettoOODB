@@ -10,7 +10,7 @@ import classiEntità.Prodotti;
 import classiEntità.Ristoranti;
 import interfacceGrafiche.JFrameRistorante;
 import postgresDAOImpl.MenùDAOPostgres;
-import postgresDAOImpl.RistoranteDAOPostgres;
+import postgresDAOImpl.RistorantiDAOPostgres;
 
 public class ControllerRicercaMenu {
 	

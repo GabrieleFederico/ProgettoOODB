@@ -10,7 +10,7 @@ import classiEntità.Utenti;
 import dbConn.ConnessioneDB;
 import interfacceDAO.UtentiDAO;
 
-public class UtenteDAOPostgres implements UtentiDAO {
+public class UtentiDAOPostgres implements UtentiDAO {
 
 	private ConnessioneDB connessioneDB;
 	private Connection connessione;

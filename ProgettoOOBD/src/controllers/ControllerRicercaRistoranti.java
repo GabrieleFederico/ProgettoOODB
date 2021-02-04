@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import classiEntità.Ristoranti;
 import classiEntità.Utenti;
 import interfacceGrafiche.JFrameHomeUtente;
-import postgresDAOImpl.RistoranteDAOPostgres;
+import postgresDAOImpl.RistorantiDAOPostgres;
 
 public class ControllerRicercaRistoranti {
 	
@@ -21,7 +21,7 @@ public class ControllerRicercaRistoranti {
 	
 	public void ricerca (String ricerca, JPanel pannello, int componentiNecessarie) throws SQLException {
 		
-		RistoranteDAOPostgres rp = new RistoranteDAOPostgres();
+		RistorantiDAOPostgres rp = new RistorantiDAOPostgres();
 		ArrayList<Ristoranti> risultatoRicerca = new ArrayList<Ristoranti>();
 		
 		risultatoRicerca = rp.getRistoranteByNomeOrProdotto(ricerca);
