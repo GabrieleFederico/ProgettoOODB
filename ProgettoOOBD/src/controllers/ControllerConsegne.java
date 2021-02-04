@@ -64,18 +64,16 @@ public class ControllerConsegne {
 		ordini.setVisible(true);
 	}
 	
-	public void creaOrdine(Carrello carrello, ArrayList<Ristorante> listaRistoranti, String mezzo, String orario) {
+	public void creaOrdine(Carrello carrello, ArrayList<Ristorante> listaRistoranti, String mezzo, String orario, ControllerCarrello c) {
 			
 		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
 		String provenienza = null;
-		String codiceCarrello;
 		
 		for(Ristorante r : listaRistoranti) {
 			if (!Objects.equals(r.getIndirizzo(), provenienza)){
-				codiceCarrello = cp.getCodCOrdine(carrello.getProprietario().getEmail(), r.getNome() + "," + r.getIndirizzo());
-				cp.creaConsegna(r.getIndirizzo(), carrello.getProprietario(), mezzo, orario, codiceCarrello);
 				provenienza = r.getIndirizzo();
 			}
+			c.ArchiviaCarrello(carrello, r);
 			
 		}
 		

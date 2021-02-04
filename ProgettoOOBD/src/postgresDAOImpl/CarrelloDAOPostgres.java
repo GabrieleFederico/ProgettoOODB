@@ -33,7 +33,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			aggiungiProdottoAlCarrelloPS = connessione.prepareStatement("INSERT INTO Carrello VALUES (?, ?, ?, ?, ?, default)");
+			aggiungiProdottoAlCarrelloPS = connessione.prepareStatement("INSERT INTO Carrello VALUES (?, ?, ?, ?, ?)");
 			aggiungiProdottoAlCarrelloPS.setString(1, nomep);
 			aggiungiProdottoAlCarrelloPS.setInt(2, quantità);
 			aggiungiProdottoAlCarrelloPS.setString(3, utente.getEmail());
@@ -201,13 +201,14 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		return risultato;
 	}
 	
-	public void archiviaCarrello(Carrello carrello) {
+	public void archiviaCarrello(Carrello carrello, Ristorante r) {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			archiviaCarrelloPS = connessione.prepareCall("call ArchiviaCarrello(?)");
+			archiviaCarrelloPS = connessione.prepareCall("call ArchiviaCarrello(?, ?)");
 			archiviaCarrelloPS.setString(1, carrello.getProprietario().getEmail());
+			archiviaCarrelloPS.setString(2, r.getNome() + ',' + r.getIndirizzo());
 			archiviaCarrelloPS.execute();
 			connessione.close();
 			

@@ -61,8 +61,7 @@ public class JFrameCassa extends JFrame {
 				else
 					mezzo = (String)comboBoxMezzo.getSelectedItem();
 				
-				cor.creaOrdine(carrello, listaRistoranti, mezzo, orario);
-				c.ArchiviaCarrello(carrello);
+				cor.creaOrdine(carrello, listaRistoranti, mezzo, orario, c);
 				co = new JDialogConclusioneOrdine(c);
 				co.setVisible(true);
 				dispose();

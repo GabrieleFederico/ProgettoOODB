@@ -59,9 +59,9 @@ public class ControllerCarrello {
 		return prezzi;
 	}
 
-	public void ArchiviaCarrello(Carrello carrello) {
+	public void ArchiviaCarrello(Carrello carrello, Ristorante r) {
 		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
-		cp.archiviaCarrello(carrello);
+		cp.archiviaCarrello(carrello, r);
 	}
 
 	public Window getfc() {

@@ -32,7 +32,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getConsegneByUtentePS = connessione.prepareStatement("SELECT * FROM archivioconsegne NATURAL JOIN consegne WHERE email = ?");
+			getConsegneByUtentePS = connessione.prepareStatement("SELECT * FROM archivioconsegne NATURAL JOIN consegne WHERE emailutente = ?");
 			getConsegneByUtentePS.setString(1, utente.getEmail());
 			ResultSet rs = getConsegneByUtentePS.executeQuery();
 			connessione.close();
@@ -83,20 +83,20 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		return risultato;
 	}
 	
-	public void creaConsegna(String indirizzoP, Utente utente, String mezzo, String orario, String CodC) {
+	public void creaConsegna(String indirizzoP, Utente utente, String mezzo, String orario) {
+		
 		
 		try {			
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			creaConsegnaPS = connessione.prepareStatement("INSERT INTO CONSEGNE VALUES (?, ?, ?, ?, ?, 'false', null, ?)");
-			creaConsegnaPS.setString(1, CodC);
-			creaConsegnaPS.setTime(2, Time.valueOf(orario + ":00"));
-			creaConsegnaPS.setString(3, indirizzoP);
-			creaConsegnaPS.setString(4, utente.getIndirizzo());
-			creaConsegnaPS.setString(5, utente.getEmail());
-			creaConsegnaPS.setString(6, mezzo);
+			creaConsegnaPS = connessione.prepareStatement("INSERT INTO CONSEGNE VALUES (default, ?, ?, ?, ?, 'false', null, ?)");
+			creaConsegnaPS.setTime(1, Time.valueOf(orario + ":00"));
+			creaConsegnaPS.setString(2, indirizzoP);
+			creaConsegnaPS.setString(3, utente.getIndirizzo());
+			creaConsegnaPS.setString(4, utente.getEmail());
+			creaConsegnaPS.setString(5, mezzo);
 			creaConsegnaPS.executeUpdate();
-			connessione.close();
+			
 			
 		} 
 		catch (SQLException e) {
@@ -144,29 +144,6 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		return risultato;
 	}
 
-	public String getCodCOrdine(String proprietario, String provenienzaProdotto) {
-		
-		String codice = null;
-		
-		try {			
-			connessioneDB = ConnessioneDB.getIstanza();
-			connessione = connessioneDB.getConnessione();
-			getCodCOrdinePS = connessione.prepareStatement("select distinct CodC from carrello where proprietario = ? AND provenienzaProdotto = ?");
-			getCodCOrdinePS.setString(1, proprietario);
-			getCodCOrdinePS.setString(2, provenienzaProdotto);
-			ResultSet rs = getCodCOrdinePS.executeQuery();
-			
-			while(rs.next()) {
-				codice = rs.getString("CodC");
-			}
-			
-			
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return codice;
-		
-	}
 
 	public void assegnaConsegnaRider(String CodR, String CodC) {
 
