@@ -69,11 +69,5 @@ public class UtenteDAOPostgres implements UtenteDAO {
 		return risultato;
 	}
 
-	@Override
-	public ArrayList<Utente> getAllUtenti() {
-		
-		return null;
-	}
-
 	
 }

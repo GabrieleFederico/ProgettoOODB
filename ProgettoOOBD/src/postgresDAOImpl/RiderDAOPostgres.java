@@ -71,6 +71,12 @@ public class RiderDAOPostgres implements RiderDAO{
 		}
 	}
 
+	@Override
+	public ArrayList<Consegne> getOrdiniByRider(Rider rider) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 
