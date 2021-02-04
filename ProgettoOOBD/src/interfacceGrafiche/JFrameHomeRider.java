@@ -6,9 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import classiEntità.Consegne;
-import classiEntità.Riders;
-import controllers.ControllerConsegne;
-import controllers.ControllerRider;
+import controllers.ControllerConsegneRider;
 import controllers.ControllerPrincipale;
 
 import javax.swing.JLabel;
@@ -19,19 +17,15 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 
 public class JFrameHomeRider extends JFrame {
-
-	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
-	private ControllerConsegne c1 = new ControllerConsegne();
 	private JDialogConfermaIncaricoRider confermaIncarico;
 	private ArrayList<Consegne> consegneDisponibili;
-	private int y = 1, xLabel = 50, xButton = 250;
-	private ControllerRider c2;
+	private ControllerConsegneRider c2;
 	private JFrameOrdiniRider iMieiOrdini;
 	
-	public JFrameHomeRider(ControllerConsegne controller, ControllerRider cr, ControllerPrincipale c1, Riders rider) {
+	public JFrameHomeRider(ControllerConsegneRider cr, ControllerPrincipale c1) {
 		
 		c2 = cr;
 		setTitle("Home");
@@ -51,7 +45,7 @@ public class JFrameHomeRider extends JFrame {
 		ButtonIMieiOrdini.setBounds(589, 447, 100, 23);
 		ButtonIMieiOrdini.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				iMieiOrdini = new JFrameOrdiniRider(controller, rider);
+				iMieiOrdini = new JFrameOrdiniRider(cr);
 				iMieiOrdini.setVisible(true);
 			}
 		});
@@ -79,11 +73,10 @@ public class JFrameHomeRider extends JFrame {
 		getConsegne();
 	}
 	
-	
 	public void getConsegne() {
 		
 		consegneDisponibili = new ArrayList<Consegne>();
-		consegneDisponibili = c1.getConsegneDisponibili();
+		consegneDisponibili = c2.getConsegneDisponibili();
 		
 		JPanel pannelloScrollPane = new JPanel();
 		pannelloScrollPane.setLayout(null);
@@ -92,6 +85,8 @@ public class JFrameHomeRider extends JFrame {
 		scrollPane = new JScrollPane(pannelloScrollPane, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 68, 690, 354);
 		contentPane.add(scrollPane);
+		
+		int y = 1, xLabel = 50, xButton = 250;
 		
 		for (Consegne c : consegneDisponibili) {
 			
@@ -105,7 +100,7 @@ public class JFrameHomeRider extends JFrame {
 			pannelloScrollPane.add(bottone);
 			bottone.addActionListener(new ActionListener() {
 				public void  actionPerformed(ActionEvent arg0) {
-					confermaIncarico = new JDialogConfermaIncaricoRider(c.getCodC(), c1, c2);
+					confermaIncarico = new JDialogConfermaIncaricoRider(c.getCodC(), c2);
 					confermaIncarico.setVisible(true);
 				}
 			});
@@ -114,7 +109,6 @@ public class JFrameHomeRider extends JFrame {
 		pannelloScrollPane.updateUI();
 		y = 1;
 	}
-
 
 	public void aggiornaInterfaccia() {
 		contentPane.remove(scrollPane);

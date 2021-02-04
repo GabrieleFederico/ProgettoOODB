@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 
 import classiEntità.Carrello;
 import controllers.ControllerCarrello;
-import controllers.ControllerConsegne;
+import controllers.ControllerConsegneUtente;
 
 import java.awt.Font;
 import javax.swing.JButton;

@@ -13,21 +13,17 @@ import java.awt.event.ActionEvent;
 
 
 public class JFrameRegistratiUtente extends JFrame {
-
-
-	private static final long serialVersionUID = 1L;
-	
 	
 	private JPanel contentPane;
 	private JTextField TFNewEmail;
 	private JTextField TFNewPassword;
-	private ControllerLogin controllore;
+	private ControllerLogin controller;
 	private JTextField TFNewNome;
 	private JTextField TFNewCognome;
 	private JTextField TFNewIndirizzo;
 	
 	public JFrameRegistratiUtente(ControllerLogin c) {
-		controllore = c;
+		controller = c;
 		setTitle("Registrati");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 391);
@@ -57,7 +53,7 @@ public class JFrameRegistratiUtente extends JFrame {
 		JButton ButtonAnnulla = new JButton("Annulla");
 		ButtonAnnulla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				c.tornaHomeDaUtente();
+				controller.tornaHomeDaUtente();
 			}
 		});
 		ButtonAnnulla.setBounds(34, 308, 89, 23);
@@ -68,7 +64,7 @@ public class JFrameRegistratiUtente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
-					controllore.registraCredenzialiUtente(TFNewEmail.getText(), TFNewPassword.getText(), TFNewNome.getText(), TFNewCognome.getText(), TFNewIndirizzo.getText());
+					controller.registraCredenzialiUtente(TFNewEmail.getText(), TFNewPassword.getText(), TFNewNome.getText(), TFNewCognome.getText(), TFNewIndirizzo.getText());
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}	

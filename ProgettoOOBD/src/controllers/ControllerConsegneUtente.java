@@ -4,30 +4,15 @@ import java.util.ArrayList;
 import java.util.Objects;
 import classiEntit‡.Carrello;
 import classiEntit‡.Consegne;
-import classiEntit‡.Riders;
 import classiEntit‡.Ristoranti;
 import classiEntit‡.Utenti;
-import interfacceGrafiche.JDialogMaxAttivit‡;
 import interfacceGrafiche.JFrameDettagliOrdine;
 import interfacceGrafiche.JFrameOrdiniUtente;
 import postgresDAOImpl.CarrelloDAOPostgres;
 import postgresDAOImpl.ConsegneDAOPostgres;
-import postgresDAOImpl.RidersDAOPostgres;
 
-public class ControllerConsegne {
-	
-	private String mezzo;
-	private String CodR;
+public class ControllerConsegneUtente {
 
-	public void CConsegne(Riders rider) {
-		this.mezzo = rider.getMezzo();
-	}
-	
-	public String getCodR(Riders rider) {
-		this.CodR = rider.getCodR();
-		return CodR;
-	}
-	
 	public ArrayList<Consegne> getOrdiniByUtente(Utenti u){
 		
 		ArrayList<Consegne> ris = new ArrayList<Consegne>();
@@ -35,14 +20,6 @@ public class ControllerConsegne {
 		ris = cd.getConsegneByUtente(u);
 		
 		return ris;
-	}
-	
-	public ArrayList<Consegne> getOrdiniByRider(Riders rider){
-		
-		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
-		ArrayList<Consegne> risultato = cp.getOrdiniByRider(rider);
-		
-		return risultato;
 	}
 	
 	public void apriDettagli(Consegne ordine) {
@@ -80,30 +57,4 @@ public class ControllerConsegne {
 		
 	}
 
-	public ArrayList<Consegne> getConsegneDisponibili() {
-
-		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
-		ArrayList<Consegne> risultato = cp.getConsegneByMezzo(mezzo);
-		
-		return risultato;
-		
-	}
-
-	public void nuovoOrdineRider(String CodR, String CodC) {
-		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
-		cp.assegnaConsegnaRider(CodR, CodC, this);
-		
-	}
-
-	public void ordineConsegnato(String CodC) {
-		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
-		cp.ordineConsegnato(CodC);
-		
-	}
-
-	public void maxAttivit‡Rider() {
-		JDialogMaxAttivit‡ maxAttivit‡ = new JDialogMaxAttivit‡();
-		maxAttivit‡.setVisible(true);
-		
-	}
 }

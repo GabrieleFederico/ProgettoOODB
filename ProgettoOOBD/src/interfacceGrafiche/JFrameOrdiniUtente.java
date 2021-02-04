@@ -24,7 +24,7 @@ import javax.swing.event.ChangeListener;
 import classiEntità.Consegne;
 import classiEntità.Prodotti;
 import classiEntità.Utenti;
-import controllers.ControllerConsegne;
+import controllers.ControllerConsegneUtente;
 
 public class JFrameOrdiniUtente extends JFrame {
 
@@ -35,7 +35,7 @@ public class JFrameOrdiniUtente extends JFrame {
 	private ArrayList<JButton> bottoni = new ArrayList<JButton>();
 	private ArrayList<Consegne> ordini;
 	
-	public JFrameOrdiniUtente(ControllerConsegne co, Utenti u) {
+	public JFrameOrdiniUtente(ControllerConsegneUtente co, Utenti u) {
 
 		setTitle("I Miei Ordini");
 		setBounds(100, 100, 649, 455);
@@ -46,11 +46,9 @@ public class JFrameOrdiniUtente extends JFrame {
 
 		ordini = co.getOrdiniByUtente(u);
 		
-		int y = 25;
-		int lung = 50;
-		int larg = 185;
-		int xLabel = 100;
-		int xBottone = 400;
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		int y = 25,	lung = 50, larg = 185, xLabel = 100, xBottone = 400;
 		
 		JPanel pannelloScrollPane = new JPanel();
 		pannelloScrollPane.setLayout(null);

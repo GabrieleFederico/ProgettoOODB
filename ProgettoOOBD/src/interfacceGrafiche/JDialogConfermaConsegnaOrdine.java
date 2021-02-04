@@ -2,7 +2,9 @@ package interfacceGrafiche;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import controllers.ControllerConsegne;
+import controllers.ControllerConsegneUtente;
+import controllers.ControllerConsegneRider;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -10,7 +12,7 @@ import java.awt.event.ActionEvent;
 
 public class JDialogConfermaConsegnaOrdine extends JDialog {
 
-	public JDialogConfermaConsegnaOrdine(String CodC, ControllerConsegne c) {
+	public JDialogConfermaConsegnaOrdine(String CodC, ControllerConsegneRider c) {
 		
 		setTitle("Conferma Ordine");
 		setBounds(100, 100, 348, 228);

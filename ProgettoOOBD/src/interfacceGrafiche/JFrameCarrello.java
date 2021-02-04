@@ -11,7 +11,7 @@ import classiEntità.Carrello;
 import classiEntità.Prodotti;
 import classiEntità.Ristoranti;
 import controllers.ControllerCarrello;
-import controllers.ControllerConsegne;
+import controllers.ControllerConsegneUtente;
 import controllers.ControllerRicercaMenu;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -36,7 +36,7 @@ public class JFrameCarrello extends JFrame {
 	private JFrameCassa cassa;
 	ArrayList<Ristoranti> listaRistoranti = new ArrayList<Ristoranti>();
 
-	public JFrameCarrello(ControllerCarrello c, ControllerConsegne co) {
+	public JFrameCarrello(ControllerCarrello c, ControllerConsegneUtente co) {
 		controller = c;
 		setBounds(100, 100, 813, 550);
 		contentPane = new JPanel();

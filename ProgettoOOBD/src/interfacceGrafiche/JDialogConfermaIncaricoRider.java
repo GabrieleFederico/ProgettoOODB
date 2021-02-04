@@ -2,8 +2,8 @@ package interfacceGrafiche;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import controllers.ControllerConsegne;
-import controllers.ControllerRider;
+import controllers.ControllerConsegneUtente;
+import controllers.ControllerConsegneRider;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 
 public class JDialogConfermaIncaricoRider extends JDialog {
 	
-	public JDialogConfermaIncaricoRider(String CodC, ControllerConsegne controller, ControllerRider cr) {
+	public JDialogConfermaIncaricoRider(String CodC, ControllerConsegneRider cr) {
 		setAlwaysOnTop(true);
 		setTitle("Conferma");
 		setBounds(100, 100, 361, 244);
@@ -30,7 +30,7 @@ public class JDialogConfermaIncaricoRider extends JDialog {
 		ButtonAccetta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String CodR = cr.getRider().getCodR();
-				controller.nuovoOrdineRider(CodR, CodC);
+				cr.nuovoOrdineRider(CodR, CodC);
 				cr.getHomeRider().aggiornaInterfaccia();
 				dispose();
 			}

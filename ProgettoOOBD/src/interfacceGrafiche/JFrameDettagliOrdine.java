@@ -57,6 +57,7 @@ public class JFrameDettagliOrdine extends JFrame {
 		}
 		
 		setVisible(true);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 	}
 

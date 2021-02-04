@@ -1,7 +1,6 @@
 package classiEntità;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Utenti {
 	

@@ -12,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 import classiEntità.Carrello;
 import classiEntità.Ristoranti;
 import controllers.ControllerCarrello;
-import controllers.ControllerConsegne;
+import controllers.ControllerConsegneUtente;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -30,7 +30,7 @@ public class JFrameCassa extends JFrame {
 	private JPanel contentPanel = new JPanel();
 	private JDialogConclusioneOrdine co;
 
-	public JFrameCassa(double totale, ControllerCarrello c, Carrello carrello, ControllerConsegne cor, ArrayList<Ristoranti> listaRistoranti) {
+	public JFrameCassa(double totale, ControllerCarrello c, Carrello carrello, ControllerConsegneUtente cor, ArrayList<Ristoranti> listaRistoranti) {
 		
 		setTitle("Pagamento");
 		setBounds(150, 150, 510, 273);

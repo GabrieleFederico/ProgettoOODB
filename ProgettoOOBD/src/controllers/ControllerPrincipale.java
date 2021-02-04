@@ -4,19 +4,17 @@ import classiEntità.Riders;
 import classiEntità.Ristoranti;
 import classiEntità.Utenti;
 import interfacceGrafiche.JFrameCarrello;
-import interfacceGrafiche.JFrameHomeRider;
-import interfacceGrafiche.JFrameLogin;
 
 public class ControllerPrincipale {
 
 	String Email;
 	ControllerCarrello ccarrello;
-	ControllerConsegne co = new ControllerConsegne();
+	ControllerConsegneUtente co = new ControllerConsegneUtente();
 	
 	public static void main(String[] args) {
 
 		ControllerPrincipale principale = new ControllerPrincipale();	
-		
+
 		principale.start();
 
 	}
@@ -34,7 +32,7 @@ public class ControllerPrincipale {
 	public void passaAdHomeRider(ControllerLogin c, Riders rider) {
 		
 		c = null;
-		ControllerRider cr = new ControllerRider(rider, co, this);
+		ControllerConsegneRider cr = new ControllerConsegneRider(rider, this);
 		
 	}
 	

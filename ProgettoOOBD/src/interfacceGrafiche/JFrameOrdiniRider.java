@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import classiEntità.Consegne;
 import classiEntità.Riders;
-import controllers.ControllerConsegne;
-import controllers.ControllerRider;
+import controllers.ControllerConsegneUtente;
+import controllers.ControllerConsegneRider;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
@@ -21,11 +21,8 @@ public class JFrameOrdiniRider extends JFrame {
 	private ArrayList<Consegne> listaConsegne;
 	private JDialogConfermaConsegnaOrdine conferma;
 	private int y = 70;
-	private Riders rider;
 
-	public JFrameOrdiniRider(ControllerConsegne c, Riders rider) {
-		
-		this.rider = rider;
+	public JFrameOrdiniRider(ControllerConsegneRider cr) {
 		
 		setTitle("I miei ordini");
 		setBounds(100, 100, 734, 490);
@@ -48,13 +45,13 @@ public class JFrameOrdiniRider extends JFrame {
 		ButtonIndietro.setBounds(619, 417, 89, 23);
 		contentPane.add(ButtonIndietro);
 		
-		getConsegneDaEffettuare(c);
+		getConsegneDaEffettuare(cr);
 
 	}
 	
-	public void getConsegneDaEffettuare(ControllerConsegne controller) {
+	public void getConsegneDaEffettuare(ControllerConsegneRider controller) {
 		
-		listaConsegne = controller.getOrdiniByRider(rider);
+		listaConsegne = controller.getOrdiniByRider();
 		
 		for (Consegne c : listaConsegne) {
 			

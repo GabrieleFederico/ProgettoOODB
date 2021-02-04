@@ -20,22 +20,18 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class JFrameLogin extends JFrame {
-
-	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
 	private JTextField TFEmail;
 	private JTextField TFPassword;
 	
-	ControllerLogin controllore;
-	ControllerPrincipale controller;
+	private ControllerLogin controller;
 	JDialogErroreLogin LoginSbagliato = new JDialogErroreLogin();
 	
 	public JFrameLogin(ControllerLogin c, ControllerPrincipale c1) {
 
 		setTitle("Login");
-		controllore=c;
-		controller = c1;
+		controller=c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 714, 516);
 		contentPane = new JPanel();
@@ -53,7 +49,7 @@ public class JFrameLogin extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e1) {
 				if(e1.getKeyCode() == KeyEvent.VK_ENTER) {
-					login(c1, c);
+					login(c1);
 				}
 			}
 		});
@@ -73,7 +69,7 @@ public class JFrameLogin extends JFrame {
 		JButton ButtonLogin = new JButton("Login");
 		ButtonLogin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				login(c1, c);
+				login(c1);
 			}
 		});
 		ButtonLogin.setBounds(276, 304, 89, 23);
@@ -111,7 +107,7 @@ public class JFrameLogin extends JFrame {
 		JButton ButtonRegistraRider = new JButton("Registrati da Rider");
 		ButtonRegistraRider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				c.loginRegistratiRiderButton();	
+				controller.loginRegistratiRiderButton();	
 			}
 		});
 		ButtonRegistraRider.setBounds(523, 432, 139, 23);
@@ -119,15 +115,15 @@ public class JFrameLogin extends JFrame {
 			
 		}
 	
-		public void login(ControllerPrincipale c1, ControllerLogin c) {
+		public void login(ControllerPrincipale c1) {
 			
 				try {
-					Riders r = c.getRider(TFEmail.getText(), TFPassword.getText());
-					Utenti u = c.controllaCredenziali(TFEmail.getText(), TFPassword.getText());
+					Riders r = controller.getRider(TFEmail.getText(), TFPassword.getText());
+					Utenti u = controller.controllaCredenziali(TFEmail.getText(), TFPassword.getText());
 					if(r != null) {
-						c.PassaAdHomeRider(c1, r);
+						controller.passaAdHomeRider(c1, r);
 					} else if (u != null) {
-						c.PassaAdHomeUtente(c1, u);
+						controller.passaAdHomeUtente(c1, u);
 					} else {
 						LoginSbagliato.setVisible(true);
 						svuotaCampi();

@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import classiEntità.Riders;
 import classiEntità.Utenti;
-import interfacceGrafiche.JDialogErroreLogin;
 import interfacceGrafiche.JFrameLogin;
 import interfacceGrafiche.JFrameRegistratiRider;
 import interfacceGrafiche.JFrameRegistratiUtente;
@@ -52,13 +51,13 @@ public class ControllerLogin {
 		return utente;
 	}
 
-	public void PassaAdHomeUtente(ControllerLogin this, ControllerPrincipale c, Utenti utente) {
+	public void passaAdHomeUtente(ControllerLogin this, ControllerPrincipale c, Utenti utente) {
 		fl.dispose();
 		c.passaAdHomeUtente(this, utente);
 
 	}
 	
-	public void PassaAdHomeRider(ControllerLogin this, ControllerPrincipale c, Riders rider) {
+	public void passaAdHomeRider(ControllerLogin this, ControllerPrincipale c, Riders rider) {
 		fl.dispose();
 		c.passaAdHomeRider(this, rider);
 
