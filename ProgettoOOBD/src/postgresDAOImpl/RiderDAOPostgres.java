@@ -81,15 +81,15 @@ public class RiderDAOPostgres implements RiderDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getOrdiniByRiderPS = connessione.prepareStatement("SELECT  CONSEGNE.CodC, CONSEGNE.Orario, CONSEGNE.IndirizzoP, CONSEGNE.IndirizzoA, CONSEGNE.emailutente,"
-					 										+ "UTENTE.Nome, UTENTE.Cognome FROM CONSEGNE NATURAL JOIN UTENTE"
+			getOrdiniByRiderPS = connessione.prepareStatement("SELECT CONSEGNE.CodC, CONSEGNE.Orario, CONSEGNE.IndirizzoP, CONSEGNE.IndirizzoA, CONSEGNE.emailutente, "
+					 										+ "UTENTE.Nome, UTENTE.Cognome FROM CONSEGNE NATURAL JOIN UTENTE "
 					 										+ "WHERE CONSEGNE.CodR = ?");
 			getOrdiniByRiderPS.setString(1, rider.getCodR());
 			ResultSet rs = getOrdiniByRiderPS.executeQuery();
 			connessione.close();
 			
 			if(rs.next()) {
-				consegne.setCodC(rs.getString("CodR"));
+				consegne.setCodC(rs.getString("CodC"));
 				consegne.setOrario(rs.getTime("orario"));
 				consegne.setIndirizzoP(rs.getString("IndirizzoP"));
 				consegne.setIndirizzoA(rs.getString("IndirizzoA"));

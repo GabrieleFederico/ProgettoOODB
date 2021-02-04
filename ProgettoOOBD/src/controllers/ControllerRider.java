@@ -12,8 +12,9 @@ public class ControllerRider {
 	private Rider rider;
 	private ControllerConsegne controller;
 	
-	public ControllerRider(Rider rider) {
+	public ControllerRider(Rider rider, ControllerConsegne c) {
 		
+		controller = c;
 		this.rider = rider;
 		JFrameHomeRider homeRider = new JFrameHomeRider(controller, this);
 		homeRider.setVisible(true);
@@ -32,5 +33,10 @@ public class ControllerRider {
 		return risultato;
 		
 	}
+
+	public ControllerConsegne getController() {
+		return controller;
+	}
+	
 	
 }

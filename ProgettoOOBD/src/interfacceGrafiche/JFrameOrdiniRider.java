@@ -19,7 +19,7 @@ public class JFrameOrdiniRider extends JFrame {
 	private int y = 70;
 
 	public JFrameOrdiniRider(ControllerRider controller) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 734, 490);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -50,7 +50,7 @@ public class JFrameOrdiniRider extends JFrame {
 			contentPane.add(LabelConsegna);
 			LabelConsegna.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent arg0) {
-					conferma = new JDialogConfermaConsegnaOrdine(c.getCodC());
+					conferma = new JDialogConfermaConsegnaOrdine(c.getCodC(), controller.getController());
 					conferma.setVisible(true);
 				}
 			});

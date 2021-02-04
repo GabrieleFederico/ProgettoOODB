@@ -33,7 +33,7 @@ public class ControllorePrincipale {
 	public void passaAdHomeRider(ControllerLogin c, Rider rider) {
 		
 		c = null;
-		ControllerRider cr = new ControllerRider(rider);
+		ControllerRider cr = new ControllerRider(rider, co);
 		
 	}
 	

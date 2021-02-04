@@ -14,9 +14,8 @@ import java.awt.event.ActionEvent;
 
 public class JDialogConfermaConsegnaOrdine extends JDialog {
 
-	private ControllerConsegne controller;
 	
-	public JDialogConfermaConsegnaOrdine(String CodC) {
+	public JDialogConfermaConsegnaOrdine(String CodC, ControllerConsegne c) {
 		setBounds(100, 100, 340, 228);
 		getContentPane().setLayout(null);
 		
@@ -27,7 +26,7 @@ public class JDialogConfermaConsegnaOrdine extends JDialog {
 		JButton ButtonConferma = new JButton("Conferma");
 		ButtonConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				controller.ordineConsegnato(CodC);
+				c.ordineConsegnato(CodC);
 				dispose();
 			}
 		});
