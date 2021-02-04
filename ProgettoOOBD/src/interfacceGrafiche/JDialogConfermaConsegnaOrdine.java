@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 public class JDialogConfermaConsegnaOrdine extends JDialog {
 
 	public JDialogConfermaConsegnaOrdine(String CodC, ControllerConsegne c) {
+		
 		setTitle("Conferma Ordine");
 		setBounds(100, 100, 348, 228);
 		getContentPane().setLayout(null);

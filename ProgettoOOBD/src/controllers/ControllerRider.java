@@ -16,7 +16,7 @@ public class ControllerRider {
 		
 		controller = c;
 		this.rider = rider;
-		JFrameHomeRider homeRider = new JFrameHomeRider(controller, this, c1);
+		JFrameHomeRider homeRider = new JFrameHomeRider(controller, this, c1, c, rider);
 		homeRider.setVisible(true);
 	}
 	
@@ -24,19 +24,5 @@ public class ControllerRider {
 		String CodR = rider.getCodR();
 		return CodR;
 	}
-
-	public ArrayList<Consegne> getOrdiniByRider() {
-		
-		RiderDAOPostgres rp = new RiderDAOPostgres();
-		ArrayList<Consegne> risultato = rp.getOrdiniByRider(rider);
-		
-		return risultato;
-		
-	}
-
-	public ControllerConsegne getController() {
-		return controller;
-	}
-	
 	
 }

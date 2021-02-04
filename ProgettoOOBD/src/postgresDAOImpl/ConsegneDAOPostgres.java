@@ -21,7 +21,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 
 	private Connection connessione;
 	private ConnessioneDB connessioneDB;
-	private PreparedStatement getConsegneByUtentePS, getConsegneByRiderPS, creaConsegnaPS, getConsegneByMezzoPS, getCodCOrdinePS;
+	private PreparedStatement getConsegneByUtentePS, getConsegneByRiderPS, creaConsegnaPS, getConsegneByMezzoPS, getOrdiniByRiderPS;
 	private PreparedStatement assegnaConsegnaRiderPS, ordineConsegnatoPS;
 	
 	@Override
@@ -33,17 +33,33 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-			getConsegneByUtentePS = connessione.prepareStatement("SELECT * FROM archivioconsegne NATURAL JOIN consegne WHERE emailutente = ?");
+			getConsegneByUtentePS = connessione.prepareStatement("SELECT * FROM archivioconsegne WHERE emailutente = ?");
 			getConsegneByUtentePS.setString(1, utente.getEmail());
 			ResultSet rs = getConsegneByUtentePS.executeQuery();
+			
+			
+			while(rs.next()) {
+				temp = new Consegne();
+				temp.setCodC(rs.getString("codc"));
+				temp.setOrario(rs.getTimestamp("dataeoraconsegna"));
+				temp.setIndirizzoP(rs.getString("indirizzop"));
+				temp.setIndirizzoA(rs.getString("indirizzoa"));
+				temp.setConsegnato(true);
+				risultato.add(temp);
+			}
+			
+			getConsegneByUtentePS = connessione.prepareStatement("SELECT * FROM consegne WHERE emailutente = ?");
+			getConsegneByUtentePS.setString(1, utente.getEmail());
+			rs = getConsegneByUtentePS.executeQuery();
 			connessione.close();
 			
 			while(rs.next()) {
 				temp = new Consegne();
 				temp.setCodC(rs.getString("codc"));
-				temp.setOrario(rs.getTime("dataconsegna"));
+				temp.setOrario(rs.getTimestamp("orario"));
 				temp.setIndirizzoP(rs.getString("indirizzop"));
 				temp.setIndirizzoA(rs.getString("indirizzoa"));
+				temp.setConsegnato(rs.getBoolean("consegnato"));
 				risultato.add(temp);
 			}
 		} 
@@ -71,7 +87,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			while(rs.next()) {
 				temp = new Consegne();
 				temp.setCodC(rs.getString("codc"));
-				temp.setOrario(rs.getTime("dataconsegna"));
+				temp.setOrario(rs.getTimestamp("dataconsegna"));
 				temp.setIndirizzoP(rs.getString("indirizzop"));
 				temp.setIndirizzoA(rs.getString("indirizzoa"));
 				risultato.add(temp);
@@ -125,7 +141,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			while(rs.next()) {
 				temp = new Consegne();
 				temp.setCodC(rs.getString("CodC"));
-				temp.setOrario(rs.getTime("Orario"));
+				temp.setOrario(rs.getTimestamp("Orario"));
 				temp.setIndirizzoP(rs.getString("IndirizzoP"));
 				temp.setIndirizzoA(rs.getString("IndirizzoA"));
 				utente.setNome(rs.getString("nome"));
@@ -175,6 +191,44 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			System.out.println(e.getMessage());
 		}
 		
+	}
+	
+	public ArrayList<Consegne> getOrdiniByRider(Rider rider) {
+		
+		ArrayList<Consegne> risultato = new ArrayList<Consegne>();
+		
+		try {
+			connessioneDB = ConnessioneDB.getIstanza();
+			connessione = connessioneDB.getConnessione();
+			getOrdiniByRiderPS = connessione.prepareStatement("SELECT CONSEGNE.CodC, CONSEGNE.Orario, CONSEGNE.IndirizzoP, CONSEGNE.IndirizzoA, CONSEGNE.emailutente, "
+					 										+ "UTENTE.Nome, UTENTE.Cognome FROM CONSEGNE NATURAL JOIN UTENTE "
+					 										+ "WHERE CONSEGNE.CodR = ?");
+			getOrdiniByRiderPS.setString(1, rider.getCodR());
+			ResultSet rs = getOrdiniByRiderPS.executeQuery();
+			connessione.close();
+			
+			while(rs.next()) {
+				Consegne consegne = new Consegne();
+				consegne.setCodC(rs.getString("CodC"));
+				consegne.setOrario(rs.getTimestamp("orario"));
+				consegne.setIndirizzoP(rs.getString("IndirizzoP"));
+				consegne.setIndirizzoA(rs.getString("IndirizzoA"));
+				Utente utente = new Utente();
+				utente.setNome(rs.getString("nome"));
+				utente.setCognome(rs.getString("cognome"));
+				utente.setEmail(rs.getString("EmailUtente"));
+				Carrello carrello = new Carrello();
+				carrello.setProprietario(utente);
+				consegne.setComposizioneConsegna(carrello);
+				risultato.add(consegne);
+			}  
+			
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return risultato;
 	}
 		
 }

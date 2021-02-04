@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import classiEntità.Consegne;
+import classiEntità.Rider;
+import controllers.ControllerConsegne;
 import controllers.ControllerRider;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -19,11 +21,15 @@ public class JFrameOrdiniRider extends JFrame {
 	private ArrayList<Consegne> listaConsegne;
 	private JDialogConfermaConsegnaOrdine conferma;
 	private int y = 70;
+	private Rider rider;
 
-	public JFrameOrdiniRider(ControllerRider controller) {
-		setTitle("I miei ordini");
+	public JFrameOrdiniRider(ControllerConsegne c, Rider rider) {
 		
+		this.rider = rider;
+		
+		setTitle("I miei ordini");
 		setBounds(100, 100, 734, 490);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -42,13 +48,13 @@ public class JFrameOrdiniRider extends JFrame {
 		ButtonIndietro.setBounds(619, 417, 89, 23);
 		contentPane.add(ButtonIndietro);
 		
-		getConsegneDaEffettuare(controller);
+		getConsegneDaEffettuare(c);
 
 	}
 	
-	public void getConsegneDaEffettuare(ControllerRider controller) {
+	public void getConsegneDaEffettuare(ControllerConsegne controller) {
 		
-		listaConsegne = controller.getOrdiniByRider();
+		listaConsegne = controller.getOrdiniByRider(rider);
 		
 		for (Consegne c : listaConsegne) {
 			
@@ -62,7 +68,7 @@ public class JFrameOrdiniRider extends JFrame {
 			contentPane.add(bottone);
 			bottone.addActionListener(new ActionListener() {
 				public void  actionPerformed(ActionEvent arg0) {
-					conferma = new JDialogConfermaConsegnaOrdine(c.getCodC(), controller.getController());
+					conferma = new JDialogConfermaConsegnaOrdine(c.getCodC(), controller);
 					conferma.setVisible(true);
 				}
 			});

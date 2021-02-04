@@ -33,6 +33,7 @@ public class JDialogConclusioneOrdine extends JDialog {
 		ButtonOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
+				dispose();
 				c.getfc().dispose();
 				
 			}

@@ -32,11 +32,12 @@ public class JFrameOrdiniUtente extends JFrame {
 	private JScrollPane scrollPane;
 	private JLabel ordine;
 	private JButton dettagliOrdine;
-	private ArrayList<JButton> bottoni;
+	private ArrayList<JButton> bottoni = new ArrayList<JButton>();
 	private ArrayList<Consegne> ordini;
 	
 	public JFrameOrdiniUtente(ControllerConsegne co, Utente u) {
 
+		setTitle("I Miei Ordini");
 		setBounds(100, 100, 649, 455);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -46,28 +47,35 @@ public class JFrameOrdiniUtente extends JFrame {
 		ordini = co.getOrdiniByUtente(u);
 		
 		int y = 25;
-		int lung = 20;
+		int lung = 50;
 		int larg = 185;
 		int xLabel = 100;
 		int xBottone = 400;
 		
 		JPanel pannelloScrollPane = new JPanel();
 		pannelloScrollPane.setLayout(null);
-		pannelloScrollPane.setPreferredSize(new Dimension(733, ordini.size()*50));
+		pannelloScrollPane.setPreferredSize(new Dimension(733, ordini.size()*52));
 		
-		scrollPane = new JScrollPane(pannelloScrollPane, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane = new JScrollPane(pannelloScrollPane, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 68, 733, 354);
 		contentPane.add(scrollPane);
 		
 		for(Consegne o : ordini) {
 			
-			ordine = new JLabel(o.getCodC());
+			if(o.isConsegnato()) {
+				ordine = new JLabel("<html>Ordine numero: " + o.getCodC() + "<br>" + "Consegnato alle: " + o.getOrario() + "</html>");
+			}
+			else {
+				ordine = new JLabel("<html>Ordine numero: " + o.getCodC() + "<br>" + "Non ancora consegnato" + "</html>");
+			}
+			
+			
 			ordine.setBounds(xLabel, y, larg, lung);
 			
 			pannelloScrollPane.add(ordine);
 
 			dettagliOrdine = new JButton("Dettagli Ordine");
-			dettagliOrdine.setBounds(xBottone, y, 150, lung);
+			dettagliOrdine.setBounds(xBottone, y, 150, 20);
 			
 			dettagliOrdine.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -77,7 +85,7 @@ public class JFrameOrdiniUtente extends JFrame {
 			});
 			pannelloScrollPane.add(dettagliOrdine);
 
-			y += 50;
+			y += 70;
 			
 			bottoni.add(dettagliOrdine);
 

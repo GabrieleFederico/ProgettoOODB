@@ -16,7 +16,9 @@ public class Carrello {
 		Quantit‡Prodotti = new ArrayList<Integer>();
 		provenienzaProdotti = new ArrayList<Ristorante>();
 	}
+	
 	public Carrello() {
+		Prezzi = new ArrayList<Double>();
 		Prodotti = new ArrayList<Prodotto>();
 		Quantit‡Prodotti = new ArrayList<Integer>();
 		provenienzaProdotti = new ArrayList<Ristorante>();

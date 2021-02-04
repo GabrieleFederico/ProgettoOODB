@@ -20,7 +20,7 @@ public class RiderDAOPostgres implements RiderDAO{
 
 	private Connection connessione;
 	private ConnessioneDB connessioneDB;
-	private PreparedStatement getRiderByEmailPS, inserisciRiderPS, getOrdiniByRiderPS;
+	private PreparedStatement getRiderByEmailPS, inserisciRiderPS;
 
 	
 	public Rider getRiderByEmail(String email, String password) {
@@ -71,43 +71,7 @@ public class RiderDAOPostgres implements RiderDAO{
 		}
 	}
 
-	public ArrayList<Consegne> getOrdiniByRider(Rider rider) {
-		
-		ArrayList<Consegne> risultato = new ArrayList<Consegne>();
-		
-		try {
-			connessioneDB = ConnessioneDB.getIstanza();
-			connessione = connessioneDB.getConnessione();
-			getOrdiniByRiderPS = connessione.prepareStatement("SELECT CONSEGNE.CodC, CONSEGNE.Orario, CONSEGNE.IndirizzoP, CONSEGNE.IndirizzoA, CONSEGNE.emailutente, "
-					 										+ "UTENTE.Nome, UTENTE.Cognome FROM CONSEGNE NATURAL JOIN UTENTE "
-					 										+ "WHERE CONSEGNE.CodR = ?");
-			getOrdiniByRiderPS.setString(1, rider.getCodR());
-			ResultSet rs = getOrdiniByRiderPS.executeQuery();
-			connessione.close();
-			
-			while(rs.next()) {
-				Consegne consegne = new Consegne();
-				consegne.setCodC(rs.getString("CodC"));
-				consegne.setOrario(rs.getTime("orario"));
-				consegne.setIndirizzoP(rs.getString("IndirizzoP"));
-				consegne.setIndirizzoA(rs.getString("IndirizzoA"));
-				Utente utente = new Utente();
-				utente.setNome(rs.getString("nome"));
-				utente.setCognome(rs.getString("cognome"));
-				utente.setEmail(rs.getString("EmailUtente"));
-				Carrello carrello = new Carrello();
-				carrello.setProprietario(utente);
-				consegne.setComposizioneConsegna(carrello);
-				risultato.add(consegne);
-			}  
-			
-			
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		
-		return risultato;
-	}
+
 
 
 }

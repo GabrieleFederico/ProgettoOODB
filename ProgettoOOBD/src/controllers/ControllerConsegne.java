@@ -12,6 +12,7 @@ import interfacceGrafiche.JFrameDettagliOrdine;
 import interfacceGrafiche.JFrameOrdiniUtente;
 import postgresDAOImpl.CarrelloDAOPostgres;
 import postgresDAOImpl.ConsegneDAOPostgres;
+import postgresDAOImpl.RiderDAOPostgres;
 
 public class ControllerConsegne {
 	
@@ -36,9 +37,12 @@ public class ControllerConsegne {
 		return ris;
 	}
 	
-	public ArrayList<Consegne> getOrdiniByRider(){
+	public ArrayList<Consegne> getOrdiniByRider(Rider rider){
 		
-		return null;
+		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
+		ArrayList<Consegne> risultato = cp.getOrdiniByRider(rider);
+		
+		return risultato;
 	}
 	
 	public void apriDettagli(Consegne ordine) {

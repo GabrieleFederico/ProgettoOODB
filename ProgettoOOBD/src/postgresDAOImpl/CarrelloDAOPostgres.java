@@ -177,6 +177,9 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		
 		Prodotto temp;
 		Carrello risultato = new Carrello();
+		Ristorante temp2 = new Ristorante();
+		String provenienza;
+		boolean sentinella = true;
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -185,13 +188,23 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			getCarrelloByOrdinePS.setString(1, ordine.getCodC());
 			ResultSet rs = getCarrelloByOrdinePS.executeQuery();
 			connessione.close();
-			
+
 			while(rs.next()){
 				temp = new Prodotto();
 				temp.setNomeP(rs.getString("prodotto"));
 				risultato.getProdotti().add(temp);
 				risultato.getPrezzi().add(rs.getDouble("prezzo"));
+				
+				if(sentinella) {
+					provenienza = rs.getString("provenienzaprodotto");
+					temp2.setNome(provenienza.substring(0, provenienza.indexOf(",")));
+					temp2.setIndirizzo(provenienza.substring(provenienza.indexOf(",")+1));
+					sentinella = false;
+				}
 			}
+			
+			
+			risultato.getProvenienzaProdotti().add(temp2);
 				
 		}
 		catch (SQLException e) {

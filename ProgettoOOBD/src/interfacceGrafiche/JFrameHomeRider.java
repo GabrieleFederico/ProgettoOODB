@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import classiEntità.Consegne;
+import classiEntità.Rider;
 import controllers.ControllerConsegne;
 import controllers.ControllerRider;
 import controllers.ControllorePrincipale;
@@ -30,7 +31,8 @@ public class JFrameHomeRider extends JFrame {
 	private ControllerRider c2;
 	private JFrameOrdiniRider iMieiOrdini;
 	
-	public JFrameHomeRider(ControllerConsegne controller, ControllerRider cr, ControllorePrincipale c1) {
+	public JFrameHomeRider(ControllerConsegne controller, ControllerRider cr, ControllorePrincipale c1, ControllerConsegne c, Rider rider) {
+		
 		c2 = cr;
 		setTitle("Home");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,7 +51,7 @@ public class JFrameHomeRider extends JFrame {
 		ButtonIMieiOrdini.setBounds(589, 447, 100, 23);
 		ButtonIMieiOrdini.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				iMieiOrdini = new JFrameOrdiniRider(cr);
+				iMieiOrdini = new JFrameOrdiniRider(c, rider);
 				iMieiOrdini.setVisible(true);
 			}
 		});
