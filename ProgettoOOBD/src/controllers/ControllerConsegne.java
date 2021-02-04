@@ -71,6 +71,7 @@ public class ControllerConsegne {
 		
 		for(Ristorante r : listaRistoranti) {
 			if (!Objects.equals(r.getIndirizzo(), provenienza)){
+				cp.creaConsegna(r.getIndirizzo(), carrello.getProprietario(), mezzo, orario);
 				provenienza = r.getIndirizzo();
 			}
 			c.ArchiviaCarrello(carrello, r);
