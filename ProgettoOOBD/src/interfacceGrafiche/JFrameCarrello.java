@@ -8,8 +8,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 import classiEntità.Carrello;
-import classiEntità.Prodotto;
-import classiEntità.Ristorante;
+import classiEntità.Prodotti;
+import classiEntità.Ristoranti;
 import controllers.ControllerCarrello;
 import controllers.ControllerConsegne;
 import controllers.ControllerRicercaMenu;
@@ -33,9 +33,8 @@ public class JFrameCarrello extends JFrame {
 	private double totale = 0;
 	private Carrello carrello;
 	private JScrollPane scrollPane;
-	private ControllerRicercaMenu controllerMenu;
 	private JFrameCassa cassa;
-	ArrayList<Ristorante> listaRistoranti = new ArrayList<Ristorante>();
+	ArrayList<Ristoranti> listaRistoranti = new ArrayList<Ristoranti>();
 
 	public JFrameCarrello(ControllerCarrello c, ControllerConsegne co) {
 		controller = c;
@@ -127,7 +126,7 @@ public class JFrameCarrello extends JFrame {
 		scrollPane.setBounds(10, 68, 733, 354);
 		contentPane.add(scrollPane);
 		
-		for(Prodotto p : carrello.getProdotti()) {
+		for(Prodotti p : carrello.getProdotti()) {
  
 			provenienza = new JLabel(listaRistoranti.get(index).getNome());
 			
@@ -161,7 +160,7 @@ public class JFrameCarrello extends JFrame {
 					pannelloScrollPane.remove(contatori.get(bottoni.indexOf(source)));
 					carrello.getProdotti().remove(bottoni.indexOf(source));
 					
-					Ristorante temp = carrello.getProvenienzaProdotti().get(bottoni.indexOf(source));
+					Ristoranti temp = carrello.getProvenienzaProdotti().get(bottoni.indexOf(source));
 					carrello.getProvenienzaProdotti().remove(bottoni.indexOf(source));
 					
 					if(!prodottiInRistorante) {
@@ -201,7 +200,7 @@ public class JFrameCarrello extends JFrame {
 					JSpinner source = (JSpinner) e.getSource();
 					String nomeProdotto = p.getNomeP();
 					int nuovoValore = (int) contatori.get(contatori.indexOf(source)).getValue();
-					controller.ModificaQuantitàCarrello(nuovoValore, carrello, nomeProdotto);
+					controller.modificaQuantitàCarrello(nuovoValore, carrello, nomeProdotto);
 					prezziJLabel.get(contatori.indexOf(source)).setText((prezzoArticoloSingolo * nuovoValore + "€"));
 					String nuovoPrezzoTotale = String.valueOf(getPrezzoTotale(prezziJLabel));
 					totaleDaPagare.setText(nuovoPrezzoTotale);

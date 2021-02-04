@@ -6,18 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import classiEntità.Utente;
+import classiEntità.Utenti;
 import dbConn.ConnessioneDB;
-import interfacceDAO.UtenteDAO;
+import interfacceDAO.UtentiDAO;
 
-public class UtenteDAOPostgres implements UtenteDAO {
+public class UtenteDAOPostgres implements UtentiDAO {
 
 	private ConnessioneDB connessioneDB;
 	private Connection connessione;
 	private PreparedStatement inserisciUtentePS, esisteUtentePS;
 
 	@Override
-	public void inserisciUtente(Utente utente) {
+	public void inserisciUtente(Utenti utente) {
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
@@ -36,9 +36,9 @@ public class UtenteDAOPostgres implements UtenteDAO {
 	}
 	
 	@Override
-	public Utente getUtenteByCredenziali(String email, String pwd) {
+	public Utenti getUtenteByCredenziali(String email, String pwd) {
 		
-		Utente risultato = new Utente();
+		Utenti risultato = new Utenti();
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();

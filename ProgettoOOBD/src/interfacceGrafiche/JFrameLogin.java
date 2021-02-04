@@ -4,10 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import classiEntità.Rider;
-import classiEntità.Utente;
+import classiEntità.Riders;
+import classiEntità.Utenti;
 import controllers.ControllerLogin;
-import controllers.ControllorePrincipale;
+import controllers.ControllerPrincipale;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -28,10 +28,10 @@ public class JFrameLogin extends JFrame {
 	private JTextField TFPassword;
 	
 	ControllerLogin controllore;
-	ControllorePrincipale controller;
+	ControllerPrincipale controller;
 	JDialogErroreLogin LoginSbagliato = new JDialogErroreLogin();
 	
-	public JFrameLogin(ControllerLogin c, ControllorePrincipale c1) {
+	public JFrameLogin(ControllerLogin c, ControllerPrincipale c1) {
 
 		setTitle("Login");
 		controllore=c;
@@ -64,7 +64,7 @@ public class JFrameLogin extends JFrame {
 		JButton ButtonRegistrati = new JButton("Registrati");
 		ButtonRegistrati.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				c.LoginRegistratiButton();	 
+				c.loginRegistratiButton();	 
 			}
 		});
 		ButtonRegistrati.setBounds(523, 389, 139, 23);
@@ -111,7 +111,7 @@ public class JFrameLogin extends JFrame {
 		JButton ButtonRegistraRider = new JButton("Registrati da Rider");
 		ButtonRegistraRider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				c.LoginRegistratiRiderButton();	
+				c.loginRegistratiRiderButton();	
 			}
 		});
 		ButtonRegistraRider.setBounds(523, 432, 139, 23);
@@ -119,11 +119,11 @@ public class JFrameLogin extends JFrame {
 			
 		}
 	
-		public void login(ControllorePrincipale c1, ControllerLogin c) {
+		public void login(ControllerPrincipale c1, ControllerLogin c) {
 			
 				try {
-					Rider r = c.getRider(TFEmail.getText(), TFPassword.getText());
-					Utente u = c.ControllaCredenziali(TFEmail.getText(), TFPassword.getText());
+					Riders r = c.getRider(TFEmail.getText(), TFPassword.getText());
+					Utenti u = c.controllaCredenziali(TFEmail.getText(), TFPassword.getText());
 					if(r != null) {
 						c.PassaAdHomeRider(c1, r);
 					} else if (u != null) {

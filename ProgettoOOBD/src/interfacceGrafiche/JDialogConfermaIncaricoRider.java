@@ -29,8 +29,9 @@ public class JDialogConfermaIncaricoRider extends JDialog {
 		JButton ButtonAccetta = new JButton("Accetta");
 		ButtonAccetta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String CodR = cr.getCodR();
+				String CodR = cr.getRider().getCodR();
 				controller.nuovoOrdineRider(CodR, CodC);
+				cr.getHomeRider().aggiornaInterfaccia();
 				dispose();
 			}
 		});

@@ -6,10 +6,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import classiEntità.Consegne;
-import classiEntità.Rider;
+import classiEntità.Riders;
 import controllers.ControllerConsegne;
 import controllers.ControllerRider;
-import controllers.ControllorePrincipale;
+import controllers.ControllerPrincipale;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -31,7 +31,7 @@ public class JFrameHomeRider extends JFrame {
 	private ControllerRider c2;
 	private JFrameOrdiniRider iMieiOrdini;
 	
-	public JFrameHomeRider(ControllerConsegne controller, ControllerRider cr, ControllorePrincipale c1, ControllerConsegne c, Rider rider) {
+	public JFrameHomeRider(ControllerConsegne controller, ControllerRider cr, ControllerPrincipale c1, Riders rider) {
 		
 		c2 = cr;
 		setTitle("Home");
@@ -51,7 +51,7 @@ public class JFrameHomeRider extends JFrame {
 		ButtonIMieiOrdini.setBounds(589, 447, 100, 23);
 		ButtonIMieiOrdini.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				iMieiOrdini = new JFrameOrdiniRider(c, rider);
+				iMieiOrdini = new JFrameOrdiniRider(controller, rider);
 				iMieiOrdini.setVisible(true);
 			}
 		});
@@ -60,7 +60,7 @@ public class JFrameHomeRider extends JFrame {
 		JButton ButtonLogout = new JButton("Logout");
 		ButtonLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				c1.Logout();
+				c1.logout();
 				dispose();
 			}
 		});

@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 import classiEntit‡.Carrello;
 import classiEntit‡.Consegne;
-import classiEntit‡.Ristorante;
-import classiEntit‡.Utente;
+import classiEntit‡.Ristoranti;
+import classiEntit‡.Utenti;
 
 public interface CarrelloDAO {
 	
-	public void aggiungiProdottoAlCarrello(String nomep, int quantit‡, Utente utente, double prezzo, Ristorante ristorante);
-	public Carrello getCarrelloByUtente(Utente utente);
-	public Ristorante rimuoviProdottoDalCarrello(Carrello carrello, int indice);
-	public boolean esisteRistoranteNelCarrello(Ristorante rist);
+	public void aggiungiProdottoAlCarrello(String nomep, int quantit‡, Utenti utente, double prezzo, Ristoranti ristorante);
+	public Carrello getCarrelloByUtente(Utenti utente);
+	public Ristoranti rimuoviProdottoDalCarrello(Carrello carrello, int indice);
+	public boolean esisteRistoranteNelCarrello(Ristoranti rist);
 	public ArrayList<Double> getArrayListPrezzi(Carrello carrello);
 	public void cambiaQuantit‡Carrello(int nuovoValore, Carrello carrello, String nomeProdotto);
 	public Carrello getCarrelloByOrdine(Consegne ordine);
-	public void archiviaCarrello(Carrello carrello, Ristorante r);
+	public void archiviaCarrello(Carrello carrello, Ristoranti r);
 }

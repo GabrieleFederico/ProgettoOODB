@@ -3,13 +3,13 @@ package classiEntità;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Rider {
+public class Riders {
 
 	private String CodR;
 	private String Nome;
 	private String Cognome;
 	private String Mezzo;
-	private ArrayList<Ristorante> Ristoranti;
+	private ArrayList<Ristoranti> Ristoranti;
 	private LinkedList<Consegne> ConsegneDaFare;
 	
 	public String getCodR() {
@@ -40,10 +40,10 @@ public class Rider {
 		Mezzo = mezzo;
 	}
 	
-	public ArrayList<Ristorante> getRistoranti() {
+	public ArrayList<Ristoranti> getRistoranti() {
 		return Ristoranti;
 	}
-	public void setRistoranti(ArrayList<Ristorante> ristoranti) {
+	public void setRistoranti(ArrayList<Ristoranti> ristoranti) {
 		Ristoranti = ristoranti;
 	}
 	

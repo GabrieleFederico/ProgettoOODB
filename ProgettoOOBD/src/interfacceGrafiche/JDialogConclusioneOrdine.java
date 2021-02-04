@@ -34,7 +34,7 @@ public class JDialogConclusioneOrdine extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				dispose();
-				c.getfc().dispose();
+				c.getJFrameCarrello().dispose();
 				
 			}
 		});

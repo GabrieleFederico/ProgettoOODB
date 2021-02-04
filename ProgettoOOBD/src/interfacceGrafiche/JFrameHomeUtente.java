@@ -3,10 +3,10 @@ package interfacceGrafiche;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import classiEntità.Ristorante;
-import classiEntità.Utente;
+import classiEntità.Ristoranti;
+import classiEntità.Utenti;
 import controllers.ControllerRicercaRistoranti;
-import controllers.ControllorePrincipale;
+import controllers.ControllerPrincipale;
 import javax.swing.JTextField;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -27,12 +27,10 @@ public class JFrameHomeUtente extends JFrame {
 	private JTextField inputTF;
 	private int componentiNecessarie;
 	private JScrollPane scrollPane;
-	ControllerRicercaRistoranti controller;
-	ControllorePrincipale controllore;
+	private ControllerPrincipale controllore;
 
-	public JFrameHomeUtente(ControllerRicercaRistoranti c, ControllorePrincipale c1, Utente utente) {
+	public JFrameHomeUtente(ControllerRicercaRistoranti c, ControllerPrincipale c1, Utenti utente) {
 		setTitle("Home");
-		controller = c;
 		controllore = c1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 769, 511);
@@ -49,7 +47,7 @@ public class JFrameHomeUtente extends JFrame {
 		JButton LogOutButton = new JButton("Log Out");
 		LogOutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				c1.Logout();
+				c1.logout();
 				dispose();
 			}
 		});
@@ -148,7 +146,7 @@ public class JFrameHomeUtente extends JFrame {
 		});
 	}
 	
-	public void aggiornaInterfacciaRistoranti(JPanel pannello, int componentiNecessarie, ArrayList<Ristorante> risultatoRicerca, ControllorePrincipale c1) {
+	public void aggiornaInterfacciaRistoranti(JPanel pannello, int componentiNecessarie, ArrayList<Ristoranti> risultatoRicerca, ControllerPrincipale c1) {
 
 		JLabel labelRisultato;
 		
@@ -169,7 +167,7 @@ public class JFrameHomeUtente extends JFrame {
 		scrollPane.setBounds(10, 68, 733, 354);
 		contentPane.add(scrollPane);
 		
-		for (Ristorante r : risultatoRicerca) {
+		for (Ristoranti r : risultatoRicerca) {
 			
 			labelRisultato = new JLabel(r.getNome());
 			labelRisultato.setBorder(new EmptyBorder(0, 60, 0, 0));

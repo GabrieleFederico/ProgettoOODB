@@ -1,13 +1,13 @@
 package controllers;
 
-import classiEntità.Rider;
-import classiEntità.Ristorante;
-import classiEntità.Utente;
+import classiEntità.Riders;
+import classiEntità.Ristoranti;
+import classiEntità.Utenti;
 import interfacceGrafiche.JFrameCarrello;
 import interfacceGrafiche.JFrameHomeRider;
 import interfacceGrafiche.JFrameLogin;
 
-public class ControllorePrincipale {
+public class ControllerPrincipale {
 
 	String Email;
 	ControllerCarrello ccarrello;
@@ -15,7 +15,7 @@ public class ControllorePrincipale {
 	
 	public static void main(String[] args) {
 
-		ControllorePrincipale principale = new ControllorePrincipale();	
+		ControllerPrincipale principale = new ControllerPrincipale();	
 		
 		principale.start();
 
@@ -25,25 +25,25 @@ public class ControllorePrincipale {
 		ControllerLogin c = new ControllerLogin(this);
 	}
 	
-	public void passaAdHomeUtente(ControllerLogin c, Utente utente) {
+	public void passaAdHomeUtente(ControllerLogin c, Utenti utente) {
 		ccarrello = new ControllerCarrello(utente);
 		c = null;
 		ControllerRicercaRistoranti c1 = new ControllerRicercaRistoranti(this, utente);
 	}
 	
-	public void passaAdHomeRider(ControllerLogin c, Rider rider) {
+	public void passaAdHomeRider(ControllerLogin c, Riders rider) {
 		
 		c = null;
 		ControllerRider cr = new ControllerRider(rider, co, this);
 		
 	}
 	
-	public void passaAInterfacciaRistorante(Ristorante r) {
+	public void passaAInterfacciaRistorante(Ristoranti r) {
 		ControllerRicercaMenu crm = new ControllerRicercaMenu(r, ccarrello);
 
 	}
 	
-	public void apriOrdini(Utente u) {
+	public void apriOrdini(Utenti u) {
 
 		co.apriOrdini(u);
 		
@@ -54,7 +54,7 @@ public class ControllorePrincipale {
 		ccarrello.fc.aggiornaInterfacciaCarrello();
 	}
 
-	public void Logout() {
+	public void logout() {
 		start();	
 	}
 }

@@ -1,28 +1,31 @@
 package controllers;
 
-import java.util.ArrayList;
-
-import classiEntità.Consegne;
-import classiEntità.Rider;
+import classiEntità.Riders;
 import interfacceGrafiche.JFrameHomeRider;
-import postgresDAOImpl.RiderDAOPostgres;
 
 public class ControllerRider {
 	
-	private Rider rider;
+	private Riders rider;
 	private ControllerConsegne controller;
+	private JFrameHomeRider homeRider;
 	
-	public ControllerRider(Rider rider, ControllerConsegne c, ControllorePrincipale c1) {
+	public ControllerRider(Riders rider, ControllerConsegne c, ControllerPrincipale c1) {
 		
 		controller = c;
 		this.rider = rider;
-		JFrameHomeRider homeRider = new JFrameHomeRider(controller, this, c1, c, rider);
+		homeRider = new JFrameHomeRider(controller, this, c1, rider);
 		homeRider.setVisible(true);
 	}
-	
-	public String getCodR() {
-		String CodR = rider.getCodR();
-		return CodR;
+
+	public JFrameHomeRider getHomeRider() {
+		return homeRider;
 	}
+
+	public Riders getRider() {
+		return rider;
+	}
+	
+
+	
 	
 }

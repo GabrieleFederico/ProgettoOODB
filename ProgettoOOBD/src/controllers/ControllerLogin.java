@@ -2,8 +2,8 @@ package controllers;
 
 import java.sql.SQLException;
 
-import classiEntità.Rider;
-import classiEntità.Utente;
+import classiEntità.Riders;
+import classiEntità.Utenti;
 import interfacceGrafiche.JDialogErroreLogin;
 import interfacceGrafiche.JFrameLogin;
 import interfacceGrafiche.JFrameRegistratiRider;
@@ -16,26 +16,26 @@ public class ControllerLogin {
 	private JFrameRegistratiUtente fr;
 	private JFrameLogin fl;
 	private JFrameRegistratiRider frr;
-	private ControllorePrincipale cc;
+	private ControllerPrincipale cc;
 
-	public ControllerLogin(ControllorePrincipale controller) {
+	public ControllerLogin(ControllerPrincipale controller) {
 
 		fl = new JFrameLogin(this, controller);
 		fl.setVisible(true);
 		cc = controller;
 	}
 
-	public void LoginRegistratiButton() {
+	public void loginRegistratiButton() {
 
 		fr = new JFrameRegistratiUtente(this);
 		fl.setVisible(false);
 		fr.setVisible(true);
 	}
 
-	public void RegistraCredenzialiUtente(String email, String pwd, String nome, String cognome, String indirizzo) throws SQLException {
+	public void registraCredenzialiUtente(String email, String pwd, String nome, String cognome, String indirizzo) throws SQLException {
 
 		UtenteDAOPostgres u1 = new UtenteDAOPostgres();
-		Utente utente = new Utente(email, pwd, nome, cognome, indirizzo);
+		Utenti utente = new Utenti(email, pwd, nome, cognome, indirizzo);
 		u1.inserisciUtente(utente);
 		
 		fl.setVisible(true);
@@ -43,36 +43,36 @@ public class ControllerLogin {
 
 	}
 
-	public Utente ControllaCredenziali(String email, String pwd) throws SQLException {
+	public Utenti controllaCredenziali(String email, String pwd) throws SQLException {
 		
 		UtenteDAOPostgres u2 = new UtenteDAOPostgres();
-		Utente utente = new Utente();
+		Utenti utente = new Utenti();
 		utente = u2.getUtenteByCredenziali(email, pwd);
 		
 		return utente;
 	}
 
-	public void PassaAdHomeUtente(ControllerLogin this, ControllorePrincipale c, Utente utente) {
+	public void PassaAdHomeUtente(ControllerLogin this, ControllerPrincipale c, Utenti utente) {
 		fl.dispose();
 		c.passaAdHomeUtente(this, utente);
 
 	}
 	
-	public void PassaAdHomeRider(ControllerLogin this, ControllorePrincipale c, Rider rider) {
+	public void PassaAdHomeRider(ControllerLogin this, ControllerPrincipale c, Riders rider) {
 		fl.dispose();
 		c.passaAdHomeRider(this, rider);
 
 	}
 	
-	public Rider getRider(String email, String password) {
+	public Riders getRider(String email, String password) {
 		
 		RiderDAOPostgres rd = new RiderDAOPostgres();
-		Rider rider = rd.getRiderByEmail(email, password);
+		Riders rider = rd.getRiderByEmail(email, password);
 		
 		return rider;
 	}
 	
-	public void RegistraCredenzialiRider(String nome, String cognome, String email, String mezzo, String password) {
+	public void registraCredenzialiRider(String nome, String cognome, String email, String mezzo, String password) {
 		
 		RiderDAOPostgres r1 = new RiderDAOPostgres();
 		r1.inserisciRider(nome, cognome, email, mezzo, password);
@@ -80,21 +80,21 @@ public class ControllerLogin {
 		frr.setVisible(false);		
 	}
 
-	public void LoginRegistratiRiderButton() {
+	public void loginRegistratiRiderButton() {
 		frr = new JFrameRegistratiRider(this);
 		fl.setVisible(false);
 		frr.setVisible(true);
 		
 	}
 
-	public void TornaHomeDaUtente() {
+	public void tornaHomeDaUtente() {
 		
 		fr.setVisible(false);
 		fl = new JFrameLogin(this, cc);
 		fl.setVisible(true);
 	}
 	
-	public void TornaHomeDaRider() {
+	public void tornaHomeDaRider() {
 
 		frr.setVisible(false);
 		fl = new JFrameLogin(this, cc);

@@ -12,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 
 import classiEntità.Carrello;
 import classiEntità.Consegne;
-import classiEntità.Prodotto;
+import classiEntità.Prodotti;
 
 public class JFrameDettagliOrdine extends JFrame {
 
@@ -44,7 +44,7 @@ public class JFrameDettagliOrdine extends JFrame {
 		
 		int y = 10;
 		
-		for(Prodotto p : carrello.getProdotti()) {
+		for(Prodotti p : carrello.getProdotti()) {
 			
 			prodotto = new JLabel(p.getNomeP());
 			prezzo = new JLabel(carrello.getPrezzi().get(carrello.getProdotti().indexOf(p)).toString()+ "€");

@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import classiEntità.Consegne;
-import classiEntità.Rider;
+import classiEntità.Riders;
 import controllers.ControllerConsegne;
 import controllers.ControllerRider;
 import javax.swing.JLabel;
@@ -21,9 +21,9 @@ public class JFrameOrdiniRider extends JFrame {
 	private ArrayList<Consegne> listaConsegne;
 	private JDialogConfermaConsegnaOrdine conferma;
 	private int y = 70;
-	private Rider rider;
+	private Riders rider;
 
-	public JFrameOrdiniRider(ControllerConsegne c, Rider rider) {
+	public JFrameOrdiniRider(ControllerConsegne c, Riders rider) {
 		
 		this.rider = rider;
 		

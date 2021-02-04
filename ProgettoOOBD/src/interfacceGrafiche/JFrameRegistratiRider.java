@@ -73,7 +73,7 @@ public class JFrameRegistratiRider extends JFrame {
 		JButton ButtonAnnulla = new JButton("Annulla");
 		ButtonAnnulla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				login.TornaHomeDaRider();
+				login.tornaHomeDaRider();
 			}
 		});
 		ButtonAnnulla.setBounds(10, 351, 89, 23);
@@ -97,7 +97,7 @@ public class JFrameRegistratiRider extends JFrame {
 		ButtonRegistrati.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String mezzo = comboBoxMezzo.getSelectedItem().toString();
-				login.RegistraCredenzialiRider( TFNewNome.getText(), TFNewCognome.getText(),TFNewEmail.getText(), mezzo, TFNewPassword.getText());	
+				login.registraCredenzialiRider( TFNewNome.getText(), TFNewCognome.getText(),TFNewEmail.getText(), mezzo, TFNewPassword.getText());	
 			}
 		});
 		ButtonRegistrati.setBounds(281, 351, 89, 23);

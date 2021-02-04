@@ -1,13 +1,13 @@
 package interfacceDAO;
 
-import classiEntità.Menu;
-import classiEntità.Ristorante;
+import classiEntità.Menù;
+import classiEntità.Ristoranti;
 
 public interface MenùDAO {
 	
-	public Menu getMenùByRistorante(Ristorante r);
-	public Menu getMenuByNomeProdottoAndRistorante(String ricerca, Ristorante r);
-	public Menu getProdottoByRicercaComplessa(String ricerca, Ristorante r, String fasciaPrezzo);
+	public Menù getMenùByRistorante(Ristoranti r);
+	public Menù getMenuByNomeProdottoAndRistorante(String ricerca, Ristoranti r);
+	public Menù getProdottoByRicercaComplessa(String ricerca, Ristoranti r, String fasciaPrezzo);
 
 
 }

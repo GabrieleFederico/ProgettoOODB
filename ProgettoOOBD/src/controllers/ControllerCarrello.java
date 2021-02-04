@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 import classiEntit‡.Carrello;
-import classiEntit‡.Ristorante;
-import classiEntit‡.Utente;
+import classiEntit‡.Ristoranti;
+import classiEntit‡.Utenti;
 import interfacceGrafiche.JFrameCarrello;
 import interfacceGrafiche.JFrameHomeUtente;
 import interfacceGrafiche.JFrameCassa;
@@ -17,14 +17,14 @@ public class ControllerCarrello {
 	
 	JFrameHomeUtente fh;
 	JFrameCarrello fc;
-	Utente utente;
+	Utenti utente;
 
 	
-	public ControllerCarrello(Utente utente) {
+	public ControllerCarrello(Utenti utente) {
 		this.utente = utente;
 	}
 
-	public void aggiungiAlCarrello(String nomep, int quantit‡, double prezzo, Ristorante ristorante) {
+	public void aggiungiAlCarrello(String nomep, int quantit‡, double prezzo, Ristoranti ristorante) {
 		
 		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
 		cp.aggiungiProdottoAlCarrello(nomep, quantit‡, utente, prezzo, ristorante);
@@ -41,13 +41,13 @@ public class ControllerCarrello {
 	public boolean rimuoviDalCarrello(Carrello carrello, int indice) {
 		
 		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
-		Ristorante temp = cp.rimuoviProdottoDalCarrello(carrello, indice);
+		Ristoranti temp = cp.rimuoviProdottoDalCarrello(carrello, indice);
 		
 		return cp.esisteRistoranteNelCarrello(temp);
 	}
 	
 	
-	public void ModificaQuantit‡Carrello(int nuovoValore, Carrello carrello,  String nomeProdotto) {
+	public void modificaQuantit‡Carrello(int nuovoValore, Carrello carrello,  String nomeProdotto) {
 		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
 		cp.cambiaQuantit‡Carrello(nuovoValore, carrello, nomeProdotto);		
 		
@@ -59,12 +59,12 @@ public class ControllerCarrello {
 		return prezzi;
 	}
 
-	public void ArchiviaCarrello(Carrello carrello, Ristorante r) {
+	public void archiviaCarrello(Carrello carrello, Ristoranti r) {
 		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
 		cp.archiviaCarrello(carrello, r);
 	}
 
-	public Window getfc() {
+	public Window getJFrameCarrello() {
 		return fc;
 	}
 		

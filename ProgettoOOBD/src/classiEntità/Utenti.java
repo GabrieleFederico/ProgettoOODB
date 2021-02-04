@@ -3,7 +3,7 @@ package classiEntità;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Utente {
+public class Utenti {
 	
 	private String email;
 	private String Password;
@@ -13,7 +13,7 @@ public class Utente {
 	private ArrayList<Consegne> OrdiniEffettuati;
 	
 	
-	public Utente(String email,  String password, String nome, String cognome, String indirizzo) {
+	public Utenti(String email,  String password, String nome, String cognome, String indirizzo) {
 		this.email = email;
 		Nome = nome;
 		Cognome = cognome;
@@ -21,7 +21,7 @@ public class Utente {
 		Password = password;
 	}
 	
-	public Utente() {
+	public Utenti() {
 	}
 	
 	public String getEmail() {

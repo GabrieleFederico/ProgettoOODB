@@ -3,17 +3,17 @@ package controllers;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JPanel;
-import classiEntità.Ristorante;
-import classiEntità.Utente;
+import classiEntità.Ristoranti;
+import classiEntità.Utenti;
 import interfacceGrafiche.JFrameHomeUtente;
 import postgresDAOImpl.RistoranteDAOPostgres;
 
 public class ControllerRicercaRistoranti {
 	
 	JFrameHomeUtente fr;
-	ControllorePrincipale C;
+	ControllerPrincipale C;
 	
-	public ControllerRicercaRistoranti(ControllorePrincipale c, Utente u) {
+	public ControllerRicercaRistoranti(ControllerPrincipale c, Utenti u) {
 		C = c;
 		fr = new JFrameHomeUtente(this, C, u);
 		fr.setVisible(true);
@@ -22,7 +22,7 @@ public class ControllerRicercaRistoranti {
 	public void ricerca (String ricerca, JPanel pannello, int componentiNecessarie) throws SQLException {
 		
 		RistoranteDAOPostgres rp = new RistoranteDAOPostgres();
-		ArrayList<Ristorante> risultatoRicerca = new ArrayList<Ristorante>();
+		ArrayList<Ristoranti> risultatoRicerca = new ArrayList<Ristoranti>();
 		
 		risultatoRicerca = rp.getRistoranteByNomeOrProdotto(ricerca);
 		

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import classiEntità.Menu;
-import classiEntità.Prodotto;
-import classiEntità.Ristorante;
+import classiEntità.Menù;
+import classiEntità.Prodotti;
+import classiEntità.Ristoranti;
 import interfacceGrafiche.JFrameRistorante;
 import postgresDAOImpl.MenùDAOPostgres;
 import postgresDAOImpl.RistoranteDAOPostgres;
@@ -15,11 +15,11 @@ import postgresDAOImpl.RistoranteDAOPostgres;
 public class ControllerRicercaMenu {
 	
 	JFrameRistorante fr;
-	Ristorante r;
+	Ristoranti r;
 	String Email;
 	ControllerCarrello CCarrello;
 	
-	public ControllerRicercaMenu(Ristorante rist, ControllerCarrello ccarrello) {
+	public ControllerRicercaMenu(Ristoranti rist, ControllerCarrello ccarrello) {
 		
 		r = rist;
 		CCarrello = ccarrello;
@@ -29,10 +29,10 @@ public class ControllerRicercaMenu {
 	}
 	
 
-	public Menu RicercaProdotto (String ricerca, JPanel pannello, int componentiNecessarie, String fasciaPrezzo) throws SQLException {
+	public Menù ricercaProdotto (String ricerca, JPanel pannello, int componentiNecessarie, String fasciaPrezzo) throws SQLException {
 		
 		MenùDAOPostgres mp = new  MenùDAOPostgres();
-		Menu risultatoRicerca = new Menu();
+		Menù risultatoRicerca = new Menù();
 		
 		if(fasciaPrezzo == null)
 			risultatoRicerca = mp.getMenuByNomeProdottoAndRistorante(ricerca, r);
@@ -45,10 +45,10 @@ public class ControllerRicercaMenu {
 
 	}
 
-	public void getMenu(Ristorante rist, JPanel pannello, int componentiNecessarie, JFrameRistorante fr) {
+	public void getMenu(Ristoranti rist, JPanel pannello, int componentiNecessarie, JFrameRistorante fr) {
 		
 		MenùDAOPostgres mp = new MenùDAOPostgres();
-		Menu menùRistorante = new Menu();
+		Menù menùRistorante = new Menù();
 
 		menùRistorante = mp.getMenùByRistorante(rist);
 

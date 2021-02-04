@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 import classiEntit‡.Carrello;
 import classiEntit‡.Consegne;
-import classiEntit‡.Rider;
-import classiEntit‡.Utente;
+import classiEntit‡.Riders;
+import classiEntit‡.Utenti;
 import controllers.ControllerConsegne;
 import dbConn.ConnessioneDB;
 import interfacceDAO.ConsegneDAO;
@@ -25,7 +25,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 	private PreparedStatement assegnaConsegnaRiderPS, ordineConsegnatoPS;
 	
 	@Override
-	public ArrayList<Consegne> getConsegneByUtente(Utente utente) {
+	public ArrayList<Consegne> getConsegneByUtente(Utenti utente) {
 		
 		ArrayList<Consegne> risultato = new ArrayList<Consegne>();
 		Consegne temp; 
@@ -71,7 +71,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 	}
 	
 	@Override
-	public ArrayList<Consegne> getConsegneByRider(Rider rider) {
+	public ArrayList<Consegne> getConsegneByRider(Riders rider) {
 		
 		ArrayList<Consegne> risultato = new ArrayList<Consegne>();
 		Consegne temp; 
@@ -100,7 +100,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		return risultato;
 	}
 	
-	public void creaConsegna(String indirizzoP, Utente utente, String mezzo, String orario) {
+	public void creaConsegna(String indirizzoP, Utenti utente, String mezzo, String orario) {
 		
 		
 		try {			
@@ -126,7 +126,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		ArrayList<Consegne> risultato = new ArrayList<Consegne>();
 		Consegne temp;
 		Carrello carrello = new Carrello();
-		Utente utente = new Utente();
+		Utenti utente = new Utenti();
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -173,7 +173,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			assegnaConsegnaRiderPS.executeUpdate();
 		
 		} catch (SQLException e) {
-				cc.MaxAttivit‡Rider();
+				cc.maxAttivit‡Rider();
 		} 
 		
 	}
@@ -193,7 +193,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		
 	}
 	
-	public ArrayList<Consegne> getOrdiniByRider(Rider rider) {
+	public ArrayList<Consegne> getOrdiniByRider(Riders rider) {
 		
 		ArrayList<Consegne> risultato = new ArrayList<Consegne>();
 		
@@ -213,7 +213,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 				consegne.setOrario(rs.getTimestamp("orario"));
 				consegne.setIndirizzoP(rs.getString("IndirizzoP"));
 				consegne.setIndirizzoA(rs.getString("IndirizzoA"));
-				Utente utente = new Utente();
+				Utenti utente = new Utenti();
 				utente.setNome(rs.getString("nome"));
 				utente.setCognome(rs.getString("cognome"));
 				utente.setEmail(rs.getString("EmailUtente"));

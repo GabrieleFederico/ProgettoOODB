@@ -4,31 +4,31 @@ import java.util.ArrayList;
 
 public class Carrello {
 
-	private ArrayList<Prodotto> Prodotti;
+	private ArrayList<Prodotti> Prodotti;
 	private ArrayList<Integer> Quantit‡Prodotti;
 	private ArrayList<Double> Prezzi;
-	private Utente Proprietario;
-	private ArrayList<Ristorante> provenienzaProdotti;
+	private Utenti Proprietario;
+	private ArrayList<Ristoranti> provenienzaProdotti;
 	
-	public Carrello(Utente proprietario) {
+	public Carrello(Utenti proprietario) {
 		this.Proprietario = proprietario;
-		Prodotti = new ArrayList<Prodotto>();
+		Prodotti = new ArrayList<Prodotti>();
 		Quantit‡Prodotti = new ArrayList<Integer>();
-		provenienzaProdotti = new ArrayList<Ristorante>();
+		provenienzaProdotti = new ArrayList<Ristoranti>();
 	}
 	
 	public Carrello() {
 		Prezzi = new ArrayList<Double>();
-		Prodotti = new ArrayList<Prodotto>();
+		Prodotti = new ArrayList<Prodotti>();
 		Quantit‡Prodotti = new ArrayList<Integer>();
-		provenienzaProdotti = new ArrayList<Ristorante>();
+		provenienzaProdotti = new ArrayList<Ristoranti>();
 	}
 
-	public ArrayList<Prodotto> getProdotti() {
+	public ArrayList<Prodotti> getProdotti() {
 		return Prodotti;
 	}
 
-	public void setProdotti(ArrayList<Prodotto> prodotti) {
+	public void setProdotti(ArrayList<Prodotti> prodotti) {
 		Prodotti = prodotti;
 	}
 	
@@ -40,11 +40,11 @@ public class Carrello {
 		Quantit‡Prodotti = quantit‡Prodotti;
 	}
 
-	public Utente getProprietario() {
+	public Utenti getProprietario() {
 		return Proprietario;
 	}
 	
-	public void setProprietario(Utente proprietario) {
+	public void setProprietario(Utenti proprietario) {
 		Proprietario = proprietario;
 	}
 
@@ -56,12 +56,13 @@ public class Carrello {
 		Prezzi = prezzi;
 	}
 
-	public ArrayList<Ristorante> getProvenienzaProdotti() {
+	public ArrayList<Ristoranti> getProvenienzaProdotti() {
 		return provenienzaProdotti;
 	}
 
-	public void setProvenienzaProdotti(ArrayList<Ristorante> provenienzaProdotti) {
+	public void setProvenienzaProdotti(ArrayList<Ristoranti> provenienzaProdotti) {
 		this.provenienzaProdotti = provenienzaProdotti;
 	}
+
 	
 }

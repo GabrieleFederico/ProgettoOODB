@@ -6,23 +6,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import classiEntità.Ristorante;
+import classiEntità.Ristoranti;
 import dbConn.ConnessioneDB;
-import interfacceDAO.RistoranteDAO;
+import interfacceDAO.RistorantiDAO;
 
 
-public class RistoranteDAOPostgres implements RistoranteDAO {
+public class RistoranteDAOPostgres implements RistorantiDAO {
 
 		private Connection connessione;
 		private ConnessioneDB connessioneDB;
 		private PreparedStatement getRistoranteByNomeOrProdottoPS;
 
 		@Override
-		public ArrayList<Ristorante> getRistoranteByNomeOrProdotto(String ricerca) {
+		public ArrayList<Ristoranti> getRistoranteByNomeOrProdotto(String ricerca) {
 			
 			String risultatoRicerca;
-			Ristorante temp;
-			ArrayList<Ristorante> risultato = new ArrayList<Ristorante>();
+			Ristoranti temp;
+			ArrayList<Ristoranti> risultato = new ArrayList<Ristoranti>();
 			
 			try {
 				connessioneDB = ConnessioneDB.getIstanza();
@@ -34,7 +34,7 @@ public class RistoranteDAOPostgres implements RistoranteDAO {
 				connessione.close();
 				
 				while(rs.next()) {
-					temp = new Ristorante();
+					temp = new Ristoranti();
 					risultatoRicerca = rs.getString("nome");
 					temp.setNome(risultatoRicerca);
 					risultatoRicerca = rs.getString("indirizzo");

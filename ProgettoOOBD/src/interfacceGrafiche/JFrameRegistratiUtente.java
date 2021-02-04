@@ -57,7 +57,7 @@ public class JFrameRegistratiUtente extends JFrame {
 		JButton ButtonAnnulla = new JButton("Annulla");
 		ButtonAnnulla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				c.TornaHomeDaUtente();
+				c.tornaHomeDaUtente();
 			}
 		});
 		ButtonAnnulla.setBounds(34, 308, 89, 23);
@@ -68,7 +68,7 @@ public class JFrameRegistratiUtente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
-					controllore.RegistraCredenzialiUtente(TFNewEmail.getText(), TFNewPassword.getText(), TFNewNome.getText(), TFNewCognome.getText(), TFNewIndirizzo.getText());
+					controllore.registraCredenzialiUtente(TFNewEmail.getText(), TFNewPassword.getText(), TFNewNome.getText(), TFNewCognome.getText(), TFNewIndirizzo.getText());
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}	

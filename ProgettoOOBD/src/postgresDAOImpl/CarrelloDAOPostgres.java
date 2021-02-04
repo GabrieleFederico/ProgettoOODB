@@ -12,12 +12,12 @@ import javax.swing.JLabel;
 
 import classiEntit‡.Carrello;
 import classiEntit‡.Consegne;
-import classiEntit‡.Prodotto;
-import classiEntit‡.Ristorante;
-import classiEntit‡.Utente;
+import classiEntit‡.Prodotti;
+import classiEntit‡.Ristoranti;
+import classiEntit‡.Utenti;
 import dbConn.ConnessioneDB;
 import interfacceDAO.CarrelloDAO;
-import interfacceDAO.RistoranteDAO;
+import interfacceDAO.RistorantiDAO;
 
 public class CarrelloDAOPostgres implements CarrelloDAO{
 	
@@ -28,7 +28,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 	private CallableStatement archiviaCarrelloPS;
 	
 	@Override
-	public void aggiungiProdottoAlCarrello(String nomep, int quantit‡, Utente utente, double prezzo, Ristorante ristorante) {
+	public void aggiungiProdottoAlCarrello(String nomep, int quantit‡, Utenti utente, double prezzo, Ristoranti ristorante) {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -48,11 +48,11 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 	}
 
 	@Override
-	public Carrello getCarrelloByUtente(Utente utente) {
+	public Carrello getCarrelloByUtente(Utenti utente) {
 		
 		Carrello risultato = new Carrello(utente);
-		Prodotto temp;
-		Ristorante temp2;
+		Prodotti temp;
+		Ristoranti temp2;
 		String tmp;
 		int i;
 		
@@ -66,11 +66,11 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			
 			while(rs.next()) {
 				tmp = new String();
-				temp = new Prodotto();
+				temp = new Prodotti();
 				temp.setNomeP(rs.getString("prodotto"));
 				risultato.getProdotti().add(temp);
 				risultato.getQuantit‡Prodotti().add(rs.getInt("quantitaprodotto"));
-				temp2 = new Ristorante();
+				temp2 = new Ristoranti();
 				tmp = rs.getString("provenienzaprodotto");
 				i = tmp.indexOf(",");
 				temp2.setNome(tmp.substring(0, i));
@@ -86,9 +86,9 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		return risultato;
 	}
 
-	public Ristorante rimuoviProdottoDalCarrello(Carrello carrello, int indice) {
+	public Ristoranti rimuoviProdottoDalCarrello(Carrello carrello, int indice) {
 		
-		Ristorante ris = carrello.getProvenienzaProdotti().get(indice);
+		Ristoranti ris = carrello.getProvenienzaProdotti().get(indice);
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
@@ -108,7 +108,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		
 	}
 	
-	public boolean esisteRistoranteNelCarrello(Ristorante rist) {
+	public boolean esisteRistoranteNelCarrello(Ristoranti rist) {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -175,9 +175,9 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 	
 	public Carrello getCarrelloByOrdine(Consegne ordine){
 		
-		Prodotto temp;
+		Prodotti temp;
 		Carrello risultato = new Carrello();
-		Ristorante temp2 = new Ristorante();
+		Ristoranti temp2 = new Ristoranti();
 		String provenienza;
 		boolean sentinella = true;
 		
@@ -190,7 +190,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 			connessione.close();
 
 			while(rs.next()){
-				temp = new Prodotto();
+				temp = new Prodotti();
 				temp.setNomeP(rs.getString("prodotto"));
 				risultato.getProdotti().add(temp);
 				risultato.getPrezzi().add(rs.getDouble("prezzo"));
@@ -214,7 +214,7 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		return risultato;
 	}
 	
-	public void archiviaCarrello(Carrello carrello, Ristorante r) {
+	public void archiviaCarrello(Carrello carrello, Ristoranti r) {
 		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();

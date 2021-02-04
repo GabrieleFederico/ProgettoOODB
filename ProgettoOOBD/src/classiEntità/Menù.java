@@ -2,23 +2,23 @@ package classiEntità;
 
 import java.util.ArrayList;
 
-public class Menu {
+public class Menù {
 	
-	private Ristorante Ristorante;
-	private ArrayList<Prodotto> Prodotti;
+	private Ristoranti Ristorante;
+	private ArrayList<Prodotti> Prodotti;
 	private ArrayList<Double> Prezzi;
 	
-	public Ristorante getRistorante() {
+	public Ristoranti getRistorante() {
 		return Ristorante;
 	}
-	public void setRistorante(Ristorante ristorante) {
+	public void setRistorante(Ristoranti ristorante) {
 		Ristorante = ristorante;
 	}
 	
-	public ArrayList<Prodotto> getProdotti() {
+	public ArrayList<Prodotti> getProdotti() {
 		return Prodotti;
 	}
-	public void setProdotti(ArrayList<Prodotto> prodotti) {
+	public void setProdotti(ArrayList<Prodotti> prodotti) {
 		Prodotti = prodotti;
 	}
 	

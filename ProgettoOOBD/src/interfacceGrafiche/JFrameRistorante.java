@@ -5,9 +5,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
-import classiEntità.Menu;
-import classiEntità.Prodotto;
-import classiEntità.Ristorante;
+import classiEntità.Menù;
+import classiEntità.Prodotti;
+import classiEntità.Ristoranti;
 import controllers.ControllerCarrello;
 import controllers.ControllerRicercaMenu;
 import javax.swing.JTextField;
@@ -29,12 +29,10 @@ public class JFrameRistorante extends JFrame {
 	private JPanel contentPane;
 	private JTextField inputTF;
 	private int componentiNecessarie;
-	ControllerRicercaMenu controller;
-	Ristorante rist;
+	private Ristoranti rist;
 	
-	public JFrameRistorante(ControllerRicercaMenu c, Ristorante r) {
+	public JFrameRistorante(ControllerRicercaMenu c, Ristoranti r) {
 		setTitle(r.getNome());
-		controller = c;
 		rist = r;
 		setBounds(100, 100, 769, 511);
 		contentPane = new JPanel();
@@ -63,7 +61,7 @@ public class JFrameRistorante extends JFrame {
 					PrezzoInput = FasciaPrezzo.getSelectedItem().toString();
 					
 				try {
-					c.RicercaProdotto(TFInput, contentPane, componentiNecessarie, PrezzoInput);
+					c.ricercaProdotto(TFInput, contentPane, componentiNecessarie, PrezzoInput);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}
@@ -78,7 +76,7 @@ public class JFrameRistorante extends JFrame {
 	}
 	
 	
-	public void aggiornaInterfacciaProdotti(JPanel pannello, int componentiNecessarie, Menu risultatoRicerca, ControllerCarrello cc) {
+	public void aggiornaInterfacciaProdotti(JPanel pannello, int componentiNecessarie, Menù risultatoRicerca, ControllerCarrello cc) {
 
 		JLabel labelRisultato;
 		JSpinner contatore;
@@ -108,7 +106,7 @@ public class JFrameRistorante extends JFrame {
 		int index = 0;
 		ArrayList<JSpinner> spinners = new ArrayList<JSpinner>();
 
-		for (Prodotto p : risultatoRicerca.getProdotti()) {
+		for (Prodotti p : risultatoRicerca.getProdotti()) {
 			labelRisultato = new JLabel(p.getNomeP());
 			labelRisultato.setBounds(x, y, larg, lung);
 			pannelloScrollPane.add(labelRisultato);

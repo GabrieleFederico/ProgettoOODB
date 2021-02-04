@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import classiEntità.Menu;
-import classiEntità.Prodotto;
-import classiEntità.Ristorante;
+import classiEntità.Menù;
+import classiEntità.Prodotti;
+import classiEntità.Ristoranti;
 import dbConn.ConnessioneDB;
 import interfacceDAO.MenùDAO;
 
@@ -19,12 +19,12 @@ public class MenùDAOPostgres implements MenùDAO{
 	private PreparedStatement getMenùByRistorantePS, getProdottiByNomeAndRistorantePS, getProdottiByRicercaCPS;
 
 	@Override
-	public Menu getMenùByRistorante(Ristorante r) {
+	public Menù getMenùByRistorante(Ristoranti r) {
 
-		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();
+		ArrayList<Prodotti> risultatoRicerca = new ArrayList<Prodotti>();
 		ArrayList<Double> risultatoPrezzi = new ArrayList<Double>();
-		Menu risultato = new Menu();
-		Prodotto temp;
+		Menù risultato = new Menù();
+		Prodotti temp;
 		Double prezzoTemp;
 		risultato.setRistorante(r);
 
@@ -39,7 +39,7 @@ public class MenùDAOPostgres implements MenùDAO{
 
 			while (rs.next()) {
 			
-				temp = new Prodotto();
+				temp = new Prodotti();
 				temp.setNomeP(rs.getString("prodotto"));
 				risultatoRicerca.add(temp);
 			
@@ -59,12 +59,12 @@ public class MenùDAOPostgres implements MenùDAO{
 	}
 
 	@Override
-	public Menu getMenuByNomeProdottoAndRistorante(String ricerca, Ristorante r) {
+	public Menù getMenuByNomeProdottoAndRistorante(String ricerca, Ristoranti r) {
 		
-		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();
+		ArrayList<Prodotti> risultatoRicerca = new ArrayList<Prodotti>();
 		ArrayList<Double> risultatoPrezzi = new ArrayList<Double>();
-		Menu risultato = new Menu();
-		Prodotto temp;
+		Menù risultato = new Menù();
+		Prodotti temp;
 		Double prezzoTemp;
 		risultato.setRistorante(r);
 
@@ -81,7 +81,7 @@ public class MenùDAOPostgres implements MenùDAO{
 			
 			while (rs.next()) {
 				
-				temp = new Prodotto();
+				temp = new Prodotti();
 				temp.setNomeP(rs.getString("prodotto"));
 				risultatoRicerca.add(temp);
 			
@@ -102,12 +102,12 @@ public class MenùDAOPostgres implements MenùDAO{
 	}
 	
 	@Override
-	public Menu getProdottoByRicercaComplessa(String ricerca, Ristorante r, String fasciaPrezzo) {
+	public Menù getProdottoByRicercaComplessa(String ricerca, Ristoranti r, String fasciaPrezzo) {
 		
-		ArrayList<Prodotto> risultatoRicerca = new ArrayList<Prodotto>();
+		ArrayList<Prodotti> risultatoRicerca = new ArrayList<Prodotti>();
 		ArrayList<Double> risultatoPrezzi = new ArrayList<Double>();
-		Menu risultato = new Menu();
-		Prodotto temp;
+		Menù risultato = new Menù();
+		Prodotti temp;
 		Double prezzoTemp;
 		risultato.setRistorante(r);
 		
@@ -135,7 +135,7 @@ public class MenùDAOPostgres implements MenùDAO{
 
 			while (rs.next()) {
 				
-				temp = new Prodotto();
+				temp = new Prodotti();
 				temp.setNomeP(rs.getString("prodotto"));
 				risultatoRicerca.add(temp);
 			

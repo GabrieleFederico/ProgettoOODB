@@ -8,14 +8,14 @@ import java.util.ArrayList;
 
 import classiEntità.Carrello;
 import classiEntità.Consegne;
-import classiEntità.Menu;
-import classiEntità.Prodotto;
-import classiEntità.Rider;
-import classiEntità.Utente;
+import classiEntità.Menù;
+import classiEntità.Prodotti;
+import classiEntità.Riders;
+import classiEntità.Utenti;
 import dbConn.ConnessioneDB;
-import interfacceDAO.RiderDAO;
+import interfacceDAO.RidersDAO;
 
-public class RiderDAOPostgres implements RiderDAO{
+public class RiderDAOPostgres implements RidersDAO{
 	
 
 	private Connection connessione;
@@ -23,9 +23,9 @@ public class RiderDAOPostgres implements RiderDAO{
 	private PreparedStatement getRiderByEmailPS, inserisciRiderPS;
 
 	
-	public Rider getRiderByEmail(String email, String password) {
+	public Riders getRiderByEmail(String email, String password) {
 		
-		Rider risultato = new Rider();
+		Riders risultato = new Riders();
 
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -70,14 +70,6 @@ public class RiderDAOPostgres implements RiderDAO{
 
 		}
 	}
-
-	@Override
-	public ArrayList<Consegne> getOrdiniByRider(Rider rider) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 
 
 }
