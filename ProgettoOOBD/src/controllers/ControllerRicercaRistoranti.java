@@ -1,12 +1,8 @@
 package controllers;
 
-import java.awt.Component;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import classiEntità.Ristorante;
 import classiEntità.Utente;
 import interfacceGrafiche.JFrameHomeUtente;

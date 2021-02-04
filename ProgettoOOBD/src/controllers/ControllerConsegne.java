@@ -1,17 +1,13 @@
 package controllers;
 
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Objects;
-
-import javax.swing.JLabel;
-
 import classiEntit‡.Carrello;
 import classiEntit‡.Consegne;
 import classiEntit‡.Rider;
 import classiEntit‡.Ristorante;
 import classiEntit‡.Utente;
+import interfacceGrafiche.JDialogMaxAttivit‡;
 import interfacceGrafiche.JFrameDettagliOrdine;
 import interfacceGrafiche.JFrameOrdiniUtente;
 import postgresDAOImpl.CarrelloDAOPostgres;
@@ -91,13 +87,19 @@ public class ControllerConsegne {
 
 	public void nuovoOrdineRider(String CodR, String CodC) {
 		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
-		cp.assegnaConsegnaRider(CodR, CodC);
+		cp.assegnaConsegnaRider(CodR, CodC, this);
 		
 	}
 
 	public void ordineConsegnato(String CodC) {
 		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
 		cp.ordineConsegnato(CodC);
+		
+	}
+
+	public void MaxAttivit‡Rider() {
+		JDialogMaxAttivit‡ maxAttivit‡ = new JDialogMaxAttivit‡();
+		maxAttivit‡.setVisible(true);
 		
 	}
 }

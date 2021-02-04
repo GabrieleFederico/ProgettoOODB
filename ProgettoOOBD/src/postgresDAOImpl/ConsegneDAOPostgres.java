@@ -13,6 +13,7 @@ import classiEntit‡.Carrello;
 import classiEntit‡.Consegne;
 import classiEntit‡.Rider;
 import classiEntit‡.Utente;
+import controllers.ControllerConsegne;
 import dbConn.ConnessioneDB;
 import interfacceDAO.ConsegneDAO;
 
@@ -145,7 +146,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 	}
 
 
-	public void assegnaConsegnaRider(String CodR, String CodC) {
+	public void assegnaConsegnaRider(String CodR, String CodC, ControllerConsegne cc) {
 
 		try {			
 			connessioneDB = ConnessioneDB.getIstanza();
@@ -156,8 +157,9 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			assegnaConsegnaRiderPS.executeUpdate();
 		
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
+				cc.MaxAttivit‡Rider();
+		} 
+		
 	}
 
 	public void ordineConsegnato(String CodC) {

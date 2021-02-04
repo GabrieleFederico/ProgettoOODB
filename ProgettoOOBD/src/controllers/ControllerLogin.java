@@ -16,11 +16,13 @@ public class ControllerLogin {
 	private JFrameRegistratiUtente fr;
 	private JFrameLogin fl;
 	private JFrameRegistratiRider frr;
+	private ControllorePrincipale cc;
 
 	public ControllerLogin(ControllorePrincipale controller) {
 
 		fl = new JFrameLogin(this, controller);
 		fl.setVisible(true);
+		cc = controller;
 	}
 
 	public void LoginRegistratiButton() {
@@ -84,4 +86,19 @@ public class ControllerLogin {
 		frr.setVisible(true);
 		
 	}
+
+	public void TornaHomeDaUtente() {
+		
+		fr.setVisible(false);
+		fl = new JFrameLogin(this, cc);
+		fl.setVisible(true);
+	}
+	
+	public void TornaHomeDaRider() {
+
+		frr.setVisible(false);
+		fl = new JFrameLogin(this, cc);
+		fl.setVisible(true);	
+	}
+
 }

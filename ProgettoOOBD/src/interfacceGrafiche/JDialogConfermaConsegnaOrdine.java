@@ -1,12 +1,8 @@
 package interfacceGrafiche;
 
-import java.awt.EventQueue;
-
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-
 import controllers.ControllerConsegne;
-
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -14,13 +10,13 @@ import java.awt.event.ActionEvent;
 
 public class JDialogConfermaConsegnaOrdine extends JDialog {
 
-	
 	public JDialogConfermaConsegnaOrdine(String CodC, ControllerConsegne c) {
-		setBounds(100, 100, 340, 228);
+		setTitle("Conferma Ordine");
+		setBounds(100, 100, 348, 228);
 		getContentPane().setLayout(null);
 		
 		JLabel LabelConferma = new JLabel("Vuole confermare la consegna di questo ordine?");
-		LabelConferma.setBounds(39, 79, 263, 14);
+		LabelConferma.setBounds(10, 79, 283, 14);
 		getContentPane().add(LabelConferma);
 		
 		JButton ButtonConferma = new JButton("Conferma");
@@ -30,7 +26,7 @@ public class JDialogConfermaConsegnaOrdine extends JDialog {
 				dispose();
 			}
 		});
-		ButtonConferma.setBounds(213, 141, 89, 23);
+		ButtonConferma.setBounds(214, 141, 108, 23);
 		getContentPane().add(ButtonConferma);
 		
 		JButton labelAnnulla = new JButton("Annulla");
@@ -39,7 +35,7 @@ public class JDialogConfermaConsegnaOrdine extends JDialog {
 				dispose();
 			}
 		});
-		labelAnnulla.setBounds(20, 141, 89, 23);
+		labelAnnulla.setBounds(10, 141, 108, 23);
 		getContentPane().add(labelAnnulla);
 		
 		JLabel labelOrdine = new JLabel("Ordine:");

@@ -71,6 +71,11 @@ public class JFrameRegistratiRider extends JFrame {
 		TFNewPassword.setColumns(10);
 		
 		JButton ButtonAnnulla = new JButton("Annulla");
+		ButtonAnnulla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				login.TornaHomeDaRider();
+			}
+		});
 		ButtonAnnulla.setBounds(10, 351, 89, 23);
 		contentPane.add(ButtonAnnulla);
 		

@@ -1,6 +1,5 @@
 package interfacceGrafiche;
 
-import java.awt.Cursor;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,13 +8,12 @@ import javax.swing.border.EmptyBorder;
 import classiEntità.Consegne;
 import controllers.ControllerConsegne;
 import controllers.ControllerRider;
+import controllers.ControllorePrincipale;
 
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JButton;
 
@@ -28,11 +26,11 @@ public class JFrameHomeRider extends JFrame {
 	private ControllerConsegne c1 = new ControllerConsegne();
 	private JDialogConfermaIncaricoRider confermaIncarico;
 	private ArrayList<Consegne> consegneDisponibili;
-	private int y = -1;
+	private int y = 1, xLabel = 50, xButton = 250;
 	private ControllerRider c2;
 	private JFrameOrdiniRider iMieiOrdini;
 	
-	public JFrameHomeRider(ControllerConsegne controller, ControllerRider cr) {
+	public JFrameHomeRider(ControllerConsegne controller, ControllerRider cr, ControllorePrincipale c1) {
 		c2 = cr;
 		setTitle("Home");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,19 +51,24 @@ public class JFrameHomeRider extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				iMieiOrdini = new JFrameOrdiniRider(cr);
 				iMieiOrdini.setVisible(true);
-				//la_home_va_chiusa?
 			}
 		});
 		contentPane.add(ButtonIMieiOrdini);
 		
 		JButton ButtonLogout = new JButton("Logout");
+		ButtonLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				c1.Logout();
+				dispose();
+			}
+		});
 		ButtonLogout.setBounds(10, 447, 89, 23);
 		contentPane.add(ButtonLogout);
 		
 		JButton ButtonAggiorna = new JButton("Aggiorna");
 		ButtonAggiorna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				getConsegne();
+				aggiornaInterfaccia();
 			}
 		});
 		ButtonAggiorna.setBounds(301, 447, 89, 23);
@@ -90,23 +93,31 @@ public class JFrameHomeRider extends JFrame {
 		
 		for (Consegne c : consegneDisponibili) {
 			
-			JLabel labelCliccabile = new JLabel("<html> Codice Ordine:" + c.getCodC() + "<br>Partenza:" + c.getIndirizzoP() + "<br>Arrivo:" + c.getIndirizzoA() + "<br>Orario:" + c.getOrario() + 
+			JLabel label = new JLabel("<html> Codice Ordine:" + c.getCodC() + "<br>Partenza:" + c.getIndirizzoP() + "<br>Arrivo:" + c.getIndirizzoA() + "<br>Orario:" + c.getOrario() + 
 					  "<br>Destinatario:" + c.getComposizioneConsegna().getProprietario().getNome() + " " + c.getComposizioneConsegna().getProprietario().getCognome() + "</html>");
-			labelCliccabile.setBounds(50, y, 150, 110);
-			pannelloScrollPane.add(labelCliccabile);
-			labelCliccabile.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent arg0) {
+			label.setBounds(xLabel, y, 150, 130);
+			pannelloScrollPane.add(label);
+			
+			JButton bottone = new JButton ("Prendi in carico");
+			bottone.setBounds(xButton, y+30, 150, 30);
+			pannelloScrollPane.add(bottone);
+			bottone.addActionListener(new ActionListener() {
+				public void  actionPerformed(ActionEvent arg0) {
 					confermaIncarico = new JDialogConfermaIncaricoRider(c.getCodC(), c1, c2);
 					confermaIncarico.setVisible(true);
 				}
 			});
-			
-			labelCliccabile.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			
 			y = y+150;
 		}
 		pannelloScrollPane.updateUI();
-		y = -1;
+		y = 1;
+	}
+
+
+	public void aggiornaInterfaccia() {
+		contentPane.remove(scrollPane);
+		getConsegne();
+		
 	}
 	
 }

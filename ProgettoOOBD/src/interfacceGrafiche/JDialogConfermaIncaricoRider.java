@@ -1,13 +1,9 @@
 package interfacceGrafiche;
 
-import java.awt.EventQueue;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-
-import classiEntità.Rider;
 import controllers.ControllerConsegne;
 import controllers.ControllerRider;
-
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

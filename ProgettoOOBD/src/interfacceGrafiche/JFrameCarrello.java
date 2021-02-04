@@ -1,15 +1,10 @@
 package interfacceGrafiche;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Container;
-import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 import classiEntità.Carrello;
@@ -20,14 +15,10 @@ import controllers.ControllerConsegne;
 import controllers.ControllerRicercaMenu;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Objects;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
@@ -80,6 +71,7 @@ public class JFrameCarrello extends JFrame {
 		
 		ButtonIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				dispose();
 			}
 		});
 		
@@ -228,7 +220,7 @@ public class JFrameCarrello extends JFrame {
 		}
 		
 		totale = getPrezzoTotale(prezziJLabel);
-		stringaRisultato = String.valueOf(totale);
+		stringaRisultato = (String.valueOf(totale) + " €");
 		totaleDaPagare.setText(stringaRisultato);
 		totaleDaPagare.setBounds(640, 430, 80, 14);
 		contentPane.add(totaleDaPagare);

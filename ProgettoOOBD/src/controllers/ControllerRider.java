@@ -12,11 +12,11 @@ public class ControllerRider {
 	private Rider rider;
 	private ControllerConsegne controller;
 	
-	public ControllerRider(Rider rider, ControllerConsegne c) {
+	public ControllerRider(Rider rider, ControllerConsegne c, ControllorePrincipale c1) {
 		
 		controller = c;
 		this.rider = rider;
-		JFrameHomeRider homeRider = new JFrameHomeRider(controller, this);
+		JFrameHomeRider homeRider = new JFrameHomeRider(controller, this, c1);
 		homeRider.setVisible(true);
 	}
 	

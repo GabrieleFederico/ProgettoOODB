@@ -73,9 +73,6 @@ public class RiderDAOPostgres implements RiderDAO{
 
 	public ArrayList<Consegne> getOrdiniByRider(Rider rider) {
 		
-		Consegne consegne = new Consegne();
-		Utente utente = new Utente();
-		Carrello carrello = new Carrello();
 		ArrayList<Consegne> risultato = new ArrayList<Consegne>();
 		
 		try {
@@ -88,18 +85,22 @@ public class RiderDAOPostgres implements RiderDAO{
 			ResultSet rs = getOrdiniByRiderPS.executeQuery();
 			connessione.close();
 			
-			if(rs.next()) {
+			while(rs.next()) {
+				Consegne consegne = new Consegne();
 				consegne.setCodC(rs.getString("CodC"));
 				consegne.setOrario(rs.getTime("orario"));
 				consegne.setIndirizzoP(rs.getString("IndirizzoP"));
 				consegne.setIndirizzoA(rs.getString("IndirizzoA"));
+				Utente utente = new Utente();
 				utente.setNome(rs.getString("nome"));
 				utente.setCognome(rs.getString("cognome"));
 				utente.setEmail(rs.getString("EmailUtente"));
+				Carrello carrello = new Carrello();
 				carrello.setProprietario(utente);
 				consegne.setComposizioneConsegna(carrello);
 				risultato.add(consegne);
 			}  
+			
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

@@ -5,6 +5,7 @@ import classiEntità.Ristorante;
 import classiEntità.Utente;
 import interfacceGrafiche.JFrameCarrello;
 import interfacceGrafiche.JFrameHomeRider;
+import interfacceGrafiche.JFrameLogin;
 
 public class ControllorePrincipale {
 
@@ -33,7 +34,7 @@ public class ControllorePrincipale {
 	public void passaAdHomeRider(ControllerLogin c, Rider rider) {
 		
 		c = null;
-		ControllerRider cr = new ControllerRider(rider, co);
+		ControllerRider cr = new ControllerRider(rider, co, this);
 		
 	}
 	
@@ -53,4 +54,7 @@ public class ControllorePrincipale {
 		ccarrello.fc.aggiornaInterfacciaCarrello();
 	}
 
+	public void Logout() {
+		start();	
+	}
 }

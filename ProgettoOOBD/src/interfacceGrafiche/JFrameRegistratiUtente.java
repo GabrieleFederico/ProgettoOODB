@@ -55,6 +55,11 @@ public class JFrameRegistratiUtente extends JFrame {
 		contentPane.add(LabelPassword);
 		
 		JButton ButtonAnnulla = new JButton("Annulla");
+		ButtonAnnulla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				c.TornaHomeDaUtente();
+			}
+		});
 		ButtonAnnulla.setBounds(34, 308, 89, 23);
 		contentPane.add(ButtonAnnulla);
 		

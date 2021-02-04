@@ -1,26 +1,14 @@
 package interfacceGrafiche;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
-
 import classiEntità.Ristorante;
 import classiEntità.Utente;
-import controllers.ControllerCarrello;
-import controllers.ControllerConsegne;
-import controllers.ControllerRicercaMenu;
 import controllers.ControllerRicercaRistoranti;
 import controllers.ControllorePrincipale;
-
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -30,8 +18,6 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Cursor;
-import javax.swing.JTextArea;
-import java.awt.List;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
@@ -61,6 +47,12 @@ public class JFrameHomeUtente extends JFrame {
 		inputTF.setColumns(10);
 
 		JButton LogOutButton = new JButton("Log Out");
+		LogOutButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				c1.Logout();
+				dispose();
+			}
+		});
 		LogOutButton.setBounds(10, 433, 89, 28);
 		contentPane.add(LogOutButton);
 		

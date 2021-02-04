@@ -1,10 +1,6 @@
 package interfacceDAO;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 import classiEntità.Menu;
-import classiEntità.Prodotto;
 import classiEntità.Ristorante;
 
 public interface MenùDAO {
