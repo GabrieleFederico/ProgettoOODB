@@ -18,7 +18,7 @@ public class ControllerCarrello {
 	JFrameHomeUtente fh;
 	JFrameCarrello fc;
 	Utenti utente;
-
+	CarrelloDAOPostgres carrelloDao = new CarrelloDAOPostgres();
 	
 	public ControllerCarrello(Utenti utente) {
 		this.utente = utente;
@@ -26,42 +26,40 @@ public class ControllerCarrello {
 
 	public void aggiungiAlCarrello(String nomep, int quantit‡, double prezzo, Ristoranti ristorante) {
 		
-		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
-		cp.aggiungiProdottoAlCarrello(nomep, quantit‡, utente, prezzo, ristorante);
+		
+		carrelloDao.aggiungiProdottoAlCarrello(nomep, quantit‡, utente, prezzo, ristorante);
 	}
 	
 	public Carrello ottieniCarrello() {
 		
-		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
-		Carrello temp = cp.getCarrelloByUtente(utente);
+		Carrello temp = carrelloDao.getCarrelloByUtente(utente);
 		
 		return temp;
 	}
 	
 	public boolean rimuoviDalCarrello(Carrello carrello, int indice) {
 		
-		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
-		Ristoranti temp = cp.rimuoviProdottoDalCarrello(carrello, indice);
+		Ristoranti temp = carrelloDao.rimuoviProdottoDalCarrello(carrello, indice);
 		
-		return cp.esisteRistoranteNelCarrello(temp);
+		return carrelloDao.esisteRistoranteNelCarrello(temp);
 	}
 	
 	
 	public void modificaQuantit‡Carrello(int nuovoValore, Carrello carrello,  String nomeProdotto) {
-		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
-		cp.cambiaQuantit‡Carrello(nuovoValore, carrello, nomeProdotto);		
+		
+		carrelloDao.cambiaQuantit‡Carrello(nuovoValore, carrello, nomeProdotto);		
 		
 	}
 
 	public ArrayList<Double> getPrezzi(Carrello carrello) {
-		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
-		ArrayList<Double> prezzi = cp.getArrayListPrezzi(carrello);		
+		
+		ArrayList<Double> prezzi = carrelloDao.getArrayListPrezzi(carrello);		
 		return prezzi;
 	}
 
 	public void archiviaCarrello(Carrello carrello, Ristoranti r) {
-		CarrelloDAOPostgres cp = new CarrelloDAOPostgres();
-		cp.archiviaCarrello(carrello, r);
+		
+		carrelloDao.archiviaCarrello(carrello, r);
 	}
 
 	public Window getJFrameCarrello() {

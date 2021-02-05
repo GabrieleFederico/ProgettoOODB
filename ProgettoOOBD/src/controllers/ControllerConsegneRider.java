@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import classiEntità.Consegne;
 import classiEntità.Riders;
 import interfacceGrafiche.JDialogErrore;
-import interfacceGrafiche.JDialogMaxAttività;
 import interfacceGrafiche.JFrameHomeRider;
 import interfacceGrafiche.JFrameOrdiniRider;
 import postgresDAOImpl.ConsegneDAOPostgres;
@@ -15,6 +14,7 @@ public class ControllerConsegneRider {
 	private Riders rider;
 	private JFrameHomeRider homeRider;
 	private JFrameOrdiniRider ordiniRider;
+	private ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
 	
 	public ControllerConsegneRider(Riders rider, ControllerPrincipale c1) {
 		
@@ -43,7 +43,7 @@ public class ControllerConsegneRider {
 	
 	public ArrayList<Consegne> getOrdiniByRider(){
 		
-		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
+		
 		ArrayList<Consegne> risultato = cp.getOrdiniByRider(rider);
 		
 		return risultato;
@@ -51,20 +51,19 @@ public class ControllerConsegneRider {
 	
 	public ArrayList<Consegne> getConsegneDisponibili() {
 
-		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
 		ArrayList<Consegne> risultato = cp.getConsegneByMezzo(rider.getMezzo());
 		
 		return risultato;
 	}
 	
 	public void nuovoOrdineRider(String CodR, String CodC) {
-		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
+		
 		cp.assegnaConsegnaRider(CodR, CodC, this);
 		
 	}
 	
 	public void ordineConsegnato(String CodC) {
-		ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
+		
 		cp.ordineConsegnato(CodC);
 		
 	}

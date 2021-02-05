@@ -17,6 +17,9 @@ public class ControllerLogin {
 	private JFrameRegistratiRider frr;
 	private ControllerPrincipale cc;
 
+	private RidersDAOPostgres riderDao = new RidersDAOPostgres();
+	private UtentiDAOPostgres utenteDao = new UtentiDAOPostgres();
+
 	public ControllerLogin(ControllerPrincipale controller) {
 
 		fl = new JFrameLogin(this, controller);
@@ -33,8 +36,7 @@ public class ControllerLogin {
 
 	public void registraCredenzialiUtente(Utenti utente) throws SQLException {
 
-		UtentiDAOPostgres u1 = new UtentiDAOPostgres();
-		u1.inserisciUtente(utente);
+		utenteDao.inserisciUtente(utente);
 		
 		fl.setVisible(true);
 		fr.setVisible(false);
@@ -43,9 +45,8 @@ public class ControllerLogin {
 
 	public Utenti controllaCredenziali(String email, String pwd) throws SQLException {
 		
-		UtentiDAOPostgres u2 = new UtentiDAOPostgres();
 		Utenti utente = new Utenti();
-		utente = u2.getUtenteByCredenziali(email, pwd);
+		utente = utenteDao.getUtenteByCredenziali(email, pwd);
 		
 		return utente;
 	}
@@ -64,8 +65,7 @@ public class ControllerLogin {
 	
 	public Riders getRider(String email, String password) {
 		
-		RidersDAOPostgres rd = new RidersDAOPostgres();
-		Riders rider = rd.getRiderByEmail(email, password);
+		Riders rider = riderDao.getRiderByEmail(email, password);
 		
 		return rider;
 	}

@@ -15,6 +15,7 @@ public class ControllerRicercaMenu {
 	Ristoranti r;
 	String Email;
 	ControllerCarrello CCarrello;
+	MenùDAOPostgres menuDao = new  MenùDAOPostgres();
 	
 	public ControllerRicercaMenu(Ristoranti rist, ControllerCarrello ccarrello) {
 		
@@ -28,13 +29,12 @@ public class ControllerRicercaMenu {
 
 	public Menù ricercaProdotto (String ricerca, JPanel pannello, int componentiNecessarie, String fasciaPrezzo) throws SQLException {
 		
-		MenùDAOPostgres mp = new  MenùDAOPostgres();
 		Menù risultatoRicerca = new Menù();
 		
 		if(fasciaPrezzo == null)
-			risultatoRicerca = mp.getMenuByNomeProdottoAndRistorante(ricerca, r);
+			risultatoRicerca = menuDao.getMenuByNomeProdottoAndRistorante(ricerca, r);
 		else
-			risultatoRicerca = mp.getProdottoByRicercaComplessa(ricerca, r, fasciaPrezzo);
+			risultatoRicerca = menuDao.getProdottoByRicercaComplessa(ricerca, r, fasciaPrezzo);
 		
 		fr.aggiornaInterfacciaProdotti(pannello, componentiNecessarie, risultatoRicerca, CCarrello);
 		
@@ -44,10 +44,9 @@ public class ControllerRicercaMenu {
 
 	public void getMenu(Ristoranti rist, JPanel pannello, int componentiNecessarie, JFrameRistorante fr) {
 		
-		MenùDAOPostgres mp = new MenùDAOPostgres();
 		Menù menùRistorante = new Menù();
 
-		menùRistorante = mp.getMenùByRistorante(rist);
+		menùRistorante = menuDao.getMenùByRistorante(rist);
 
 		fr.aggiornaInterfacciaProdotti(pannello, componentiNecessarie, menùRistorante, CCarrello);
 		
