@@ -74,7 +74,8 @@ public class ControllerLogin {
 	public void registraCredenzialiRider(String nome, String cognome, String email, String mezzo, String password) {
 		
 		RidersDAOPostgres r1 = new RidersDAOPostgres();
-		r1.inserisciRider(nome, cognome, email, mezzo, password);
+		Riders rider = new Riders(nome, cognome, email, mezzo, password);
+		r1.inserisciRider(rider);
 		fl.setVisible(true);
 		frr.setVisible(false);		
 	}

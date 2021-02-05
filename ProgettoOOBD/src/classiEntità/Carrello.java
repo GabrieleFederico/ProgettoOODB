@@ -11,7 +11,7 @@ public class Carrello {
 	private ArrayList<Ristoranti> provenienzaProdotti;
 	
 	public Carrello(Utenti proprietario) {
-		this.Proprietario = proprietario;
+		Proprietario = proprietario;
 		Prodotti = new ArrayList<Prodotti>();
 		Quantit‡Prodotti = new ArrayList<Integer>();
 		provenienzaProdotti = new ArrayList<Ristoranti>();

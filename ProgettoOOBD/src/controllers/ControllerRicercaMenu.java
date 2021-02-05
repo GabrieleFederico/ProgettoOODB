@@ -1,16 +1,13 @@
 package controllers;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
 import classiEntità.Menù;
-import classiEntità.Prodotti;
 import classiEntità.Ristoranti;
 import interfacceGrafiche.JFrameRistorante;
 import postgresDAOImpl.MenùDAOPostgres;
-import postgresDAOImpl.RistorantiDAOPostgres;
 
 public class ControllerRicercaMenu {
 	

@@ -1,13 +1,10 @@
 package classiEntità;
 
-import java.util.LinkedList;
-
 public class Ristoranti {
 
 	private String Nome;
 	private String Indirizzo;
 	private Menù Menu;
-	private LinkedList<Riders> RiderDelRistorante;
 	
 	public String getNome() {
 		return Nome;
@@ -29,14 +26,6 @@ public class Ristoranti {
 	public void setMenu(Menù menu) {
 		Menu = menu;
 	}
-	
-	public LinkedList<Riders> getRiderDelRistorante() {
-		return RiderDelRistorante;
-	}
-	public void setRiderDelRistorante(LinkedList<Riders> riderDelRistorante) {
-		RiderDelRistorante = riderDelRistorante;
-	}
-	
 	
 	
 }

@@ -1,6 +1,5 @@
 package classiEntità;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Riders {
@@ -9,8 +8,23 @@ public class Riders {
 	private String Nome;
 	private String Cognome;
 	private String Mezzo;
-	private ArrayList<Ristoranti> Ristoranti;
+	private String Email;
+	private String Password;
 	private LinkedList<Consegne> ConsegneDaFare;
+	
+
+	public Riders(String nome, String cognome, String email, String mezzo, String password) {
+		
+		Nome = nome;
+		Cognome = cognome;
+		Mezzo = mezzo;
+		Email = email;
+		Password = password;
+	}
+	
+	public Riders() {
+		
+	}
 	
 	public String getCodR() {
 		return CodR;
@@ -40,11 +54,19 @@ public class Riders {
 		Mezzo = mezzo;
 	}
 	
-	public ArrayList<Ristoranti> getRistoranti() {
-		return Ristoranti;
+	public String getEmail() {
+		return Email;
 	}
-	public void setRistoranti(ArrayList<Ristoranti> ristoranti) {
-		Ristoranti = ristoranti;
+	public void setEmail(String email) {
+		Email = email;
+	}
+	
+	public String getPassword() {
+		return Password;
+	}
+
+	public void setPassword(String password) {
+		Password = password;
 	}
 	
 	public LinkedList<Consegne> getConsegneDaFare() {
@@ -53,6 +75,7 @@ public class Riders {
 	public void setConsegneDaFare(LinkedList<Consegne> consegnedafare) {
 		ConsegneDaFare = consegnedafare;
 	}
+
 	
 	
 }

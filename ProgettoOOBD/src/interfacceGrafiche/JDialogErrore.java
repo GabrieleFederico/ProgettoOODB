@@ -14,11 +14,11 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class JDialogErroreLogin extends JDialog {
+public class JDialogErrore extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
-	public JDialogErroreLogin() {
+	public JDialogErrore(String messaggio) {
 		setAlwaysOnTop(true);
 		setTitle("Errore");
 		setBounds(100, 100, 450, 191);
@@ -28,7 +28,7 @@ public class JDialogErroreLogin extends JDialog {
 		contentPanel.setLayout(null);
 		
 		{
-			JLabel lblNewLabel = new JLabel("Email e/o Password errata/e");
+			JLabel lblNewLabel = new JLabel(messaggio);
 			lblNewLabel.setBounds(124, 33, 172, 53);
 			contentPanel.add(lblNewLabel);
 		}
@@ -40,7 +40,7 @@ public class JDialogErroreLogin extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						JDialogErroreLogin.this.setVisible(false);
+						JDialogErrore.this.setVisible(false);
 						dispose();
 						
 					}

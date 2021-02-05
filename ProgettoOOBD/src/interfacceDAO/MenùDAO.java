@@ -9,5 +9,4 @@ public interface MenùDAO {
 	public Menù getMenuByNomeProdottoAndRistorante(String ricerca, Ristoranti r);
 	public Menù getProdottoByRicercaComplessa(String ricerca, Ristoranti r, String fasciaPrezzo);
 
-
 }

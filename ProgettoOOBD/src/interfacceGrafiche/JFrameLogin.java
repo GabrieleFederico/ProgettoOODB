@@ -26,7 +26,7 @@ public class JFrameLogin extends JFrame {
 	private JTextField TFPassword;
 	
 	private ControllerLogin controller;
-	JDialogErroreLogin LoginSbagliato = new JDialogErroreLogin();
+	JDialogErrore LoginSbagliato = new JDialogErrore("Email e/o Password errata/e");
 	
 	public JFrameLogin(ControllerLogin c, ControllerPrincipale c1) {
 

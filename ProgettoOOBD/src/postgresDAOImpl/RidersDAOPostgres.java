@@ -52,16 +52,17 @@ public class RidersDAOPostgres implements RidersDAO{
 		return null;
 	}
 	
-	public void inserisciRider(String nome, String cognome, String email, String mezzo, String password) {
+	public void inserisciRider(Riders rider) {
+		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
 			inserisciRiderPS = connessione.prepareStatement("INSERT INTO RIDER VALUES (default, ?, ?, ?, ?, ?);");
-			inserisciRiderPS.setString(1, nome);
-			inserisciRiderPS.setString(2, cognome);
-			inserisciRiderPS.setString(3, email);
-			inserisciRiderPS.setString(4, mezzo);
-			inserisciRiderPS.setString(5, password);
+			inserisciRiderPS.setString(1, rider.getNome());
+			inserisciRiderPS.setString(2, rider.getCognome());
+			inserisciRiderPS.setString(3, rider.getEmail());
+			inserisciRiderPS.setString(4, rider.getMezzo());
+			inserisciRiderPS.setString(5, rider.getPassword());
 			inserisciRiderPS.executeUpdate();
 			connessione.close();
 				

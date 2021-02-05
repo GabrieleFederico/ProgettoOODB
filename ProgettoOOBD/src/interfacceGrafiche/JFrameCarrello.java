@@ -52,8 +52,16 @@ public class JFrameCarrello extends JFrame {
 		JButton ButtonCassa = new JButton("Vai alla cassa");
 		ButtonCassa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cassa = new JFrameCassa(totale, c, carrello, co, listaRistoranti);
-				cassa.setVisible(true);
+				try {
+					listaRistoranti.get(0);
+					cassa = new JFrameCassa(totale, c, carrello, co, listaRistoranti);
+					cassa.setVisible(true);
+				}
+				catch(IndexOutOfBoundsException e) {
+					JDialogErrore err = new JDialogErrore("Il carrello è vuoto");
+					err.setVisible(true);
+				}
+					
 			}
 		});
 		ButtonCassa.setBounds(594, 446, 136, 23);
