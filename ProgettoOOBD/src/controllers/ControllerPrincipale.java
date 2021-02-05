@@ -7,7 +7,6 @@ import interfacceGrafiche.JFrameCarrello;
 
 public class ControllerPrincipale {
 
-	String Email;
 	ControllerCarrello ccarrello;
 	ControllerConsegneUtente co = new ControllerConsegneUtente();
 	

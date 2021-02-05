@@ -33,19 +33,13 @@ public class CarrelloDAOPostgres implements CarrelloDAO{
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
-<<<<<<< Updated upstream
 			aggiungiProdottoAlCarrelloPS = connessione.prepareStatement("INSERT INTO Carrello VALUES (?, ?, ?, ?, ?)");
 			aggiungiProdottoAlCarrelloPS.setString(1, nomep);
 			aggiungiProdottoAlCarrelloPS.setInt(2, quantità);
 			aggiungiProdottoAlCarrelloPS.setString(3, utente.getEmail());
 			aggiungiProdottoAlCarrelloPS.setString(4, ristorante.getNome() + "," + ristorante.getIndirizzo());
 			aggiungiProdottoAlCarrelloPS.setDouble(5, prezzo);
-=======
-			aggiungiProdottoAlCarrelloPS = connessione.prepareStatement("INSERT INTO Carrello VALUES ( ?, ?, ?)");
-			aggiungiProdottoAlCarrelloPS.setString(1, nomep);
-			aggiungiProdottoAlCarrelloPS.setInt(2, quantità);
-			aggiungiProdottoAlCarrelloPS.setString(3, utente.getEmail());
->>>>>>> Stashed changes
+
 			aggiungiProdottoAlCarrelloPS.executeUpdate();
 			connessione.close();
 		} 

@@ -41,7 +41,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			while(rs.next()) {
 				temp = new Consegne();
 				temp.setCodC(rs.getString("codc"));
-				temp.setOrario(rs.getTimestamp("dataeoraconsegna"));
+				temp.setOrario(rs.getTime("dataeoraconsegna"));
 				temp.setIndirizzoP(rs.getString("indirizzop"));
 				temp.setIndirizzoA(rs.getString("indirizzoa"));
 				temp.setConsegnato(true);
@@ -56,7 +56,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			while(rs.next()) {
 				temp = new Consegne();
 				temp.setCodC(rs.getString("codc"));
-				temp.setOrario(rs.getTimestamp("orario"));
+				temp.setOrario(rs.getTime("orario"));
 				temp.setIndirizzoP(rs.getString("indirizzop"));
 				temp.setIndirizzoA(rs.getString("indirizzoa"));
 				temp.setConsegnato(rs.getBoolean("consegnato"));
@@ -87,7 +87,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			while(rs.next()) {
 				temp = new Consegne();
 				temp.setCodC(rs.getString("codc"));
-				temp.setOrario(rs.getTimestamp("dataconsegna"));
+				temp.setOrario(rs.getTime("dataconsegna"));
 				temp.setIndirizzoP(rs.getString("indirizzop"));
 				temp.setIndirizzoA(rs.getString("indirizzoa"));
 				risultato.add(temp);
@@ -100,6 +100,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		return risultato;
 	}
 	
+	@Override
 	public void creaConsegna(String indirizzoP, Utenti utente, String mezzo, String orario) {
 		
 		
@@ -121,6 +122,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		}
 	}
 
+	@Override
 	public ArrayList<Consegne> getConsegneByMezzo(String mezzo) {
 
 		ArrayList<Consegne> risultato = new ArrayList<Consegne>();
@@ -141,7 +143,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			while(rs.next()) {
 				temp = new Consegne();
 				temp.setCodC(rs.getString("CodC"));
-				temp.setOrario(rs.getTimestamp("Orario"));
+				temp.setOrario(rs.getTime("Orario"));
 				temp.setIndirizzoP(rs.getString("IndirizzoP"));
 				temp.setIndirizzoA(rs.getString("IndirizzoA"));
 				utente.setNome(rs.getString("nome"));
@@ -161,7 +163,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		return risultato;
 	}
 
-
+	@Override
 	public void assegnaConsegnaRider(String CodR, String CodC, ControllerConsegneRider cc) {
 
 		try {			
@@ -178,6 +180,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		
 	}
 
+	@Override
 	public void ordineConsegnato(String CodC) {
 
 		try {			
@@ -193,6 +196,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 		
 	}
 	
+	@Override
 	public ArrayList<Consegne> getOrdiniByRider(Riders rider) {
 		
 		ArrayList<Consegne> risultato = new ArrayList<Consegne>();
@@ -210,7 +214,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			while(rs.next()) {
 				Consegne consegne = new Consegne();
 				consegne.setCodC(rs.getString("CodC"));
-				consegne.setOrario(rs.getTimestamp("orario"));
+				consegne.setOrario(rs.getTime("orario"));
 				consegne.setIndirizzoP(rs.getString("IndirizzoP"));
 				consegne.setIndirizzoA(rs.getString("IndirizzoA"));
 				Utenti utente = new Utenti();

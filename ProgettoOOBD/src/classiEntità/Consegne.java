@@ -1,11 +1,12 @@
 package classiEntità;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class Consegne {
 
 	private String CodC;
-	private Timestamp Orario;
+	private Time Orario;
 	private String IndirizzoP;
 	private String IndirizzoA;
 	private boolean Consegnato;
@@ -18,11 +19,11 @@ public class Consegne {
 		CodC = codC;
 	}
 	
-	public Timestamp getOrario() {
+	public Time getOrario() {
 		return Orario;
 	}
-	public void setOrario(Timestamp timestamp) {
-		Orario = timestamp;
+	public void setOrario(Time time) {
+		Orario = time;
 	}
 	
 	public String getIndirizzoP() {

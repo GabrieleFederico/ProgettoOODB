@@ -14,5 +14,6 @@ public interface ConsegneDAO {
 	public ArrayList<Consegne> getConsegneByMezzo(String mezzo);
 	public void assegnaConsegnaRider(String CodR, String CodC, ControllerConsegneRider cc);
 	public void ordineConsegnato(String CodC);
+	public ArrayList<Consegne> getOrdiniByRider(Riders rider);
 
 }

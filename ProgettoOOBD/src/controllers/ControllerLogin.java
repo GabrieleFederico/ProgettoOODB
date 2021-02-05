@@ -31,10 +31,9 @@ public class ControllerLogin {
 		fr.setVisible(true);
 	}
 
-	public void registraCredenzialiUtente(String email, String pwd, String nome, String cognome, String indirizzo) throws SQLException {
+	public void registraCredenzialiUtente(Utenti utente) throws SQLException {
 
 		UtentiDAOPostgres u1 = new UtentiDAOPostgres();
-		Utenti utente = new Utenti(email, pwd, nome, cognome, indirizzo);
 		u1.inserisciUtente(utente);
 		
 		fl.setVisible(true);
@@ -71,10 +70,9 @@ public class ControllerLogin {
 		return rider;
 	}
 	
-	public void registraCredenzialiRider(String nome, String cognome, String email, String mezzo, String password) {
+	public void registraCredenzialiRider(Riders rider) {
 		
 		RidersDAOPostgres r1 = new RidersDAOPostgres();
-		Riders rider = new Riders(nome, cognome, email, mezzo, password);
 		r1.inserisciRider(rider);
 		fl.setVisible(true);
 		frr.setVisible(false);		

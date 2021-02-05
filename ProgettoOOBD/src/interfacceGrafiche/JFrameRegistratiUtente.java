@@ -3,6 +3,8 @@ package interfacceGrafiche;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import classiEntità.Utenti;
 import controllers.ControllerLogin;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -64,10 +66,11 @@ public class JFrameRegistratiUtente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
-					controller.registraCredenzialiUtente(TFNewEmail.getText(), TFNewPassword.getText(), TFNewNome.getText(), TFNewCognome.getText(), TFNewIndirizzo.getText());
+					Utenti utente = new Utenti(TFNewEmail.getText(), TFNewPassword.getText(), TFNewNome.getText(), TFNewCognome.getText(), TFNewIndirizzo.getText());
+					controller.registraCredenzialiUtente(utente);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
-				}	
+				}
 			}
 		});
 		buttonConferma.setBounds(304, 308, 109, 23);

@@ -22,7 +22,7 @@ public class RidersDAOPostgres implements RidersDAO{
 	private ConnessioneDB connessioneDB;
 	private PreparedStatement getRiderByEmailPS, inserisciRiderPS;
 
-	
+	@Override
 	public Riders getRiderByEmail(String email, String password) {
 		
 		Riders risultato = new Riders();
@@ -52,6 +52,7 @@ public class RidersDAOPostgres implements RidersDAO{
 		return null;
 	}
 	
+	@Override
 	public void inserisciRider(Riders rider) {
 		
 		try {

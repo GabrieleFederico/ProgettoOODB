@@ -2,6 +2,8 @@ package interfacceGrafiche;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import classiEntità.Riders;
 import controllers.ControllerLogin;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -97,7 +99,8 @@ public class JFrameRegistratiRider extends JFrame {
 		buttonRegistrati.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String mezzo = comboBoxMezzo.getSelectedItem().toString();
-				c.registraCredenzialiRider( TFNewNome.getText(), TFNewCognome.getText(),TFNewEmail.getText(), mezzo, TFNewPassword.getText());	
+				Riders rider = new Riders(TFNewNome.getText(), TFNewCognome.getText(),TFNewEmail.getText(), mezzo, TFNewPassword.getText());
+				c.registraCredenzialiRider(rider);	
 			}
 		});
 		buttonRegistrati.setBounds(281, 351, 89, 23);
