@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import classiEntit‡.Consegne;
 import classiEntit‡.Riders;
+import interfacceGrafiche.JDialogErrore;
 import interfacceGrafiche.JDialogMaxAttivit‡;
 import interfacceGrafiche.JFrameHomeRider;
 import interfacceGrafiche.JFrameOrdiniRider;
@@ -69,7 +70,7 @@ public class ControllerConsegneRider {
 	}
 	
 	public void maxAttivit‡Rider() {
-		JDialogMaxAttivit‡ maxAttivit‡ = new JDialogMaxAttivit‡();
+		JDialogErrore maxAttivit‡ = new JDialogErrore("<html>ATTENZIONE <br>Possiedi gi‡ il massimo numero di ordini.</html>");
 		maxAttivit‡.setVisible(true);
 		
 	}
