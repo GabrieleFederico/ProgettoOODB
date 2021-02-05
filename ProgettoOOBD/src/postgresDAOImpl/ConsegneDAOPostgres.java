@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -106,7 +107,7 @@ public class ConsegneDAOPostgres implements ConsegneDAO{
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
 			creaConsegnaPS = connessione.prepareStatement("INSERT INTO CONSEGNE VALUES (default, ?, ?, ?, ?, 'false', null, ?)");
-			creaConsegnaPS.setTimestamp(1, Timestamp.valueOf(orario + ":00"));
+			creaConsegnaPS.setTime(1, Time.valueOf(orario + ":00"));
 			creaConsegnaPS.setString(2, indirizzoP);
 			creaConsegnaPS.setString(3, utente.getIndirizzo());
 			creaConsegnaPS.setString(4, utente.getEmail());

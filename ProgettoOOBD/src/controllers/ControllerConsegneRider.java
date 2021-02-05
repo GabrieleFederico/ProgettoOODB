@@ -6,12 +6,14 @@ import classiEntità.Consegne;
 import classiEntità.Riders;
 import interfacceGrafiche.JDialogMaxAttività;
 import interfacceGrafiche.JFrameHomeRider;
+import interfacceGrafiche.JFrameOrdiniRider;
 import postgresDAOImpl.ConsegneDAOPostgres;
 
 public class ControllerConsegneRider {
 	
 	private Riders rider;
 	private JFrameHomeRider homeRider;
+	private JFrameOrdiniRider ordiniRider;
 	
 	public ControllerConsegneRider(Riders rider, ControllerPrincipale c1) {
 		
@@ -19,9 +21,19 @@ public class ControllerConsegneRider {
 		homeRider = new JFrameHomeRider(this, c1);
 		homeRider.setVisible(true);
 	}
+	
+	public void apriMieiOrdini() {
+	
+		ordiniRider = new JFrameOrdiniRider(this);
+		ordiniRider.setVisible(true);
+	}
 
 	public JFrameHomeRider getHomeRider() {
 		return homeRider;
+	}
+	
+	public JFrameOrdiniRider getJFrameOrdiniRider() {
+		return ordiniRider;
 	}
 
 	public Riders getRider() {
