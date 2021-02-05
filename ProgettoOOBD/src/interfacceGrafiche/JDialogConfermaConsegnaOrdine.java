@@ -26,7 +26,6 @@ public class JDialogConfermaConsegnaOrdine extends JDialog {
 		ButtonConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				c.ordineConsegnato(CodC);
-				c.getJFrameOrdiniRider().aggiornaInterfaccia();
 				dispose();
 			}
 		});

@@ -114,11 +114,7 @@ public class JFrameRistorante extends JFrame {
 			contatore = new JSpinner();
 			contatore.setBounds(x + 250, y, 40, 20);
 			contatore.setModel(new SpinnerNumberModel(1, 1, null, 1));
-<<<<<<< Updated upstream
 			pannelloScrollPane.add(contatore);
-=======
-			pannello.add(contatore);
->>>>>>> Stashed changes
 			spinners.add(contatore);
 			bottone = new JButton("Aggiungi al carrello");
 			bottone.setBounds(x + 350, y, 200, 20);

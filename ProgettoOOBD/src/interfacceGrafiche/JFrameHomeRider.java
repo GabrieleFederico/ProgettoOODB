@@ -23,6 +23,7 @@ public class JFrameHomeRider extends JFrame {
 	private JDialogConfermaIncaricoRider confermaIncarico;
 	private ArrayList<Consegne> consegneDisponibili;
 	private ControllerConsegneRider c2;
+	private JFrameOrdiniRider iMieiOrdini;
 	
 	public JFrameHomeRider(ControllerConsegneRider cr, ControllerPrincipale c1) {
 		
@@ -44,7 +45,8 @@ public class JFrameHomeRider extends JFrame {
 		ButtonIMieiOrdini.setBounds(589, 447, 100, 23);
 		ButtonIMieiOrdini.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cr.apriMieiOrdini();
+				iMieiOrdini = new JFrameOrdiniRider(cr);
+				iMieiOrdini.setVisible(true);
 			}
 		});
 		contentPane.add(ButtonIMieiOrdini);
@@ -92,6 +94,7 @@ public class JFrameHomeRider extends JFrame {
 					  "<br>Destinatario:" + c.getComposizioneConsegna().getProprietario().getNome() + " " + c.getComposizioneConsegna().getProprietario().getCognome() + "</html>");
 			label.setBounds(xLabel, y, 150, 130);
 			pannelloScrollPane.add(label);
+			
 			JButton bottone = new JButton ("Prendi in carico");
 			bottone.setBounds(xButton, y+30, 150, 30);
 			pannelloScrollPane.add(bottone);
