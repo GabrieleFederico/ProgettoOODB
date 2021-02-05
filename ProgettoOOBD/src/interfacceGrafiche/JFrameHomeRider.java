@@ -35,38 +35,38 @@ public class JFrameHomeRider extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel LabelOrdiniDisponibili = new JLabel("Sono disponibili i seguenti ordini:");
-		LabelOrdiniDisponibili.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		LabelOrdiniDisponibili.setBounds(10, 50, 240, 14);
-		contentPane.add(LabelOrdiniDisponibili);
+		JLabel labelOrdiniDisponibili = new JLabel("Sono disponibili i seguenti ordini:");
+		labelOrdiniDisponibili.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		labelOrdiniDisponibili.setBounds(10, 50, 240, 14);
+		contentPane.add(labelOrdiniDisponibili);
 		
-		JButton ButtonIMieiOrdini = new JButton("I miei ordini");
-		ButtonIMieiOrdini.setBounds(589, 447, 100, 23);
-		ButtonIMieiOrdini.addActionListener(new ActionListener() {
+		JButton luttonIMieiOrdini = new JButton("I miei ordini");
+		luttonIMieiOrdini.setBounds(589, 447, 100, 23);
+		luttonIMieiOrdini.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cr.apriMieiOrdini();
 			}
 		});
-		contentPane.add(ButtonIMieiOrdini);
+		contentPane.add(luttonIMieiOrdini);
 		
-		JButton ButtonLogout = new JButton("Logout");
-		ButtonLogout.addActionListener(new ActionListener() {
+		JButton buttonLogout = new JButton("Logout");
+		buttonLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				c1.logout();
 				dispose();
 			}
 		});
-		ButtonLogout.setBounds(10, 447, 89, 23);
-		contentPane.add(ButtonLogout);
+		buttonLogout.setBounds(10, 447, 89, 23);
+		contentPane.add(buttonLogout);
 		
-		JButton ButtonAggiorna = new JButton("Aggiorna");
-		ButtonAggiorna.addActionListener(new ActionListener() {
+		JButton buttonAggiorna = new JButton("Aggiorna");
+		buttonAggiorna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				aggiornaInterfaccia();
 			}
 		});
-		ButtonAggiorna.setBounds(301, 447, 89, 23);
-		contentPane.add(ButtonAggiorna);
+		buttonAggiorna.setBounds(301, 447, 89, 23);
+		contentPane.add(buttonAggiorna);
 		
 		getConsegne();
 	}

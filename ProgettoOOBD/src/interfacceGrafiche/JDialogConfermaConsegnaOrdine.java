@@ -18,20 +18,20 @@ public class JDialogConfermaConsegnaOrdine extends JDialog {
 		setBounds(100, 100, 348, 228);
 		getContentPane().setLayout(null);
 		
-		JLabel LabelConferma = new JLabel("Vuole confermare la consegna di questo ordine?");
-		LabelConferma.setBounds(10, 79, 283, 14);
-		getContentPane().add(LabelConferma);
+		JLabel labelConferma = new JLabel("Vuole confermare la consegna di questo ordine?");
+		labelConferma.setBounds(10, 79, 283, 14);
+		getContentPane().add(labelConferma);
 		
-		JButton ButtonConferma = new JButton("Conferma");
-		ButtonConferma.addActionListener(new ActionListener() {
+		JButton buttonConferma = new JButton("Conferma");
+		buttonConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				c.ordineConsegnato(CodC);
 				c.getJFrameOrdiniRider().aggiornaInterfaccia();
 				dispose();
 			}
 		});
-		ButtonConferma.setBounds(214, 141, 108, 23);
-		getContentPane().add(ButtonConferma);
+		buttonConferma.setBounds(214, 141, 108, 23);
+		getContentPane().add(buttonConferma);
 		
 		JButton labelAnnulla = new JButton("Annulla");
 		labelAnnulla.addActionListener(new ActionListener() {
@@ -47,10 +47,10 @@ public class JDialogConfermaConsegnaOrdine extends JDialog {
 		labelOrdine.setBounds(39, 29, 67, 14);
 		getContentPane().add(labelOrdine);
 		
-		JLabel LabelCodC = new JLabel(CodC);
-		LabelCodC.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		LabelCodC.setBounds(102, 31, 108, 14);
-		getContentPane().add(LabelCodC);
+		JLabel labelCodC = new JLabel(CodC);
+		labelCodC.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelCodC.setBounds(102, 31, 108, 14);
+		getContentPane().add(labelCodC);
 
 	}
 

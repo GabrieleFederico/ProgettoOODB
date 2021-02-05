@@ -35,18 +35,18 @@ public class JFrameOrdiniRider extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel LabelOrdini = new JLabel("Gli ordini presi da lei in carico sono i seguenti:");
-		LabelOrdini.setBounds(10, 32, 300, 14);
-		contentPane.add(LabelOrdini);
+		JLabel labelOrdini = new JLabel("Gli ordini presi da lei in carico sono i seguenti:");
+		labelOrdini.setBounds(10, 32, 300, 14);
+		contentPane.add(labelOrdini);
 		
-		JButton ButtonIndietro = new JButton("Indietro");
-		ButtonIndietro.addActionListener(new ActionListener() {
+		JButton buttonIndietro = new JButton("Indietro");
+		buttonIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 			}
 		});
-		ButtonIndietro.setBounds(619, 435, 89, 23);
-		contentPane.add(ButtonIndietro);
+		buttonIndietro.setBounds(619, 435, 89, 23);
+		contentPane.add(buttonIndietro);
 		
 		getConsegneDaEffettuare(cr);
 
@@ -66,10 +66,10 @@ public class JFrameOrdiniRider extends JFrame {
 		
 		for (Consegne c : listaConsegne) {
 			
-			JLabel LabelConsegna = new JLabel("<html> Codice Ordine:" + c.getCodC() + "<br>Partenza:" + c.getIndirizzoP() + "<br>Arrivo:" + c.getIndirizzoA() + "<br>Orario:" + c.getOrario() + 
+			JLabel labelConsegna = new JLabel("<html> Codice Ordine:" + c.getCodC() + "<br>Partenza:" + c.getIndirizzoP() + "<br>Arrivo:" + c.getIndirizzoA() + "<br>Orario:" + c.getOrario() + 
 					  "<br>Destinatario:" + c.getComposizioneConsegna().getProprietario().getNome() + " " + c.getComposizioneConsegna().getProprietario().getCognome() + "</html>");
-			LabelConsegna.setBounds(58, y, 150, 110);
-			pannelloScrollPane.add(LabelConsegna);
+			labelConsegna.setBounds(58, y, 150, 110);
+			pannelloScrollPane.add(labelConsegna);
 			
 			JButton bottone = new JButton ("Consegnato");
 			bottone.setBounds(258, y+30, 150, 30);

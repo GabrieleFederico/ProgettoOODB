@@ -45,20 +45,20 @@ public class JFrameRistorante extends JFrame {
 		contentPane.add(inputTF);
 		inputTF.setColumns(10);
 		
-		JComboBox<String> FasciaPrezzo = new JComboBox<String>();
-		FasciaPrezzo.setBounds(362, 11, 191, 28);
-		FasciaPrezzo.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare fascia di prezzo", "0-5", "5-10", "10-20"}));
-		contentPane.add(FasciaPrezzo);
+		JComboBox<String> fasciaPrezzo = new JComboBox<String>();
+		fasciaPrezzo.setBounds(362, 11, 191, 28);
+		fasciaPrezzo.setModel(new DefaultComboBoxModel<String>(new String[] {"Selezionare fascia di prezzo", "0-5", "5-10", "10-20"}));
+		contentPane.add(fasciaPrezzo);
 		
-		JButton CercaButton = new JButton("Cerca");
-		CercaButton.setBounds(583, 11, 89, 28);
-		CercaButton.addActionListener(new ActionListener() {
+		JButton cercaButton = new JButton("Cerca");
+		cercaButton.setBounds(583, 11, 89, 28);
+		cercaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String TFInput = inputTF.getText();
 				String PrezzoInput = null;
 				
-				if(FasciaPrezzo.getSelectedIndex() != 0)
-					PrezzoInput = FasciaPrezzo.getSelectedItem().toString();
+				if(fasciaPrezzo.getSelectedIndex() != 0)
+					PrezzoInput = fasciaPrezzo.getSelectedItem().toString();
 					
 				try {
 					c.ricercaProdotto(TFInput, contentPane, componentiNecessarie, PrezzoInput);
@@ -68,7 +68,7 @@ public class JFrameRistorante extends JFrame {
 				
 			}
 		});
-		contentPane.add(CercaButton);
+		contentPane.add(cercaButton);
 		
 		componentiNecessarie = contentPane.getComponentCount();
 		c.getMenu(r, contentPane, componentiNecessarie, this);
@@ -114,11 +114,8 @@ public class JFrameRistorante extends JFrame {
 			contatore = new JSpinner();
 			contatore.setBounds(x + 250, y, 40, 20);
 			contatore.setModel(new SpinnerNumberModel(1, 1, null, 1));
-<<<<<<< Updated upstream
 			pannelloScrollPane.add(contatore);
-=======
 			pannello.add(contatore);
->>>>>>> Stashed changes
 			spinners.add(contatore);
 			bottone = new JButton("Aggiungi al carrello");
 			bottone.setBounds(x + 350, y, 200, 20);

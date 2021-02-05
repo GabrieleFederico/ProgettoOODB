@@ -32,9 +32,9 @@ public class JFrameRegistratiUtente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel LabelEmail = new JLabel("Email:");
-		LabelEmail.setBounds(74, 94, 75, 14);
-		contentPane.add(LabelEmail);
+		JLabel labelEmail = new JLabel("Email:");
+		labelEmail.setBounds(74, 94, 75, 14);
+		contentPane.add(labelEmail);
 		
 		TFNewEmail = new JTextField();
 		TFNewEmail.setBounds(198, 91, 166, 20);
@@ -46,21 +46,21 @@ public class JFrameRegistratiUtente extends JFrame {
 		contentPane.add(TFNewPassword);
 		TFNewPassword.setColumns(10);
 		
-		JLabel LabelPassword = new JLabel("Password:");
-		LabelPassword.setBounds(74, 122, 75, 14);
-		contentPane.add(LabelPassword);
+		JLabel labelPassword = new JLabel("Password:");
+		labelPassword.setBounds(74, 122, 75, 14);
+		contentPane.add(labelPassword);
 		
-		JButton ButtonAnnulla = new JButton("Annulla");
-		ButtonAnnulla.addActionListener(new ActionListener() {
+		JButton buttonAnnulla = new JButton("Annulla");
+		buttonAnnulla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.tornaHomeDaUtente();
 			}
 		});
-		ButtonAnnulla.setBounds(34, 308, 89, 23);
-		contentPane.add(ButtonAnnulla);
+		buttonAnnulla.setBounds(34, 308, 89, 23);
+		contentPane.add(buttonAnnulla);
 		
-		JButton ButtonConferma = new JButton("Conferma");
-		ButtonConferma.addActionListener(new ActionListener() {
+		JButton buttonConferma = new JButton("Conferma");
+		buttonConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
@@ -70,24 +70,24 @@ public class JFrameRegistratiUtente extends JFrame {
 				}	
 			}
 		});
-		ButtonConferma.setBounds(304, 308, 109, 23);
-		contentPane.add(ButtonConferma);
+		buttonConferma.setBounds(304, 308, 109, 23);
+		contentPane.add(buttonConferma);
 		
-		JLabel LabelInserire = new JLabel("La preghiamo di inserire i suoi dati:");
-		LabelInserire.setBounds(34, 44, 303, 14);
-		contentPane.add(LabelInserire);
+		JLabel labelInserire = new JLabel("La preghiamo di inserire i suoi dati:");
+		labelInserire.setBounds(34, 44, 303, 14);
+		contentPane.add(labelInserire);
 		
-		JLabel LabelNewNome = new JLabel("Nome:");
-		LabelNewNome.setBounds(74, 153, 75, 14);
-		contentPane.add(LabelNewNome);
+		JLabel labelNewNome = new JLabel("Nome:");
+		labelNewNome.setBounds(74, 153, 75, 14);
+		contentPane.add(labelNewNome);
 		
-		JLabel LabelNewCognome = new JLabel("Cognome:");
-		LabelNewCognome.setBounds(74, 184, 75, 14);
-		contentPane.add(LabelNewCognome);
+		JLabel labelNewCognome = new JLabel("Cognome:");
+		labelNewCognome.setBounds(74, 184, 75, 14);
+		contentPane.add(labelNewCognome);
 		
-		JLabel LabelNewIndirizzo = new JLabel("Indirizzo:");
-		LabelNewIndirizzo.setBounds(74, 215, 75, 14);
-		contentPane.add(LabelNewIndirizzo);
+		JLabel labelNewIndirizzo = new JLabel("Indirizzo:");
+		labelNewIndirizzo.setBounds(74, 215, 75, 14);
+		contentPane.add(labelNewIndirizzo);
 		
 		TFNewNome = new JTextField();
 		TFNewNome.setBounds(198, 150, 166, 20);

@@ -30,25 +30,25 @@ public class JFrameRegistratiRider extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel LabelNome = new JLabel("Nome:");
-		LabelNome.setBounds(34, 93, 68, 14);
-		contentPane.add(LabelNome);
+		JLabel labelNome = new JLabel("Nome:");
+		labelNome.setBounds(34, 93, 68, 14);
+		contentPane.add(labelNome);
 		
-		JLabel LabelCognome = new JLabel("Cognome:");
-		LabelCognome.setBounds(34, 143, 68, 14);
-		contentPane.add(LabelCognome);
+		JLabel labelCognome = new JLabel("Cognome:");
+		labelCognome.setBounds(34, 143, 68, 14);
+		contentPane.add(labelCognome);
 		
-		JLabel LabelEmail = new JLabel("Email:");
-		LabelEmail.setBounds(34, 193, 68, 14);
-		contentPane.add(LabelEmail);
+		JLabel labelEmail = new JLabel("Email:");
+		labelEmail.setBounds(34, 193, 68, 14);
+		contentPane.add(labelEmail);
 		
-		JLabel LabelPassword = new JLabel("Password:");
-		LabelPassword.setBounds(34, 243, 68, 14);
-		contentPane.add(LabelPassword);
+		JLabel labelPassword = new JLabel("Password:");
+		labelPassword.setBounds(34, 243, 68, 14);
+		contentPane.add(labelPassword);
 		
-		JLabel LabelMezzo = new JLabel("Mezzo:");
-		LabelMezzo.setBounds(34, 293, 68, 14);
-		contentPane.add(LabelMezzo);
+		JLabel labelMezzo = new JLabel("Mezzo:");
+		labelMezzo.setBounds(34, 293, 68, 14);
+		contentPane.add(labelMezzo);
 		
 		TFNewNome = new JTextField();
 		TFNewNome.setBounds(130, 90, 145, 20);
@@ -70,38 +70,38 @@ public class JFrameRegistratiRider extends JFrame {
 		contentPane.add(TFNewPassword);
 		TFNewPassword.setColumns(10);
 		
-		JButton ButtonAnnulla = new JButton("Annulla");
-		ButtonAnnulla.addActionListener(new ActionListener() {
+		JButton buttonAnnulla = new JButton("Annulla");
+		buttonAnnulla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				c.tornaHomeDaRider();
 			}
 		});
-		ButtonAnnulla.setBounds(10, 351, 89, 23);
-		contentPane.add(ButtonAnnulla);
+		buttonAnnulla.setBounds(10, 351, 89, 23);
+		contentPane.add(buttonAnnulla);
 		
-		JLabel LabelInserire = new JLabel("Inserire i dati richiesti:");
-		LabelInserire.setBounds(34, 50, 379, 14);
-		contentPane.add(LabelInserire);
+		JLabel labelInserire = new JLabel("Inserire i dati richiesti:");
+		labelInserire.setBounds(34, 50, 379, 14);
+		contentPane.add(labelInserire);
 		
 		JComboBox<String> comboBoxMezzo = new JComboBox<String>();
 		comboBoxMezzo.setModel(new DefaultComboBoxModel<String>(new String[] {"Moto", "Automobile", "Bici"}));
 		comboBoxMezzo.setBounds(130, 289, 145, 22);
 		contentPane.add(comboBoxMezzo);
 		
-		JLabel LabelBenvenuto = new JLabel("Benvenuto");
-		LabelBenvenuto.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		LabelBenvenuto.setBounds(165, 25, 98, 14);
-		contentPane.add(LabelBenvenuto);
+		JLabel labelBenvenuto = new JLabel("Benvenuto");
+		labelBenvenuto.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelBenvenuto.setBounds(165, 25, 98, 14);
+		contentPane.add(labelBenvenuto);
 		
-		JButton ButtonRegistrati = new JButton("Registrati");
-		ButtonRegistrati.addActionListener(new ActionListener() {
+		JButton buttonRegistrati = new JButton("Registrati");
+		buttonRegistrati.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String mezzo = comboBoxMezzo.getSelectedItem().toString();
 				c.registraCredenzialiRider( TFNewNome.getText(), TFNewCognome.getText(),TFNewEmail.getText(), mezzo, TFNewPassword.getText());	
 			}
 		});
-		ButtonRegistrati.setBounds(281, 351, 89, 23);
-		contentPane.add(ButtonRegistrati);
+		buttonRegistrati.setBounds(281, 351, 89, 23);
+		contentPane.add(buttonRegistrati);
 		
 		
 	}

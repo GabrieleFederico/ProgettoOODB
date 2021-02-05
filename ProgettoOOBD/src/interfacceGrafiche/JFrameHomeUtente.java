@@ -44,29 +44,29 @@ public class JFrameHomeUtente extends JFrame {
 		contentPane.add(inputTF);
 		inputTF.setColumns(10);
 
-		JButton LogOutButton = new JButton("Log Out");
-		LogOutButton.addActionListener(new ActionListener() {
+		JButton logOutButton = new JButton("Log Out");
+		logOutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				c1.logout();
 				dispose();
 			}
 		});
-		LogOutButton.setBounds(10, 433, 89, 28);
-		contentPane.add(LogOutButton);
+		logOutButton.setBounds(10, 433, 89, 28);
+		contentPane.add(logOutButton);
 		
-		JButton HomeButton = new JButton("Home");
-		HomeButton.addActionListener(new ActionListener() {
+		JButton homeButton = new JButton("Home");
+		homeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TornaHome(contentPane, componentiNecessarie);
-				HomeButton.setEnabled(false);
+				homeButton.setEnabled(false);
 			}
 		});
-		HomeButton.setEnabled(false);
-		HomeButton.setBounds(324, 435, 89, 25);
-		contentPane.add(HomeButton);
+		homeButton.setEnabled(false);
+		homeButton.setBounds(324, 435, 89, 25);
+		contentPane.add(homeButton);
 
-		JButton CercaButton = new JButton("Cerca");
-		CercaButton.addActionListener(new ActionListener() {
+		JButton cercaButton = new JButton("Cerca");
+		cercaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String TFInput = inputTF.getText();
 					try {
@@ -74,20 +74,20 @@ public class JFrameHomeUtente extends JFrame {
 					} catch (SQLException e) {
 						System.out.println(e.getMessage());
 					}
-					HomeButton.setEnabled(true);
+					homeButton.setEnabled(true);
 			}
 		});
-		CercaButton.setBounds(365, 11, 120, 28);
-		contentPane.add(CercaButton);
+		cercaButton.setBounds(365, 11, 120, 28);
+		contentPane.add(cercaButton);
 
-		JButton IMieiOrdiniButton = new JButton("I miei ordini");
-		IMieiOrdiniButton.addActionListener(new ActionListener() {
+		JButton iMieiOrdiniButton = new JButton("I miei ordini");
+		iMieiOrdiniButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controllore.apriOrdini(utente);
 			}
 		});
-		IMieiOrdiniButton.setBounds(625, 12, 118, 27);
-		contentPane.add(IMieiOrdiniButton);
+		iMieiOrdiniButton.setBounds(625, 12, 118, 27);
+		contentPane.add(iMieiOrdiniButton);
 
 		JButton carrelloButton = new JButton("Carrello");
 		carrelloButton.addActionListener(new ActionListener() {
@@ -100,45 +100,45 @@ public class JFrameHomeUtente extends JFrame {
 
 		componentiNecessarie = contentPane.getComponentCount();
 		
-		JButton PaniniButton = new JButton("Panini");
-		PaniniButton.setBounds(10, 160, 215, 163);
-		contentPane.add(PaniniButton);
+		JButton paniniButton = new JButton("Panini");
+		paniniButton.setBounds(10, 160, 215, 163);
+		contentPane.add(paniniButton);
 
-		JButton PizzaButton = new JButton("Pizza");
-		PizzaButton.setBounds(270, 160, 215, 163);
-		contentPane.add(PizzaButton);
+		JButton pizzaButton = new JButton("Pizza");
+		pizzaButton.setBounds(270, 160, 215, 163);
+		contentPane.add(pizzaButton);
 
-		JButton SushiButton = new JButton("Sushi");
-		SushiButton.setBounds(528, 160, 215, 163);
-		contentPane.add(SushiButton);
+		JButton sushiButton = new JButton("Sushi");
+		sushiButton.setBounds(528, 160, 215, 163);
+		contentPane.add(sushiButton);
 
-		SushiButton.addActionListener(new ActionListener() {
+		sushiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					c.ricerca("Sushi", contentPane, componentiNecessarie);
-					HomeButton.setEnabled(true);
+					homeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}
 			}
 		});
 
-		PizzaButton.addActionListener(new ActionListener() {
+		pizzaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					c.ricerca("Pizz", contentPane, componentiNecessarie);
-					HomeButton.setEnabled(true);
+					homeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}
 			}
 		});
 
-		PaniniButton.addActionListener(new ActionListener() {
+		paniniButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					c.ricerca("Panin", contentPane, componentiNecessarie);
-					HomeButton.setEnabled(true);
+					homeButton.setEnabled(true);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 				}

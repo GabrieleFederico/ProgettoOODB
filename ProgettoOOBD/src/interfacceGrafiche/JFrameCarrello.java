@@ -44,13 +44,13 @@ public class JFrameCarrello extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel LabelCarrello = new JLabel("Carrello");
-		LabelCarrello.setBounds(372, 11, 55, 20);
-		contentPane.add(LabelCarrello);
-		LabelCarrello.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		JLabel labelCarrello = new JLabel("Carrello");
+		labelCarrello.setBounds(372, 11, 55, 20);
+		contentPane.add(labelCarrello);
+		labelCarrello.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JButton ButtonCassa = new JButton("Vai alla cassa");
-		ButtonCassa.addActionListener(new ActionListener() {
+		JButton buttonCassa = new JButton("Vai alla cassa");
+		buttonCassa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					listaRistoranti.get(0);
@@ -64,19 +64,19 @@ public class JFrameCarrello extends JFrame {
 					
 			}
 		});
-		ButtonCassa.setBounds(594, 446, 136, 23);
-		contentPane.add(ButtonCassa);
+		buttonCassa.setBounds(594, 446, 136, 23);
+		contentPane.add(buttonCassa);
 		
-		JButton ButtonIndietro = new JButton("Indietro");
-		ButtonIndietro.setBounds(24, 446, 89, 23);
-		contentPane.add(ButtonIndietro);
+		JButton buttonIndietro = new JButton("Indietro");
+		buttonIndietro.setBounds(24, 446, 89, 23);
+		contentPane.add(buttonIndietro);
 		
-		JLabel LabelTotale = new JLabel("Totale:");
-		LabelTotale.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		LabelTotale.setBounds(594, 430, 80, 14);
-		contentPane.add(LabelTotale);
+		JLabel labelTotale = new JLabel("Totale:");
+		labelTotale.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		labelTotale.setBounds(594, 430, 80, 14);
+		contentPane.add(labelTotale);
 		
-		ButtonIndietro.addActionListener(new ActionListener() {
+		buttonIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 			}

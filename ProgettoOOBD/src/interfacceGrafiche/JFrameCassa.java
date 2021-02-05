@@ -50,8 +50,8 @@ public class JFrameCassa extends JFrame {
 		comboBoxOrario.setBounds(299, 38, 89, 22);
 		contentPanel.add(comboBoxOrario);
 		
-		JButton ButtonPaga = new JButton("Paga");
-		ButtonPaga.addActionListener(new ActionListener() {
+		JButton buttonPaga = new JButton("Paga");
+		buttonPaga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String mezzo;
 				String orario = comboBoxOrario.getSelectedItem().toString();
@@ -67,25 +67,25 @@ public class JFrameCassa extends JFrame {
 				dispose();
 			}
 		});
-		ButtonPaga.setBounds(395, 200, 89, 23);
-		contentPanel.add(ButtonPaga);
+		buttonPaga.setBounds(395, 200, 89, 23);
+		contentPanel.add(buttonPaga);
 		
-		JButton ButtonAnnulla = new JButton("Annulla");
-		ButtonAnnulla.addActionListener(new ActionListener() {
+		JButton buttonAnnulla = new JButton("Annulla");
+		buttonAnnulla.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
 				 dispose();
 			 }
 		});
-		ButtonAnnulla.setBounds(10, 200, 89, 23);
-		contentPanel.add(ButtonAnnulla);
+		buttonAnnulla.setBounds(10, 200, 89, 23);
+		contentPanel.add(buttonAnnulla);
 		
-		JLabel LabelOrario = new JLabel("Inserire l'orario in cui desidera ricevere l'ordine:");
-		LabelOrario.setBounds(10, 42, 291, 14);
-		contentPanel.add(LabelOrario);
+		JLabel labelOrario = new JLabel("Inserire l'orario in cui desidera ricevere l'ordine:");
+		labelOrario.setBounds(10, 42, 291, 14);
+		contentPanel.add(labelOrario);
 		
-		JLabel LabelTotale = new JLabel("Il totale del suo ordine è:");
-		LabelTotale.setBounds(10, 157, 143, 14);
-		contentPanel.add(LabelTotale);
+		JLabel labelTotale = new JLabel("Il totale del suo ordine è:");
+		labelTotale.setBounds(10, 157, 143, 14);
+		contentPanel.add(labelTotale);
 		
 		String stringaRisultato = String.valueOf(totale);
 		JLabel JLabelprezzoTotale = new JLabel(stringaRisultato);

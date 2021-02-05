@@ -24,9 +24,8 @@ public class JFrameLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField TFEmail;
 	private JTextField TFPassword;
-	
 	private ControllerLogin controller;
-	JDialogErrore LoginSbagliato = new JDialogErrore("Email e/o Password errata/e");
+	JDialogErrore loginSbagliato = new JDialogErrore("Email e/o Password errata/e");
 	
 	public JFrameLogin(ControllerLogin c, ControllerPrincipale c1) {
 
@@ -57,61 +56,61 @@ public class JFrameLogin extends JFrame {
 		contentPane.add(TFPassword);
 		TFPassword.setColumns(10);
 		
-		JButton ButtonRegistrati = new JButton("Registrati");
-		ButtonRegistrati.addActionListener(new ActionListener() {
+		JButton buttonRegistrati = new JButton("Registrati");
+		buttonRegistrati.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				c.loginRegistratiButton();	 
 			}
 		});
-		ButtonRegistrati.setBounds(523, 389, 139, 23);
-		contentPane.add(ButtonRegistrati);
+		buttonRegistrati.setBounds(523, 389, 139, 23);
+		contentPane.add(buttonRegistrati);
 		
-		JButton ButtonLogin = new JButton("Login");
-		ButtonLogin.addActionListener(new ActionListener(){
+		JButton buttonLogin = new JButton("Login");
+		buttonLogin.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				login(c1);
 			}
 		});
-		ButtonLogin.setBounds(276, 304, 89, 23);
-		contentPane.add(ButtonLogin);
+		buttonLogin.setBounds(276, 304, 89, 23);
+		contentPane.add(buttonLogin);
 		
-		JLabel LabelEmail = new JLabel("Email");
-		LabelEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		LabelEmail.setBounds(197, 143, 46, 14);
-		contentPane.add(LabelEmail);
+		JLabel labelEmail = new JLabel("Email");
+		labelEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelEmail.setBounds(197, 143, 46, 14);
+		contentPane.add(labelEmail);
 		
-		JLabel LabelPassword = new JLabel("Password");
-		LabelPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		LabelPassword.setBounds(179, 220, 70, 14);
-		contentPane.add(LabelPassword);
+		JLabel labelPassword = new JLabel("Password");
+		labelPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelPassword.setBounds(179, 220, 70, 14);
+		contentPane.add(labelPassword);
 		
-		JLabel LabelBenvenuto = new JLabel("Benvenuto, inserisci i tuoi dati:");
-		LabelBenvenuto.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		LabelBenvenuto.setBounds(212, 67, 243, 14);
-		contentPane.add(LabelBenvenuto);
+		JLabel labelBenvenuto = new JLabel("Benvenuto, inserisci i tuoi dati:");
+		labelBenvenuto.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelBenvenuto.setBounds(212, 67, 243, 14);
+		contentPane.add(labelBenvenuto);
 		
-		JLabel LabelRegistrati = new JLabel("Non sei ancora iscritto?");
-		LabelRegistrati.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		LabelRegistrati.setBounds(523, 352, 165, 14);
-		contentPane.add(LabelRegistrati);
+		JLabel labelRegistrati = new JLabel("Non sei ancora iscritto?");
+		labelRegistrati.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelRegistrati.setBounds(523, 352, 165, 14);
+		contentPane.add(labelRegistrati);
 		
-		JButton ButtonChiudi = new JButton("Chiudi");
-		ButtonChiudi.addActionListener(new ActionListener() {
+		JButton buttonChiudi = new JButton("Chiudi");
+		buttonChiudi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(NORMAL);
 			}
 		});
-		ButtonChiudi.setBounds(34, 432, 89, 23);
-		contentPane.add(ButtonChiudi);
+		buttonChiudi.setBounds(34, 432, 89, 23);
+		contentPane.add(buttonChiudi);
 		
-		JButton ButtonRegistraRider = new JButton("Registrati da Rider");
-		ButtonRegistraRider.addActionListener(new ActionListener() {
+		JButton buttonRegistraRider = new JButton("Registrati da Rider");
+		buttonRegistraRider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.loginRegistratiRiderButton();	
 			}
 		});
-		ButtonRegistraRider.setBounds(523, 432, 139, 23);
-		contentPane.add(ButtonRegistraRider);
+		buttonRegistraRider.setBounds(523, 432, 139, 23);
+		contentPane.add(buttonRegistraRider);
 			
 		}
 	
@@ -125,7 +124,7 @@ public class JFrameLogin extends JFrame {
 					} else if (u != null) {
 						controller.passaAdHomeUtente(c1, u);
 					} else {
-						LoginSbagliato.setVisible(true);
+						loginSbagliato.setVisible(true);
 						svuotaCampi();
 					}
 				}

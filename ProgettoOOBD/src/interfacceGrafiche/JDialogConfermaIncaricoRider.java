@@ -17,17 +17,17 @@ public class JDialogConfermaIncaricoRider extends JDialog {
 		setBounds(100, 100, 361, 244);
 		getContentPane().setLayout(null);
 		
-		JLabel LabelOrdine = new JLabel("Ordine:");
-		LabelOrdine.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		LabelOrdine.setBounds(59, 33, 64, 14);
-		getContentPane().add(LabelOrdine);
+		JLabel labelOrdine = new JLabel("Ordine:");
+		labelOrdine.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelOrdine.setBounds(59, 33, 64, 14);
+		getContentPane().add(labelOrdine);
 		
-		JLabel LabelConferma = new JLabel("Vuoi prendere in carico questo ordine?");
-		LabelConferma.setBounds(74, 77, 232, 14);
-		getContentPane().add(LabelConferma);
+		JLabel labelConferma = new JLabel("Vuoi prendere in carico questo ordine?");
+		labelConferma.setBounds(74, 77, 232, 14);
+		getContentPane().add(labelConferma);
 		
-		JButton ButtonAccetta = new JButton("Accetta");
-		ButtonAccetta.addActionListener(new ActionListener() {
+		JButton buttonAccetta = new JButton("Accetta");
+		buttonAccetta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String CodR = cr.getRider().getCodR();
 				cr.nuovoOrdineRider(CodR, CodC);
@@ -35,22 +35,22 @@ public class JDialogConfermaIncaricoRider extends JDialog {
 				dispose();
 			}
 		});
-		ButtonAccetta.setBounds(231, 145, 89, 23);
-		getContentPane().add(ButtonAccetta);
+		buttonAccetta.setBounds(231, 145, 89, 23);
+		getContentPane().add(buttonAccetta);
 		
-		JButton ButtonAnnulla = new JButton("Annulla");
-		ButtonAnnulla.addActionListener(new ActionListener() {
+		JButton buttonAnnulla = new JButton("Annulla");
+		buttonAnnulla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 			}
 		});
-		ButtonAnnulla.setBounds(34, 145, 89, 23);
-		getContentPane().add(ButtonAnnulla);
+		buttonAnnulla.setBounds(34, 145, 89, 23);
+		getContentPane().add(buttonAnnulla);
 		
-		JLabel LabelCodC = new JLabel(CodC);
-		LabelCodC.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		LabelCodC.setBounds(125, 33, 76, 14);
-		getContentPane().add(LabelCodC);
+		JLabel labelCodC = new JLabel(CodC);
+		labelCodC.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelCodC.setBounds(125, 33, 76, 14);
+		getContentPane().add(labelCodC);
 		
 		
 	}

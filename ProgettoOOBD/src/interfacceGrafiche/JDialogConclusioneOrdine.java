@@ -20,17 +20,17 @@ public class JDialogConclusioneOrdine extends JDialog {
 		setBounds(100, 100, 450, 190);
 		getContentPane().setLayout(null);
 		
-		JLabel LabelGrazie = new JLabel("Grazie!");
-		LabelGrazie.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		LabelGrazie.setBounds(179, 11, 61, 14);
-		getContentPane().add(LabelGrazie);
+		JLabel labelGrazie = new JLabel("Grazie!");
+		labelGrazie.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelGrazie.setBounds(179, 11, 61, 14);
+		getContentPane().add(labelGrazie);
 		
-		JLabel LabelConferma = new JLabel("Il suo ordine è stato eseguito correttamente.");
-		LabelConferma.setBounds(96, 60, 300, 14);
-		getContentPane().add(LabelConferma);
+		JLabel labelConferma = new JLabel("Il suo ordine è stato eseguito correttamente.");
+		labelConferma.setBounds(96, 60, 300, 14);
+		getContentPane().add(labelConferma);
 		
-		JButton ButtonOk = new JButton("ok");
-		ButtonOk.addActionListener(new ActionListener() {
+		JButton buttonOk = new JButton("ok");
+		buttonOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				dispose();
@@ -38,8 +38,8 @@ public class JDialogConclusioneOrdine extends JDialog {
 				
 			}
 		});
-		ButtonOk.setBounds(168, 117, 72, 23);
-		getContentPane().add(ButtonOk);
+		buttonOk.setBounds(168, 117, 72, 23);
+		getContentPane().add(buttonOk);
 
 	}
 
