@@ -18,9 +18,10 @@ public class ControllerCarrello {
 	JFrameHomeUtente fh;
 	JFrameCarrello fc;
 	Utenti utente;
-	CarrelloDAOPostgres carrelloDao = new CarrelloDAOPostgres();
+	CarrelloDAOPostgres carrelloDao;
 	
 	public ControllerCarrello(Utenti utente) {
+		carrelloDao = new CarrelloDAOPostgres();
 		this.utente = utente;
 	}
 

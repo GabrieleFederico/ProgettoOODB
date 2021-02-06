@@ -69,6 +69,7 @@ public class JFrameHomeRider extends JFrame {
 		contentPane.add(buttonAggiorna);
 		
 		getConsegne();
+		setVisible(true);
 	}
 	
 	public void getConsegne() {

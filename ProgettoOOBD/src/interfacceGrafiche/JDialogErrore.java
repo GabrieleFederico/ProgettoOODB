@@ -40,7 +40,6 @@ public class JDialogErrore extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						JDialogErrore.this.setVisible(false);
 						dispose();
 						
 					}
@@ -50,6 +49,9 @@ public class JDialogErrore extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 		}
+		
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setVisible(true);
 	}
 
 }

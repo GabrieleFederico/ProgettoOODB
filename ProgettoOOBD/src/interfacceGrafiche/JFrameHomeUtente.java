@@ -69,12 +69,9 @@ public class JFrameHomeUtente extends JFrame {
 		cercaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String TFInput = inputTF.getText();
-					try {
-						c.ricerca(TFInput, contentPane, componentiNecessarie);
-					} catch (SQLException e) {
-						System.out.println(e.getMessage());
-					}
-					homeButton.setEnabled(true);
+					
+				aggiornaInterfacciaRistoranti(contentPane, componentiNecessarie, c.ricerca(TFInput));	
+				homeButton.setEnabled(true);
 			}
 		});
 		cercaButton.setBounds(365, 11, 120, 28);
@@ -114,39 +111,33 @@ public class JFrameHomeUtente extends JFrame {
 
 		sushiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					c.ricerca("Sushi", contentPane, componentiNecessarie);
-					homeButton.setEnabled(true);
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				}
+
+				aggiornaInterfacciaRistoranti(contentPane, componentiNecessarie, c.ricerca("Sushi"));
+				homeButton.setEnabled(true);
+		
 			}
 		});
 
 		pizzaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					c.ricerca("Pizz", contentPane, componentiNecessarie);
-					homeButton.setEnabled(true);
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				}
+
+				aggiornaInterfacciaRistoranti(contentPane, componentiNecessarie, c.ricerca("Pizz"));
+				homeButton.setEnabled(true);
+
 			}
 		});
 
 		paniniButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					c.ricerca("Panin", contentPane, componentiNecessarie);
-					homeButton.setEnabled(true);
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				}
+
+				aggiornaInterfacciaRistoranti(contentPane, componentiNecessarie, c.ricerca("Panin"));
+				homeButton.setEnabled(true);
+
 			}
 		});
 	}
 	
-	public void aggiornaInterfacciaRistoranti(JPanel pannello, int componentiNecessarie, ArrayList<Ristoranti> risultatoRicerca, ControllerPrincipale c1) {
+	public void aggiornaInterfacciaRistoranti(JPanel pannello, int componentiNecessarie, ArrayList<Ristoranti> risultatoRicerca) {
 
 		JLabel labelRisultato;
 		
@@ -175,7 +166,7 @@ public class JFrameHomeUtente extends JFrame {
 			
 			labelRisultato.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent arg0) {
-					c1.passaAInterfacciaRistorante(r);
+					controllore.passaAInterfacciaRistorante(r);
 				}
 			});
 			labelRisultato.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -65,12 +65,9 @@ public class JFrameRegistratiUtente extends JFrame {
 		buttonConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				try {
 					Utenti utente = new Utenti(TFNewEmail.getText(), TFNewPassword.getText(), TFNewNome.getText(), TFNewCognome.getText(), TFNewIndirizzo.getText());
 					controller.registraCredenzialiUtente(utente);
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				}
+				
 			}
 		});
 		buttonConferma.setBounds(304, 308, 109, 23);
@@ -106,5 +103,7 @@ public class JFrameRegistratiUtente extends JFrame {
 		TFNewIndirizzo.setBounds(198, 212, 166, 20);
 		contentPane.add(TFNewIndirizzo);
 		TFNewIndirizzo.setColumns(10);
+		
+		setVisible(true);
 	}
 }

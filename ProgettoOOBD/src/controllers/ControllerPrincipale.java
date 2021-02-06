@@ -13,7 +13,6 @@ public class ControllerPrincipale {
 	public static void main(String[] args) {
 
 		ControllerPrincipale principale = new ControllerPrincipale();	
-
 		principale.start();
 
 	}

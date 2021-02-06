@@ -31,7 +31,7 @@ public class JFrameRistorante extends JFrame {
 	private int componentiNecessarie;
 	private Ristoranti rist;
 	
-	public JFrameRistorante(ControllerRicercaMenu c, Ristoranti r) {
+	public JFrameRistorante(ControllerRicercaMenu c, Ristoranti r, ControllerCarrello ccarrello) {
 		setTitle(r.getNome());
 		rist = r;
 		setBounds(100, 100, 769, 511);
@@ -59,19 +59,15 @@ public class JFrameRistorante extends JFrame {
 				
 				if(fasciaPrezzo.getSelectedIndex() != 0)
 					PrezzoInput = fasciaPrezzo.getSelectedItem().toString();
-					
-				try {
-					c.ricercaProdotto(TFInput, contentPane, componentiNecessarie, PrezzoInput);
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				}
+
+				aggiornaInterfacciaProdotti(contentPane, componentiNecessarie, c.ricercaProdotto(TFInput, PrezzoInput), ccarrello);
 				
 			}
 		});
 		contentPane.add(cercaButton);
 		
 		componentiNecessarie = contentPane.getComponentCount();
-		c.getMenu(r, contentPane, componentiNecessarie, this);
+		aggiornaInterfacciaProdotti(contentPane, componentiNecessarie, c.getMenu(), ccarrello);
 		
 	}
 	

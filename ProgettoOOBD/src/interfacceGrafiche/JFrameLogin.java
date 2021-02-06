@@ -25,7 +25,6 @@ public class JFrameLogin extends JFrame {
 	private JTextField TFEmail;
 	private JTextField TFPassword;
 	private ControllerLogin controller;
-	JDialogErrore loginSbagliato = new JDialogErrore("Email e/o Password errata/e");
 	
 	public JFrameLogin(ControllerLogin c, ControllerPrincipale c1) {
 
@@ -117,14 +116,14 @@ public class JFrameLogin extends JFrame {
 		public void login(ControllerPrincipale c1) {
 			
 				try {
-					Riders r = controller.getRider(TFEmail.getText(), TFPassword.getText());
-					Utenti u = controller.controllaCredenziali(TFEmail.getText(), TFPassword.getText());
+					Riders r = controller.controllaCredenzialiRider(TFEmail.getText(), TFPassword.getText());
+					Utenti u = controller.controllaCredenzialiUtente(TFEmail.getText(), TFPassword.getText());
 					if(r != null) {
 						controller.passaAdHomeRider(c1, r);
 					} else if (u != null) {
 						controller.passaAdHomeUtente(c1, u);
 					} else {
-						loginSbagliato.setVisible(true);
+						JDialogErrore loginSbagliato = new JDialogErrore("Email e/o Password errata/e");
 						svuotaCampi();
 					}
 				}

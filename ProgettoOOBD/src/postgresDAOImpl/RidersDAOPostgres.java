@@ -14,6 +14,7 @@ import classiEntità.Riders;
 import classiEntità.Utenti;
 import dbConn.ConnessioneDB;
 import interfacceDAO.RidersDAO;
+import interfacceGrafiche.JDialogErrore;
 
 public class RidersDAOPostgres implements RidersDAO{
 	
@@ -68,7 +69,7 @@ public class RidersDAOPostgres implements RidersDAO{
 			connessione.close();
 				
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			JDialogErrore err = new JDialogErrore("Errore in fase di registrazione, riprovare");
 
 		}
 	}

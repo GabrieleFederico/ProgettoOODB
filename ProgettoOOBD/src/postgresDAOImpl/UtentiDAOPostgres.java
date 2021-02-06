@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import classiEntità.Utenti;
 import dbConn.ConnessioneDB;
 import interfacceDAO.UtentiDAO;
+import interfacceGrafiche.JDialogErrore;
 
 public class UtentiDAOPostgres implements UtentiDAO {
 
@@ -18,6 +19,7 @@ public class UtentiDAOPostgres implements UtentiDAO {
 
 	@Override
 	public void inserisciUtente(Utenti utente) {
+		
 		try {
 			connessioneDB = ConnessioneDB.getIstanza();
 			connessione = connessioneDB.getConnessione();
@@ -31,7 +33,7 @@ public class UtentiDAOPostgres implements UtentiDAO {
 			connessione.close();
 		}
 		catch(SQLException e){
-			System.out.println(e.getMessage());
+			JDialogErrore errore = new JDialogErrore("Errore in fase di registrazione: controllare i dati e riprovare");
 		}
 	}
 	

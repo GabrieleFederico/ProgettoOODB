@@ -100,7 +100,9 @@ public class JFrameRegistratiRider extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String mezzo = comboBoxMezzo.getSelectedItem().toString();
 				Riders rider = new Riders(TFNewNome.getText(), TFNewCognome.getText(),TFNewEmail.getText(), mezzo, TFNewPassword.getText());
-				c.registraCredenzialiRider(rider);	
+
+				c.registraCredenzialiRider(rider);
+					
 			}
 		});
 		buttonRegistrati.setBounds(281, 351, 89, 23);

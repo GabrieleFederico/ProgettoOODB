@@ -14,13 +14,13 @@ public class ControllerConsegneRider {
 	private Riders rider;
 	private JFrameHomeRider homeRider;
 	private JFrameOrdiniRider ordiniRider;
-	private ConsegneDAOPostgres cp = new ConsegneDAOPostgres();
+	private ConsegneDAOPostgres consegneDao;
 	
 	public ControllerConsegneRider(Riders rider, ControllerPrincipale c1) {
 		
+		consegneDao = new ConsegneDAOPostgres();
 		this.rider = rider;
 		homeRider = new JFrameHomeRider(this, c1);
-		homeRider.setVisible(true);
 	}
 	
 	public void apriMieiOrdini() {
@@ -44,27 +44,27 @@ public class ControllerConsegneRider {
 	public ArrayList<Consegne> getOrdiniByRider(){
 		
 		
-		ArrayList<Consegne> risultato = cp.getOrdiniByRider(rider);
+		ArrayList<Consegne> risultato = consegneDao.getOrdiniByRider(rider);
 		
 		return risultato;
 	}
 	
 	public ArrayList<Consegne> getConsegneDisponibili() {
 
-		ArrayList<Consegne> risultato = cp.getConsegneByMezzo(rider.getMezzo());
+		ArrayList<Consegne> risultato = consegneDao.getConsegneByMezzo(rider.getMezzo());
 		
 		return risultato;
 	}
 	
 	public void nuovoOrdineRider(String CodR, String CodC) {
 		
-		cp.assegnaConsegnaRider(CodR, CodC, this);
+		consegneDao.assegnaConsegnaRider(CodR, CodC, this);
 		
 	}
 	
 	public void ordineConsegnato(String CodC) {
 		
-		cp.ordineConsegnato(CodC);
+		consegneDao.ordineConsegnato(CodC);
 		
 	}
 	

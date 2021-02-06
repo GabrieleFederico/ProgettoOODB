@@ -12,22 +12,24 @@ public class ControllerRicercaRistoranti {
 	
 	JFrameHomeUtente fr;
 	ControllerPrincipale C;
-	RistorantiDAOPostgres ristoranteDao = new RistorantiDAOPostgres();
+	RistorantiDAOPostgres ristoranteDao;
 	
 	public ControllerRicercaRistoranti(ControllerPrincipale c, Utenti u) {
+		
+		ristoranteDao = new RistorantiDAOPostgres();
 		C = c;
 		fr = new JFrameHomeUtente(this, C, u);
 		fr.setVisible(true);
 	}
 	
-	public void ricerca (String ricerca, JPanel pannello, int componentiNecessarie) throws SQLException {
+	public ArrayList<Ristoranti> ricerca (String ricerca) {
 		
 		
 		ArrayList<Ristoranti> risultatoRicerca = new ArrayList<Ristoranti>();
 		
 		risultatoRicerca = ristoranteDao.getRistoranteByNomeOrProdotto(ricerca);
 		
-		fr.aggiornaInterfacciaRistoranti(pannello, componentiNecessarie, risultatoRicerca, C);
+		return risultatoRicerca;
 			
 	}
 
